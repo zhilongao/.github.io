@@ -167,9 +167,27 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder-open"></i>
                             &nbsp;
+                            jvm
+                        </a>
+                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/jvm/">jvm</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
                             mysql
                         </a>
                          <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/mysql/">mysql常见面试题</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            源码
+                        </a>
+                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/HashMap/">HashMap</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -245,6 +263,204 @@
 </aside>
             
             <section id="main">
+        <article id="post-HashMap" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/源码/">源码</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/HashMap/">
+            <time datetime="2019-08-16T14:01:46.000Z" itemprop="datePublished">2019-08-16</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/HashMap.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/HashMap.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/HashMap.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/HashMap/">HashMap</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><hr>
+
+<figure class="highlight plain"><figcaption><span>wiki</span></figcaption><table><tr><td class="code"><pre><span class="line">1.HashMap的数据结构</span><br><span class="line">	在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2.HashMap的put方法的过程</span><br><span class="line">	a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resize方法初始化</span><br><span class="line">	b.通过key的hash值和数组长度计算出该元素在数组中的位置</span><br><span class="line">	c1.若是数组上没有元素,构建Node节点,存储该元素</span><br><span class="line">	c21.若是该数组上有元素,且第一个节点的key与要存储的key相等,用变量保存该节点。</span><br><span class="line">	c22.若是该数组上有元素,且第一个节点的key与要存储的key不相等,需要判断该节点类型。</span><br><span class="line">		若是该节点属于红黑树,将元素插入到红黑树。</span><br><span class="line">		若是该节点属于链表,循环遍历链表,若是没有遇到key相同的,将key-value创建称为节点,插入到链表的尾部。判断是否需要转成红黑树，若是需要，将链表转成红黑树。</span><br><span class="line">	d.前面的操作中，若是找到与key相同的节点,根据条件判断是否需要覆盖,若是需要覆盖,直接修改原有节点的value。</span><br><span class="line">    f.将元素的个数size加1并判断是否需要扩容,若是需要扩容,调用resize方法扩容。</span><br></pre></td></tr></table></figure>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/wiki/HashMap/#more">查看更多</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-jvm" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/jvm/">jvm</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/jvm/">
+            <time datetime="2019-08-16T04:51:03.000Z" itemprop="datePublished">2019-08-16</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/jvm.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/jvm.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/jvm.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/jvm/">jvm</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><p>jvm的运行时数据区</p>
+<blockquote>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空间。若是在堆中没有完成实例分配，并且堆也无法再扩展时，就会抛出OutOfMemoryError异常。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/wiki/jvm/#more">查看更多</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-mysql" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         

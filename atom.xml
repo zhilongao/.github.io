@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://gzl2017.github.io/"/>
-  <updated>2019-08-16T00:45:20.849Z</updated>
+  <updated>2019-08-16T14:21:54.905Z</updated>
   <id>https://gzl2017.github.io/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HashMap</title>
+    <link href="https://gzl2017.github.io/wiki/HashMap/"/>
+    <id>https://gzl2017.github.io/wiki/HashMap/</id>
+    <published>2019-08-16T14:01:46.000Z</published>
+    <updated>2019-08-16T14:21:54.905Z</updated>
+    
+    <content type="html"><![CDATA[<hr><figure class="highlight plain"><figcaption><span>wiki</span></figcaption><table><tr><td class="code"><pre><span class="line">1.HashMap的数据结构</span><br><span class="line">在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2.HashMap的put方法的过程</span><br><span class="line">a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resize方法初始化</span><br><span class="line">b.通过key的hash值和数组长度计算出该元素在数组中的位置</span><br><span class="line">c1.若是数组上没有元素,构建Node节点,存储该元素</span><br><span class="line">c21.若是该数组上有元素,且第一个节点的key与要存储的key相等,用变量保存该节点。</span><br><span class="line">c22.若是该数组上有元素,且第一个节点的key与要存储的key不相等,需要判断该节点类型。</span><br><span class="line">若是该节点属于红黑树,将元素插入到红黑树。</span><br><span class="line">若是该节点属于链表,循环遍历链表,若是没有遇到key相同的,将key-value创建称为节点,插入到链表的尾部。判断是否需要转成红黑树，若是需要，将链表转成红黑树。</span><br><span class="line">d.前面的操作中，若是找到与key相同的节点,根据条件判断是否需要覆盖,若是需要覆盖,直接修改原有节点的value。</span><br><span class="line">    f.将元素的个数size加1并判断是否需要扩容,若是需要扩容,调用resize方法扩容。</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3.HashMap的resize方法</span><br><span class="line">resize方法涉及到两个大的步骤,首先是确定新数组的大小已经下次的扩容时机，新数组大小为原有数组大小的两倍，扩容变量也扩大为原有的两倍。其次是将原有数组的元素迁移至新的数组中,其中数组元素只会在两个地方，一个在[原下标]的地方，另一个在[原下标+原容量]的位置。</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;hr&gt;
+
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;figcaption&gt;&lt;span&gt;wiki&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1.HashMa
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+    
+      <category term="源码" scheme="https://gzl2017.github.io/categories/java/%E6%BA%90%E7%A0%81/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>jvm</title>
+    <link href="https://gzl2017.github.io/wiki/jvm/"/>
+    <id>https://gzl2017.github.io/wiki/jvm/</id>
+    <published>2019-08-16T04:51:03.000Z</published>
+    <updated>2019-08-16T05:29:16.926Z</updated>
+    
+    <content type="html"><![CDATA[<p>jvm的运行时数据区</p><blockquote><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空间。若是在堆中没有完成实例分配，并且堆也无法再扩展时，就会抛出OutOfMemoryError异常。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></blockquote><blockquote><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 方法区:用于存储已经被虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据。当方法区无法满足内存分配的需求时，将会抛出OutOfMemoryError异常。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></blockquote><blockquote><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 虚拟机栈:描述的是java方法执行的内存模型，每个方法执行时都会创建一个栈帧，栈帧中用于存储局部变量表，操作数栈，动态链接，方法出口等信息。当线程申请的栈深度大于虚拟机所允许的栈深度，将抛出StackOverflowError异常。若是虚拟机动态扩展时无法申请到足够的内存，将会抛出OutOfMemoryError异常。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></blockquote><blockquote><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 程序计数器:记录当前线程执行的字节码指令的行号，不会发生OutOfMemoryError。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></blockquote><blockquote><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 本地方法栈:用于执行非java方法的内存模型，也会发生StackOverflowError和OutOfMemoryError异常</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;jvm的运行时数据区&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;figure class=&quot;highlight tex&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt; 堆:java垃圾回收的主要区域，唯一存在的价
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+    
+      <category term="jvm" scheme="https://gzl2017.github.io/categories/java/jvm/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>mysql常见面试题</title>
