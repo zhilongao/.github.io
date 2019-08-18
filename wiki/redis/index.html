@@ -3,19 +3,23 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     
-    <title>gzl Blog</title>
+    <title>redis | gzl Blog</title>
     
     
-        <meta name="keywords" content="gzl Blog">
+        <meta name="keywords" content="redis">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="gzl Blog">
-<meta property="og:url" content="https://gzl2017.github.io/index.html">
+    <meta name="description" content="redis和zk实现分布式锁的区别    实现方式 优点 缺点    基于redis 性能高 锁的失效时间很难把控   基于zk 实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题 性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点   cap原则  缓存数据的同步方式  先写入数据库，在写入缓存 查询数据库，然后写入缓存 定时刷新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis">
+<meta property="og:url" content="https://gzl2017.github.io/wiki/redis/index.html">
 <meta property="og:site_name" content="gzl Blog">
+<meta property="og:description" content="redis和zk实现分布式锁的区别    实现方式 优点 缺点    基于redis 性能高 锁的失效时间很难把控   基于zk 实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题 性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点   cap原则  缓存数据的同步方式  先写入数据库，在写入缓存 查询数据库，然后写入缓存 定时刷新">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-18T09:04:16.904Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="gzl Blog">
+<meta name="twitter:title" content="redis">
+<meta name="twitter:description" content="redis和zk实现分布式锁的区别    实现方式 优点 缺点    基于redis 性能高 锁的失效时间很难把控   基于zk 实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题 性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点   cap原则  缓存数据的同步方式  先写入数据库，在写入缓存 查询数据库，然后写入缓存 定时刷新">
     
 
     
@@ -156,7 +160,7 @@
         
         
          <ul class="unstyled" id="tree" style="display: block;"> 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder-open"></i>
                             &nbsp;
@@ -181,13 +185,13 @@
                          <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/mysql/">mysql常见面试题</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder-open"></i>
                             &nbsp;
                             redis
                         </a>
-                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/redis/">redis</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file active"><a href="/wiki/redis/">redis</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -271,8 +275,7 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main">
-        <article id="post-redis" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-redis" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -314,8 +317,8 @@
                 
                 
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/redis/">redis</a>
+        <h1 class="article-title" itemprop="name">
+            redis
         </h1>
     
 
@@ -326,38 +329,163 @@
         
         
             
-                
-                
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
                     
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><hr>
+                </div>
+            
+        
+        
+            <hr>
 
 <p>redis和zk实现分布式锁的区别</p>
 <table>
 <thead>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/wiki/redis/#more">查看更多</a>
+<tr>
+<th>实现方式</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基于redis</td>
+<td>性能高</td>
+<td>锁的失效时间很难把控</td>
+</tr>
+<tr>
+<td>基于zk</td>
+<td>实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题</td>
+<td>性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点</td>
+</tr>
+</tbody></table>
+<p>cap原则</p>
+<ol>
+<li><p>缓存数据的同步方式</p>
+<ul>
+<li>先写入数据库，在写入缓存</li>
+<li>查询数据库，然后写入缓存</li>
+<li>定时刷新数据写入缓存</li>
+</ul>
+</li>
+<li><p>redis特点</p>
+<p>​    一种缓存中间件，key-value的存储形式，默认16个db（0-15）个空间，支持数据的持久化。</p>
+</li>
+<li><p>redis五种数据结构</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>数据结构</th>
+<th align="center">使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>string</td>
+<td align="center">session共享 短信验证码 ip限制 序列自增</td>
+</tr>
+<tr>
+<td>list</td>
+<td align="center">分布式队列  栈</td>
+</tr>
+<tr>
+<td>hash</td>
+<td align="center">对象的存储（用户信息）</td>
+</tr>
+<tr>
+<td>set</td>
+<td align="center">用户标签(定点推送) 求交集 并集</td>
+</tr>
+<tr>
+<td>sorted set</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<ol start="4">
+<li><p>过期时间</p>
+<ul>
+<li>消极方法<ul>
+<li>当应用访问key时，发现key已经过期，就会删除。</li>
+</ul>
+</li>
+<li>积极方法：<ul>
+<li>周期性的从设置了过期时间的key中选择一部分的key进行删除。<ul>
+<li>随机测试20个带有timeout信息的key。</li>
+<li>如果超过25%的key被删除，则重复执行整个流程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>pub/sub 发布订阅模式</p>
+</li>
+<li><p>redis持久化及原理</p>
+<ul>
+<li><p>RDB</p>
+<ul>
+<li><p>概念：当符合【条件】的时候，fork子进程，生成dump.rdb快照文件。</p>
+</li>
+<li><p>缺点：数据丢失</p>
+</li>
+<li><p>规则</p>
+<ul>
+<li><p>配置规则，配置文件配置</p>
+</li>
+<li><p>save或者bgsave命令触发</p>
+</li>
+<li><p>flushall命令触发，且满足配置规则</p>
+</li>
+<li><p>执行复制操作</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>AOF</p>
+<ul>
+<li>概念：需要配置文件开启(默认关闭)，aof文件的写入，只针对事物操作。AOF重写</li>
+<li>缺点：</li>
+<li>规则</li>
+</ul>
+</li>
+</ul>
+<ol start="7">
+<li><p>redis内存回收策略</p>
+<p>​    </p>
+</li>
+<li><p>redis单线程性能高的原因</p>
+<p>​    内存和网络的宽带</p>
+<ul>
+<li>多路复用（同一时间处理多个请求）</li>
+<li>避免线程切换</li>
+<li>纯内存操作</li>
+</ul>
+</li>
+<li><p>lua脚本在redis中的应用</p>
+<ul>
+<li><p>pipeline管道模型</p>
+</li>
+<li><p>减少网络开销去执行多个指令</p>
+</li>
+<li><p>满足原子性</p>
+</li>
+<li><p>复用性</p>
+</li>
+<li><p>redis.call(“set”, “gupao”, “123”)</p>
+</li>
+<li><p>redis.call(“get”, “gupao”);</p>
+</li>
+<li><p>lua脚本可以存储在服务端-&gt;生成摘要</p>
+</li>
+</ul>
+</li>
+</ol>
+
             </div>
         
         <footer class="article-footer">
@@ -366,308 +494,31 @@
 </article>
 
 
-
-
-
-
     
-        <article id="post-HashMap" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/源码/">源码</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/HashMap/">
-            <time datetime="2019-08-16T14:01:46.000Z" itemprop="datePublished">2019-08-16</time>
+<nav id="article-nav">
+    
+    
+        <a href="/wiki/HashMap/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">HashMap</div>
         </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/HashMap.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/HashMap.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/HashMap.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/HashMap/">HashMap</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><hr>
-
-<p>1.HashMap的数据结构<br>    在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树</p>
-<hr>
-
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/wiki/HashMap/#more">查看更多</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
+</nav>
 
 
 
 
 
     
-        <article id="post-jvm" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/jvm/">jvm</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/jvm/">
-            <time datetime="2019-08-16T04:51:03.000Z" itemprop="datePublished">2019-08-16</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/jvm.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/jvm.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/jvm.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/jvm/">jvm</a>
-        </h1>
     
 
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><p>jvm的运行时数据区</p>
-<blockquote>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空间。若是在堆中没有完成实例分配，并且堆也无法再扩展时，就会抛出OutOfMemoryError异常。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/wiki/jvm/#more">查看更多</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
 
 
 
-
-
-
-    
-        <article id="post-mysql" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/mysql/">mysql</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/mysql/">
-            <time datetime="2019-08-15T12:56:11.000Z" itemprop="datePublished">2019-08-15</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/mysql.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/mysql.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/mysql.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/mysql/">mysql常见面试题</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><hr>
-
-<p>1.char(32)和varchar(32)的区别<br>    (1):char和varchar都是数据库定义字符串类型的数据格式,char是一种定长度的类型,varchar是一种可变长度的类型。<br>    (2):char(32)表示定义了当前字段所占用的存储空间为32个字符,不管字段长度是否达到32,占用的空间是不变的。而varchar(32)表示定义了当前字段所能够占用的最大存储空间是32个字符,实际占用空间是字段的大小。<br>    (3):就存储效率而言,定长的char类型由于一开始就定义好了字段占用空间,不需要根据字段的长度在去申请空间,故效率相对较高,但是在占用空间上就没有varchar有优势。而varchar由于根据字段长度调整空间占用,故空间消耗较小,但是存储效率不高。</p>
-<hr>
-
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/wiki/mysql/#more">查看更多</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
 </section>
         </div>
         <footer id="footer">

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://gzl2017.github.io/"/>
-  <updated>2019-08-16T14:21:54.905Z</updated>
+  <updated>2019-08-18T09:04:16.904Z</updated>
   <id>https://gzl2017.github.io/</id>
   
   <author>
@@ -17,13 +17,13 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>HashMap</title>
-    <link href="https://gzl2017.github.io/wiki/HashMap/"/>
-    <id>https://gzl2017.github.io/wiki/HashMap/</id>
-    <published>2019-08-16T14:01:46.000Z</published>
-    <updated>2019-08-16T14:21:54.905Z</updated>
+    <title>redis</title>
+    <link href="https://gzl2017.github.io/wiki/redis/"/>
+    <id>https://gzl2017.github.io/wiki/redis/</id>
+    <published>2019-08-18T02:58:52.000Z</published>
+    <updated>2019-08-18T09:04:16.904Z</updated>
     
-    <content type="html"><![CDATA[<hr><figure class="highlight plain"><figcaption><span>wiki</span></figcaption><table><tr><td class="code"><pre><span class="line">1.HashMap的数据结构</span><br><span class="line">在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2.HashMap的put方法的过程</span><br><span class="line">a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resize方法初始化</span><br><span class="line">b.通过key的hash值和数组长度计算出该元素在数组中的位置</span><br><span class="line">c1.若是数组上没有元素,构建Node节点,存储该元素</span><br><span class="line">c21.若是该数组上有元素,且第一个节点的key与要存储的key相等,用变量保存该节点。</span><br><span class="line">c22.若是该数组上有元素,且第一个节点的key与要存储的key不相等,需要判断该节点类型。</span><br><span class="line">若是该节点属于红黑树,将元素插入到红黑树。</span><br><span class="line">若是该节点属于链表,循环遍历链表,若是没有遇到key相同的,将key-value创建称为节点,插入到链表的尾部。判断是否需要转成红黑树，若是需要，将链表转成红黑树。</span><br><span class="line">d.前面的操作中，若是找到与key相同的节点,根据条件判断是否需要覆盖,若是需要覆盖,直接修改原有节点的value。</span><br><span class="line">    f.将元素的个数size加1并判断是否需要扩容,若是需要扩容,调用resize方法扩容。</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3.HashMap的resize方法</span><br><span class="line">resize方法涉及到两个大的步骤,首先是确定新数组的大小已经下次的扩容时机，新数组大小为原有数组大小的两倍，扩容变量也扩大为原有的两倍。其次是将原有数组的元素迁移至新的数组中,其中数组元素只会在两个地方，一个在[原下标]的地方，另一个在[原下标+原容量]的位置。</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<hr><p>redis和zk实现分布式锁的区别</p><table><thead><tr><th>实现方式</th><th>优点</th><th>缺点</th></tr></thead><tbody><tr><td>基于redis</td><td>性能高</td><td>锁的失效时间很难把控</td></tr><tr><td>基于zk</td><td>实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题</td><td>性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点</td></tr></tbody></table><p>cap原则</p><ol><li><p>缓存数据的同步方式</p><ul><li>先写入数据库，在写入缓存</li><li>查询数据库，然后写入缓存</li><li>定时刷新数据写入缓存</li></ul></li><li><p>redis特点</p><p>​    一种缓存中间件，key-value的存储形式，默认16个db（0-15）个空间，支持数据的持久化。</p></li><li><p>redis五种数据结构</p></li></ol><table><thead><tr><th>数据结构</th><th align="center">使用场景</th></tr></thead><tbody><tr><td>string</td><td align="center">session共享 短信验证码 ip限制 序列自增</td></tr><tr><td>list</td><td align="center">分布式队列  栈</td></tr><tr><td>hash</td><td align="center">对象的存储（用户信息）</td></tr><tr><td>set</td><td align="center">用户标签(定点推送) 求交集 并集</td></tr><tr><td>sorted set</td><td align="center"></td></tr></tbody></table><ol start="4"><li><p>过期时间</p><ul><li>消极方法<ul><li>当应用访问key时，发现key已经过期，就会删除。</li></ul></li><li>积极方法：<ul><li>周期性的从设置了过期时间的key中选择一部分的key进行删除。<ul><li>随机测试20个带有timeout信息的key。</li><li>如果超过25%的key被删除，则重复执行整个流程</li></ul></li></ul></li></ul></li><li><p>pub/sub 发布订阅模式</p></li><li><p>redis持久化及原理</p><ul><li><p>RDB</p><ul><li><p>概念：当符合【条件】的时候，fork子进程，生成dump.rdb快照文件。</p></li><li><p>缺点：数据丢失</p></li><li><p>规则</p><ul><li><p>配置规则，配置文件配置</p></li><li><p>save或者bgsave命令触发</p></li><li><p>flushall命令触发，且满足配置规则</p></li><li><p>执行复制操作</p></li></ul></li></ul></li></ul></li></ol><ul><li><p>AOF</p><ul><li>概念：需要配置文件开启(默认关闭)，aof文件的写入，只针对事物操作。AOF重写</li><li>缺点：</li><li>规则</li></ul></li></ul><ol start="7"><li><p>redis内存回收策略</p><p>​    </p></li><li><p>redis单线程性能高的原因</p><p>​    内存和网络的宽带</p><ul><li>多路复用（同一时间处理多个请求）</li><li>避免线程切换</li><li>纯内存操作</li></ul></li><li><p>lua脚本在redis中的应用</p><ul><li><p>pipeline管道模型</p></li><li><p>减少网络开销去执行多个指令</p></li><li><p>满足原子性</p></li><li><p>复用性</p></li><li><p>redis.call(“set”, “gupao”, “123”)</p></li><li><p>redis.call(“get”, “gupao”);</p></li><li><p>lua脚本可以存储在服务端-&gt;生成摘要</p></li></ul></li></ol>]]></content>
     
     <summary type="html">
     
@@ -31,7 +31,48 @@
       
         &lt;hr&gt;
 
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;figcaption&gt;&lt;span&gt;wiki&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1.HashMa
+&lt;p&gt;redis和zk实现分布式锁的区别&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;实现方式&lt;/th&gt;
+&lt;th&gt;优点&lt;/th&gt;
+&lt;th&gt;缺点&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;基于redis&lt;/td&gt;
+&lt;td&gt;性能
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+    
+      <category term="redis" scheme="https://gzl2017.github.io/categories/java/redis/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>HashMap</title>
+    <link href="https://gzl2017.github.io/wiki/HashMap/"/>
+    <id>https://gzl2017.github.io/wiki/HashMap/</id>
+    <published>2019-08-16T14:01:46.000Z</published>
+    <updated>2019-08-16T14:23:46.216Z</updated>
+    
+    <content type="html"><![CDATA[<hr><p>1.HashMap的数据结构<br>    在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树</p><hr><p>2.HashMap的put方法的过程<br>    a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resize方法初始化<br>    b.通过key的hash值和数组长度计算出该元素在数组中的位置<br>    c1.若是数组上没有元素,构建Node节点,存储该元素<br>    c21.若是该数组上有元素,且第一个节点的key与要存储的key相等,用变量保存该节点。<br>    c22.若是该数组上有元素,且第一个节点的key与要存储的key不相等,需要判断该节点类型。<br>        若是该节点属于红黑树,将元素插入到红黑树。<br>        若是该节点属于链表,循环遍历链表,若是没有遇到key相同的,将key-value创建称为节点,插入到链表的尾部。判断是否需要转成红黑树，若是需要，将链表转成红黑树。<br>    d.前面的操作中，若是找到与key相同的节点,根据条件判断是否需要覆盖,若是需要覆盖,直接修改原有节点的value。<br>    f.将元素的个数size加1并判断是否需要扩容,若是需要扩容,调用resize方法扩容。</p><hr><p>3.HashMap的resize方法<br>    resize方法涉及到两个大的步骤,首先是确定新数组的大小已经下次的扩容时机，新数组大小为原有数组大小的两倍，扩容变量也扩大为原有的两倍。其次是将原有数组的元素迁移至新的数组中,其中数组元素只会在两个地方，一个在[原下标]的地方，另一个在[原下标+原容量]的位置。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;hr&gt;
+
+&lt;p&gt;1.HashMap的数据结构&lt;br&gt;    在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树&lt;/p&gt;
+&lt;hr&gt;
+
+&lt;p&gt;2.HashMap的put方法的过程&lt;br&gt;    a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resiz
       
     
     </summary>
@@ -75,15 +116,17 @@
     <link href="https://gzl2017.github.io/wiki/mysql/"/>
     <id>https://gzl2017.github.io/wiki/mysql/</id>
     <published>2019-08-15T12:56:11.000Z</published>
-    <updated>2019-08-16T00:45:20.849Z</updated>
+    <updated>2019-08-17T08:44:21.094Z</updated>
     
-    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.char(32)和varchar(32)的区别</span><br><span class="line">(1):char和varchar都是数据库定义字符串类型的数据格式,char是一种定长度的类型,varchar是一种可变长度的类型。</span><br><span class="line">(2):char(32)表示定义了当前字段所占用的存储空间为32个字符,不管字段长度是否达到32,占用的空间是不变的。而varchar(32)表示定义了当前字段所能够占用的最大存储空间是32个字符,实际占用空间是字段的大小。</span><br><span class="line">(3):就存储效率而言,定长的char类型由于一开始就定义好了字段占用空间,不需要根据字段的长度在去申请空间,故效率相对较高,但是在占用空间上就没有varchar有优势。而varchar由于根据字段长度调整空间占用,故空间消耗较小,但是存储效率不高。</span><br><span class="line"></span><br><span class="line">2.数据库的四大特性</span><br><span class="line">A(Atomicity 原子性):数据库最小的工作单元，整个工作单元要么一起提交成功,要么一起回滚失败。 </span><br><span class="line">C(Consistency 一致性):事物中操作的数据的状态是一致的。即写入资料的结果必须完全符合预设的规则，不会因为出现系统意外等原因导致状态的不一致。</span><br><span class="line">I(Isolation 隔离性):一个事务所操作的数据在提交之前，对其他事务的可见性设定（一般设定为不可见）。</span><br><span class="line">D(Durability 持久性):数据库的数据一旦提交,无法更改。</span><br><span class="line"></span><br><span class="line">3.多个事物并发引发的数据读取问题</span><br><span class="line">脏读:该问题是指一个事物读取到了另外一个事物未提交的问题。</span><br><span class="line">不可重复读:该问题是指在一个事物未结束之前,前后两次读取到的数据不一致现象。原因在于该事物在前后两次读取数据之间，另外一个事物修改了该数据。(不可重复读的重点在于修改)</span><br><span class="line">幻读:该问题是指当一个事物修改了数据库表中某一个范围内的数据的某一个字段，但是另外一个事物在此期间又在该范围内插入了一条新的数据，造成前一个事物出现幻觉(没有完全修改)。(幻读的重点在于新增或删除)</span><br><span class="line"></span><br><span class="line">4.数据库事物的隔离级别</span><br><span class="line">Read Uncommited读未提交:事物未提交对其它的事物也是可见的。</span><br><span class="line">Read Commited读已提交:一个事物只能够读取到已提交的数据。(解决脏读,未解决不可重复读)</span><br><span class="line">Repeatable Read可重复读:一个事物对数据的前后读取结果是一致的。(解决了不可重复读,未解决幻读)</span><br><span class="line">Serializable串行化:数据库最高的隔离级别,强制所有事物串行执行,解决了所有并发问题。</span><br><span class="line"></span><br><span class="line">5.聚集索引和非聚集索引的区别:</span><br><span class="line">聚集索引:表中的数据是按照索引的顺序来存储的。索引的叶子节点上存储了真实的数据,不会有另外单独的数据页。</span><br><span class="line">非聚集索引:表中的数据存储不依赖于索引的顺序。索引的叶子节点上存储了索引的关键字和指向真实数据的指针。</span><br><span class="line"></span><br><span class="line">6.sql注入,如何避免sql注入</span><br><span class="line">概念:所谓sql注入,就是攻击者将sql命令插入到web表单的输入域或者是页面请求的查询字符串，欺骗服务器执行恶意的sql命令。(某些表单中的输入命令被直接用来构造(或影响)sql命令，或者是构成存储过程的输入参数,这类表单特别容易受到sql注入式攻击)。</span><br><span class="line">如何避免:</span><br><span class="line">(1):mybatis中多使用#&#123;param&#125;,尽量避免使用$&#123;param&#125;,原因在于$&#123;param&#125;会直接参与sql编译,容易造成sql攻击。</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<hr><p>1.char(32)和varchar(32)的区别<br>    (1):char和varchar都是数据库定义字符串类型的数据格式,char是一种定长度的类型,varchar是一种可变长度的类型。<br>    (2):char(32)表示定义了当前字段所占用的存储空间为32个字符,不管字段长度是否达到32,占用的空间是不变的。而varchar(32)表示定义了当前字段所能够占用的最大存储空间是32个字符,实际占用空间是字段的大小。<br>    (3):就存储效率而言,定长的char类型由于一开始就定义好了字段占用空间,不需要根据字段的长度在去申请空间,故效率相对较高,但是在占用空间上就没有varchar有优势。而varchar由于根据字段长度调整空间占用,故空间消耗较小,但是存储效率不高。</p><hr><p>2.数据库的四大特性<br>    A(Atomicity 原子性):数据库最小的工作单元，整个工作单元要么一起提交成功,要么一起回滚失败。<br>    C(Consistency 一致性):事物中操作的数据的状态是一致的。即写入资料的结果必须完全符合预设的规则，不会因为出现系统意外等原因导致状态的不一致。<br>    I(Isolation 隔离性):一个事务所操作的数据在提交之前，对其他事务的可见性设定（一般设定为不可见）。<br>    D(Durability 持久性):数据库的数据一旦提交,无法更改。</p><hr><p>3.多个事物并发引发的数据读取问题<br>    脏读:该问题是指一个事物读取到了另外一个事物未提交的问题。<br>    不可重复读:该问题是指在一个事物未结束之前,前后两次读取到的数据不一致现象。原因在于该事物在前后两次读取数据之间，另外一个事物修改了该数据。(不可重复读的重点在于修改)<br>    幻读:该问题是指当一个事物修改了数据库表中某一个范围内的数据的某一个字段，但是另外一个事物在此期间又在该范围内插入了一条新的数据，造成前一个事物出现幻觉(没有完全修改)。(幻读的重点在于新增或删除)</p><hr><p>4.数据库事物的隔离级别<br>    Read Uncommited读未提交:事物未提交对其它的事物也是可见的。<br>    Read Commited读已提交:一个事物只能够读取到已提交的数据。(解决脏读,未解决不可重复读)<br>    Repeatable Read可重复读:一个事物对数据的前后读取结果是一致的。(解决了不可重复读,未解决幻读)<br>    Serializable串行化:数据库最高的隔离级别,强制所有事物串行执行,解决了所有并发问题。</p><hr><p>5.聚集索引和非聚集索引的区别:<br>    聚集索引:表中的数据是按照索引的顺序来存储的。索引的叶子节点上存储了真实的数据,不会有另外单独的数据页。<br>    非聚集索引:表中的数据存储不依赖于索引的顺序。索引的叶子节点上存储了索引的关键字和指向真实数据的指针。</p><hr><p>6.sql注入,如何避免sql注入<br>    概念:所谓sql注入,就是攻击者将sql命令插入到web表单的输入域或者是页面请求的查询字符串，欺骗服务器执行恶意的sql命令。(某些表单中的输入命令被直接用来构造(或影响)sql命令，或者是构成存储过程的输入参数,这类表单特别容易受到sql注入式攻击)。<br>    如何避免:<br>        (1):mybatis中多使用[#{param}],尽量避免使用[${param}],原因在于[${param}]会直接参与sql编译,容易造成sql攻击。</p><hr><p>7.数据库的三大范式<br>    第一范式: 每一列都是一个不可再分割的属性值,确保每一列的原子性(规范列)。<br>    第二范式: 在满足第一范式的要求下，每一行数据只做一件事(规范行)。<br>    第三范式: 在满足第二范式的要求下，确保数据表中的每一列数据都和主键直接相关,而不能够间接相关。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1.char(32)和varchar(32)的区别&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	
+        &lt;hr&gt;
+
+&lt;p&gt;1.char(32)和varchar(32)的区别&lt;br&gt;    (1):char和varchar都是数据库定义字符串类型的数据格式,char是一种定长度的类型,varchar是一种可变长度的类型。&lt;br&gt;    (2):char(32)表示定义了当前字段所占用
       
     
     </summary>
