@@ -9,17 +9,17 @@
         <meta name="keywords" content="redis">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="redis和zk实现分布式锁的区别       实现方式 优点 缺点    基于redis 性能高 锁的失效时间很难把控   基于zk 实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题 性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点   cap原则  缓存数据的同步方式  先写入数据库，在写入缓存 查询数据库，然后写入缓存 定时">
+    <meta name="description" content="redis和zk实现分布式锁的区别       实现方式 优点 缺点    基于redis 性能高 锁的失效时间很难把控   基于zk 实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题 性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点   cap原则  缓存数据的同步方式  先写入数据库，在写入缓存  查询数据库，然后写入缓存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis">
 <meta property="og:url" content="https://gzl2017.github.io/wiki/redis/index.html">
 <meta property="og:site_name" content="gzl Blog">
-<meta property="og:description" content="redis和zk实现分布式锁的区别       实现方式 优点 缺点    基于redis 性能高 锁的失效时间很难把控   基于zk 实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题 性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点   cap原则  缓存数据的同步方式  先写入数据库，在写入缓存 查询数据库，然后写入缓存 定时">
+<meta property="og:description" content="redis和zk实现分布式锁的区别       实现方式 优点 缺点    基于redis 性能高 锁的失效时间很难把控   基于zk 实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题 性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点   cap原则  缓存数据的同步方式  先写入数据库，在写入缓存  查询数据库，然后写入缓存">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-19T01:23:49.886Z">
+<meta property="og:updated_time" content="2019-08-19T01:54:58.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis">
-<meta name="twitter:description" content="redis和zk实现分布式锁的区别       实现方式 优点 缺点    基于redis 性能高 锁的失效时间很难把控   基于zk 实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题 性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点   cap原则  缓存数据的同步方式  先写入数据库，在写入缓存 查询数据库，然后写入缓存 定时">
+<meta name="twitter:description" content="redis和zk实现分布式锁的区别       实现方式 优点 缺点    基于redis 性能高 锁的失效时间很难把控   基于zk 实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题 性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点   cap原则  缓存数据的同步方式  先写入数据库，在写入缓存  查询数据库，然后写入缓存">
     
 
     
@@ -364,13 +364,25 @@ redis和zk实现分布式锁的区别
 <ol>
 <li><p>缓存数据的同步方式</p>
 <ul>
-<li>先写入数据库，在写入缓存</li>
-<li>查询数据库，然后写入缓存</li>
-<li>定时刷新数据写入缓存</li>
+<li><p>先写入数据库，在写入缓存</p>
+</li>
+<li><p>查询数据库，然后写入缓存</p>
+</li>
+<li><p>定时刷新数据写入缓存</p>
+</li>
 </ul>
 </li>
 <li><p>redis特点</p>
-<p>​    一种缓存中间件，key-value的存储形式，默认16个db（0-15）个空间，支持数据的持久化。</p>
+<ul>
+<li><p>一种缓存中间件</p>
+</li>
+<li><p>key-value的存储形式</p>
+</li>
+<li><p>默认16个db（0-15）个空间</p>
+</li>
+<li><p>支持数据的持久化</p>
+</li>
+</ul>
 </li>
 <li><p>redis五种数据结构</p>
 </li>
@@ -461,13 +473,19 @@ redis和zk实现分布式锁的区别
 <p>​    </p>
 </li>
 <li><p>redis单线程性能高的原因</p>
-<p>​    内存和网络的宽带</p>
 <ul>
-<li>多路复用（同一时间处理多个请求）</li>
-<li>避免线程切换</li>
-<li>纯内存操作</li>
+<li><p>内存和网络的宽带</p>
+</li>
+<li><p>多路复用（同一时间处理多个请求）</p>
+</li>
+<li><p>避免线程切换</p>
+</li>
+<li><p>纯内存操作 </p>
+</li>
 </ul>
 </li>
+</ol>
+<ol start="9">
 <li><p>lua脚本在redis中的应用</p>
 <ul>
 <li><p>pipeline管道模型</p>
@@ -487,14 +505,31 @@ redis和zk实现分布式锁的区别
 </ul>
 </li>
 </ol>
-<ol start="10">
-<li><p>redis集群</p>
+<hr>
 <p>redis集群</p>
-<p>哨兵模式</p>
-<p>Redis-Cluster</p>
-<p>redis的实践应用</p>
+<ul>
+<li><p>解决单点问题 </p>
 </li>
-</ol>
+<li><p>主从复制(master-slave)</p>
+</li>
+<li><p>数据同步: 全量复制(初始化)   增量复制  无磁盘复制</p>
+</li>
+<li><p>选主(哨兵) </p>
+</li>
+</ul>
+<hr>
+<p>哨兵机制</p>
+<ul>
+<li><p>监控master和slave是否正常运行</p>
+</li>
+<li><p>当master出现故障的时候，从slave中选取一个新的master</p>
+</li>
+</ul>
+<hr>
+<p>Redis-Cluster</p>
+<hr>
+<p>Redis的实践应用</p>
+<hr>
 
             </div>
         
