@@ -9,17 +9,17 @@
         <meta name="keywords" content="redis">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="redis和zk实现分布式锁的区别    实现方式 优点 缺点    基于redis 性能高 锁的失效时间很难把控   基于zk 实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题 性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点   cap原则  缓存数据的同步方式  先写入数据库，在写入缓存 查询数据库，然后写入缓存 定时刷新">
+    <meta name="description" content="redis和zk实现分布式锁的区别       实现方式 优点 缺点    基于redis 性能高 锁的失效时间很难把控   基于zk 实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题 性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点   cap原则  缓存数据的同步方式  先写入数据库，在写入缓存 查询数据库，然后写入缓存 定时">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis">
 <meta property="og:url" content="https://gzl2017.github.io/wiki/redis/index.html">
 <meta property="og:site_name" content="gzl Blog">
-<meta property="og:description" content="redis和zk实现分布式锁的区别    实现方式 优点 缺点    基于redis 性能高 锁的失效时间很难把控   基于zk 实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题 性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点   cap原则  缓存数据的同步方式  先写入数据库，在写入缓存 查询数据库，然后写入缓存 定时刷新">
+<meta property="og:description" content="redis和zk实现分布式锁的区别       实现方式 优点 缺点    基于redis 性能高 锁的失效时间很难把控   基于zk 实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题 性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点   cap原则  缓存数据的同步方式  先写入数据库，在写入缓存 查询数据库，然后写入缓存 定时">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-18T09:04:16.904Z">
+<meta property="og:updated_time" content="2019-08-19T01:23:49.886Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis">
-<meta name="twitter:description" content="redis和zk实现分布式锁的区别    实现方式 优点 缺点    基于redis 性能高 锁的失效时间很难把控   基于zk 实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题 性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点   cap原则  缓存数据的同步方式  先写入数据库，在写入缓存 查询数据库，然后写入缓存 定时刷新">
+<meta name="twitter:description" content="redis和zk实现分布式锁的区别       实现方式 优点 缺点    基于redis 性能高 锁的失效时间很难把控   基于zk 实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题 性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点   cap原则  缓存数据的同步方式  先写入数据库，在写入缓存 查询数据库，然后写入缓存 定时">
     
 
     
@@ -337,8 +337,10 @@
         
         
             <hr>
+redis和zk实现分布式锁的区别
 
-<p>redis和zk实现分布式锁的区别</p>
+
+
 <table>
 <thead>
 <tr>
@@ -480,9 +482,17 @@
 </li>
 <li><p>redis.call(“get”, “gupao”);</p>
 </li>
-<li><p>lua脚本可以存储在服务端-&gt;生成摘要</p>
+<li><p>lua脚本可以存储在服务端-&gt;生成摘要 </p>
 </li>
 </ul>
+</li>
+</ol>
+<ol start="10">
+<li><p>redis集群</p>
+<p>redis集群</p>
+<p>哨兵模式</p>
+<p>Redis-Cluster</p>
+<p>redis的实践应用</p>
 </li>
 </ol>
 

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://gzl2017.github.io/"/>
-  <updated>2019-08-18T09:04:16.904Z</updated>
+  <updated>2019-08-19T01:23:49.886Z</updated>
   <id>https://gzl2017.github.io/</id>
   
   <author>
@@ -21,17 +21,19 @@
     <link href="https://gzl2017.github.io/wiki/redis/"/>
     <id>https://gzl2017.github.io/wiki/redis/</id>
     <published>2019-08-18T02:58:52.000Z</published>
-    <updated>2019-08-18T09:04:16.904Z</updated>
+    <updated>2019-08-19T01:23:49.886Z</updated>
     
-    <content type="html"><![CDATA[<hr><p>redis和zk实现分布式锁的区别</p><table><thead><tr><th>实现方式</th><th>优点</th><th>缺点</th></tr></thead><tbody><tr><td>基于redis</td><td>性能高</td><td>锁的失效时间很难把控</td></tr><tr><td>基于zk</td><td>实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题</td><td>性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点</td></tr></tbody></table><p>cap原则</p><ol><li><p>缓存数据的同步方式</p><ul><li>先写入数据库，在写入缓存</li><li>查询数据库，然后写入缓存</li><li>定时刷新数据写入缓存</li></ul></li><li><p>redis特点</p><p>​    一种缓存中间件，key-value的存储形式，默认16个db（0-15）个空间，支持数据的持久化。</p></li><li><p>redis五种数据结构</p></li></ol><table><thead><tr><th>数据结构</th><th align="center">使用场景</th></tr></thead><tbody><tr><td>string</td><td align="center">session共享 短信验证码 ip限制 序列自增</td></tr><tr><td>list</td><td align="center">分布式队列  栈</td></tr><tr><td>hash</td><td align="center">对象的存储（用户信息）</td></tr><tr><td>set</td><td align="center">用户标签(定点推送) 求交集 并集</td></tr><tr><td>sorted set</td><td align="center"></td></tr></tbody></table><ol start="4"><li><p>过期时间</p><ul><li>消极方法<ul><li>当应用访问key时，发现key已经过期，就会删除。</li></ul></li><li>积极方法：<ul><li>周期性的从设置了过期时间的key中选择一部分的key进行删除。<ul><li>随机测试20个带有timeout信息的key。</li><li>如果超过25%的key被删除，则重复执行整个流程</li></ul></li></ul></li></ul></li><li><p>pub/sub 发布订阅模式</p></li><li><p>redis持久化及原理</p><ul><li><p>RDB</p><ul><li><p>概念：当符合【条件】的时候，fork子进程，生成dump.rdb快照文件。</p></li><li><p>缺点：数据丢失</p></li><li><p>规则</p><ul><li><p>配置规则，配置文件配置</p></li><li><p>save或者bgsave命令触发</p></li><li><p>flushall命令触发，且满足配置规则</p></li><li><p>执行复制操作</p></li></ul></li></ul></li></ul></li></ol><ul><li><p>AOF</p><ul><li>概念：需要配置文件开启(默认关闭)，aof文件的写入，只针对事物操作。AOF重写</li><li>缺点：</li><li>规则</li></ul></li></ul><ol start="7"><li><p>redis内存回收策略</p><p>​    </p></li><li><p>redis单线程性能高的原因</p><p>​    内存和网络的宽带</p><ul><li>多路复用（同一时间处理多个请求）</li><li>避免线程切换</li><li>纯内存操作</li></ul></li><li><p>lua脚本在redis中的应用</p><ul><li><p>pipeline管道模型</p></li><li><p>减少网络开销去执行多个指令</p></li><li><p>满足原子性</p></li><li><p>复用性</p></li><li><p>redis.call(“set”, “gupao”, “123”)</p></li><li><p>redis.call(“get”, “gupao”);</p></li><li><p>lua脚本可以存储在服务端-&gt;生成摘要</p></li></ul></li></ol>]]></content>
+    <content type="html"><![CDATA[<hr>redis和zk实现分布式锁的区别<table><thead><tr><th>实现方式</th><th>优点</th><th>缺点</th></tr></thead><tbody><tr><td>基于redis</td><td>性能高</td><td>锁的失效时间很难把控</td></tr><tr><td>基于zk</td><td>实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题</td><td>性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点</td></tr></tbody></table><p>cap原则</p><ol><li><p>缓存数据的同步方式</p><ul><li>先写入数据库，在写入缓存</li><li>查询数据库，然后写入缓存</li><li>定时刷新数据写入缓存</li></ul></li><li><p>redis特点</p><p>​    一种缓存中间件，key-value的存储形式，默认16个db（0-15）个空间，支持数据的持久化。</p></li><li><p>redis五种数据结构</p></li></ol><table><thead><tr><th>数据结构</th><th align="center">使用场景</th></tr></thead><tbody><tr><td>string</td><td align="center">session共享 短信验证码 ip限制 序列自增</td></tr><tr><td>list</td><td align="center">分布式队列  栈</td></tr><tr><td>hash</td><td align="center">对象的存储（用户信息）</td></tr><tr><td>set</td><td align="center">用户标签(定点推送) 求交集 并集</td></tr><tr><td>sorted set</td><td align="center"></td></tr></tbody></table><ol start="4"><li><p>过期时间</p><ul><li>消极方法<ul><li>当应用访问key时，发现key已经过期，就会删除。</li></ul></li><li>积极方法：<ul><li>周期性的从设置了过期时间的key中选择一部分的key进行删除。<ul><li>随机测试20个带有timeout信息的key。</li><li>如果超过25%的key被删除，则重复执行整个流程</li></ul></li></ul></li></ul></li><li><p>pub/sub 发布订阅模式</p></li><li><p>redis持久化及原理</p><ul><li><p>RDB</p><ul><li><p>概念：当符合【条件】的时候，fork子进程，生成dump.rdb快照文件。</p></li><li><p>缺点：数据丢失</p></li><li><p>规则</p><ul><li><p>配置规则，配置文件配置</p></li><li><p>save或者bgsave命令触发</p></li><li><p>flushall命令触发，且满足配置规则</p></li><li><p>执行复制操作</p></li></ul></li></ul></li></ul></li></ol><ul><li><p>AOF</p><ul><li>概念：需要配置文件开启(默认关闭)，aof文件的写入，只针对事物操作。AOF重写</li><li>缺点：</li><li>规则</li></ul></li></ul><ol start="7"><li><p>redis内存回收策略</p><p>​    </p></li><li><p>redis单线程性能高的原因</p><p>​    内存和网络的宽带</p><ul><li>多路复用（同一时间处理多个请求）</li><li>避免线程切换</li><li>纯内存操作</li></ul></li><li><p>lua脚本在redis中的应用</p><ul><li><p>pipeline管道模型</p></li><li><p>减少网络开销去执行多个指令</p></li><li><p>满足原子性</p></li><li><p>复用性</p></li><li><p>redis.call(“set”, “gupao”, “123”)</p></li><li><p>redis.call(“get”, “gupao”);</p></li><li><p>lua脚本可以存储在服务端-&gt;生成摘要 </p></li></ul></li></ol><ol start="10"><li><p>redis集群</p><p>redis集群</p><p>哨兵模式</p><p>Redis-Cluster</p><p>redis的实践应用</p></li></ol>]]></content>
     
     <summary type="html">
     
       
       
         &lt;hr&gt;
+redis和zk实现分布式锁的区别
 
-&lt;p&gt;redis和zk实现分布式锁的区别&lt;/p&gt;
+
+
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -42,7 +44,7 @@
 &lt;/thead&gt;
 &lt;tbody&gt;&lt;tr&gt;
 &lt;td&gt;基于redis&lt;/td&gt;
-&lt;td&gt;性能
+&lt;td&gt;性能高&lt;/td
       
     
     </summary>
