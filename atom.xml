@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://gzl2017.github.io/"/>
-  <updated>2019-08-19T10:01:45.298Z</updated>
+  <updated>2019-08-19T10:21:32.783Z</updated>
   <id>https://gzl2017.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://gzl2017.github.io/wiki/spring/"/>
     <id>https://gzl2017.github.io/wiki/spring/</id>
     <published>2019-08-19T09:04:07.000Z</published>
-    <updated>2019-08-19T10:01:45.298Z</updated>
+    <updated>2019-08-19T10:21:32.783Z</updated>
     
     <content type="html"><![CDATA[<p>此处参考了<a href="http://www.codeceo.com/article/spring-transactions.html这篇博客，总结的挺nice的。" target="_blank" rel="noopener">http://www.codeceo.com/article/spring-transactions.html这篇博客，总结的挺nice的。</a></p><p><strong>spring事物简介</strong></p><ul><li><p>spring基于注解的事物</p><p>​    xml文件开启注解驱动，相关类和方法上通过@Transactional注解标识。</p><p>​    spring在启动是会为这些class生成spring内部管理的bean，若是发现带有@Transactional注解的类和方</p><p>​    法，会为其生成代理类，代理类中会做相关的事物处理（正常提交，异常回滚）。</p></li></ul><ul><li><p>基于实现TransactionCallback接口的事物</p><p>​    </p></li></ul><hr><p><strong>spring事物的传播属性</strong></p><table><thead><tr><th>常量名称</th><th align="center">常量解释</th></tr></thead><tbody><tr><td>PROPAGATION_REQUIRED(propagation_required)</td><td align="center">支持当前事物，如果当前没有事物，就新建一个事物。这是最常见的选择，也是spring默认的事物传播。</td></tr><tr><td>PROPAGATION_REQUIRES_NEW(propagation_requires_new)</td><td align="center">新建事物，如果当前存在事物，就把当前事物挂起。新建的事物和挂起的事物没有任何的关系，是两个独立的事物。外层事物失败回滚之后，不能回滚内层事物执行的结果。内层事物失败抛出异常，外层事物捕获，也可以不处理回滚操作。</td></tr><tr><td>PROPAGATION_SUPPORTS(propagation_supports)</td><td align="center">支持当前事物，如果当前没有事物，就以非事物的方式执行。</td></tr><tr><td>PROPAGATION_MANDATORY(propagation_mandatory)</td><td align="center">支持当前事物，如果当前没有事物，就抛出异常。</td></tr><tr><td>PROPAGATION_NOT_SUPPORTED(propagation_not_supported)</td><td align="center">以非事物方式执行操作，如果当前存在事物，就把当前事物挂起。</td></tr><tr><td>PROPAGATION_NEVER(propagation_never)</td><td align="center">以非事物方式执行操作，如果当前存在事物，就抛出异常。</td></tr><tr><td>PROPAGATION_NESTED(propagation_nested)</td><td align="center">如果一个活动的事务存在，则运行在一个嵌套的事务中。如果没有活动事务，则按REQUIRED属性执行。它使用了一个单独的事务，这个事务拥有多个可以回滚的保存点。内部事务的回滚不会对外部事务造成影响。它只对DataSourceTransactionManager事务管理器起效。</td></tr></tbody></table><hr><p><strong>数据库隔离级别</strong></p><table><thead><tr><th>隔离级别</th><th>隔离级别的值</th><th>导致的问题</th></tr></thead><tbody><tr><td>Read Uncommited</td><td>0</td><td>允许脏读，不可重复读，幻读</td></tr><tr><td>Read Commited</td><td>1</td><td>避免脏读，允许不可重复读和幻读</td></tr><tr><td>RepeatableRead</td><td>2</td><td>避免脏读和不可重复读，允许幻读</td></tr><tr><td>Serializable</td><td>3</td><td>避免脏读 ，不可重复读，幻读，事物一个一个执行，执行效率低</td></tr></tbody></table><hr><p><strong>spring中的隔离级别</strong></p><table><thead><tr><th>常量名称</th><th>常量解释</th></tr></thead><tbody><tr><td>ISOLATION_DEFAULT(isolation_default)</td><td>PlatfromTransactionManager默认的事物隔离级别，使用数据库默认的事物隔离级别。</td></tr><tr><td>ISOLATION_READ_UNCOMMITTED(isolation_read_uncommitted)</td><td>读未提交</td></tr><tr><td>ISOLATION_READ_COMMITTED(isolation_read_committed)</td><td>读已提交</td></tr><tr><td>ISOLATION_REPEATABLE_READ(isolation_repeatable)</td><td>可重复读</td></tr><tr><td>ISOLATION_SERIALIZABLE(isolation_serializable)</td><td>串行化</td></tr></tbody></table><hr>]]></content>
     
@@ -116,17 +116,17 @@ redis和zk实现分布式锁的区别
     <link href="https://gzl2017.github.io/wiki/jvm/"/>
     <id>https://gzl2017.github.io/wiki/jvm/</id>
     <published>2019-08-16T04:51:03.000Z</published>
-    <updated>2019-08-16T05:29:16.926Z</updated>
+    <updated>2019-08-19T11:40:03.355Z</updated>
     
-    <content type="html"><![CDATA[<p>jvm的运行时数据区</p><blockquote><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空间。若是在堆中没有完成实例分配，并且堆也无法再扩展时，就会抛出OutOfMemoryError异常。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></blockquote><blockquote><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 方法区:用于存储已经被虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据。当方法区无法满足内存分配的需求时，将会抛出OutOfMemoryError异常。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></blockquote><blockquote><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 虚拟机栈:描述的是java方法执行的内存模型，每个方法执行时都会创建一个栈帧，栈帧中用于存储局部变量表，操作数栈，动态链接，方法出口等信息。当线程申请的栈深度大于虚拟机所允许的栈深度，将抛出StackOverflowError异常。若是虚拟机动态扩展时无法申请到足够的内存，将会抛出OutOfMemoryError异常。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></blockquote><blockquote><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 程序计数器:记录当前线程执行的字节码指令的行号，不会发生OutOfMemoryError。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></blockquote><blockquote><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 本地方法栈:用于执行非java方法的内存模型，也会发生StackOverflowError和OutOfMemoryError异常</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></blockquote>]]></content>
+    <content type="html"><![CDATA[<p>jvm的运行时数据区</p><hr><p>堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空间。若是在堆中没有完成实例分配，并且堆也无法再扩展时，就会抛出OutOfMemoryError异常。</p><hr><p>方法区:用于存储已经被虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据。当方法区无法满足内存分配的需求时，将会抛出OutOfMemoryError异常。</p><hr><p>虚拟机栈:描述的是java方法执行的内存模型，每个方法执行时都会创建一个栈帧，栈帧中用于存储局部变量表，操作数栈，动态链接，方法出口等信息。当线程申请的栈深度大于虚拟机所允许的栈深度，将抛出StackOverflowError异常。若是虚拟机动态扩展时无法申请到足够的内存，将会抛出OutOfMemoryError异常。</p><hr><p>程序计数器:记录当前线程执行的字节码指令的行号，不会发生OutOfMemoryError。</p><hr><p>本地方法栈:用于执行非java方法的内存模型，也会发生StackOverflowError和OutOfMemoryError异常。</p><hr><p>jvm垃圾回收考虑的三个问题</p><ul><li>回收哪些对象</li><li>什么时候回收这些对象</li><li>怎么回收这些对象</li></ul><hr><p>jvm垃圾回收算法</p><ul><li><p>标记清除：会有内存碎片</p></li><li><p>标记整理：没有内存碎片，适合新生代对象的回收</p></li><li><p>复制算法：需要留出一部分的内存空间，利用率不高</p></li><li><p>分代收集算法：新生代死亡对象多，采用复制算法。老年代死亡对象少，采用标记整理或标记清除。</p></li></ul><hr><p>jvm垃圾收集器</p><p>​    新生代垃圾收集器</p><p>​    老年代垃圾收集器    </p>]]></content>
     
     <summary type="html">
     
       
       
         &lt;p&gt;jvm的运行时数据区&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;figure class=&quot;highlight tex&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt; 堆:java垃圾回收的主要区域，唯一存在的价
+&lt;hr&gt;
+&lt;p&gt;堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空
       
     
     </summary>

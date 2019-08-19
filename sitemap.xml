@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://gzl2017.github.io/wiki/jvm/</loc>
+    
+    <lastmod>2019-08-19T11:40:03.355Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://gzl2017.github.io/wiki/spring/</loc>
     
-    <lastmod>2019-08-19T10:01:45.298Z</lastmod>
+    <lastmod>2019-08-19T10:21:32.783Z</lastmod>
     
   </url>
   
@@ -26,13 +33,6 @@
     <loc>https://gzl2017.github.io/wiki/HashMap/</loc>
     
     <lastmod>2019-08-16T14:23:46.216Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://gzl2017.github.io/wiki/jvm/</loc>
-    
-    <lastmod>2019-08-16T05:29:16.926Z</lastmod>
     
   </url>
   

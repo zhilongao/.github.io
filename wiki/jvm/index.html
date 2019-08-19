@@ -9,17 +9,17 @@
         <meta name="keywords" content="jvm">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="jvm的运行时数据区  &amp;gt; 堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空间。若是在堆中没有完成实例分配，并且堆也无法再扩展时，就会抛出OutOfMemoryError异常。&amp;gt;   &amp;gt; 方法区:用于存">
+    <meta name="description" content="jvm的运行时数据区  堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空间。若是在堆中没有完成实例分配，并且堆也无法再扩展时，就会抛出OutOfMemoryError异常。  方法区:用于存储已经被虚拟机加载的类信息，常">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jvm">
 <meta property="og:url" content="https://gzl2017.github.io/wiki/jvm/index.html">
 <meta property="og:site_name" content="gzl Blog">
-<meta property="og:description" content="jvm的运行时数据区  &amp;gt; 堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空间。若是在堆中没有完成实例分配，并且堆也无法再扩展时，就会抛出OutOfMemoryError异常。&amp;gt;   &amp;gt; 方法区:用于存">
+<meta property="og:description" content="jvm的运行时数据区  堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空间。若是在堆中没有完成实例分配，并且堆也无法再扩展时，就会抛出OutOfMemoryError异常。  方法区:用于存储已经被虚拟机加载的类信息，常">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-16T05:29:16.926Z">
+<meta property="og:updated_time" content="2019-08-19T11:40:03.355Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jvm">
-<meta name="twitter:description" content="jvm的运行时数据区  &amp;gt; 堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空间。若是在堆中没有完成实例分配，并且堆也无法再扩展时，就会抛出OutOfMemoryError异常。&amp;gt;   &amp;gt; 方法区:用于存">
+<meta name="twitter:description" content="jvm的运行时数据区  堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空间。若是在堆中没有完成实例分配，并且堆也无法再扩展时，就会抛出OutOfMemoryError异常。  方法区:用于存储已经被虚拟机加载的类信息，常">
     
 
     
@@ -346,21 +346,39 @@
         
         
             <p>jvm的运行时数据区</p>
-<blockquote>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空间。若是在堆中没有完成实例分配，并且堆也无法再扩展时，就会抛出OutOfMemoryError异常。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 方法区:用于存储已经被虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据。当方法区无法满足内存分配的需求时，将会抛出OutOfMemoryError异常。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 虚拟机栈:描述的是java方法执行的内存模型，每个方法执行时都会创建一个栈帧，栈帧中用于存储局部变量表，操作数栈，动态链接，方法出口等信息。当线程申请的栈深度大于虚拟机所允许的栈深度，将抛出StackOverflowError异常。若是虚拟机动态扩展时无法申请到足够的内存，将会抛出OutOfMemoryError异常。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 程序计数器:记录当前线程执行的字节码指令的行号，不会发生OutOfMemoryError。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">&gt; 本地方法栈:用于执行非java方法的内存模型，也会发生StackOverflowError和OutOfMemoryError异常</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
+<hr>
+<p>堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空间。若是在堆中没有完成实例分配，并且堆也无法再扩展时，就会抛出OutOfMemoryError异常。</p>
+<hr>
+<p>方法区:用于存储已经被虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据。当方法区无法满足内存分配的需求时，将会抛出OutOfMemoryError异常。</p>
+<hr>
+<p>虚拟机栈:描述的是java方法执行的内存模型，每个方法执行时都会创建一个栈帧，栈帧中用于存储局部变量表，操作数栈，动态链接，方法出口等信息。当线程申请的栈深度大于虚拟机所允许的栈深度，将抛出StackOverflowError异常。若是虚拟机动态扩展时无法申请到足够的内存，将会抛出OutOfMemoryError异常。</p>
+<hr>
+<p>程序计数器:记录当前线程执行的字节码指令的行号，不会发生OutOfMemoryError。</p>
+<hr>
+<p>本地方法栈:用于执行非java方法的内存模型，也会发生StackOverflowError和OutOfMemoryError异常。</p>
+<hr>
+<p>jvm垃圾回收考虑的三个问题</p>
+<ul>
+<li>回收哪些对象</li>
+<li>什么时候回收这些对象</li>
+<li>怎么回收这些对象</li>
+</ul>
+<hr>
+<p>jvm垃圾回收算法</p>
+<ul>
+<li><p>标记清除：会有内存碎片</p>
+</li>
+<li><p>标记整理：没有内存碎片，适合新生代对象的回收</p>
+</li>
+<li><p>复制算法：需要留出一部分的内存空间，利用率不高</p>
+</li>
+<li><p>分代收集算法：新生代死亡对象多，采用复制算法。老年代死亡对象少，采用标记整理或标记清除。</p>
+</li>
+</ul>
+<hr>
+<p>jvm垃圾收集器</p>
+<p>​    新生代垃圾收集器</p>
+<p>​    老年代垃圾收集器    </p>
 
             </div>
         
