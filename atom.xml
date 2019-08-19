@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://gzl2017.github.io/"/>
-  <updated>2019-08-19T01:54:58.025Z</updated>
+  <updated>2019-08-19T10:01:45.298Z</updated>
   <id>https://gzl2017.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>spring</title>
+    <link href="https://gzl2017.github.io/wiki/spring/"/>
+    <id>https://gzl2017.github.io/wiki/spring/</id>
+    <published>2019-08-19T09:04:07.000Z</published>
+    <updated>2019-08-19T10:01:45.298Z</updated>
+    
+    <content type="html"><![CDATA[<p>此处参考了<a href="http://www.codeceo.com/article/spring-transactions.html这篇博客，总结的挺nice的。" target="_blank" rel="noopener">http://www.codeceo.com/article/spring-transactions.html这篇博客，总结的挺nice的。</a></p><p><strong>spring事物简介</strong></p><ul><li><p>spring基于注解的事物</p><p>​    xml文件开启注解驱动，相关类和方法上通过@Transactional注解标识。</p><p>​    spring在启动是会为这些class生成spring内部管理的bean，若是发现带有@Transactional注解的类和方</p><p>​    法，会为其生成代理类，代理类中会做相关的事物处理（正常提交，异常回滚）。</p></li></ul><ul><li><p>基于实现TransactionCallback接口的事物</p><p>​    </p></li></ul><hr><p><strong>spring事物的传播属性</strong></p><table><thead><tr><th>常量名称</th><th align="center">常量解释</th></tr></thead><tbody><tr><td>PROPAGATION_REQUIRED(propagation_required)</td><td align="center">支持当前事物，如果当前没有事物，就新建一个事物。这是最常见的选择，也是spring默认的事物传播。</td></tr><tr><td>PROPAGATION_REQUIRES_NEW(propagation_requires_new)</td><td align="center">新建事物，如果当前存在事物，就把当前事物挂起。新建的事物和挂起的事物没有任何的关系，是两个独立的事物。外层事物失败回滚之后，不能回滚内层事物执行的结果。内层事物失败抛出异常，外层事物捕获，也可以不处理回滚操作。</td></tr><tr><td>PROPAGATION_SUPPORTS(propagation_supports)</td><td align="center">支持当前事物，如果当前没有事物，就以非事物的方式执行。</td></tr><tr><td>PROPAGATION_MANDATORY(propagation_mandatory)</td><td align="center">支持当前事物，如果当前没有事物，就抛出异常。</td></tr><tr><td>PROPAGATION_NOT_SUPPORTED(propagation_not_supported)</td><td align="center">以非事物方式执行操作，如果当前存在事物，就把当前事物挂起。</td></tr><tr><td>PROPAGATION_NEVER(propagation_never)</td><td align="center">以非事物方式执行操作，如果当前存在事物，就抛出异常。</td></tr><tr><td>PROPAGATION_NESTED(propagation_nested)</td><td align="center">如果一个活动的事务存在，则运行在一个嵌套的事务中。如果没有活动事务，则按REQUIRED属性执行。它使用了一个单独的事务，这个事务拥有多个可以回滚的保存点。内部事务的回滚不会对外部事务造成影响。它只对DataSourceTransactionManager事务管理器起效。</td></tr></tbody></table><hr><p><strong>数据库隔离级别</strong></p><table><thead><tr><th>隔离级别</th><th>隔离级别的值</th><th>导致的问题</th></tr></thead><tbody><tr><td>Read Uncommited</td><td>0</td><td>允许脏读，不可重复读，幻读</td></tr><tr><td>Read Commited</td><td>1</td><td>避免脏读，允许不可重复读和幻读</td></tr><tr><td>RepeatableRead</td><td>2</td><td>避免脏读和不可重复读，允许幻读</td></tr><tr><td>Serializable</td><td>3</td><td>避免脏读 ，不可重复读，幻读，事物一个一个执行，执行效率低</td></tr></tbody></table><hr><p><strong>spring中的隔离级别</strong></p><table><thead><tr><th>常量名称</th><th>常量解释</th></tr></thead><tbody><tr><td>ISOLATION_DEFAULT(isolation_default)</td><td>PlatfromTransactionManager默认的事物隔离级别，使用数据库默认的事物隔离级别。</td></tr><tr><td>ISOLATION_READ_UNCOMMITTED(isolation_read_uncommitted)</td><td>读未提交</td></tr><tr><td>ISOLATION_READ_COMMITTED(isolation_read_committed)</td><td>读已提交</td></tr><tr><td>ISOLATION_REPEATABLE_READ(isolation_repeatable)</td><td>可重复读</td></tr><tr><td>ISOLATION_SERIALIZABLE(isolation_serializable)</td><td>串行化</td></tr></tbody></table><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;此处参考了&lt;a href=&quot;http://www.codeceo.com/article/spring-transactions.html这篇博客，总结的挺nice的。&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.codeceo.c
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+    
+      <category term="spring" scheme="https://gzl2017.github.io/categories/java/spring/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>redis</title>

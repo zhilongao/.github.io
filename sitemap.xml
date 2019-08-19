@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://gzl2017.github.io/wiki/spring/</loc>
+    
+    <lastmod>2019-08-19T10:01:45.298Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://gzl2017.github.io/wiki/redis/</loc>
     
     <lastmod>2019-08-19T01:54:58.025Z</lastmod>
