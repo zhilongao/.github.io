@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="gzl Blog">
 <meta property="og:description" content="此处参考了http://www.codeceo.com/article/spring-transactions.html这篇博客，总结的挺nice的。 spring事物简介  spring基于注解的事物 ​    xml文件开启注解驱动，相关类和方法上通过@Transactional注解标识。 ​    spring在启动是会为这些class生成spring内部管理的bean，若是发现带有@Tra">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-19T10:21:32.783Z">
+<meta property="og:updated_time" content="2019-08-20T10:57:02.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring">
 <meta name="twitter:description" content="此处参考了http://www.codeceo.com/article/spring-transactions.html这篇博客，总结的挺nice的。 spring事物简介  spring基于注解的事物 ​    xml文件开启注解驱动，相关类和方法上通过@Transactional注解标识。 ​    spring在启动是会为这些class生成spring内部管理的bean，若是发现带有@Tra">
@@ -459,6 +459,22 @@
 </tr>
 </tbody></table>
 <hr>
+<p><code>@Resource注解和@Autowired注解的区别</code></p>
+<p>1.当单独使用@Autowired注解时，会默认按照类型装配，不适用与系统里一个接口有多个实现类的情况。<br>2.当系统内存在多个实现类时，无法按照类型装配，@Autowired可以配合@Qualifier注解按照名称进行装配<br>3.@Resource默认按照名称装配，可以通过指定name属性来进行按照名称来装配。<br>4.@Resource若是指定的name为空串或者是未指定name属性，会去按照类型来装配(此时系统内只能存在一个接口实现类，否则报错)<br>5.@Resource装配的类必须存在，否则会报错。@Autowired可以配置required=false来设置装配的bean是否是必须的。<br>6.@Resource注解属于JSR250标准的注释，属于J2EE的。而@Autowired属于spring提供的注解。使用@Resource注解可以与spring解耦。</p>
+<hr>
+<p>Restful风格</p>
+<p>参考博客：<a href="https://blog.igevin.info/posts/restful-architecture-in-general/#restful_features" target="_blank" rel="noopener">https://blog.igevin.info/posts/restful-architecture-in-general/#restful_features</a></p>
+<p>特点：资源，统一接口 ，URI和无状态</p>
+<ul>
+<li><p>资源：就是网络上面的一个实体，或者说是网络上面的一个具体信息。</p>
+</li>
+<li><p>统一接口：数据的元操作，分别对应于http的四个不同的方法。</p>
+</li>
+<li><p>URI：可以通过一个URI访问一个具体的资源。</p>
+</li>
+<li><p>无状态：</p>
+</li>
+</ul>
 
             </div>
         
