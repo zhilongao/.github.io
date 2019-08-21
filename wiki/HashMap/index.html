@@ -9,17 +9,17 @@
         <meta name="keywords" content="HashMap">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="1.HashMap的数据结构    在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树   2.HashMap的put方法的过程    a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resize方法初始化    b.通过key的hash值和数组长度计算出该元素在数组中的位置    c1.若是数组上没有元素,构建Node节点,存储该元素    c21.若是该数组上">
+    <meta name="description" content="1.HashMap的数据结构     在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树   2.HashMap的put方法的过程     a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resize方法初始化     b.通过key的hash值和数组长度计算出该元素在数组中的位置     c1.若是数组上没有元素,构建Node节点,存储该元素     c21.若是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HashMap">
 <meta property="og:url" content="https://gzl2017.github.io/wiki/HashMap/index.html">
 <meta property="og:site_name" content="gzl Blog">
-<meta property="og:description" content="1.HashMap的数据结构    在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树   2.HashMap的put方法的过程    a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resize方法初始化    b.通过key的hash值和数组长度计算出该元素在数组中的位置    c1.若是数组上没有元素,构建Node节点,存储该元素    c21.若是该数组上">
+<meta property="og:description" content="1.HashMap的数据结构     在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树   2.HashMap的put方法的过程     a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resize方法初始化     b.通过key的hash值和数组长度计算出该元素在数组中的位置     c1.若是数组上没有元素,构建Node节点,存储该元素     c21.若是">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-16T14:23:46.216Z">
+<meta property="og:updated_time" content="2019-08-21T07:30:38.652Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap">
-<meta name="twitter:description" content="1.HashMap的数据结构    在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树   2.HashMap的put方法的过程    a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resize方法初始化    b.通过key的hash值和数组长度计算出该元素在数组中的位置    c1.若是数组上没有元素,构建Node节点,存储该元素    c21.若是该数组上">
+<meta name="twitter:description" content="1.HashMap的数据结构     在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树   2.HashMap的put方法的过程     a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resize方法初始化     b.通过key的hash值和数组长度计算出该元素在数组中的位置     c1.若是数组上没有元素,构建Node节点,存储该元素     c21.若是">
     
 
     
@@ -203,6 +203,24 @@
                          <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/spring/">spring</a></li>  </ul> 
                     </li> 
                     
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            springboot
+                        </a>
+                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/springboot/">springboot</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            多线程
+                        </a>
+                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/thread/">thread</a></li>  </ul> 
+                    </li> 
+                    
                     <li class="directory open">
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder-open"></i>
@@ -338,22 +356,28 @@
         
         
             
-                <div id="toc" class="toc-article">
-                <strong class="toc-title">文章目录</strong>
-                    
-                </div>
-            
         
         
             <hr>
+1.HashMap的数据结构
+    在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树
 
-<p>1.HashMap的数据结构<br>    在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树</p>
 <hr>
+2.HashMap的put方法的过程
+    a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resize方法初始化
+    b.通过key的hash值和数组长度计算出该元素在数组中的位置
+    c1.若是数组上没有元素,构建Node节点,存储该元素
+    c21.若是该数组上有元素,且第一个节点的key与要存储的key相等,用变量保存该节点。
+    c22.若是该数组上有元素,且第一个节点的key与要存储的key不相等,需要判断该节点类型。
+        若是该节点属于红黑树,将元素插入到红黑树。
+        若是该节点属于链表,循环遍历链表,若是没有遇到key相同的,将key-value创建称为节点,插入到链表的尾部。判断是否需要转成红黑树，若是需要，将链表转成红黑树。
+    d.前面的操作中，若是找到与key相同的节点,根据条件判断是否需要覆盖,若是需要覆盖,直接修改原有节点的value。
+    f.将元素的个数size加1并判断是否需要扩容,若是需要扩容,调用resize方法扩容。
 
-<p>2.HashMap的put方法的过程<br>    a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resize方法初始化<br>    b.通过key的hash值和数组长度计算出该元素在数组中的位置<br>    c1.若是数组上没有元素,构建Node节点,存储该元素<br>    c21.若是该数组上有元素,且第一个节点的key与要存储的key相等,用变量保存该节点。<br>    c22.若是该数组上有元素,且第一个节点的key与要存储的key不相等,需要判断该节点类型。<br>        若是该节点属于红黑树,将元素插入到红黑树。<br>        若是该节点属于链表,循环遍历链表,若是没有遇到key相同的,将key-value创建称为节点,插入到链表的尾部。判断是否需要转成红黑树，若是需要，将链表转成红黑树。<br>    d.前面的操作中，若是找到与key相同的节点,根据条件判断是否需要覆盖,若是需要覆盖,直接修改原有节点的value。<br>    f.将元素的个数size加1并判断是否需要扩容,若是需要扩容,调用resize方法扩容。</p>
 <hr>
+3.HashMap的resize方法
+    resize方法涉及到两个大的步骤,首先是确定新数组的大小已经下次的扩容时机，新数组大小为原有数组大小的两倍，扩容变量也扩大为原有的两倍。其次是将原有数组的元素迁移至新的数组中,其中数组元素只会在两个地方，一个在[原下标]的地方，另一个在[原下标+原容量]的位置。
 
-<p>3.HashMap的resize方法<br>    resize方法涉及到两个大的步骤,首先是确定新数组的大小已经下次的扩容时机，新数组大小为原有数组大小的两倍，扩容变量也扩大为原有的两倍。其次是将原有数组的元素迁移至新的数组中,其中数组元素只会在两个地方，一个在[原下标]的地方，另一个在[原下标+原容量]的位置。</p>
 
             </div>
         

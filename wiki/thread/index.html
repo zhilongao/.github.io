@@ -3,20 +3,23 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     
-    <title>About | gzl Blog</title>
+    <title>thread | gzl Blog</title>
     
     
-        <meta name="keywords" content="About">
+        <meta name="keywords" content="thread">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="About">
-<meta property="og:url" content="https://gzl2017.github.io/about/index.html">
+    <meta name="description" content="// ThreadPoolTaskExecutorpublic class ThreadPoolTaskExecutor &amp;#123;    private final Object poolSizeMonitor = new Object();    // 核心线程数    private int corePoolSize = 1;    // 最大线程数    private int maxP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="thread">
+<meta property="og:url" content="https://gzl2017.github.io/wiki/thread/index.html">
 <meta property="og:site_name" content="gzl Blog">
+<meta property="og:description" content="// ThreadPoolTaskExecutorpublic class ThreadPoolTaskExecutor &amp;#123;    private final Object poolSizeMonitor = new Object();    // 核心线程数    private int corePoolSize = 1;    // 最大线程数    private int maxP">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-15T09:07:03.165Z">
+<meta property="og:updated_time" content="2019-08-21T07:29:30.975Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About">
+<meta name="twitter:title" content="thread">
+<meta name="twitter:description" content="// ThreadPoolTaskExecutorpublic class ThreadPoolTaskExecutor &amp;#123;    private final Object poolSizeMonitor = new Object();    // 核心线程数    private int corePoolSize = 1;    // 最大线程数    private int maxP">
     
 
     
@@ -157,7 +160,7 @@
         
         
          <ul class="unstyled" id="tree" style="display: block;"> 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder-open"></i>
                             &nbsp;
@@ -209,13 +212,13 @@
                          <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/springboot/">springboot</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder-open"></i>
                             &nbsp;
                             多线程
                         </a>
-                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/thread/">thread</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file active"><a href="/wiki/thread/">thread</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -299,16 +302,50 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-thread" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
             <header class="article-header">
                 
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/多线程/">多线程</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/thread/">
+            <time datetime="2019-08-21T05:43:50.000Z" itemprop="datePublished">2019-08-21</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/thread.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/thread.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/thread.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
                 
     
         <h1 class="article-title" itemprop="name">
-            About
+            thread
         </h1>
     
 
@@ -321,7 +358,31 @@
             
         
         
-            
+            <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ThreadPoolTaskExecutor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadPoolTaskExecutor</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object poolSizeMonitor = <span class="keyword">new</span> Object();</span><br><span class="line">    <span class="comment">// 核心线程数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> corePoolSize = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 最大线程数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxPoolSize = <span class="number">2147483647</span>;</span><br><span class="line">    <span class="comment">// 非核心线程空闲最大存活时间</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> keepAliveSeconds = <span class="number">60</span>;</span><br><span class="line">    <span class="comment">// 缓存队列容量</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> queueCapacity = <span class="number">2147483647</span>;</span><br><span class="line">    <span class="comment">// 是否允许核心线程池超时等待(设置为false,当到达一定时间没有任务,线程池会自动关闭)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> allowCoreThreadTimeOut = <span class="keyword">false</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> TaskDecorator taskDecorator;</span><br><span class="line">    <span class="keyword">private</span> ThreadPoolExecutor threadPoolExecutor;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolTaskExecutor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 因为spring线程池提供了更加灵活的配置，项目中一般使用的是spring的线程池。</span></span><br></pre></td></tr></table></figure>
+
+<p>​    // 项目准备</p>
+<ol>
+<li><p>从原始借据表bp_collect_loan_src中获取某个批次的原始借据总数，最小id，最大id。</p>
+</li>
+<li><p>会有一个数量限制，若是当前批次的原始借据数目小于10000，直接调用更新借据的操作。</p>
+</li>
+<li><p>若是当前这个批次的原始借据数目大于10000，获取到线程池，分批次将这些任务放到线程池，每个线程调用</p>
+<p>更新借据的操作。</p>
+</li>
+<li><p>更新借据的逻辑，通过原始借据id从小到大查询原始借据，每次500条。（重试机制，当查询出现异常时，重</p>
+<p>新查询）。</p>
+</li>
+<li><p>将查询到的这批原始借据加工成为催收系统里面的借据。bp_collect_loan_src –&gt; bp_collect_loan。</p>
+</li>
+<li><p>调用bp_collect_loan表操作mapper的insertOrUpdate方法将原始借据插入或更新到系统中。</p>
+</li>
+<li><p>bp_collect_loan会针对客户计算出一个hash值，作为bp_collect_loan的loadId，loadId在借据表中作为唯一</p>
+<p>索引，当有数据的时候会更新，没有数据的时候会最添加。</p>
+</li>
+<li><p>上游每天会更新他们的借据信息，我们在这边只是做一个数据同步的功能。</p>
+</li>
+</ol>
+
             </div>
         
         <footer class="article-footer">
@@ -331,6 +392,16 @@
 
 
     
+<nav id="article-nav">
+    
+    
+        <a href="/wiki/springboot/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">springboot</div>
+        </a>
+    
+</nav>
+
 
 
 
