@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://gzl2017.github.io/wiki/mysql/</loc>
+    
+    <lastmod>2019-08-22T09:03:32.303Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://gzl2017.github.io/wiki/thread/</loc>
+    
+    <lastmod>2019-08-21T09:04:31.314Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://gzl2017.github.io/wiki/jvm/</loc>
     
     <lastmod>2019-08-21T07:30:51.135Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>https://gzl2017.github.io/wiki/HashMap/</loc>
     
     <lastmod>2019-08-21T07:30:38.652Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://gzl2017.github.io/wiki/thread/</loc>
-    
-    <lastmod>2019-08-21T07:29:30.975Z</lastmod>
     
   </url>
   
@@ -40,13 +47,6 @@
     <loc>https://gzl2017.github.io/wiki/redis/</loc>
     
     <lastmod>2019-08-19T01:54:58.025Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://gzl2017.github.io/wiki/mysql/</loc>
-    
-    <lastmod>2019-08-17T08:44:21.094Z</lastmod>
     
   </url>
   
