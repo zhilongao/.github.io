@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="gzl Blog">
 <meta property="og:description" content="此处参考了http://www.codeceo.com/article/spring-transactions.html这篇博客，总结的挺nice的。 spring事物简介  spring基于注解的事物 ​    xml文件开启注解驱动，相关类和方法上通过@Transactional注解标识。 ​    spring在启动是会为这些class生成spring内部管理的bean，若是发现带有@Tra">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-21T01:25:23.764Z">
+<meta property="og:updated_time" content="2019-08-22T09:53:01.405Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring">
 <meta name="twitter:description" content="此处参考了http://www.codeceo.com/article/spring-transactions.html这篇博客，总结的挺nice的。 spring事物简介  spring基于注解的事物 ​    xml文件开启注解驱动，相关类和方法上通过@Transactional注解标识。 ​    spring在启动是会为这些class生成spring内部管理的bean，若是发现带有@Tra">
@@ -167,6 +167,15 @@
                             java
                         </a>
                          <ul class="unstyled" id="tree" style="display: block;"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            io
+                        </a>
+                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/io/">io</a></li>  </ul> 
+                    </li> 
+                    
                     <li class="directory">
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder-open"></i>
@@ -489,7 +498,15 @@
 <li>URI：可以通过一个URI访问一个具体的资源。</li>
 <li>无状态：</li>
 </ul>
+<hr>
+<p>为啥说spring mvc是线程安全的</p>
+<p>​    SpringMVC是基于方法的映射，每一个controller在容器中只有一个实例对象。若是我们在controller中使用一些共享变量时，可以使用ThreadLocal关键字来实现。但是尽量不要使用共享变量。</p>
+<hr>
 <p>什么是一致性hash</p>
+<p>​    附上一篇比较白话的博客<a href="http://www.zsythink.net/archives/1182" target="_blank" rel="noopener">http://www.zsythink.net/archives/1182</a></p>
+<hr>
+<p>为什么synchronized不能锁住基本数据类型</p>
+<p>​    synchronized要实现锁的功能，必须在jvm底层提供与之对应的锁对象。而基本数据类型是根本没有属性的。</p>
 
             </div>
         
