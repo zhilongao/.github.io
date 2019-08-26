@@ -9,17 +9,17 @@
         <meta name="keywords" content="lock">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="synchronized关键字 ​    偏向锁：当线程执行时，会去修改对象的对象头（Mark Word）中线程id，若是修改成功，执行。若是修改不成功，需要将偏向锁升级为轻量级锁。锁升级的过程是，该获取锁的线程通知Mark Word中标识的线程，使其进入暂停状态。 ​    轻量级锁：争抢锁的线程会去将对象的对象头（Mark Word）拷贝的线程栈中，并将对象头执行该栈（cas操作），若是执行">
+    <meta name="description" content="前戏java里面提供了两种锁机制，基于jvm层面实现的关键字synchronized和基于jdk层面实现的Lock锁。  synchronized关键字 基本使用：synchronized关键字可以用来修饰静态方法，普通方法，代码块，获取到的锁对象分别为当前类Class对象，当前实例对象和synchronized括号里面的对象。 加锁原理：synchronized加锁是基于对象监视器Monito">
 <meta property="og:type" content="article">
 <meta property="og:title" content="lock">
 <meta property="og:url" content="https://gzl2017.github.io/wiki/lock/index.html">
 <meta property="og:site_name" content="gzl Blog">
-<meta property="og:description" content="synchronized关键字 ​    偏向锁：当线程执行时，会去修改对象的对象头（Mark Word）中线程id，若是修改成功，执行。若是修改不成功，需要将偏向锁升级为轻量级锁。锁升级的过程是，该获取锁的线程通知Mark Word中标识的线程，使其进入暂停状态。 ​    轻量级锁：争抢锁的线程会去将对象的对象头（Mark Word）拷贝的线程栈中，并将对象头执行该栈（cas操作），若是执行">
+<meta property="og:description" content="前戏java里面提供了两种锁机制，基于jvm层面实现的关键字synchronized和基于jdk层面实现的Lock锁。  synchronized关键字 基本使用：synchronized关键字可以用来修饰静态方法，普通方法，代码块，获取到的锁对象分别为当前类Class对象，当前实例对象和synchronized括号里面的对象。 加锁原理：synchronized加锁是基于对象监视器Monito">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-25T09:47:23.544Z">
+<meta property="og:updated_time" content="2019-08-26T13:16:50.804Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lock">
-<meta name="twitter:description" content="synchronized关键字 ​    偏向锁：当线程执行时，会去修改对象的对象头（Mark Word）中线程id，若是修改成功，执行。若是修改不成功，需要将偏向锁升级为轻量级锁。锁升级的过程是，该获取锁的线程通知Mark Word中标识的线程，使其进入暂停状态。 ​    轻量级锁：争抢锁的线程会去将对象的对象头（Mark Word）拷贝的线程栈中，并将对象头执行该栈（cas操作），若是执行">
+<meta name="twitter:description" content="前戏java里面提供了两种锁机制，基于jvm层面实现的关键字synchronized和基于jdk层面实现的Lock锁。  synchronized关键字 基本使用：synchronized关键字可以用来修饰静态方法，普通方法，代码块，获取到的锁对象分别为当前类Class对象，当前实例对象和synchronized括号里面的对象。 加锁原理：synchronized加锁是基于对象监视器Monito">
     
 
     
@@ -153,90 +153,90 @@
             <span>分类</span>
             &nbsp;
             <a id='allExpand' href="#">
-                <i class="fa fa-angle-double-up fa-2x"></i>
+                <i class="fa fa-angle-double-down fa-2x"></i>
             </a>
         </h3>
         
         
         
-         <ul class="unstyled" id="tree" style="display: block;"> 
+         <ul class="unstyled" id="tree" > 
                     <li class="directory open">
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder-open"></i>
                             &nbsp;
                             java
                         </a>
-                         <ul class="unstyled" id="tree" style="display: block;"> 
+                         <ul class="unstyled" id="tree" > 
                     <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             io
                         </a>
-                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/io/">io</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/io/">io</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             jvm
                         </a>
-                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/jvm/">jvm</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/jvm/">jvm</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             mysql
                         </a>
-                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/mysql/">mysql</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/mysql/">mysql</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             redis
                         </a>
-                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/redis/">redis</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/redis/">redis</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             spring
                         </a>
-                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/spring/">spring</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/spring/">spring</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             springboot
                         </a>
-                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/springboot/">springboot</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/springboot/">springboot</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             分布式
                         </a>
-                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/http/">http</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/http/">http</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             多线程
                         </a>
-                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/thread/">thread</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/thread/">thread</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory open">
@@ -245,16 +245,25 @@
                             &nbsp;
                             并发
                         </a>
-                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file active"><a href="/wiki/lock/">lock</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            锁
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/wiki/lock/">lock</a></li>  </ul> 
+                    </li> 
+                     </ul> 
                     </li> 
                     
                     <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             源码
                         </a>
-                         <ul class="unstyled" id="tree" style="display: block;">  <li class="file"><a href="/wiki/HashMap/">HashMap</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/HashMap/">HashMap</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -339,7 +348,7 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/并发/">并发</a>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/并发/">并发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/并发/锁/">锁</a>
     </div>
 
                         
@@ -383,20 +392,20 @@
         
         
             
-                <div id="toc" class="toc-article">
-                <strong class="toc-title">文章目录</strong>
-                    
-                </div>
-            
         
         
             <hr>
-<p>synchronized关键字</p>
-<p>​    偏向锁：当线程执行时，会去修改对象的对象头（Mark Word）中线程id，若是修改成功，执行。若是修改不成功，需要将偏向锁升级为轻量级锁。锁升级的过程是，该获取锁的线程通知Mark Word中标识的线程，使其进入暂停状态。</p>
-<p>​    轻量级锁：争抢锁的线程会去将对象的对象头（Mark Word）拷贝的线程栈中，并将对象头执行该栈（cas操作），若是执行成功，获取到锁，执行代码。若是执行失败，自旋等待其它线程释放锁。</p>
-<p>​    重量级锁：当自旋超过了一定的时间之后，若是还不能获取到锁，将会升级为重量级锁，线程阻塞。</p>
+<p><code>前戏</code>java里面提供了两种锁机制，基于jvm层面实现的关键字synchronized和基于jdk层面实现的Lock锁。</p>
 <hr>
-<p>Lock接口</p>
+<p><code>synchronized关键字</code></p>
+<p><code>基本使用</code>：synchronized关键字可以用来修饰静态方法，普通方法，代码块，获取到的锁对象分别为当前类Class对象，当前实例对象和synchronized括号里面的对象。</p>
+<p><code>加锁原理</code>：synchronized加锁是基于对象监视器Monitor的monitorenter和monitorexit。在java中，每个对象都会有一个对象监视器，当synchronized修饰代码块时，在开始位置会加上monitorenter指令，在方法结束和异常处会插入monitorexit指令。当执行monitorentrt指令时，会去获取锁的Monitor对象，若是获取到，执行，获取不到的话，线程阻塞。</p>
+<p><code>synchronized的锁升级</code></p>
+<p>​    <code>偏向锁</code>：当线程执行时，会去修改对象的对象头（Mark Word）中线程id，若是修改成功，执行。若是修改不成功，需要将偏向锁升级为轻量级锁。锁升级的过程是，该获取锁的线程通知Mark Word中标识的线程，使其进入暂停状态。</p>
+<p>​    <code>轻量级锁</code>：争抢锁的线程会去将对象的对象头（Mark Word）拷贝的线程栈中，并将对象头指向该栈（cas操作），若是执行成功，获取到锁，执行代码。若是执行失败，自旋等待其它线程释放锁。</p>
+<p>​    <code>重量级锁</code>：当自旋超过了一定的时间之后，若是还不能获取到锁，将会升级为重量级锁，线程阻塞。</p>
+<hr>
+<p><code>Lock接口</code></p>
 <table>
 <thead>
 <tr>
@@ -450,12 +459,18 @@
 </tr>
 </tbody></table>
 <hr>
-<p>lock和synchronized的区别</p>
+<p><code>lock和synchronized的区别</code></p>
+<p>​        <code>关于加锁和释放锁方式和原理的不同</code></p>
 <ul>
-<li>synchronized是jvm层面提供的关键字，获取锁和释放锁不需要手工干预。synchronized获取锁时会获取锁定对象(静态方法-&gt;类对象，普通方法-&gt;当前对象，代码块-&gt;提供的对象)的对象监视器Monitor。一旦一个线程获取到这个对象的Monitor,其它线程就无法获取。但是同一个线程对这个Monitor可以多次获取（可重入）。对于锁的释放，当方法正常执行结束或者发生异常时，会释放该锁。</li>
-<li>lock锁是jdk层面提供的锁，可以基于api执行上锁和解锁操作，操作更加的灵活。Lock接口实现的可重入锁ReentLock，其底层是依赖于AQS，AQS内部维护了一个同步队列，获取锁的线程会被加入到这个同步队列上面，等待前一个获取锁的节点释放锁时唤醒。ReentLock提供了多种获取锁的方式，可以在获取锁的时候立即响应中断。</li>
-<li>synchronized基于对象监视器，调用底层的wait方法时，会将线程加入到等待队列中，内部只维护了一个等待队列，而调用notify或者notifyAll时，会将唤醒的线程加入到同步队列。</li>
-<li>ReentLock内部可以创建多个等待队列，可以调用await方法将获取到锁的线程加入到等待队列，也可以调用singal,singalAll唤醒线程，将其加入到同步队列中。</li>
+<li><p>synchronized是jvm层面提供的关键字，获取锁和释放锁不需要手工干预。synchronized获取锁时会获取锁定对象(静态方法-&gt;类对象，普通方法-&gt;当前对象，代码块-&gt;提供的对象)的对象监视器Monitor。一旦一个线程获取到这个对象的Monitor,其它线程就无法获取。但是同一个线程对这个Monitor可以多次获取（可重入）。对于锁的释放，当方法正常执行结束或者发生异常时，会释放该锁。</p>
+</li>
+<li><p>lock锁是jdk层面提供的锁，可以基于api执行上锁和解锁操作，操作更加的灵活。Lock接口实现的可重入锁ReentLock，其底层是依赖于AQS实现，AQS内部维护了一个同步队列，获取锁的线程会被加入到这个同步队列上面，等待前一个获取锁的节点释放锁时唤醒。ReentLock提供了多种获取锁的方式，可以在获取锁的时候立即响应中断。</p>
+<p><code>关于等待队列和同步队列的不同</code></p>
+</li>
+<li><p>synchronized基于对象监视器，调用底层的wait方法时，会将线程加入到等待队列中，内部只维护了一个等待队列，而调用notify或者notifyAll时，会将唤醒的线程加入到同步队列。</p>
+</li>
+<li><p>ReentLock内部可以创建多个等待队列，可以调用await方法将获取到锁的线程加入到等待队列，也可以调用singal,singalAll唤醒线程，将其加入到同步队列中。</p>
+</li>
 </ul>
 <hr>
 
