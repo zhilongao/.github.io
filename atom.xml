@@ -49,11 +49,11 @@
   </entry>
   
   <entry>
-    <title>数据库基本操作</title>
+    <title>基本操作</title>
     <link href="https://gzl2017.github.io/wiki/mysql-base/"/>
     <id>https://gzl2017.github.io/wiki/mysql-base/</id>
     <published>2019-08-27T09:08:25.000Z</published>
-    <updated>2019-08-27T09:37:51.884Z</updated>
+    <updated>2019-08-27T09:51:45.355Z</updated>
     
     <content type="html"><![CDATA[<hr><p><code>centos7上mysql的安装步骤</code></p><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1.下载mysql的repo源  &gt; wget http://repo.mysql.com/mysql57-community-release-el7-8.noarch.rpm</span><br><span class="line">2.安装源&gt; rpm -ivh mysql57-community-release-el7-8.noarch.rpm</span><br><span class="line">3.安装数据库-&gt;yum install mysql-server</span><br><span class="line">4.启动数据库&gt; systemctl start mysqld</span><br><span class="line">5.查看mysql为root账号生成的随机密码&gt;grep "password" /var/log/mysqld.log</span><br><span class="line">  说明root@localhost:此处为随机密码</span><br><span class="line">6.运行mysql -uroot -p回车</span><br><span class="line">7.粘贴随机密码-&gt;此时已经登录到mysql数据库，需要为root账号设置密码</span><br><span class="line">8.由于mysql5.7有对密码设置的验证，简单密码设置不了，需要运行下面两条命令关闭验证</span><br><span class="line">&gt; set global validate_password_length=1;</span><br><span class="line">&gt; set global validate_password_policy=0;</span><br><span class="line">9.修改root账号的权限</span><br><span class="line">    &gt; GRANT ALL PRIVILEGES ON *.* TO 'root'@'<span class="comment">%' IDENTIFIED BY 'root' WITH GRANT OPTION;</span></span><br><span class="line">10.可以创建一个其它的用户</span><br><span class="line">&gt; create user repl identified by 'repl';</span><br><span class="line">11.为该用户授权(数据同步的权限)</span><br><span class="line">    &gt; grant replication slave on *.* to 'repl'@'<span class="comment">%' identified by 'repl';</span></span><br></pre></td></tr></table></figure><p><code>mysql配置主从同步的步骤</code></p><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">todo 需要完善</span><br><span class="line">mysql的数据文件和二进制文件: /var/lib/mysql/</span><br><span class="line">mysql的配置文件: /etc/my.cnf</span><br><span class="line">mysql的日志文件:  /var/log/mysql.log</span><br><span class="line">修改/etc/my.cnf</span><br><span class="line">[mysqld]</span><br><span class="line">log-bin=mysql-bin</span><br><span class="line">server-id=192.168.11.140</span><br><span class="line">show master status;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -78,11 +78,11 @@
   </entry>
   
   <entry>
-    <title>数据库索引</title>
+    <title>索引</title>
     <link href="https://gzl2017.github.io/wiki/mysql-index/"/>
     <id>https://gzl2017.github.io/wiki/mysql-index/</id>
     <published>2019-08-27T09:08:17.000Z</published>
-    <updated>2019-08-27T09:49:02.187Z</updated>
+    <updated>2019-08-27T09:51:54.005Z</updated>
     
     <content type="html"><![CDATA[<p><code>1.数据库四大特性</code></p><p>​    A( Atomicity 原子性):  数据库最小的工作单元，整个工作单元要么一起提交成功,要么一起失败回滚。<br>​    C( Consistency 一致性):  事物中操作的数据的状态是一致的。即写入数据的结果必须完全符合预设的规则，不会因为出现系统意外等原因导致状态的不一致。<br>​    I( Isolation 隔离性):  一个事务所操作的数据在提交之前，对其他事务的可见性设定（一般设定为不可见）。<br>​    D( Durability 持久性):  数据库的数据一旦提交,无法更改。</p><p><code>2.多个事物并发引起的数据读取问题</code></p><p>​    脏读:  是指一个事物读取到了另外一个事物未提交的数据。<br>​    不可重复读:  是指在一个事物未结束之前, 前后两次读取到的数据不一致现象。原因在于该事物在前后两次读取数据之间，另外一个事物修改了该数据。(不可重复读的重点在于修改)。<br>​    幻读:  是指当一个事物修改了数据库表中某一个范围内的数据的某一个字段，但是另外一个事物在此期间又在该范围内插入了一条新的数据，造成前一个事物出现幻觉(没有完全修改)。(幻读的重点在于新增或删除) 。</p><p><code>3.数据库事物的隔离级别</code></p><p>  Read Uncommited 读未提交:  事物未提交对其它的事物也是可见的。<br>  Read Commited 读已提交:  一个事物只能够读取到已提交的数据。(解决脏读, 未解决不可重复读)。<br>  Repeatable Read 可重复读:  一个事物对数据的前后读取结果是一致的。(解决了不可重复读, 未解决幻读)。<br>  Serializable 串行化:  数据库最高的隔离级别,  强制所有事物串行执行,解决了所有并发问题。</p><p><code>4.聚集索引和非聚集索引的区别</code><br>    聚集索引:  表中的数据是按照索引的顺序来存储的。索引的叶子节点上存储了真实的数据,不会有另外单独的数据页。<br>    非聚集索引:  表中的数据存储不依赖于索引的顺序。索引的叶子节点上存储了索引的关键字和指向真实数据的指针。   </p><p><code>5.sql调优</code></p><p>​    a. 创建索引  b.使用临时表存储中间结果-&gt;(避免多次扫描主表)。c. 避免在索引上使用计算。4.少使用select *，只返回需要的字段。</p><p><code>6.如何理解MVCC</code>   </p><p>​    a. 数据库每张表会单独维护两个字段，数据行版本号和删除版本号。   </p><p>​    b. 当执行insert操作时，我们开启了一个事物，执行数据插入操作时，会将这个事物的事物id设置到数据行版本号这个字段中（这个事物的事物id属于数据库一个全局属性，自增）。</p><p>​    c. 当执行delete操作时，我们开启了一个事物，执行数据删除操作时，会将这个事物的事物id设置到删除版本号这个字段中。</p><p>​    d. 当执行update操作时，我们开启了一个事物，指定数据更新操作时，会将这行数据copy一份，copy的这份数据数据行版本号为当前事物id，删除版本号为Null，并更新相关字段。原先那行的删除版本号会被设置为当前的事物id。</p><p>​    e.  当我们执行数据库查询时，满足以下两点要求：</p><p>​        e1：查找数据的数据行版本号小于或等于当前事物id。(保证该条数据在当前事物开启之前就已经存在或者为该事物添加的数据。</p><p>​        e2：查找数据的删除版本号为Null或者删除版本号大于当前事物id。（该条规则可以确保当前事物在开始之前数据还未被删除。</p><p><code>7.MVCC解决的问题与未解决的问题</code></p><p>   若是一个查询先于一行的数据更新，不会出现问题。若是一个查询后于一行的数据更新，会产生脏读的问题。</p><p><code>8.Innodb数据库的四种隔离级别是如何实现的</code></p><p>​    读未提交：对select操作不会加锁，并发性能是最好的，但是容易造成脏读。</p><p>​    读已提交（互联网上默认的隔离级别）：普通的数据读取是会直接读取数据快照，加锁的select，update等操作会使用记录锁。注意：读已提交读取快照时，一个事物读取了数据，但是当第二次读取的时候，另外一个事物已经将该快照刷新了，所以会造成不可重复读的问题。</p><p>​    可重复读（Innodb默认的事物隔离级别）：对于普通的数据库查询，使用读取快照的方式。对于加锁的select,update等语句，他们加锁的力度取决于查询条件是使用了唯一索引还是使用了范围查询。若是使用了唯一索引，会使用记录锁的方式。若是使用了范围查询，会使用间隙锁，避免发生不可重复读。注意:当一个事物开启读取数据时，前后两次读取的都是同一个快照，这样就可以实现了可重复读。</p><p>​    串行化：针对所有的操作都会去加锁，普通的select操作会去加共享锁-&gt;select * from table in share mode。对于 update 等操作会加排他锁。若是一个事物查询操作时，正好有一个事物对改行的数据做修改操作。则该查询操作会阻塞，直到更新操作执行完成。</p><p><code>9.如何理解快照读和当前读</code></p><p>​    快照读：读取的数据是快照。当前读：读取的数据是数据库的最新的数据。</p>]]></content>
     
