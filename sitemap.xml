@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://gzl2017.github.io/wiki/mysql-index/</loc>
+    
+    <lastmod>2019-08-27T09:49:02.187Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://gzl2017.github.io/wiki/mysql/</loc>
+    
+    <lastmod>2019-08-27T09:47:21.912Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://gzl2017.github.io/wiki/mysql-base/</loc>
+    
+    <lastmod>2019-08-27T09:37:51.884Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://gzl2017.github.io/wiki/mysql-split/</loc>
+    
+    <lastmod>2019-08-27T09:26:56.180Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://gzl2017.github.io/wiki/redis/</loc>
+    
+    <lastmod>2019-08-27T09:05:36.608Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://gzl2017.github.io/wiki/project-ask/</loc>
     
     <lastmod>2019-08-26T13:36:29.277Z</lastmod>
@@ -51,13 +86,6 @@
   </url>
   
   <url>
-    <loc>https://gzl2017.github.io/wiki/mysql/</loc>
-    
-    <lastmod>2019-08-24T06:26:03.941Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://gzl2017.github.io/wiki/io/</loc>
     
     <lastmod>2019-08-24T06:09:30.942Z</lastmod>
@@ -82,13 +110,6 @@
     <loc>https://gzl2017.github.io/wiki/springboot/</loc>
     
     <lastmod>2019-08-21T05:42:21.998Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://gzl2017.github.io/wiki/redis/</loc>
-    
-    <lastmod>2019-08-19T01:54:58.025Z</lastmod>
     
   </url>
   

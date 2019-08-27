@@ -3,22 +3,23 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     
-    <title>分类: 基础 | gzl Blog</title>
+    <title>分库分表 | gzl Blog</title>
     
     
-        <meta name="keywords" content="gzl Blog">
+        <meta name="keywords" content="分库分表">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="每天进步一点点">
-<meta property="og:type" content="website">
-<meta property="og:title" content="gzl Blog">
-<meta property="og:url" content="https://gzl2017.github.io/categories/java/并发/基础/index.html">
+    <meta name="description" content="数据库优化之分库分表  针对数据库的优化有两点，第一是从整体层面优化，设计到读写分离和分库分表。第二是从sql层面优化，主要是涉及到索引相关的一些东西。  读写分离 ​    读写分离的目的是做数据冗余备份，同时将读写分离，提升数据库的服务性能。 分库分表 ​    垂直拆分 ​        概念:垂直拆分主要是通过业务层面，将各个业务模块所使用到的表放到各自不同的数据库里面，做到各个业务模块">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分库分表">
+<meta property="og:url" content="https://gzl2017.github.io/wiki/mysql-split/index.html">
 <meta property="og:site_name" content="gzl Blog">
-<meta property="og:description" content="每天进步一点点">
+<meta property="og:description" content="数据库优化之分库分表  针对数据库的优化有两点，第一是从整体层面优化，设计到读写分离和分库分表。第二是从sql层面优化，主要是涉及到索引相关的一些东西。  读写分离 ​    读写分离的目的是做数据冗余备份，同时将读写分离，提升数据库的服务性能。 分库分表 ​    垂直拆分 ​        概念:垂直拆分主要是通过业务层面，将各个业务模块所使用到的表放到各自不同的数据库里面，做到各个业务模块">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-27T09:26:56.180Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="gzl Blog">
-<meta name="twitter:description" content="每天进步一点点">
+<meta name="twitter:title" content="分库分表">
+<meta name="twitter:description" content="数据库优化之分库分表  针对数据库的优化有两点，第一是从整体层面优化，设计到读写分离和分库分表。第二是从sql层面优化，主要是涉及到索引相关的一些东西。  读写分离 ​    读写分离的目的是做数据冗余备份，同时将读写分离，提升数据库的服务性能。 分库分表 ​    垂直拆分 ​        概念:垂直拆分主要是通过业务层面，将各个业务模块所使用到的表放到各自不同的数据库里面，做到各个业务模块">
     
 
     
@@ -159,9 +160,9 @@
         
         
          <ul class="unstyled" id="tree" > 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             java
                         </a>
@@ -247,20 +248,20 @@
                      </ul> 
                     </li> 
                     
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             数据库
                         </a>
                          <ul class="unstyled" id="tree" > 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             mysql
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/mysql/">面试题</a></li>  <li class="file"><a href="/wiki/mysql-index/">数据库索引</a></li>  <li class="file"><a href="/wiki/mysql-base/">数据库基本操作</a></li>  <li class="file"><a href="/wiki/mysql-split/">分库分表</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/mysql/">面试题</a></li>  <li class="file"><a href="/wiki/mysql-index/">数据库索引</a></li>  <li class="file"><a href="/wiki/mysql-base/">数据库基本操作</a></li>  <li class="file active"><a href="/wiki/mysql-split/">分库分表</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -364,45 +365,115 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main">
-<div class="timeline timeline-wrap">
-    <div class="timeline-row timeline-row-major">
-        <span class="node"><i class="fa fa-folder"></i></span>
-        <h1 class="title">基础</h1>
-    </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+            <section id="main"><article id="post-mysql-split" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
                 
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/wiki/thread/">thread</a>
-        </h1>
-    
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/数据库/">数据库</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/数据库/mysql/">mysql</a>
+    </div>
 
-                <div class="article-meta">
-                    
+                        
+                        
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/wiki/thread/">
-            <time datetime="2019-08-21T05:43:50.000Z" itemprop="datePublished">2019-08-21</time>
+        <a href="/wiki/mysql-split/">
+            <time datetime="2019-08-27T09:08:54.000Z" itemprop="datePublished">2019-08-27</time>
         </a>
     </div>
 
 
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/并发/">并发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/并发/基础/">基础</a>
-    </div>
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/mysql-split.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/mysql-split.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/mysql-split.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            分库分表
+        </h1>
+    
 
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
                     
                 </div>
+            
+        
+        
+            <hr>
+<p><code>数据库优化之分库分表</code></p>
+<hr>
+<p>针对数据库的优化有两点，第一是从整体层面优化，设计到读写分离和分库分表。第二是从sql层面优化，主要是涉及到索引相关的一些东西。</p>
+<hr>
+<p><code>读写分离</code></p>
+<p>​    读写分离的目的是做数据冗余备份，同时将读写分离，提升数据库的服务性能。</p>
+<p><code>分库分表</code></p>
+<p>​    <code>垂直拆分</code></p>
+<p>​        <code>概念</code>:垂直拆分主要是通过业务层面，将各个业务模块所使用到的表放到各自不同的数据库里面，做到各个业务模块库相互隔离的目的。</p>
+<p>​        <code>问题</code>:若是各个业务模块的表之间存在一些关联查询，需要将这些查询改为服务调用的方式。  针对一些全局表，可以改为服务调用的方式，对外提供服务。</p>
+<p>​    <code>水平拆分</code></p>
+<p>​        <code>概念</code>:将一张大的表拆分成n多张小表。实现方式，第一种是通过一致性hash（若是新增表的话，会涉及到数据迁移的问题）。第二种是可以按照id的范围来拆分。第三种是通过日期来拆分。</p>
+<p>​        <code>问题</code>:唯一主键问题，可以使用zk自增id  可以使用redis的自增id  可以使用代理的id</p>
+
             </div>
-        </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
     
-</div>
+<nav id="article-nav">
+    
+    
+        <a href="/wiki/mysql-base/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">数据库基本操作</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
 </section>
         </div>
         <footer id="footer">

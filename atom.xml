@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://gzl2017.github.io/"/>
-  <updated>2019-08-26T13:34:37.315Z</updated>
+  <updated>2019-08-27T09:26:56.180Z</updated>
   <id>https://gzl2017.github.io/</id>
   
   <author>
@@ -15,6 +15,95 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>分库分表</title>
+    <link href="https://gzl2017.github.io/wiki/mysql-split/"/>
+    <id>https://gzl2017.github.io/wiki/mysql-split/</id>
+    <published>2019-08-27T09:08:54.000Z</published>
+    <updated>2019-08-27T09:26:56.180Z</updated>
+    
+    <content type="html"><![CDATA[<hr><p><code>数据库优化之分库分表</code></p><hr><p>针对数据库的优化有两点，第一是从整体层面优化，设计到读写分离和分库分表。第二是从sql层面优化，主要是涉及到索引相关的一些东西。</p><hr><p><code>读写分离</code></p><p>​    读写分离的目的是做数据冗余备份，同时将读写分离，提升数据库的服务性能。</p><p><code>分库分表</code></p><p>​    <code>垂直拆分</code></p><p>​        <code>概念</code>:垂直拆分主要是通过业务层面，将各个业务模块所使用到的表放到各自不同的数据库里面，做到各个业务模块库相互隔离的目的。</p><p>​        <code>问题</code>:若是各个业务模块的表之间存在一些关联查询，需要将这些查询改为服务调用的方式。  针对一些全局表，可以改为服务调用的方式，对外提供服务。</p><p>​    <code>水平拆分</code></p><p>​        <code>概念</code>:将一张大的表拆分成n多张小表。实现方式，第一种是通过一致性hash（若是新增表的话，会涉及到数据迁移的问题）。第二种是可以按照id的范围来拆分。第三种是通过日期来拆分。</p><p>​        <code>问题</code>:唯一主键问题，可以使用zk自增id  可以使用redis的自增id  可以使用代理的id</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;hr&gt;
+&lt;p&gt;&lt;code&gt;数据库优化之分库分表&lt;/code&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;针对数据库的优化有两点，第一是从整体层面优化，设计到读写分离和分库分表。第二是从sql层面优化，主要是涉及到索引相关的一些东西。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;code&gt;读写分离&lt;/code&gt;&lt;/
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+    
+      <category term="数据库" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="mysql" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>数据库基本操作</title>
+    <link href="https://gzl2017.github.io/wiki/mysql-base/"/>
+    <id>https://gzl2017.github.io/wiki/mysql-base/</id>
+    <published>2019-08-27T09:08:25.000Z</published>
+    <updated>2019-08-27T09:37:51.884Z</updated>
+    
+    <content type="html"><![CDATA[<hr><p><code>centos7上mysql的安装步骤</code></p><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1.下载mysql的repo源  &gt; wget http://repo.mysql.com/mysql57-community-release-el7-8.noarch.rpm</span><br><span class="line">2.安装源&gt; rpm -ivh mysql57-community-release-el7-8.noarch.rpm</span><br><span class="line">3.安装数据库-&gt;yum install mysql-server</span><br><span class="line">4.启动数据库&gt; systemctl start mysqld</span><br><span class="line">5.查看mysql为root账号生成的随机密码&gt;grep "password" /var/log/mysqld.log</span><br><span class="line">  说明root@localhost:此处为随机密码</span><br><span class="line">6.运行mysql -uroot -p回车</span><br><span class="line">7.粘贴随机密码-&gt;此时已经登录到mysql数据库，需要为root账号设置密码</span><br><span class="line">8.由于mysql5.7有对密码设置的验证，简单密码设置不了，需要运行下面两条命令关闭验证</span><br><span class="line">&gt; set global validate_password_length=1;</span><br><span class="line">&gt; set global validate_password_policy=0;</span><br><span class="line">9.修改root账号的权限</span><br><span class="line">    &gt; GRANT ALL PRIVILEGES ON *.* TO 'root'@'<span class="comment">%' IDENTIFIED BY 'root' WITH GRANT OPTION;</span></span><br><span class="line">10.可以创建一个其它的用户</span><br><span class="line">&gt; create user repl identified by 'repl';</span><br><span class="line">11.为该用户授权(数据同步的权限)</span><br><span class="line">    &gt; grant replication slave on *.* to 'repl'@'<span class="comment">%' identified by 'repl';</span></span><br></pre></td></tr></table></figure><p><code>mysql配置主从同步的步骤</code></p><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">todo 需要完善</span><br><span class="line">mysql的数据文件和二进制文件: /var/lib/mysql/</span><br><span class="line">mysql的配置文件: /etc/my.cnf</span><br><span class="line">mysql的日志文件:  /var/log/mysql.log</span><br><span class="line">修改/etc/my.cnf</span><br><span class="line">[mysqld]</span><br><span class="line">log-bin=mysql-bin</span><br><span class="line">server-id=192.168.11.140</span><br><span class="line">show master status;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;hr&gt;
+&lt;p&gt;&lt;code&gt;centos7上mysql的安装步骤&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight tex&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1.下载mysql的repo
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+    
+      <category term="数据库" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="mysql" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>数据库索引</title>
+    <link href="https://gzl2017.github.io/wiki/mysql-index/"/>
+    <id>https://gzl2017.github.io/wiki/mysql-index/</id>
+    <published>2019-08-27T09:08:17.000Z</published>
+    <updated>2019-08-27T09:49:02.187Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>1.数据库四大特性</code></p><p>​    A( Atomicity 原子性):  数据库最小的工作单元，整个工作单元要么一起提交成功,要么一起失败回滚。<br>​    C( Consistency 一致性):  事物中操作的数据的状态是一致的。即写入数据的结果必须完全符合预设的规则，不会因为出现系统意外等原因导致状态的不一致。<br>​    I( Isolation 隔离性):  一个事务所操作的数据在提交之前，对其他事务的可见性设定（一般设定为不可见）。<br>​    D( Durability 持久性):  数据库的数据一旦提交,无法更改。</p><p><code>2.多个事物并发引起的数据读取问题</code></p><p>​    脏读:  是指一个事物读取到了另外一个事物未提交的数据。<br>​    不可重复读:  是指在一个事物未结束之前, 前后两次读取到的数据不一致现象。原因在于该事物在前后两次读取数据之间，另外一个事物修改了该数据。(不可重复读的重点在于修改)。<br>​    幻读:  是指当一个事物修改了数据库表中某一个范围内的数据的某一个字段，但是另外一个事物在此期间又在该范围内插入了一条新的数据，造成前一个事物出现幻觉(没有完全修改)。(幻读的重点在于新增或删除) 。</p><p><code>3.数据库事物的隔离级别</code></p><p>  Read Uncommited 读未提交:  事物未提交对其它的事物也是可见的。<br>  Read Commited 读已提交:  一个事物只能够读取到已提交的数据。(解决脏读, 未解决不可重复读)。<br>  Repeatable Read 可重复读:  一个事物对数据的前后读取结果是一致的。(解决了不可重复读, 未解决幻读)。<br>  Serializable 串行化:  数据库最高的隔离级别,  强制所有事物串行执行,解决了所有并发问题。</p><p><code>4.聚集索引和非聚集索引的区别</code><br>    聚集索引:  表中的数据是按照索引的顺序来存储的。索引的叶子节点上存储了真实的数据,不会有另外单独的数据页。<br>    非聚集索引:  表中的数据存储不依赖于索引的顺序。索引的叶子节点上存储了索引的关键字和指向真实数据的指针。   </p><p><code>5.sql调优</code></p><p>​    a. 创建索引  b.使用临时表存储中间结果-&gt;(避免多次扫描主表)。c. 避免在索引上使用计算。4.少使用select *，只返回需要的字段。</p><p><code>6.如何理解MVCC</code>   </p><p>​    a. 数据库每张表会单独维护两个字段，数据行版本号和删除版本号。   </p><p>​    b. 当执行insert操作时，我们开启了一个事物，执行数据插入操作时，会将这个事物的事物id设置到数据行版本号这个字段中（这个事物的事物id属于数据库一个全局属性，自增）。</p><p>​    c. 当执行delete操作时，我们开启了一个事物，执行数据删除操作时，会将这个事物的事物id设置到删除版本号这个字段中。</p><p>​    d. 当执行update操作时，我们开启了一个事物，指定数据更新操作时，会将这行数据copy一份，copy的这份数据数据行版本号为当前事物id，删除版本号为Null，并更新相关字段。原先那行的删除版本号会被设置为当前的事物id。</p><p>​    e.  当我们执行数据库查询时，满足以下两点要求：</p><p>​        e1：查找数据的数据行版本号小于或等于当前事物id。(保证该条数据在当前事物开启之前就已经存在或者为该事物添加的数据。</p><p>​        e2：查找数据的删除版本号为Null或者删除版本号大于当前事物id。（该条规则可以确保当前事物在开始之前数据还未被删除。</p><p><code>7.MVCC解决的问题与未解决的问题</code></p><p>   若是一个查询先于一行的数据更新，不会出现问题。若是一个查询后于一行的数据更新，会产生脏读的问题。</p><p><code>8.Innodb数据库的四种隔离级别是如何实现的</code></p><p>​    读未提交：对select操作不会加锁，并发性能是最好的，但是容易造成脏读。</p><p>​    读已提交（互联网上默认的隔离级别）：普通的数据读取是会直接读取数据快照，加锁的select，update等操作会使用记录锁。注意：读已提交读取快照时，一个事物读取了数据，但是当第二次读取的时候，另外一个事物已经将该快照刷新了，所以会造成不可重复读的问题。</p><p>​    可重复读（Innodb默认的事物隔离级别）：对于普通的数据库查询，使用读取快照的方式。对于加锁的select,update等语句，他们加锁的力度取决于查询条件是使用了唯一索引还是使用了范围查询。若是使用了唯一索引，会使用记录锁的方式。若是使用了范围查询，会使用间隙锁，避免发生不可重复读。注意:当一个事物开启读取数据时，前后两次读取的都是同一个快照，这样就可以实现了可重复读。</p><p>​    串行化：针对所有的操作都会去加锁，普通的select操作会去加共享锁-&gt;select * from table in share mode。对于 update 等操作会加排他锁。若是一个事物查询操作时，正好有一个事物对改行的数据做修改操作。则该查询操作会阻塞，直到更新操作执行完成。</p><p><code>9.如何理解快照读和当前读</code></p><p>​    快照读：读取的数据是快照。当前读：读取的数据是数据库的最新的数据。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;code&gt;1.数据库四大特性&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;​    A( Atomicity 原子性):  数据库最小的工作单元，整个工作单元要么一起提交成功,要么一起失败回滚。&lt;br&gt;​    C( Consistency 一致性):  事物中操作的数据的状态是一致的。
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+    
+      <category term="数据库" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="mysql" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>tcp</title>
@@ -285,7 +374,7 @@
     <link href="https://gzl2017.github.io/wiki/redis/"/>
     <id>https://gzl2017.github.io/wiki/redis/</id>
     <published>2019-08-18T02:58:52.000Z</published>
-    <updated>2019-08-19T01:54:58.025Z</updated>
+    <updated>2019-08-27T09:05:36.608Z</updated>
     
     <content type="html"><![CDATA[<hr>redis和zk实现分布式锁的区别<table><thead><tr><th>实现方式</th><th>优点</th><th>缺点</th></tr></thead><tbody><tr><td>基于redis</td><td>性能高</td><td>锁的失效时间很难把控</td></tr><tr><td>基于zk</td><td>实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题</td><td>性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点</td></tr></tbody></table><p>cap原则</p><ol><li><p>缓存数据的同步方式</p><ul><li><p>先写入数据库，在写入缓存</p></li><li><p>查询数据库，然后写入缓存</p></li><li><p>定时刷新数据写入缓存</p></li></ul></li><li><p>redis特点</p><ul><li><p>一种缓存中间件</p></li><li><p>key-value的存储形式</p></li><li><p>默认16个db（0-15）个空间</p></li><li><p>支持数据的持久化</p></li></ul></li><li><p>redis五种数据结构</p></li></ol><table><thead><tr><th>数据结构</th><th align="center">使用场景</th></tr></thead><tbody><tr><td>string</td><td align="center">session共享 短信验证码 ip限制 序列自增</td></tr><tr><td>list</td><td align="center">分布式队列  栈</td></tr><tr><td>hash</td><td align="center">对象的存储（用户信息）</td></tr><tr><td>set</td><td align="center">用户标签(定点推送) 求交集 并集</td></tr><tr><td>sorted set</td><td align="center"></td></tr></tbody></table><ol start="4"><li><p>过期时间</p><ul><li>消极方法<ul><li>当应用访问key时，发现key已经过期，就会删除。</li></ul></li><li>积极方法：<ul><li>周期性的从设置了过期时间的key中选择一部分的key进行删除。<ul><li>随机测试20个带有timeout信息的key。</li><li>如果超过25%的key被删除，则重复执行整个流程</li></ul></li></ul></li></ul></li><li><p>pub/sub 发布订阅模式</p></li><li><p>redis持久化及原理</p><ul><li><p>RDB</p><ul><li><p>概念：当符合【条件】的时候，fork子进程，生成dump.rdb快照文件。</p></li><li><p>缺点：数据丢失</p></li><li><p>规则</p><ul><li><p>配置规则，配置文件配置</p></li><li><p>save或者bgsave命令触发</p></li><li><p>flushall命令触发，且满足配置规则</p></li><li><p>执行复制操作</p></li></ul></li></ul></li></ul></li></ol><ul><li><p>AOF</p><ul><li>概念：需要配置文件开启(默认关闭)，aof文件的写入，只针对事物操作。AOF重写</li><li>缺点：</li><li>规则</li></ul></li></ul><ol start="7"><li><p>redis内存回收策略</p><p>​    </p></li><li><p>redis单线程性能高的原因</p><ul><li><p>内存和网络的宽带</p></li><li><p>多路复用（同一时间处理多个请求）</p></li><li><p>避免线程切换</p></li><li><p>纯内存操作 </p></li></ul></li></ol><ol start="9"><li><p>lua脚本在redis中的应用</p><ul><li><p>pipeline管道模型</p></li><li><p>减少网络开销去执行多个指令</p></li><li><p>满足原子性</p></li><li><p>复用性</p></li><li><p>redis.call(“set”, “gupao”, “123”)</p></li><li><p>redis.call(“get”, “gupao”);</p></li><li><p>lua脚本可以存储在服务端-&gt;生成摘要 </p></li></ul></li></ol><hr><p>redis集群</p><ul><li><p>解决单点问题 </p></li><li><p>主从复制(master-slave)</p></li><li><p>数据同步: 全量复制(初始化)   增量复制  无磁盘复制</p></li><li><p>选主(哨兵) </p></li></ul><hr><p>哨兵机制</p><ul><li><p>监控master和slave是否正常运行</p></li><li><p>当master出现故障的时候，从slave中选取一个新的master</p></li></ul><hr><p>Redis-Cluster</p><hr><p>Redis的实践应用</p><hr>]]></content>
     
@@ -315,7 +404,9 @@ redis和zk实现分布式锁的区别
     
       <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
     
-      <category term="redis" scheme="https://gzl2017.github.io/categories/java/redis/"/>
+      <category term="数据库" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="redis" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/"/>
     
     
   </entry>
@@ -380,29 +471,28 @@ redis和zk实现分布式锁的区别
   </entry>
   
   <entry>
-    <title>mysql</title>
+    <title>面试题</title>
     <link href="https://gzl2017.github.io/wiki/mysql/"/>
     <id>https://gzl2017.github.io/wiki/mysql/</id>
     <published>2019-08-15T12:56:11.000Z</published>
-    <updated>2019-08-24T06:26:03.941Z</updated>
+    <updated>2019-08-27T09:47:21.912Z</updated>
     
-    <content type="html"><![CDATA[<hr>1.char(32)和varchar(32)的区别    (1):char和varchar都是数据库定义字符串类型的数据格式,char是一种定长度的类型,varchar是一种可变长度的类型。    (2):char(32)表示定义了当前字段所占用的存储空间为32个字符,不管字段长度是否达到32,占用的空间是不变的。而varchar(32)表示定义了当前字段所能够占用的最大存储空间是32个字符,实际占用空间是字段的大小。    (3):就存储效率而言,定长的char类型由于一开始就定义好了字段占用空间,不需要根据字段的长度在去申请空间,故效率相对较高,但是在占用空间上就没有varchar有优势。而varchar由于根据字段长度调整空间占用,故空间消耗较小,但是存储效率不高。<hr>2.数据库的四大特性      A(Atomicity 原子性):  数据库最小的工作单元，整个工作单元要么一起提交成功,要么一起失败回滚。      C(Consistency 一致性):  事物中操作的数据的状态是一致的。即写入数据的结果必须完全符合预设的规则，不会因为出现系统意外等原因导致状态的不一致。      I(Isolation 隔离性):  一个事务所操作的数据在提交之前，对其他事务的可见性设定（一般设定为不可见）。      D(Durability 持久性):  数据库的数据一旦提交,无法更改。<hr>3.多个事物并发引起的数据读取问题      脏读:  是指一个事物读取到了另外一个事物未提交的数据。      不可重复读:  是指在一个事物未结束之前, 前后两次读取到的数据不一致现象。原因在于该事物在前后两次读取数据之间，另外一个事物修改了该数据。(不可重复读的重点在于修改)。      幻读:  是指当一个事物修改了数据库表中某一个范围内的数据的某一个字段，但是另外一个事物在此期间又在该范围内插入了一条新的数据，造成前一个事物出现幻觉(没有完全修改)。(幻读的重点在于新增或删除) 。<hr>4.数据库事物的隔离级别      Read Uncommited读未提交:  事物未提交对其它的事物也是可见的。      Read Commited读已提交:  一个事物只能够读取到已提交的数据。(解决脏读, 未解决不可重复读)。      Repeatable Read可重复读:  一个事物对数据的前后读取结果是一致的。(解决了不可重复读, 未解决幻读)。      Serializable串行化:  数据库最高的隔离级别,  强制所有事物串行执行,解决了所有并发问题。   <hr>5.聚集索引和非聚集索引的区别      聚集索引:  表中的数据是按照索引的顺序来存储的。索引的叶子节点上存储了真实的数据,不会有另外单独的数据页。      非聚集索引:  表中的数据存储不依赖于索引的顺序。索引的叶子节点上存储了索引的关键字和指向真实数据的指针。   <hr>6. sql注入,如何避免sql注入             概念:  所谓sql注入, 就是攻击者将sql命令插入到web表单的输入域或者是页面请求的查询字符串，欺骗服务器执行恶意的sql命令。(某些表单中的输入命令被直接用来构造(或影响)sql命令，或者是构成存储过程的输入参数, 这类表单特别容易受到sql注入式攻击)。       如何避免:             (1): mybatis中多使用[#{param}],尽量避免使用[\${param}],原因在于[\${param}]会直接参与sql编译,容易造成sql攻击。<hr>7.数据库的三大范式       第一范式:  每一列都是一个不可再分割的属性值,确保每一列的原子性(规范列)。      第二范式:  在满足第一范式的要求下，每一行数据只做一件事(规范行)。      第三范式:  在满足第二范式的要求下，确保数据表中的每一列数据都和主键直接相关,而不能够间接相关。   <hr><p>8.sql调优</p><p>​    a. 创建索引  b.使用临时表存储中间结果-&gt;(避免多次扫描主表)。c. 避免在索引上使用计算。4.少使用select *，只返回需要的字段。</p><hr><ol start="9"><li><p>如何理解MVCC:    </p><p>​    a. 数据库每张表会单独维护两个字段，数据行版本号和删除版本号。   </p><p>​    b. 当执行insert操作时，我们开启了一个事物，执行数据插入操作时，会将这个事物的事物id设置到数据行版本号这个字段中（这个事物的事物id属于数据库一个全局属性，自增）。</p><p>​    c. 当执行delete操作时，我们开启了一个事物，执行数据删除操作时，会将这个事物的事物id设置到删除版本号这个字段中。</p><p>​    d. 当执行update操作时，我们开启了一个事物，指定数据更新操作时，会将这行数据copy一份，copy的这份数据数据行版本号为当前事物id，删除版本号为Null，并更新相关字段。原先那行的删除版本号会被设置为当前的事物id。</p><p>​    e.  当我们执行数据库查询时，满足以下两点要求：</p><p>​        e1：查找数据的数据行版本号小于或等于当前事物id。(保证该条数据在当前事物开启之前就已经存在或者为该事物添加的数据。</p><p>​        e2：查找数据的删除版本号为Null或者删除版本号大于当前事物id。（该条规则可以确保当前事物在开始之前数据还未被删除。</p></li><li><p>MVCC解决的问题与未解决的问题：</p><p>若是一个查询先于一行的数据更新，不会出现问题。若是一个查询后于一行的数据更新，会产生脏读的问题。</p></li></ol><hr><ol start="11"><li>Innodb数据库的四种隔离级别是如何实现的：</li></ol><p>​    读未提交：对select操作不会加锁，并发性能是最好的，但是容易造成脏读。</p><p>​    读已提交（互联网上默认的隔离级别）：普通的数据读取是会直接读取数据快照，加锁的select，update等操作会使用记录锁。注意：读已提交读取快照时，一个事物读取了数据，但是当第二次读取的时候，另外一个事物已经将该快照刷新了，所以会造成不可重复读的问题。</p><p>​    可重复读（Innodb默认的事物隔离级别）：对于普通的数据库查询，使用读取快照的方式。对于加锁的select,update等语句，他们加锁的力度取决于查询条件是使用了唯一索引还是使用了范围查询。若是使用了唯一索引，会使用记录锁的方式。若是使用了范围查询，会使用间隙锁，避免发生不可重复读。注意:当一个事物开启读取数据时，前后两次读取的都是同一个快照，这样就可以实现了可重复读。</p><p>​    串行化：针对所有的操作都会去加锁，普通的select操作会去加共享锁-&gt;select * from table in share mode。对于 update 等操作会加排他锁。若是一个事物查询操作时，正好有一个事物对改行的数据做修改操作。则该查询操作会阻塞，直到更新操作执行完成。</p><hr><ol start="12"><li>如何理解快照读和当前读</li></ol><p>​    快照读：读取的数据是快照。当前读：读取的数据是数据库的最新的数据。</p><hr>]]></content>
+    <content type="html"><![CDATA[<p><code>1.char(32)和varchar(32)的区别</code><br>    (1):char和varchar都是数据库定义字符串类型的数据格式,char是一种定长度的类型,varchar是一种可变长度的类型。<br>    (2):char(32)表示定义了当前字段所占用的存储空间为32个字符,不管字段长度是否达到32,占用的空间是不变的。而varchar(32)表示定义了当前字段所能够占用的最大存储空间是32个字符,实际占用空间是字段的大小。<br>    (3):就存储效率而言,定长的char类型由于一开始就定义好了字段占用空间,不需要根据字段的长度在去申请空间,故效率相对较高,但是在占用空间上就没有varchar有优势。而varchar由于根据字段长度调整空间占用,故空间消耗较小,但是存储效率不高。</p><p><code>2.sql注入,如何避免sql注入</code><br>概念:  所谓sql注入, 就是攻击者将sql命令插入到web表单的输入域或者是页面请求的查询字符串，欺骗服务器执行恶意的sql命令。(某些表单中的输入命令被直接用来构造(或影响)sql命令，或者是构成存储过程的输入参数, 这类表单特别容易受到sql注入式攻击)。<br>      如何避免:<br>          (1): mybatis中多使用[#{param}],尽量避免使用[${param}],原因在于[${param}]会直接参与sql编译,容易造成sql攻击。</p><p><code>3.数据库的三大范式</code><br>    第一范式:  每一列都是一个不可再分割的属性值,确保每一列的原子性(规范列)。<br>    第二范式:  在满足第一范式的要求下，每一行数据只做一件事(规范行)。<br>    第三范式:  在满足第二范式的要求下，确保数据表中的每一列数据都和主键直接相关,而不能够间接相关。   </p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;hr&gt;
-1.char(32)和varchar(32)的区别
-    (1):char和varchar都是数据库定义字符串类型的数据格式,char是一种定长度的类型,varchar是一种可变长度的类型。
-    (2):char(32)表示定义了当前字段所占用的存储空间为32个字
+        &lt;p&gt;&lt;code&gt;1.char(32)和varchar(32)的区别&lt;/code&gt;&lt;br&gt;    (1):char和varchar都是数据库定义字符串类型的数据格式,char是一种定长度的类型,varchar是一种可变长度的类型。&lt;br&gt;    (2):char(32)表示定义了
       
     
     </summary>
     
       <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
     
-      <category term="mysql" scheme="https://gzl2017.github.io/categories/java/mysql/"/>
+      <category term="数据库" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="mysql" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/"/>
     
     
   </entry>
