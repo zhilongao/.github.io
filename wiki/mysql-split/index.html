@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="gzl Blog">
 <meta property="og:description" content="数据库优化之分库分表  针对数据库的优化有两点，第一是从整体层面优化，设计到读写分离和分库分表。第二是从sql层面优化，主要是涉及到索引相关的一些东西。  读写分离 ​    需求: 读写分离的目的是做数据冗余备份，同时将读写分离，提升数据库的服务性能（IO性能瓶颈）。 ​    搭建过程: 在基本操作里面-&amp;gt;mysql配置主从同步的步骤 。 ​    实现原理:  首先是master数据">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-27T13:21:15.833Z">
+<meta property="og:updated_time" content="2019-08-27T13:35:37.508Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分库分表">
 <meta name="twitter:description" content="数据库优化之分库分表  针对数据库的优化有两点，第一是从整体层面优化，设计到读写分离和分库分表。第二是从sql层面优化，主要是涉及到索引相关的一些东西。  读写分离 ​    需求: 读写分离的目的是做数据冗余备份，同时将读写分离，提升数据库的服务性能（IO性能瓶颈）。 ​    搭建过程: 在基本操作里面-&amp;gt;mysql配置主从同步的步骤 。 ​    实现原理:  首先是master数据">
@@ -303,7 +303,7 @@
                     </li> 
                      </ul> 
                     </li> 
-                     </ul> 
+                     <li class="file"><a href="/wiki/share-articles/">大佬们的博客</a></li>  </ul> 
     </div>
     <script>
         $(document).ready(function() {
@@ -439,7 +439,8 @@
 <p>​    <code>需求</code>: 读写分离的目的是做数据冗余备份，同时将读写分离，提升数据库的服务性能（IO性能瓶颈）。</p>
 <p>​    <code>搭建过程</code>: 在基本操作里面-&gt;mysql配置主从同步的步骤 。</p>
 <p>​    <code>实现原理</code>:  首先是master数据库会先将数据库的变化存储在binlog文件中。在slave数据库上，会有一个IO Thread负责将binlog文件读取到内部的relaylog文件中。同时，slave数据库上的另外一个线程SQL Thread读取relaylog，将数据写入到slave数据库里面。</p>
-<p>​    <code>细节</code>: mysql的binlog文件存储在 /var/lib/mysql文件夹下；使用命令-&gt; mysqlbinlog –base64-output=decode-rows -v  mysql-bin.000001 查看binlog的内容；binlog的格式：statement（默认，基于sql语句模式，针对数据更新的一些函数now()等，数据延迟造成的不一致），row：基于行模式，记录修改后每一条数据变化的值，mixed：混合模式，由mysql自动判断处理</p>
+<p>​    <code>细节</code>: mysql的binlog文件存储在 /var/lib/mysql文件夹下；使用命令-&gt; mysqlbinlog –base64-output=decode-rows -v  mysql-bin.000001 查看binlog的内容；binlog的格式：statement（默认，基于sql语句模式，针对数据更新的一些函数now()等，数据延迟造成的不一致），row：基于行模式，记录修改后每一条数据变化的值，mixed：混合模式，由mysql自动判断处理。</p>
+<p>​    <code>问题</code>：同步延迟，master tps较高时出现同步延迟； 网络延迟；磁盘IO</p>
 <hr>
 <p><code>分库分表</code></p>
 <p>​    <code>垂直拆分</code></p>
@@ -448,6 +449,8 @@
 <p>​    <code>水平拆分</code></p>
 <p>​        <code>概念</code>:将一张大的表拆分成n多张小表。实现方式，第一种是通过一致性hash（若是新增表的话，会涉及到数据迁移的问题）。第二种是可以按照id的范围来拆分。第三种是通过日期来拆分。</p>
 <p>​        <code>问题</code>:唯一主键问题，可以使用zk自增id  可以使用redis的自增id  可以使用代理的id</p>
+<hr>
+<p><code>Mycat</code></p>
 
             </div>
         
@@ -459,6 +462,15 @@
 
     
 <nav id="article-nav">
+    
+        <a href="/wiki/share-articles/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    大佬们的博客
+                
+            </div>
+        </a>
     
     
         <a href="/wiki/mysql-base/" id="article-nav-older" class="article-nav-link-wrap">
