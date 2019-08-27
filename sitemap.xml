@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://gzl2017.github.io/wiki/tcp/</loc>
+    
+    <lastmod>2019-08-27T09:55:39.119Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://gzl2017.github.io/wiki/http/</loc>
+    
+    <lastmod>2019-08-27T09:55:26.475Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://gzl2017.github.io/wiki/mysql-index/</loc>
     
     <lastmod>2019-08-27T09:51:54.005Z</lastmod>
@@ -44,13 +58,6 @@
   </url>
   
   <url>
-    <loc>https://gzl2017.github.io/wiki/tcp/</loc>
-    
-    <lastmod>2019-08-26T13:34:37.315Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://gzl2017.github.io/wiki/thread/</loc>
     
     <lastmod>2019-08-26T13:29:52.496Z</lastmod>
@@ -75,13 +82,6 @@
     <loc>https://gzl2017.github.io/wiki/spring/</loc>
     
     <lastmod>2019-08-24T09:54:37.240Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://gzl2017.github.io/wiki/http/</loc>
-    
-    <lastmod>2019-08-24T06:29:30.434Z</lastmod>
     
   </url>
   

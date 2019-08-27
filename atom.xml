@@ -110,7 +110,7 @@
     <link href="https://gzl2017.github.io/wiki/tcp/"/>
     <id>https://gzl2017.github.io/wiki/tcp/</id>
     <published>2019-08-26T13:33:14.000Z</published>
-    <updated>2019-08-26T13:34:37.315Z</updated>
+    <updated>2019-08-27T09:55:39.119Z</updated>
     
     <content type="html"><![CDATA[<hr><p><code>此时握手</code></p><p><code>四次挥手</code></p><p><code>为什么要三次握手</code></p><p><code>为什么要四次挥手</code></p>]]></content>
     
@@ -131,6 +131,8 @@
       <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
     
       <category term="分布式" scheme="https://gzl2017.github.io/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+      <category term="协议" scheme="https://gzl2017.github.io/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%8D%8F%E8%AE%AE/"/>
     
     
   </entry>
@@ -229,7 +231,7 @@
     <link href="https://gzl2017.github.io/wiki/http/"/>
     <id>https://gzl2017.github.io/wiki/http/</id>
     <published>2019-08-24T01:51:41.000Z</published>
-    <updated>2019-08-24T06:29:30.434Z</updated>
+    <updated>2019-08-27T09:55:26.475Z</updated>
     
     <content type="html"><![CDATA[<hr><ol><li><p>对http协议的理解</p><p>​    http协议是一种基于客户端-&gt;服务器模式的协议，客户端发送请求，服务器返回响应。http协议通过uri定位访问的资源。http协议是一种无状态的协议，服务 器无法识别同一浏览器的前后两次请求（为解决无状态,浏览器端引入了cookie机制）。</p></li></ol><hr><ol start="2"><li>http响应状态码</li></ol><table><thead><tr><th>状态码</th><th>类别</th><th>原因短语</th></tr></thead><tbody><tr><td>1XX</td><td>Informational（信息性状态码）</td><td>接收的请求正在处理</td></tr><tr><td>2XX</td><td>Success（成功状态码）</td><td>请求正常处理完毕</td></tr><tr><td>3XX</td><td>Redirection（重定向状态码）</td><td>需要进行附加操作以完成请求</td></tr><tr><td>4XX</td><td>Client Error（客户端错误）</td><td>服务器无法处理请求</td></tr><tr><td>5XX</td><td>Server Error （服务端错误）</td><td>服务器处理请求出错</td></tr></tbody></table><hr><ol start="3"><li><p>http请求首部常用字段</p><p>Accept：用户代理可处理的媒体类型。</p><p>Accept-Encoding：优先的内容编码。</p><p>Accept-Language：优先的语言。</p><p>Content-Type：实体类型。</p></li></ol><hr><ol start="4"><li>跨域问题</li></ol>]]></content>
     
@@ -248,6 +250,8 @@
       <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
     
       <category term="分布式" scheme="https://gzl2017.github.io/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+      <category term="协议" scheme="https://gzl2017.github.io/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%8D%8F%E8%AE%AE/"/>
     
     
   </entry>
