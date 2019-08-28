@@ -518,10 +518,7 @@
 <p>​        <code>问题</code>:唯一主键问题，可以使用zk自增id  可以使用redis的自增id  可以使用代理的id</p>
 <hr>
 <p><code>Mycat</code></p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="C:/Users/long/Desktop/images/1566909982(1).jpg" alt="1566909982(assets/1566909982(1).jpg)"></p>
-
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1. 从github上面clone项目 https://github.com/MyCATApache/Mycat-Server.git</span><br><span class="line">2. 修改项目中schema.xml配置文件中的dataHost数据库配置节点信息，修改为可用的数据库</span><br><span class="line">3. MycatStartup类运行main函数启动</span><br><span class="line">	idea启动前需要在配置参数VM options: -DMYCAT_HOME=D:<span class="tag">\<span class="name">code</span></span><span class="tag">\<span class="name">Mycat</span></span>-Server<span class="tag">\<span class="name">src</span></span><span class="tag">\<span class="name">main</span></span></span><br><span class="line">4. 通过数据库连接工具可以连接到MyCat,数据库相关配置在server.xml配置文件里面</span><br><span class="line">	默认的用户名: root 密码: 123456 port: 8066</span><br><span class="line">5. mycat里面有三个比较重要的配置文件 </span><br><span class="line">	server.xml	配置数据库连接相关的一些信息</span><br><span class="line">	schema.xml  配置数据库的一些节点信息</span><br><span class="line">	rule.xml    配置一些路由规则</span><br></pre></td></tr></table></figure>
             </div>
         
         <footer class="article-footer">
