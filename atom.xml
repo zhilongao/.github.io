@@ -5,9 +5,9 @@
   <subtitle>志龙的博客</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://gzl2017.github.io/"/>
+  <link href="https://zhilongao.github.io/"/>
   <updated>2019-08-27T13:48:22.886Z</updated>
-  <id>https://gzl2017.github.io/</id>
+  <id>https://zhilongao.github.io/</id>
   
   <author>
     <name>gaozhilong</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>大佬们的博客</title>
-    <link href="https://gzl2017.github.io/wiki/share-articles/"/>
-    <id>https://gzl2017.github.io/wiki/share-articles/</id>
+    <link href="https://zhilongao.github.io/wiki/share-articles/"/>
+    <id>https://zhilongao.github.io/wiki/share-articles/</id>
     <published>2019-08-27T13:38:52.000Z</published>
     <updated>2019-08-27T13:48:22.886Z</updated>
     
@@ -41,12 +41,12 @@
   
   <entry>
     <title>分库分表</title>
-    <link href="https://gzl2017.github.io/wiki/mysql-split/"/>
-    <id>https://gzl2017.github.io/wiki/mysql-split/</id>
+    <link href="https://zhilongao.github.io/wiki/mysql-split/"/>
+    <id>https://zhilongao.github.io/wiki/mysql-split/</id>
     <published>2019-08-27T09:08:54.000Z</published>
-    <updated>2019-08-28T02:48:20.550Z</updated>
+    <updated>2019-08-28T03:14:43.225Z</updated>
     
-    <content type="html"><![CDATA[<hr><p><code>数据库优化之分库分表</code></p><hr><p>针对数据库的优化有两点，第一是从整体层面优化，设计到读写分离和分库分表。第二是从sql层面优化，主要是涉及到索引相关的一些东西。</p><hr><p><code>读写分离</code></p><p>​    <code>需求</code>: 读写分离的目的是做数据冗余备份，同时将读写分离，提升数据库的服务性能（IO性能瓶颈）。</p><p>​    <code>搭建过程</code>: 在基本操作里面-&gt;mysql配置主从同步的步骤 。</p><p>​    <code>实现原理</code>:  首先是master数据库会先将数据库的变化存储在binlog文件中。在slave数据库上，会有一个IO Thread负责将binlog文件读取到内部的relaylog文件中。同时，slave数据库上的另外一个线程SQL Thread读取relaylog，将数据写入到slave数据库里面。</p><p>​    <code>细节</code>: mysql的binlog文件存储在 /var/lib/mysql文件夹下；使用命令-&gt; mysqlbinlog –base64-output=decode-rows -v  mysql-bin.000001 查看binlog的内容；binlog的格式：statement（默认，基于sql语句模式，针对数据更新的一些函数now()等，数据延迟造成的不一致），row：基于行模式，记录修改后每一条数据变化的值，mixed：混合模式，由mysql自动判断处理。</p><p>​    <code>问题</code>：同步延迟，master tps较高时出现同步延迟； 网络延迟；磁盘IO</p><hr><p><code>分库分表</code></p><p>​    <code>垂直拆分</code></p><p>​        <code>概念</code>:垂直拆分主要是通过业务层面，将各个业务模块所使用到的表放到各自不同的数据库里面，做到各个业务模块库相互隔离的目的。</p><p>​        <code>问题</code>:若是各个业务模块的表之间存在一些关联查询，需要将这些查询改为服务调用的方式。  针对一些全局表，可以改为服务调用的方式，对外提供服务。</p><p>​    <code>水平拆分</code></p><p>​        <code>概念</code>:将一张大的表拆分成n多张小表。实现方式，第一种是通过一致性hash（若是新增表的话，会涉及到数据迁移的问题）。第二种是可以按照id的范围来拆分。第三种是通过日期来拆分。</p><p>​        <code>问题</code>:唯一主键问题，可以使用zk自增id  可以使用redis的自增id  可以使用代理的id</p><hr><p><code>Mycat</code></p><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1. 从github上面clone项目 https://github.com/MyCATApache/Mycat-Server.git</span><br><span class="line">2. 修改项目中schema.xml配置文件中的dataHost数据库配置节点信息，修改为可用的数据库</span><br><span class="line">3. MycatStartup类运行main函数启动</span><br><span class="line">idea启动前需要在配置参数VM options: -DMYCAT_HOME=D:<span class="tag">\<span class="name">code</span></span><span class="tag">\<span class="name">Mycat</span></span>-Server<span class="tag">\<span class="name">src</span></span><span class="tag">\<span class="name">main</span></span></span><br><span class="line">4. 通过数据库连接工具可以连接到MyCat,数据库相关配置在server.xml配置文件里面</span><br><span class="line">默认的用户名: root 密码: 123456 port: 8066</span><br><span class="line">5. mycat里面有三个比较重要的配置文件 </span><br><span class="line">server.xml配置数据库连接相关的一些信息</span><br><span class="line">schema.xml  配置数据库的一些节点信息</span><br><span class="line">rule.xml    配置一些路由规则</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<hr><p><code>数据库优化之分库分表</code></p><hr><p>针对数据库的优化有两点，第一是从整体层面优化，设计到读写分离和分库分表。第二是从sql层面优化，主要是涉及到索引相关的一些东西。</p><hr><p><code>读写分离</code></p><p>​    <code>需求</code>: 读写分离的目的是做数据冗余备份，同时将读写分离，提升数据库的服务性能（IO性能瓶颈）。</p><p>​    <code>搭建过程</code>: 在基本操作里面-&gt;mysql配置主从同步的步骤 。</p><p>​    <code>实现原理</code>:  首先是master数据库会先将数据库的变化存储在binlog文件中。在slave数据库上，会有一个IO Thread负责将binlog文件读取到内部的relaylog文件中。同时，slave数据库上的另外一个线程SQL Thread读取relaylog，将数据写入到slave数据库里面。</p><p>​    <code>细节</code>: mysql的binlog文件存储在 /var/lib/mysql文件夹下；使用命令-&gt; mysqlbinlog –base64-output=decode-rows -v  mysql-bin.000001 查看binlog的内容；binlog的格式：statement（默认，基于sql语句模式，针对数据更新的一些函数now()等，数据延迟造成的不一致），row：基于行模式，记录修改后每一条数据变化的值，mixed：混合模式，由mysql自动判断处理。</p><p>​    <code>问题</code>：同步延迟，master tps较高时出现同步延迟； 网络延迟；磁盘IO</p><hr><p><code>分库分表</code></p><p>​    <code>垂直拆分</code></p><p>​        <code>概念</code>:垂直拆分主要是通过业务层面，将各个业务模块所使用到的表放到各自不同的数据库里面，做到各个业务模块库相互隔离的目的。</p><p>​        <code>问题</code>:若是各个业务模块的表之间存在一些关联查询，需要将这些查询改为服务调用的方式。  针对一些全局表，可以改为服务调用的方式，对外提供服务。</p><p>​    <code>水平拆分</code></p><p>​        <code>概念</code>:将一张大的表拆分成n多张小表。实现方式，第一种是通过一致性hash（若是新增表的话，会涉及到数据迁移的问题）。第二种是可以按照id的范围来拆分。第三种是通过日期来拆分。</p><p>​        <code>问题</code>:唯一主键问题，可以使用zk自增id  可以使用redis的自增id  可以使用代理的id</p><hr><p><code>Mycat</code></p><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1. 从github上面clone项目 https://github.com/MyCATApache/Mycat-Server.git</span><br><span class="line">2. 修改项目中schema.xml配置文件中的dataHost数据库配置节点信息，修改为可用的数据库</span><br><span class="line">3. MycatStartup类运行main函数启动</span><br><span class="line">idea启动前需要在配置参数VM options: -DMYCAT_HOME=D:<span class="tag">\<span class="name">code</span></span><span class="tag">\<span class="name">Mycat</span></span>-Server<span class="tag">\<span class="name">src</span></span><span class="tag">\<span class="name">main</span></span></span><br><span class="line">4. 通过数据库连接工具可以连接到MyCat,数据库相关配置在server.xml配置文件里面</span><br><span class="line">默认的用户名: root 密码: 123456 port: 8066</span><br><span class="line">5. mycat里面有三个比较重要的配置文件 </span><br><span class="line">server.xml配置数据库连接相关的一些信息</span><br><span class="line">schema.xml  配置数据库的一些节点信息</span><br><span class="line">rule.xml    配置一些路由规则</span><br><span class="line">6. 支持单库分表   支持跨库分表    支持配置读写分离(writeHost和readHost节点)</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -62,19 +62,19 @@
     
     </summary>
     
-      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
-      <category term="数据库" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="https://zhilongao.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-      <category term="mysql" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/"/>
+      <category term="mysql" scheme="https://zhilongao.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/"/>
     
     
   </entry>
   
   <entry>
     <title>基本操作</title>
-    <link href="https://gzl2017.github.io/wiki/mysql-base/"/>
-    <id>https://gzl2017.github.io/wiki/mysql-base/</id>
+    <link href="https://zhilongao.github.io/wiki/mysql-base/"/>
+    <id>https://zhilongao.github.io/wiki/mysql-base/</id>
     <published>2019-08-27T09:08:25.000Z</published>
     <updated>2019-08-27T12:58:54.756Z</updated>
     
@@ -91,19 +91,19 @@
     
     </summary>
     
-      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
-      <category term="数据库" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="https://zhilongao.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-      <category term="mysql" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/"/>
+      <category term="mysql" scheme="https://zhilongao.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/"/>
     
     
   </entry>
   
   <entry>
     <title>索引</title>
-    <link href="https://gzl2017.github.io/wiki/mysql-index/"/>
-    <id>https://gzl2017.github.io/wiki/mysql-index/</id>
+    <link href="https://zhilongao.github.io/wiki/mysql-index/"/>
+    <id>https://zhilongao.github.io/wiki/mysql-index/</id>
     <published>2019-08-27T09:08:17.000Z</published>
     <updated>2019-08-27T09:51:54.005Z</updated>
     
@@ -119,19 +119,19 @@
     
     </summary>
     
-      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
-      <category term="数据库" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="https://zhilongao.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-      <category term="mysql" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/"/>
+      <category term="mysql" scheme="https://zhilongao.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/"/>
     
     
   </entry>
   
   <entry>
     <title>tcp</title>
-    <link href="https://gzl2017.github.io/wiki/tcp/"/>
-    <id>https://gzl2017.github.io/wiki/tcp/</id>
+    <link href="https://zhilongao.github.io/wiki/tcp/"/>
+    <id>https://zhilongao.github.io/wiki/tcp/</id>
     <published>2019-08-26T13:33:14.000Z</published>
     <updated>2019-08-27T09:55:39.119Z</updated>
     
@@ -151,19 +151,19 @@
     
     </summary>
     
-      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
-      <category term="分布式" scheme="https://gzl2017.github.io/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+      <category term="分布式" scheme="https://zhilongao.github.io/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
     
-      <category term="协议" scheme="https://gzl2017.github.io/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%8D%8F%E8%AE%AE/"/>
+      <category term="协议" scheme="https://zhilongao.github.io/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%8D%8F%E8%AE%AE/"/>
     
     
   </entry>
   
   <entry>
     <title>project-ask</title>
-    <link href="https://gzl2017.github.io/wiki/project-ask/"/>
-    <id>https://gzl2017.github.io/wiki/project-ask/</id>
+    <link href="https://zhilongao.github.io/wiki/project-ask/"/>
+    <id>https://zhilongao.github.io/wiki/project-ask/</id>
     <published>2019-08-26T13:26:32.000Z</published>
     <updated>2019-08-26T13:36:29.277Z</updated>
     
@@ -182,17 +182,17 @@
     
     </summary>
     
-      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
-      <category term="项目" scheme="https://gzl2017.github.io/categories/java/%E9%A1%B9%E7%9B%AE/"/>
+      <category term="项目" scheme="https://zhilongao.github.io/categories/java/%E9%A1%B9%E7%9B%AE/"/>
     
     
   </entry>
   
   <entry>
     <title>threadpool</title>
-    <link href="https://gzl2017.github.io/wiki/threadpool/"/>
-    <id>https://gzl2017.github.io/wiki/threadpool/</id>
+    <link href="https://zhilongao.github.io/wiki/threadpool/"/>
+    <id>https://zhilongao.github.io/wiki/threadpool/</id>
     <published>2019-08-26T13:20:13.000Z</published>
     <updated>2019-08-26T13:23:48.587Z</updated>
     
@@ -209,19 +209,19 @@
     
     </summary>
     
-      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
-      <category term="并发" scheme="https://gzl2017.github.io/categories/java/%E5%B9%B6%E5%8F%91/"/>
+      <category term="并发" scheme="https://zhilongao.github.io/categories/java/%E5%B9%B6%E5%8F%91/"/>
     
-      <category term="线程池" scheme="https://gzl2017.github.io/categories/java/%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
+      <category term="线程池" scheme="https://zhilongao.github.io/categories/java/%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
     
     
   </entry>
   
   <entry>
     <title>lock</title>
-    <link href="https://gzl2017.github.io/wiki/lock/"/>
-    <id>https://gzl2017.github.io/wiki/lock/</id>
+    <link href="https://zhilongao.github.io/wiki/lock/"/>
+    <id>https://zhilongao.github.io/wiki/lock/</id>
     <published>2019-08-25T06:28:41.000Z</published>
     <updated>2019-08-26T13:16:50.804Z</updated>
     
@@ -240,19 +240,19 @@
     
     </summary>
     
-      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
-      <category term="并发" scheme="https://gzl2017.github.io/categories/java/%E5%B9%B6%E5%8F%91/"/>
+      <category term="并发" scheme="https://zhilongao.github.io/categories/java/%E5%B9%B6%E5%8F%91/"/>
     
-      <category term="锁" scheme="https://gzl2017.github.io/categories/java/%E5%B9%B6%E5%8F%91/%E9%94%81/"/>
+      <category term="锁" scheme="https://zhilongao.github.io/categories/java/%E5%B9%B6%E5%8F%91/%E9%94%81/"/>
     
     
   </entry>
   
   <entry>
     <title>http</title>
-    <link href="https://gzl2017.github.io/wiki/http/"/>
-    <id>https://gzl2017.github.io/wiki/http/</id>
+    <link href="https://zhilongao.github.io/wiki/http/"/>
+    <id>https://zhilongao.github.io/wiki/http/</id>
     <published>2019-08-24T01:51:41.000Z</published>
     <updated>2019-08-27T09:55:26.475Z</updated>
     
@@ -270,19 +270,19 @@
     
     </summary>
     
-      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
-      <category term="分布式" scheme="https://gzl2017.github.io/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+      <category term="分布式" scheme="https://zhilongao.github.io/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
     
-      <category term="协议" scheme="https://gzl2017.github.io/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%8D%8F%E8%AE%AE/"/>
+      <category term="协议" scheme="https://zhilongao.github.io/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%8D%8F%E8%AE%AE/"/>
     
     
   </entry>
   
   <entry>
     <title>io</title>
-    <link href="https://gzl2017.github.io/wiki/io/"/>
-    <id>https://gzl2017.github.io/wiki/io/</id>
+    <link href="https://zhilongao.github.io/wiki/io/"/>
+    <id>https://zhilongao.github.io/wiki/io/</id>
     <published>2019-08-23T09:43:24.000Z</published>
     <updated>2019-08-24T06:09:30.942Z</updated>
     
@@ -304,17 +304,17 @@
     
     </summary>
     
-      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
-      <category term="io" scheme="https://gzl2017.github.io/categories/java/io/"/>
+      <category term="io" scheme="https://zhilongao.github.io/categories/java/io/"/>
     
     
   </entry>
   
   <entry>
     <title>thread</title>
-    <link href="https://gzl2017.github.io/wiki/thread/"/>
-    <id>https://gzl2017.github.io/wiki/thread/</id>
+    <link href="https://zhilongao.github.io/wiki/thread/"/>
+    <id>https://zhilongao.github.io/wiki/thread/</id>
     <published>2019-08-21T05:43:50.000Z</published>
     <updated>2019-08-26T13:29:52.496Z</updated>
     
@@ -337,19 +337,19 @@
     
     </summary>
     
-      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
-      <category term="并发" scheme="https://gzl2017.github.io/categories/java/%E5%B9%B6%E5%8F%91/"/>
+      <category term="并发" scheme="https://zhilongao.github.io/categories/java/%E5%B9%B6%E5%8F%91/"/>
     
-      <category term="基础" scheme="https://gzl2017.github.io/categories/java/%E5%B9%B6%E5%8F%91/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="https://zhilongao.github.io/categories/java/%E5%B9%B6%E5%8F%91/%E5%9F%BA%E7%A1%80/"/>
     
     
   </entry>
   
   <entry>
     <title>springboot</title>
-    <link href="https://gzl2017.github.io/wiki/springboot/"/>
-    <id>https://gzl2017.github.io/wiki/springboot/</id>
+    <link href="https://zhilongao.github.io/wiki/springboot/"/>
+    <id>https://zhilongao.github.io/wiki/springboot/</id>
     <published>2019-08-21T01:58:17.000Z</published>
     <updated>2019-08-21T05:42:21.998Z</updated>
     
@@ -364,17 +364,17 @@
     
     </summary>
     
-      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
-      <category term="springboot" scheme="https://gzl2017.github.io/categories/java/springboot/"/>
+      <category term="springboot" scheme="https://zhilongao.github.io/categories/java/springboot/"/>
     
     
   </entry>
   
   <entry>
     <title>spring</title>
-    <link href="https://gzl2017.github.io/wiki/spring/"/>
-    <id>https://gzl2017.github.io/wiki/spring/</id>
+    <link href="https://zhilongao.github.io/wiki/spring/"/>
+    <id>https://zhilongao.github.io/wiki/spring/</id>
     <published>2019-08-19T09:04:07.000Z</published>
     <updated>2019-08-24T09:54:37.240Z</updated>
     
@@ -389,17 +389,17 @@
     
     </summary>
     
-      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
-      <category term="spring" scheme="https://gzl2017.github.io/categories/java/spring/"/>
+      <category term="spring" scheme="https://zhilongao.github.io/categories/java/spring/"/>
     
     
   </entry>
   
   <entry>
     <title>redis</title>
-    <link href="https://gzl2017.github.io/wiki/redis/"/>
-    <id>https://gzl2017.github.io/wiki/redis/</id>
+    <link href="https://zhilongao.github.io/wiki/redis/"/>
+    <id>https://zhilongao.github.io/wiki/redis/</id>
     <published>2019-08-18T02:58:52.000Z</published>
     <updated>2019-08-27T09:05:36.608Z</updated>
     
@@ -429,19 +429,19 @@ redis和zk实现分布式锁的区别
     
     </summary>
     
-      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
-      <category term="数据库" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="https://zhilongao.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-      <category term="redis" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/"/>
+      <category term="redis" scheme="https://zhilongao.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/"/>
     
     
   </entry>
   
   <entry>
     <title>HashMap</title>
-    <link href="https://gzl2017.github.io/wiki/HashMap/"/>
-    <id>https://gzl2017.github.io/wiki/HashMap/</id>
+    <link href="https://zhilongao.github.io/wiki/HashMap/"/>
+    <id>https://zhilongao.github.io/wiki/HashMap/</id>
     <published>2019-08-16T14:01:46.000Z</published>
     <updated>2019-08-21T07:30:38.652Z</updated>
     
@@ -463,17 +463,17 @@ redis和zk实现分布式锁的区别
     
     </summary>
     
-      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
-      <category term="源码" scheme="https://gzl2017.github.io/categories/java/%E6%BA%90%E7%A0%81/"/>
+      <category term="源码" scheme="https://zhilongao.github.io/categories/java/%E6%BA%90%E7%A0%81/"/>
     
     
   </entry>
   
   <entry>
     <title>jvm</title>
-    <link href="https://gzl2017.github.io/wiki/jvm/"/>
-    <id>https://gzl2017.github.io/wiki/jvm/</id>
+    <link href="https://zhilongao.github.io/wiki/jvm/"/>
+    <id>https://zhilongao.github.io/wiki/jvm/</id>
     <published>2019-08-16T04:51:03.000Z</published>
     <updated>2019-08-21T07:30:51.135Z</updated>
     
@@ -490,17 +490,17 @@ redis和zk实现分布式锁的区别
     
     </summary>
     
-      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
-      <category term="jvm" scheme="https://gzl2017.github.io/categories/java/jvm/"/>
+      <category term="jvm" scheme="https://zhilongao.github.io/categories/java/jvm/"/>
     
     
   </entry>
   
   <entry>
     <title>面试题</title>
-    <link href="https://gzl2017.github.io/wiki/mysql/"/>
-    <id>https://gzl2017.github.io/wiki/mysql/</id>
+    <link href="https://zhilongao.github.io/wiki/mysql/"/>
+    <id>https://zhilongao.github.io/wiki/mysql/</id>
     <published>2019-08-15T12:56:11.000Z</published>
     <updated>2019-08-27T09:47:21.912Z</updated>
     
@@ -515,11 +515,11 @@ redis和zk实现分布式锁的区别
     
     </summary>
     
-      <category term="java" scheme="https://gzl2017.github.io/categories/java/"/>
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
-      <category term="数据库" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="https://zhilongao.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-      <category term="mysql" scheme="https://gzl2017.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/"/>
+      <category term="mysql" scheme="https://zhilongao.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/"/>
     
     
   </entry>
