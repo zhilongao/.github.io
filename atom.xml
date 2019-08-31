@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhilongao.github.io/"/>
-  <updated>2019-08-27T13:48:22.886Z</updated>
+  <updated>2019-08-31T03:54:50.335Z</updated>
   <id>https://zhilongao.github.io/</id>
   
   <author>
@@ -17,11 +17,102 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>排序算法</title>
+    <link href="https://zhilongao.github.io/wiki/arithmetic-sort/"/>
+    <id>https://zhilongao.github.io/wiki/arithmetic-sort/</id>
+    <published>2019-08-31T01:19:15.000Z</published>
+    <updated>2019-08-31T03:54:50.335Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>常见的排序算法</code></p><p><code>1.插入排序</code></p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 插入排序算法</span></span><br><span class="line"><span class="comment">// 时间复杂度：平均情况:o(n^2)  最好情况:o(n) 最坏情况:o(n^2) </span></span><br><span class="line"><span class="comment">// 空间复杂度: o(1)</span></span><br><span class="line"><span class="comment">// 特点: 稳定</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; array.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">int</span> temp = array[i];</span><br><span class="line">        <span class="keyword">for</span> (j = i - <span class="number">1</span>; j &gt;=<span class="number">0</span> &amp;&amp; array[j] &gt; temp; j --) &#123;</span><br><span class="line">            <span class="comment">// 将数组中的元素后移一位</span></span><br><span class="line">            array[j + <span class="number">1</span>] = array[j];</span><br><span class="line">        &#125;</span><br><span class="line">        array[j + <span class="number">1</span>] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>2.选择排序</code></p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 选择排序算法</span></span><br><span class="line"><span class="comment">// 时间复杂度: 平均情况:o(n^2)  最好情况:o(n^2) 最坏情况:o(n^2)  </span></span><br><span class="line"><span class="comment">// 空间复杂度: o(1)</span></span><br><span class="line"><span class="comment">// 特点: 不稳定</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">selectSort</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; array.length; j ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (array[i] &gt; array[j]) &#123;</span><br><span class="line">                <span class="keyword">int</span> temp = array[i];</span><br><span class="line">                array[i] = array[j];</span><br><span class="line">                array[j] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>3.交换排序-&gt;冒泡排序</code></p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 冒泡排序算法</span></span><br><span class="line"><span class="comment">// 时间复杂度: 平均情况:o(n^2)  最好情况:o(n) 最坏情况:o(n^2)</span></span><br><span class="line"><span class="comment">// 空间复杂度: o(1)</span></span><br><span class="line"><span class="comment">// 特点：稳定</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; array.length - i - <span class="number">1</span>; j ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (array[j] &gt; array[j + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">int</span> temp = array[j];</span><br><span class="line">                array[j] = array[j + <span class="number">1</span>];</span><br><span class="line">                array[j + <span class="number">1</span>] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>4.交换排序-&gt;快速排序</code></p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 快速排序算法</span></span><br><span class="line"><span class="comment">// 时间复杂度: 平均情况:o(nlog2^n) 最好情况:o(nlog2^n) 最坏情况:o(n^2)</span></span><br><span class="line"><span class="comment">// 空间复杂度: o(nlog2^n)</span></span><br><span class="line"><span class="comment">// 特点：不稳定</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">fastSort</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (low &gt; high) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> i = low;</span><br><span class="line">    <span class="keyword">int</span> j = fast;</span><br><span class="line">    <span class="keyword">int</span> temp = array[low];</span><br><span class="line">    <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">        <span class="comment">// 从右向左找到第一个小于temp的元素,保存其下标</span></span><br><span class="line">        <span class="keyword">while</span> (array[j] &gt; temp &amp;&amp; i &lt; j) &#123;</span><br><span class="line">            j --;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 从左向右找到第一个大于temp的元素，保存其下标</span></span><br><span class="line">        <span class="keyword">while</span> (array[i] &lt;= temp &amp;&amp; i &lt; j) &#123;</span><br><span class="line">            i ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 交换这两个元素</span></span><br><span class="line">        <span class="keyword">int</span> swap = array[i];</span><br><span class="line">        array[i] = array[j];</span><br><span class="line">        array[j] = swap;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 交换temp</span></span><br><span class="line">    array[low] = array[i];</span><br><span class="line">    array[i] = temp;</span><br><span class="line">    <span class="comment">// 快排temp左半边</span></span><br><span class="line">    fastSort(array, low, j - <span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 快排temp右半边</span></span><br><span class="line">    fastSort(array, j + <span class="number">1</span>, high);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>5.归并排序</code></p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 归并排序算法</span></span><br><span class="line"><span class="comment">// 时间复杂度: 平均情况:o(nlog2^n) 最好情况:o(nlog2^n) 最坏情况:o(nlog2^n)</span></span><br><span class="line"><span class="comment">// 空间复杂度：o(1)</span></span><br><span class="line"><span class="comment">// 特点: 稳定</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title">sortMerge</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">    sort(array, <span class="number">0</span>, array.length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> array[], <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (L == R) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (R + L) / <span class="number">2</span>;</span><br><span class="line">    <span class="comment">// 排序左半部分</span></span><br><span class="line">    sort(array, L, mid);</span><br><span class="line">    <span class="comment">// 排序右半部分</span></span><br><span class="line">    sort(array, mid + <span class="number">1</span>, R);</span><br><span class="line">    <span class="comment">// 合并 </span></span><br><span class="line">    merge(array, L, mid, R);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> L, <span class="keyword">int</span> mid, <span class="keyword">int</span> R)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] temp = <span class="keyword">new</span> <span class="keyword">int</span>[R - L + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> p1 = L;</span><br><span class="line">    <span class="keyword">int</span> p2 = mid + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 将数组排序后放入到临时数组temp中</span></span><br><span class="line">    <span class="keyword">while</span> (p1 &lt;= mid &amp;&amp; p2 &lt;= R) &#123;</span><br><span class="line">        <span class="keyword">if</span> (array[p1] &lt; array[p2]) &#123;</span><br><span class="line">            temp[i++] = array[p1++];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            temp[i++] = array[p2++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(p1 &lt;= mid) &#123;</span><br><span class="line">        temp[i++] = array[p1++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(p2 &lt;= R) &#123;</span><br><span class="line">        temp[i++] = array[p2++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将临时数组中的元素移动到array中</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; temp.length; k ++) &#123;</span><br><span class="line">        array[L + k] = temp[k];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;code&gt;常见的排序算法&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;1.插入排序&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;s
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
+    
+      <category term="算法" scheme="https://zhilongao.github.io/categories/java/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="排序" scheme="https://zhilongao.github.io/categories/java/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>jvm-command</title>
+    <link href="https://zhilongao.github.io/wiki/jvm-command/"/>
+    <id>https://zhilongao.github.io/wiki/jvm-command/</id>
+    <published>2019-08-29T09:01:23.000Z</published>
+    <updated>2019-08-29T09:07:31.863Z</updated>
+    
+    <content type="html"><![CDATA[<hr><p><code>jvm基本指令</code></p><table><thead><tr><th>基本指令</th><th>指令说明</th></tr></thead><tbody><tr><td>iconst_1</td><td>int型常量值1进栈</td></tr><tr><td>bipush</td><td>将一个byte型常量值推送至栈顶</td></tr><tr><td>iload_1</td><td>第二个int型局部变量进栈，从0开始计数</td></tr><tr><td>istore_1</td><td><em>将栈顶int型数值存入第二个局部变量，从<strong>0</strong>开始计数</em></td></tr><tr><td></td><td></td></tr></tbody></table>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;hr&gt;
+&lt;p&gt;&lt;code&gt;jvm基本指令&lt;/code&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;基本指令&lt;/th&gt;
+&lt;th&gt;指令说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;iconst_1&lt;/td&gt;
+&lt;td&gt;int型常量值1进
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
+    
+      <category term="jvm" scheme="https://zhilongao.github.io/categories/java/jvm/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>dubbo</title>
+    <link href="https://zhilongao.github.io/wiki/dubbo-ask/"/>
+    <id>https://zhilongao.github.io/wiki/dubbo-ask/</id>
+    <published>2019-08-28T11:57:42.000Z</published>
+    <updated>2019-08-28T12:21:39.474Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>协议</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;code&gt;协议&lt;/code&gt;&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
+    
+      <category term="分布式" scheme="https://zhilongao.github.io/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>大佬们的博客</title>
     <link href="https://zhilongao.github.io/wiki/share-articles/"/>
     <id>https://zhilongao.github.io/wiki/share-articles/</id>
     <published>2019-08-27T13:38:52.000Z</published>
-    <updated>2019-08-27T13:48:22.886Z</updated>
+    <updated>2019-08-28T11:55:06.200Z</updated>
     
     <content type="html"><![CDATA[<p><code>友情链接</code></p><p><a href="https://yapengren.github.io/" target="_blank" rel="noopener">任亚鹏的博客</a></p>]]></content>
     
@@ -133,9 +224,9 @@
     <link href="https://zhilongao.github.io/wiki/tcp/"/>
     <id>https://zhilongao.github.io/wiki/tcp/</id>
     <published>2019-08-26T13:33:14.000Z</published>
-    <updated>2019-08-27T09:55:39.119Z</updated>
+    <updated>2019-08-28T12:55:39.134Z</updated>
     
-    <content type="html"><![CDATA[<hr><p><code>此时握手</code></p><p><code>四次挥手</code></p><p><code>为什么要三次握手</code></p><p><code>为什么要四次挥手</code></p>]]></content>
+    <content type="html"><![CDATA[<hr><p><code>此时握手</code></p><p><code>四次挥手</code></p><p><code>为什么要三次握手</code></p><p><code>为什么要四次挥手</code></p><p><code>socket的几种状态</code></p><p>​        <code>listen:侦听来自远方tcp端口的连接请求</code></p><p>​        <code>syn-sent:在发送连接请求后，等待匹配的连接请求。</code></p><p>​        <code>syn-receive:在收到和发送一个连接请求后，等待连接请求的确认</code></p><p>​        <code>established:代表一个打开的连接，数据可以传送给用户</code></p>]]></content>
     
     <summary type="html">
     
@@ -146,7 +237,7 @@
 &lt;p&gt;&lt;code&gt;四次挥手&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;为什么要三次握手&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;为什么要四次挥手&lt;/code&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;code&gt;socket的几种状态&lt;/code&gt;
       
     
     </summary>
