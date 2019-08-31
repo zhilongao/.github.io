@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="gzl Blog">
 <meta property="og:description" content="1.在jdk1.4，java引入了nio，nio是一种非阻塞io。   在nio中有三个概念   缓冲区(buffer)：java nio中数据的读取和存放需要通过缓冲区。  通道(channel)：可以理解为io中流的概念 ，与流不同的是，一个通道中既可以进行数据的读取，也可以进行数据的写入，而在io模型中，数据的读取和写入会有专门的输入和输出流来进行操作。  选择器(select)：通道可以">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-24T06:09:30.942Z">
+<meta property="og:updated_time" content="2019-08-31T03:59:42.888Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="io">
 <meta name="twitter:description" content="1.在jdk1.4，java引入了nio，nio是一种非阻塞io。   在nio中有三个概念   缓冲区(buffer)：java nio中数据的读取和存放需要通过缓冲区。  通道(channel)：可以理解为io中流的概念 ，与流不同的是，一个通道中既可以进行数据的读取，也可以进行数据的写入，而在io模型中，数据的读取和写入会有专门的输入和输出流来进行操作。  选择器(select)：通道可以">
@@ -167,6 +167,31 @@
                             java
                         </a>
                          <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分布式
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            协议
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/http/">http</a></li>  <li class="file"><a href="/wiki/tcp/">tcp</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/dubbo-ask/">dubbo</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
                     <li class="directory open">
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder-open"></i>
@@ -184,41 +209,7 @@
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/jvm/">jvm</a></li>  <li class="file"><a href="/wiki/jvm-command/">jvm-command</a></li>  </ul> 
                     </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            spring
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/spring/">spring</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            springboot
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/springboot/">springboot</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            分布式
-                        </a>
-                         <ul class="unstyled" id="tree" > 
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            协议
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/http/">http</a></li>  <li class="file"><a href="/wiki/tcp/">tcp</a></li>  </ul> 
-                    </li> 
-                     <li class="file"><a href="/wiki/dubbo-ask/">dubbo</a></li>  </ul> 
+                     </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -288,6 +279,33 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
+                            框架
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            spring
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/spring/">spring</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            springboot
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/springboot/">springboot</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
                             源码
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/HashMap/">HashMap</a></li>  </ul> 
@@ -307,6 +325,15 @@
                             排序
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/arithmetic-sort/">排序算法</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            链表
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/linked-list-ask/">单链表</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -402,7 +429,7 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/io/">io</a>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/基础/">基础</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/基础/io/">io</a>
     </div>
 
                         
