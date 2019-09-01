@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zhilongao.github.io/wiki/redis/</loc>
+    
+    <lastmod>2019-09-01T08:04:54.804Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zhilongao.github.io/wiki/springboot/</loc>
     
     <lastmod>2019-08-31T04:01:53.338Z</lastmod>
@@ -103,13 +110,6 @@
     <loc>https://zhilongao.github.io/wiki/mysql/</loc>
     
     <lastmod>2019-08-27T09:47:21.912Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zhilongao.github.io/wiki/redis/</loc>
-    
-    <lastmod>2019-08-27T09:05:36.608Z</lastmod>
     
   </url>
   
