@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhilongao.github.io/"/>
-  <updated>2019-08-31T03:58:19.027Z</updated>
+  <updated>2019-09-02T04:20:13.462Z</updated>
   <id>https://zhilongao.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>基础知识</title>
+    <link href="https://zhilongao.github.io/wiki/redis-advance/"/>
+    <id>https://zhilongao.github.io/wiki/redis-advance/</id>
+    <published>2019-09-02T00:47:25.000Z</published>
+    <updated>2019-09-02T04:20:13.462Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>数据结构</code></p><p>​    reids中常用的五种数据类型，string，list，hash，set，zset</p><p><code>string</code></p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span>单个操作   </span><br><span class="line">set name value(设置某个key-value)</span><br><span class="line">get name(获取某个key)</span><br><span class="line">exists name(判断某个key是否存在)</span><br><span class="line">del name(删除某个key)</span><br><span class="line">expire name seconds(给某个key设置expire)</span><br><span class="line">setex name seconds value(设置key的时候同时设置expire)</span><br><span class="line">setnx name value(不存在存储,存在不存储)</span><br><span class="line"><span class="meta">#</span>批量操作</span><br><span class="line">mset name1 value1 name2 value2(批量插入)</span><br><span class="line">mget name1 name2(批量获取)</span><br><span class="line"><span class="meta">#</span>特殊操作</span><br><span class="line">incr key(针对值为整数的情况,value加1)</span><br><span class="line">incrby key 5(针对值为整数的情况,value加5)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 使用场景</span><br><span class="line">保存一些JSON序列化的用户对象信息，使用时通过JSON反序列化，一次性的获取一整个用户对象，消耗网络流量。优点是存储消耗低于hash。</span><br></pre></td></tr></table></figure><p><code>list(ziplist+quicklist)</code></p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span>基本操作(普通操作)</span><br><span class="line">rpush key value1 value2 value3(存储元素)</span><br><span class="line">llen key(获取列表元素个数)</span><br><span class="line">lpop key(从左边弹出，非阻塞)</span><br><span class="line">rpop key(从右边弹出，非阻塞)</span><br><span class="line">blpop key timeout(从左边弹出，阻塞，timeout单位为秒)</span><br><span class="line">brpop key timeout(从右边弹出，阻塞，timeout单位为秒)</span><br><span class="line"><span class="meta">#</span> 基本操作(慢操作)</span><br><span class="line">lindex key index(获取某个位置上的value)</span><br><span class="line">ltrim key start_index end_index(保留start_index到end_index区间内的值,index可为负数,-1表示最后一个)</span><br><span class="line">lrange key start_index end_index(返回start_index到end_index区间内的值)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 使用场景</span><br><span class="line">异步队列(rpush lpop) </span><br><span class="line">栈(rpush rpop)</span><br></pre></td></tr></table></figure><p><code>hash</code></p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span>基本操作</span><br><span class="line">hset key filed value(给某个key的字典中存储一个key-value)</span><br><span class="line">hgetall key(查看key-value,key和value间隔出现)</span><br><span class="line">hlen books(查看key中存储的key-value个数)</span><br><span class="line">hget key filed(获取某个key下filed的value值)</span><br><span class="line">hmset key filed1 value1 filed2 value2(批量设置key-value)</span><br><span class="line">hincrby key filed 1(给某个key的field字段的value加1)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>使用场景</span><br><span class="line">存储用户信息-&gt;针对用户信息中的每个字段单独存储，获取用户信息时可以对部分字段单独获取,节省网络流量。但是缺点是存储消耗要高于字符串。</span><br></pre></td></tr></table></figure><p><code>set</code></p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span>基本操作</span><br><span class="line">sadd key value(集合中添加一个元素)</span><br><span class="line">sadd key value1 value2(集合中添加多个元素)</span><br><span class="line">smembers key(列出key下面的value列表)</span><br><span class="line">sismember key value(查询key下面是否存在value)</span><br><span class="line">scard key(获取key的长度)</span><br><span class="line">spop key(弹出一个元素)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>使用场景</span><br><span class="line">可以用来存储中将用户的id,因为有去重功能，所以可以保证同一个用户不会中将两次。</span><br></pre></td></tr></table></figure><p><code>zset(跳跃表)</code></p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span>基本操作</span><br><span class="line">zadd key score value(添加一个value)</span><br><span class="line">zrange key 0 -1(获取key元素列表，按照score排序列出)</span><br><span class="line">zrevrange key 0 -1(获取key元素列表，按照score逆序列出)</span><br><span class="line">zcard key(返回key中元素个数)</span><br><span class="line">zscore key value(返回某个key的score)</span><br><span class="line">zrangebyscore key score1 score2(根据分值区间遍历zset)</span><br><span class="line">zrangebyscore key -inf score withscore (根据分值区间 (-∞, score] 遍历 zset，同时返回分值。inf 代表 infinite，无穷大的意思。)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>使用场景</span><br><span class="line">可以用来存储粉丝列表，value值是粉丝的用户id，score是关注时间。可以对粉丝列表按照关注时间进行排序。</span><br><span class="line">可以用来存储学生的成绩，value值是学生的id, score是考试成绩。可以对成绩按照分数进行排序，就可以获取到它的名次。</span><br></pre></td></tr></table></figure><p><code>排序sort</code></p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> redis的sort命令可以对列表键 集合键或者有序集合键的值进行排序</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>############# 最简单的排序 sort #########</span><br><span class="line"><span class="meta">#</span> 插入元素</span><br><span class="line"><span class="meta">redis&gt;</span> rpush numbers 5 3 1 4 2</span><br><span class="line">(integer) 5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 按照插入顺序排列的列表元素</span><br><span class="line"><span class="meta">redis&gt;</span>lrange numbers 0 -1</span><br><span class="line"><span class="meta">#</span> 元素的输出顺序为 "5" "3" "1" "4" "2"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 按值从小到大有序排列的列表元素(默认升序排列asc)</span><br><span class="line"><span class="meta">redis&gt;</span> sort numbers</span><br><span class="line"><span class="meta">#</span> 元素的输出顺序为 "1" "2" "3" "4" "5"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 按值从大到小有序排列的列表元素</span><br><span class="line"><span class="meta">redis&gt;</span> sort numbers desc</span><br><span class="line"><span class="meta">#</span> 元素的输出顺序为 "5" "4" "3" "2" "1"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>########### 使用 sort和alpha选项对字符串进行排序########</span><br><span class="line"><span class="meta">#</span> 插入元素</span><br><span class="line"><span class="meta">reids&gt;</span> sadd alphabet a b c d e f g</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 乱序排列的集合元素</span><br><span class="line"><span class="meta">redis&gt;</span> smembers alphabet</span><br><span class="line"><span class="meta">#</span> 输出顺序为 "d" "a" "c" "b" "g" "e" "f"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 集合元素排序，使用alpha，asc升序排列</span><br><span class="line"><span class="meta">redis&gt;</span> sort alphabet alpha</span><br><span class="line"><span class="meta">#</span> 输出顺序为 "a" "b" "c" "d" "e" "f" "g"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 集合元素排序，使用alpha，desc降序排列</span><br><span class="line"><span class="meta">redis&gt;</span> sort alphabet alpha desc</span><br><span class="line"><span class="meta">#</span> 输出顺序为 "g" "f" "e" "d" "c" "b" "a"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>########### 使用sort和by选项对元素排序 ############</span><br><span class="line"><span class="meta">#</span> 插入元素</span><br><span class="line"><span class="meta">redis&gt;</span> zadd test-result 3.0 jack 3.5 peter 4.0 tom</span><br><span class="line">(integer) 3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 普通输出，按照元素的分值排序</span><br><span class="line"><span class="meta">redis&gt;</span> zrange test-result 0 -1</span><br><span class="line"><span class="meta">#</span> 输出顺序为 "jack" "peter" "tom"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 为各个元素设置序号</span><br><span class="line"><span class="meta">redis&gt;</span> mset peter_number 1 tom_number 2 jack_number 3</span><br><span class="line">ok</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 以序号为权重，对集合中的元素进行排序</span><br><span class="line"><span class="meta">redis&gt;</span> sort test-result by *_number</span><br><span class="line"><span class="meta">#</span> 输出顺序为 "peter" "tom" "jack"</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;code&gt;数据结构&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;​    reids中常用的五种数据类型，string，list，hash，set，zset&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;string&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight shell&quot;&gt;&lt;t
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
+    
+      <category term="数据库" scheme="https://zhilongao.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="redis" scheme="https://zhilongao.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>单链表</title>
@@ -524,22 +554,20 @@
   </entry>
   
   <entry>
-    <title>redis</title>
-    <link href="https://zhilongao.github.io/wiki/redis/"/>
-    <id>https://zhilongao.github.io/wiki/redis/</id>
+    <title>基本操作</title>
+    <link href="https://zhilongao.github.io/wiki/redis-base/"/>
+    <id>https://zhilongao.github.io/wiki/redis-base/</id>
     <published>2019-08-18T02:58:52.000Z</published>
-    <updated>2019-09-01T08:04:54.804Z</updated>
+    <updated>2019-09-02T04:21:01.618Z</updated>
     
-    <content type="html"><![CDATA[<hr>`redis安装步骤`<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1.安装相关库gcc  </span><br><span class="line"># yum install gcc</span><br><span class="line">2.下载安装包 </span><br><span class="line"># wget http://download.redis.io/releases/redis-3.0.0.tar.gz</span><br><span class="line">3.解压安装包 </span><br><span class="line"># tar zxvf redis-3.0.0.tar.gz</span><br><span class="line">4.执行make命令</span><br><span class="line"># cd redis-3.0.0/src</span><br><span class="line"># make</span><br><span class="line">5.将src目录下的相关文件拷贝到/usr/redis文件夹下</span><br><span class="line"># mkdir /usr/redis</span><br><span class="line"># cp redis-server  /usr/redis</span><br><span class="line"># cp redis-benchmark /usr/redis</span><br><span class="line"># cp redis-cli  /usr/redis</span><br><span class="line"># cp redis.conf  /usr/redis</span><br><span class="line">6.为redis-server和redis-cli创建软链接</span><br><span class="line"># ln -s /usr/redis/redis-server /usr/bin/redis-server</span><br><span class="line"># ln -s /usr/redis/redis-cli /usr/bin/redis-cli</span><br><span class="line">7.启动redis</span><br><span class="line"># redis-server /usr/redis/redis.conf</span><br><span class="line">8.若是需要在后台启动，可以修改redis.conf文件中的daemonize为yes</span><br><span class="line"></span><br><span class="line">########################################################</span><br><span class="line">1.关闭redis服务的方式</span><br><span class="line"> a. 强制结束程序。使用kill -9 进程的pid，强行终止Redis进程可能会导致redis持久化丢失。</span><br><span class="line"> b. 正确停止redis的方式是向redis发送shutdown命令(关闭默认端口)。 # redis-cli shutdown</span><br></pre></td></tr></table></figure><p><code>cluster</code></p><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">开启集群</span><br><span class="line">修改配置文件redis.conf中的cluster-enabled yes</span><br><span class="line">加入到集群</span><br><span class="line">127.0.0.1:6379&gt; cluster meet 192.168.25.150 6379</span><br><span class="line">分配hash操作</span><br><span class="line">[root@localhost redis]# redis-cli -h 192.168.25.147 -p 6379 cluster addslots &#123;0..5000&#125;</span><br></pre></td></tr></table></figure><p>redis和zk实现分布式锁的区别</p><table><thead><tr><th>实现方式</th><th>优点</th><th>缺点</th></tr></thead><tbody><tr><td>基于redis</td><td>性能高</td><td>锁的失效时间很难把控</td></tr><tr><td>基于zk</td><td>实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题</td><td>性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点</td></tr></tbody></table><p>cap原则</p><ol><li><p>缓存数据的同步方式</p><ul><li><p>先写入数据库，在写入缓存</p></li><li><p>查询数据库，然后写入缓存</p></li><li><p>定时刷新数据写入缓存</p></li></ul></li><li><p>redis特点</p><ul><li><p>一种缓存中间件</p></li><li><p>key-value的存储形式</p></li><li><p>默认16个db（0-15）个空间</p></li><li><p>支持数据的持久化</p></li></ul></li><li><p>redis五种数据结构</p><table><thead><tr><th>数据结构</th><th align="center">使用场景</th></tr></thead><tbody><tr><td>string</td><td align="center">session共享 短信验证码 ip限制 序列自增</td></tr><tr><td>list</td><td align="center">分布式队列  栈</td></tr><tr><td>hash</td><td align="center">对象的存储（用户信息）</td></tr><tr><td>set</td><td align="center">用户标签(定点推送) 求交集 并集</td></tr><tr><td>sorted set</td><td align="center"></td></tr></tbody></table></li><li><p>过期键删除策略</p><ul><li>惰性删除<ul><li>特点：当应用访问key时，发现key已经过期，就会删除。</li><li>不足：只有键被访问时才会删除，对内存不友好。</li></ul></li><li>定期删除：<ul><li>周期性的从设置了过期时间的key中选择一部分的key进行删除。</li></ul></li><li>随机测试20个带有timeout信息的key。<ul><li>如果超过25%的key被删除，则重复执行整个流程。<ul><li>难点：确定删除操作的时常和频率，若是删除操作执行的太频繁或者是删除操作占用的时间太长，会将cpu的时间过多的浪费在过期键的删除上面。若是删除操作执行的太少或者是删除操作执行的时间太短，又将会使太多过期键无法删除，造成内存浪费。</li></ul></li></ul></li></ul></li><li><p>pub/sub 发布订阅模式</p></li><li><p>redis持久化及原理</p><ul><li><p>RDB</p><ul><li><p>概念：当符合【条件】的时候，fork子进程，生成dump.rdb快照文件。</p></li><li><p>缺点：数据丢失</p></li><li><p>规则</p><ul><li><p>配置规则，配置文件配置（只要满足任意一个条件，就会执行bgsave命令）</p></li><li><p>save或者bgsave命令触发</p></li><li><p>flushall命令触发，且满足配置规则</p></li><li><p>执行复制操作</p></li></ul></li></ul></li><li><p>AOF</p><ul><li>概念：需要配置文件开启(默认关闭)，aof文件的写入，只针对事物操作。</li></ul></li><li><p>特点：文件过大时，会执行bgrewriteaof命令重写aof文件（实际上就是创建一个新的aof文件，将当前数据库中的命令保存到该文件中，然后替换原有的文件）</p></li></ul></li><li><p>redis内存回收策略</p><p>​    </p></li><li><p>redis单线程性能高的原因</p><ul><li><p>内存和网络的宽带</p></li><li><p>多路复用（同一时间处理多个请求）</p></li><li><p>避免线程切换</p></li><li><p>纯内存操作 </p></li></ul></li></ol><ol start="9"><li><p>lua脚本在redis中的应用</p><ul><li><p>pipeline管道模型</p></li><li><p>减少网络开销去执行多个指令</p></li><li><p>满足原子性</p></li><li><p>复用性</p></li><li><p>redis.call(“set”, “gupao”, “123”)</p></li><li><p>redis.call(“get”, “gupao”);</p></li><li><p>lua脚本可以存储在服务端-&gt;生成摘要 </p></li></ul></li></ol><hr><p>redis集群</p><ul><li><p>解决单点问题 </p></li><li><p>主从复制(master-slave)</p></li><li><p>数据同步: 全量复制(初始化)   增量复制  无磁盘复制</p></li><li><p>选主(哨兵) </p></li></ul><hr><p>哨兵机制</p><ul><li><p>监控master和slave是否正常运行</p></li><li><p>当master出现故障的时候，从slave中选取一个新的master</p></li></ul><hr><p>Redis-Cluster</p><hr><p>Redis的实践应用</p><hr>]]></content>
+    <content type="html"><![CDATA[<p><code>redis安装步骤</code></p><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1.安装相关库gcc  </span><br><span class="line"># yum install gcc</span><br><span class="line">2.下载安装包 </span><br><span class="line"># wget http://download.redis.io/releases/redis-3.0.0.tar.gz</span><br><span class="line">3.解压安装包 </span><br><span class="line"># tar zxvf redis-3.0.0.tar.gz</span><br><span class="line">4.执行make命令</span><br><span class="line"># cd redis-3.0.0/src</span><br><span class="line"># make</span><br><span class="line">5.将src目录下的相关文件拷贝到/usr/redis文件夹下</span><br><span class="line"># mkdir /usr/redis</span><br><span class="line"># cp redis-server  /usr/redis</span><br><span class="line"># cp redis-benchmark /usr/redis</span><br><span class="line"># cp redis-cli  /usr/redis</span><br><span class="line"># cp redis.conf  /usr/redis</span><br><span class="line">6.为redis-server和redis-cli创建软链接</span><br><span class="line"># ln -s /usr/redis/redis-server /usr/bin/redis-server</span><br><span class="line"># ln -s /usr/redis/redis-cli /usr/bin/redis-cli</span><br></pre></td></tr></table></figure><p><code>启动redis服务</code></p><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1.启动redis</span><br><span class="line"># redis-server /usr/redis/redis.conf</span><br><span class="line">2.若是需要在后台启动，可以修改redis.conf文件中的daemonize为yes</span><br></pre></td></tr></table></figure><p><code>关闭redis服务</code></p><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1. 强制结束程序。使用kill -9 进程的pid，强行终止Redis进程可能会导致redis持久化丢失。</span><br><span class="line">2. 正确停止redis的方式是向redis发送shutdown命令(关闭默认端口)。 # redis-cli shutdown</span><br></pre></td></tr></table></figure><p><code>cluster集群</code></p><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">开启集群</span><br><span class="line">修改配置文件redis.conf中的cluster-enabled yes</span><br><span class="line">加入到集群</span><br><span class="line">127.0.0.1:6379&gt; cluster meet 192.168.25.150 6379</span><br><span class="line">分配hash槽</span><br><span class="line">[root@localhost redis]# redis-cli -h 192.168.25.147 -p 6379 cluster addslots &#123;0..5000&#125;</span><br></pre></td></tr></table></figure><p>redis和zk实现分布式锁的区别</p><table><thead><tr><th>实现方式</th><th>优点</th><th>缺点</th></tr></thead><tbody><tr><td>基于redis</td><td>性能高</td><td>锁的失效时间很难把控</td></tr><tr><td>基于zk</td><td>实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题</td><td>性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点</td></tr></tbody></table><p>cap原则</p><ol><li><p>缓存数据的同步方式</p><ul><li><p>先写入数据库，在写入缓存</p></li><li><p>查询数据库，然后写入缓存</p></li><li><p>定时刷新数据写入缓存</p></li></ul></li></ol><ol start="4"><li><p>过期键删除策略</p><ul><li>惰性删除<ul><li>特点：当应用访问key时，发现key已经过期，就会删除。</li><li>不足：只有键被访问时才会删除，对内存不友好。</li></ul></li><li>定期删除：<ul><li>周期性的从设置了过期时间的key中选择一部分的key进行删除。</li></ul></li><li>随机测试20个带有timeout信息的key。<ul><li>如果超过25%的key被删除，则重复执行整个流程。<ul><li>难点：确定删除操作的时常和频率，若是删除操作执行的太频繁或者是删除操作占用的时间太长，会将cpu的时间过多的浪费在过期键的删除上面。若是删除操作执行的太少或者是删除操作执行的时间太短，又将会使太多过期键无法删除，造成内存浪费。</li></ul></li></ul></li></ul></li><li><p>pub/sub 发布订阅模式</p></li><li><p>redis持久化及原理</p><ul><li><p>RDB</p><ul><li><p>概念：当符合【条件】的时候，fork子进程，生成dump.rdb快照文件。</p></li><li><p>缺点：数据丢失</p></li><li><p>规则</p><ul><li><p>配置规则，配置文件配置（只要满足任意一个条件，就会执行bgsave命令）</p></li><li><p>save或者bgsave命令触发</p></li><li><p>flushall命令触发，且满足配置规则</p></li><li><p>执行复制操作</p></li></ul></li></ul></li><li><p>AOF</p><ul><li>概念：需要配置文件开启(默认关闭)，aof文件的写入，只针对事物操作。</li></ul></li><li><p>特点：文件过大时，会执行bgrewriteaof命令重写aof文件（实际上就是创建一个新的aof文件，将当前数据库中的命令保存到该文件中，然后替换原有的文件）</p></li></ul></li></ol><ol start="8"><li><p>redis单线程性能高的原因</p><ul><li><p>内存和网络的宽带</p></li><li><p>多路复用（同一时间处理多个请求）</p></li><li><p>避免线程切换</p></li><li><p>纯内存操作 </p></li></ul></li></ol><ol start="9"><li><p>lua脚本在redis中的应用</p><ul><li><p>pipeline管道模型</p></li><li><p>减少网络开销去执行多个指令</p></li><li><p>满足原子性</p></li><li><p>复用性</p></li><li><p>redis.call(“set”, “gupao”, “123”)</p></li><li><p>redis.call(“get”, “gupao”);</p></li><li><p>lua脚本可以存储在服务端-&gt;生成摘要 </p></li></ul></li></ol><hr><p>redis集群</p><ul><li><p>解决单点问题 </p></li><li><p>主从复制(master-slave)</p></li><li><p>数据同步: 全量复制(初始化)   增量复制  无磁盘复制</p></li><li><p>选主(哨兵) </p></li></ul><hr><p>哨兵机制</p><ul><li><p>监控master和slave是否正常运行</p></li><li><p>当master出现故障的时候，从slave中选取一个新的master</p></li></ul>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;hr&gt;
-`redis安装步骤`
-
-&lt;figure class=&quot;highlight tex&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1.安装相关库gcc  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line
+        &lt;p&gt;&lt;code&gt;redis安装步骤&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight tex&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1.安装相关库gcc  &lt;/span&gt;&lt;br&gt;&lt;span
       
     
     </summary>
@@ -581,35 +609,6 @@
       <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
     
       <category term="源码" scheme="https://zhilongao.github.io/categories/java/%E6%BA%90%E7%A0%81/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>jvm</title>
-    <link href="https://zhilongao.github.io/wiki/jvm/"/>
-    <id>https://zhilongao.github.io/wiki/jvm/</id>
-    <published>2019-08-16T04:51:03.000Z</published>
-    <updated>2019-08-31T04:00:29.135Z</updated>
-    
-    <content type="html"><![CDATA[<p>jvm的运行时数据区</p><hr><p>堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空间。若是在堆中没有完成实例分配，并且堆也无法再扩展时，就会抛出OutOfMemoryError异常。</p><hr><p>方法区:用于存储已经被虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据。当方法区无法满足内存分配的需求时，将会抛出OutOfMemoryError异常。</p><hr><p>虚拟机栈:描述的是java方法执行的内存模型，每个方法执行时都会创建一个栈帧，栈帧中用于存储局部变量表，操作数栈，动态链接，方法出口等信息。当线程申请的栈深度大于虚拟机所允许的栈深度，将抛出StackOverflowError异常。若是虚拟机动态扩展时无法申请到足够的内存，将会抛出OutOfMemoryError异常。</p><hr><p>程序计数器:记录当前线程执行的字节码指令的行号，不会发生OutOfMemoryError。</p><hr><p>本地方法栈:用于执行非java方法的内存模型，也会发生StackOverflowError和OutOfMemoryError异常。</p><hr><p>jvm垃圾回收考虑的三个问题</p><ul><li>回收哪些对象</li><li>什么时候回收这些对象</li><li>怎么回收这些对象</li></ul><hr><p>jvm垃圾回收算法</p><ul><li><p>标记清除：会有内存碎片</p></li><li><p>标记整理：没有内存碎片，适合新生代对象的回收</p></li><li><p>复制算法：需要留出一部分的内存空间，利用率不高</p></li><li><p>分代收集算法：新生代死亡对象多，采用复制算法。老年代死亡对象少，采用标记整理或标记清除。</p></li></ul><hr><p>jvm垃圾收集器</p><p>​    新生代垃圾收集器</p><p>​    老年代垃圾收集器    </p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;jvm的运行时数据区&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空
-      
-    
-    </summary>
-    
-      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
-    
-      <category term="基础" scheme="https://zhilongao.github.io/categories/java/%E5%9F%BA%E7%A1%80/"/>
-    
-      <category term="jvm" scheme="https://zhilongao.github.io/categories/java/%E5%9F%BA%E7%A1%80/jvm/"/>
     
     
   </entry>
