@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="gzl Blog">
 <meta property="og:description" content="数据结构 ​    reids中常用的五中对象类型，string，list，hash，set，zset string(sds) #单个操作   	set name value(设置某个key-value)	get name(获取某个key)	exists name(判断某个key是否存在)	del name(删除某个key)	expire name seconds(给某个key设置expire)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-03T07:15:54.337Z">
+<meta property="og:updated_time" content="2019-09-03T08:33:55.910Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基础知识">
 <meta name="twitter:description" content="数据结构 ​    reids中常用的五中对象类型，string，list，hash，set，zset string(sds) #单个操作   	set name value(设置某个key-value)	get name(获取某个key)	exists name(判断某个key是否存在)	del name(删除某个key)	expire name seconds(给某个key设置expire)">
@@ -357,7 +357,7 @@
                     </li> 
                      </ul> 
                     </li> 
-                     <li class="file"><a href="/wiki/share-articles/">大佬们的博客</a></li>  </ul> 
+                     <li class="file"><a href="/wiki/share-articles/">博客</a></li>  </ul> 
     </div>
     <script>
         $(document).ready(function() {
@@ -504,6 +504,7 @@
 <p><code>排序sort</code></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> redis的sort命令可以对列表键 集合键或者有序集合键的值进行排序</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>############# 最简单的排序 sort #########</span><br><span class="line"><span class="meta">#</span> 插入元素</span><br><span class="line"><span class="meta">redis&gt;</span> rpush numbers 5 3 1 4 2</span><br><span class="line">(integer) 5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 按照插入顺序排列的列表元素</span><br><span class="line"><span class="meta">redis&gt;</span>lrange numbers 0 -1</span><br><span class="line"><span class="meta">#</span> 元素的输出顺序为 "5" "3" "1" "4" "2"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 按值从小到大有序排列的列表元素(默认升序排列asc)</span><br><span class="line"><span class="meta">redis&gt;</span> sort numbers</span><br><span class="line"><span class="meta">#</span> 元素的输出顺序为 "1" "2" "3" "4" "5"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 按值从大到小有序排列的列表元素</span><br><span class="line"><span class="meta">redis&gt;</span> sort numbers desc</span><br><span class="line"><span class="meta">#</span> 元素的输出顺序为 "5" "4" "3" "2" "1"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>########### 使用 sort和alpha选项对字符串进行排序########</span><br><span class="line"><span class="meta">#</span> 插入元素</span><br><span class="line"><span class="meta">reids&gt;</span> sadd alphabet a b c d e f g</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 乱序排列的集合元素</span><br><span class="line"><span class="meta">redis&gt;</span> smembers alphabet</span><br><span class="line"><span class="meta">#</span> 输出顺序为 "d" "a" "c" "b" "g" "e" "f"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 集合元素排序，使用alpha，asc升序排列</span><br><span class="line"><span class="meta">redis&gt;</span> sort alphabet alpha</span><br><span class="line"><span class="meta">#</span> 输出顺序为 "a" "b" "c" "d" "e" "f" "g"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 集合元素排序，使用alpha，desc降序排列</span><br><span class="line"><span class="meta">redis&gt;</span> sort alphabet alpha desc</span><br><span class="line"><span class="meta">#</span> 输出顺序为 "g" "f" "e" "d" "c" "b" "a"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>########### 使用sort和by选项对元素排序 ############</span><br><span class="line"><span class="meta">#</span> 插入元素</span><br><span class="line"><span class="meta">redis&gt;</span> zadd test-result 3.0 jack 3.5 peter 4.0 tom</span><br><span class="line">(integer) 3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 普通输出，按照元素的分值排序</span><br><span class="line"><span class="meta">redis&gt;</span> zrange test-result 0 -1</span><br><span class="line"><span class="meta">#</span> 输出顺序为 "jack" "peter" "tom"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 为各个元素设置序号</span><br><span class="line"><span class="meta">redis&gt;</span> mset peter_number 1 tom_number 2 jack_number 3</span><br><span class="line">ok</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 以序号为权重，对集合中的元素进行排序</span><br><span class="line"><span class="meta">redis&gt;</span> sort test-result by *_number</span><br><span class="line"><span class="meta">#</span> 输出顺序为 "peter" "tom" "jack"</span><br></pre></td></tr></table></figure>
 
+<p><code>redis的应用</code></p>
 
             </div>
         

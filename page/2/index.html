@@ -356,7 +356,7 @@
                     </li> 
                      </ul> 
                     </li> 
-                     <li class="file"><a href="/wiki/share-articles/">大佬们的博客</a></li>  </ul> 
+                     <li class="file"><a href="/wiki/share-articles/">博客</a></li>  </ul> 
     </div>
     <script>
         $(document).ready(function() {
@@ -570,6 +570,8 @@
 <p>在项目中都遇到过哪些的技术难点，如何解决的？</p>
 <p>说说你们在dubbo中是如何解决分布式事物的（看过dubbo，但貌似没有讲到过解决分布式事物这）</p>
 <p>说说你对分布式的理解</p>
+<p><code>redis在项目中是如何使用的</code></p>
+<p>​    </p>
 <p><code>项目专题</code></p>
 <p><code>催收系统</code></p>
 <p>​    <code>任务执行流程</code></p>
@@ -595,6 +597,9 @@
 </li>
 </ol>
 <hr>
+<p><code>数据同步代码执行流程</code></p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1. 由于项目部署在多台集器上，但是任务只能有一个进程来执行，所以每一个任务执行之前会去获取锁(redis实现的分布式锁，获取锁的操作使用set命令来实现，释放锁的操作采用Lua脚本来实现)。</span><br><span class="line">2. 尝试获取锁成功的进程会去直接执行任务，而尝试获取锁失败的进程直接结束。</span><br></pre></td></tr></table></figure>
+
 
             </div>
         
