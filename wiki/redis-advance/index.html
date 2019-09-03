@@ -9,17 +9,17 @@
         <meta name="keywords" content="基础知识">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="数据结构 ​    reids中常用的五种数据类型，string，list，hash，set，zset string(sds) #单个操作   	set name value(设置某个key-value)	get name(获取某个key)	exists name(判断某个key是否存在)	del name(删除某个key)	expire name seconds(给某个key设置expire)">
+    <meta name="description" content="数据结构 ​    reids中常用的五中对象类型，string，list，hash，set，zset string(sds) #单个操作   	set name value(设置某个key-value)	get name(获取某个key)	exists name(判断某个key是否存在)	del name(删除某个key)	expire name seconds(给某个key设置expire)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基础知识">
 <meta property="og:url" content="https://zhilongao.github.io/wiki/redis-advance/index.html">
 <meta property="og:site_name" content="gzl Blog">
-<meta property="og:description" content="数据结构 ​    reids中常用的五种数据类型，string，list，hash，set，zset string(sds) #单个操作   	set name value(设置某个key-value)	get name(获取某个key)	exists name(判断某个key是否存在)	del name(删除某个key)	expire name seconds(给某个key设置expire)">
+<meta property="og:description" content="数据结构 ​    reids中常用的五中对象类型，string，list，hash，set，zset string(sds) #单个操作   	set name value(设置某个key-value)	get name(获取某个key)	exists name(判断某个key是否存在)	del name(删除某个key)	expire name seconds(给某个key设置expire)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-02T08:12:49.642Z">
+<meta property="og:updated_time" content="2019-09-03T07:15:54.337Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基础知识">
-<meta name="twitter:description" content="数据结构 ​    reids中常用的五种数据类型，string，list，hash，set，zset string(sds) #单个操作   	set name value(设置某个key-value)	get name(获取某个key)	exists name(判断某个key是否存在)	del name(删除某个key)	expire name seconds(给某个key设置expire)">
+<meta name="twitter:description" content="数据结构 ​    reids中常用的五中对象类型，string，list，hash，set，zset string(sds) #单个操作   	set name value(设置某个key-value)	get name(获取某个key)	exists name(判断某个key是否存在)	del name(删除某个key)	expire name seconds(给某个key设置expire)">
     
 
     
@@ -485,7 +485,7 @@
         
         
             <p><code>数据结构</code></p>
-<p>​    reids中常用的五种数据类型，string，list，hash，set，zset</p>
+<p>​    reids中常用的五中对象类型，string，list，hash，set，zset</p>
 <p><code>string(sds)</code></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span>单个操作   </span><br><span class="line">	set name value(设置某个key-value)</span><br><span class="line">	get name(获取某个key)</span><br><span class="line">	exists name(判断某个key是否存在)</span><br><span class="line">	del name(删除某个key)</span><br><span class="line">	expire name seconds(给某个key设置expire)</span><br><span class="line">	setex name seconds value(设置key的时候同时设置expire)</span><br><span class="line">	setnx name value(不存在存储,存在不存储)</span><br><span class="line"><span class="meta">#</span>批量操作</span><br><span class="line">	mset name1 value1 name2 value2(批量插入)</span><br><span class="line">	mget name1 name2(批量获取)</span><br><span class="line"><span class="meta">#</span>特殊操作</span><br><span class="line">	incr key(针对值为整数的情况,value加1)</span><br><span class="line">	incrby key 5(针对值为整数的情况,value加5)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 使用场景</span><br><span class="line">	保存一些JSON序列化的用户对象信息，使用时通过JSON反序列化，一次性的获取一整个用户对象，消耗网络流量。优点是存储消耗低于hash。</span><br></pre></td></tr></table></figure>
 

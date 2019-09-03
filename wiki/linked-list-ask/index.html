@@ -9,17 +9,17 @@
         <meta name="keywords" content="单链表">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="单链表常见操作">
+    <meta name="description" content="单链表常见操作 1.如何实现一个单链表的逆序输出-&amp;gt;反转单链表 public static ListNode reverse(ListNode head) &amp;#123;	ListNode prev = null;    ListNode next = null;    while (head != null &amp;amp;&amp;amp; (next = head.next) != null) &amp;#1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单链表">
 <meta property="og:url" content="https://zhilongao.github.io/wiki/linked-list-ask/index.html">
 <meta property="og:site_name" content="gzl Blog">
-<meta property="og:description" content="单链表常见操作">
+<meta property="og:description" content="单链表常见操作 1.如何实现一个单链表的逆序输出-&amp;gt;反转单链表 public static ListNode reverse(ListNode head) &amp;#123;	ListNode prev = null;    ListNode next = null;    while (head != null &amp;amp;&amp;amp; (next = head.next) != null) &amp;#1">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-31T03:58:19.027Z">
+<meta property="og:updated_time" content="2019-09-03T07:38:54.888Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单链表">
-<meta name="twitter:description" content="单链表常见操作">
+<meta name="twitter:description" content="单链表常见操作 1.如何实现一个单链表的逆序输出-&amp;gt;反转单链表 public static ListNode reverse(ListNode head) &amp;#123;	ListNode prev = null;    ListNode next = null;    while (head != null &amp;amp;&amp;amp; (next = head.next) != null) &amp;#1">
     
 
     
@@ -485,6 +485,9 @@
         
         
             <p><code>单链表常见操作</code></p>
+<p><code>1.如何实现一个单链表的逆序输出-&gt;反转单链表</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ListNode <span class="title">reverse</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">	ListNode prev = <span class="keyword">null</span>;</span><br><span class="line">    ListNode next = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">while</span> (head != <span class="keyword">null</span> &amp;&amp; (next = head.next) != <span class="keyword">null</span>) &#123;</span><br><span class="line">    	head.next = prev;</span><br><span class="line">        prev = head;</span><br><span class="line">        head = next;</span><br><span class="line">    &#125;</span><br><span class="line">    head.next = prev;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
             </div>
         
