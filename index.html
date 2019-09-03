@@ -258,6 +258,15 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
+                            mongodb
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/mongodb-base/">mongodb-base</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
                             mysql
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/mysql/">面试题</a></li>  <li class="file"><a href="/wiki/mysql-index/">索引</a></li>  <li class="file"><a href="/wiki/mysql-base/">基本操作</a></li>  <li class="file"><a href="/wiki/mysql-split/">分库分表</a></li>  </ul> 
@@ -419,6 +428,79 @@
 </aside>
             
             <section id="main">
+        <article id="post-mongodb-base" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/数据库/">数据库</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/数据库/mongodb/">mongodb</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/mongodb-base/">
+            <time datetime="2019-09-03T03:45:03.000Z" itemprop="datePublished">2019-09-03</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/mongodb-base.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/mongodb-base.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/mongodb-base.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/mongodb-base/">mongodb-base</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p><code>安装步骤(centos7)</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">1.下载安装包</span><br><span class="line">	wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel62-3.2.10.tgz</span><br><span class="line">2.解压安装包</span><br><span class="line">	tar -zxvf mongodb-linux-x86_64-rhel62-3.2.10.tgz </span><br><span class="line">3.将解压目录移动到(/usr/local/mongodb)</span><br><span class="line">	mv mongodb-linux-x86_64-rhel62-3.2.10 /usr/local/mongodb</span><br><span class="line">4.在/usr/local/mongodb目录下创建/data/db目录和/logs目录</span><br><span class="line">	mkdir -p /usr/local/mongodb/data/db </span><br><span class="line">	mkdir -p /usr/local/mongodb/logs</span><br><span class="line">5.在/usr/local/mongodb/logs目录下创建mongodb.log文件</span><br><span class="line">	touch mongodb.log</span><br><span class="line">6.在/usr/local/mongodb/bin目录下创建mongodb的配置文件</span><br><span class="line">	touch mongodb.conf</span><br><span class="line">7.编辑mongodb.conf文件</span><br><span class="line">	vi mongodb.conf</span><br><span class="line">	编辑内容</span><br><span class="line">		dbpath = /usr/local/mongodb/data/db #数据文件存放目录</span><br><span class="line">		logpath = /usr/local/mongodb/logs/mongodb.log #日志文件存放目录</span><br><span class="line">		port = 27017  #端口</span><br><span class="line">		fork = true  #以守护程序的方式启用，即在后台运行</span><br><span class="line">		nohttpinterface = true</span><br><span class="line">		auth=true</span><br><span class="line">		bind_ip=0.0.0.0</span><br><span class="line">8.修改环境变量</span><br><span class="line">	vi /etc/profile</span><br><span class="line">	添加的内容</span><br><span class="line">		export MONGODB_HOME=/usr/local/mongodb</span><br><span class="line">		export PATH=$PATH:$MONGODB_HOME/bin</span><br><span class="line">9.编辑完成之后重启系统配置</span><br><span class="line">	source /etc/profile</span><br><span class="line">10.在/usr/local/mongodb/bin目录下启动mongodb</span><br><span class="line">	./mongod -f mongodb.conf</span><br><span class="line">11.关闭mongodb服务</span><br><span class="line">	./mongod -f ./mongodb.conf --shutdown</span><br><span class="line">12.开启27017端口</span><br><span class="line"></span><br><span class="line">13.使用shell登录到mongodb</span><br><span class="line">	./mongodb</span><br><span class="line"></span><br><span class="line">14.登录到相关数据库</span><br><span class="line">	use test</span><br><span class="line"></span><br><span class="line">15.创建用户</span><br><span class="line">	db.createUser(</span><br><span class="line">		&#123;</span><br><span class="line">			user: "test", </span><br><span class="line">			pwd: "test", </span><br><span class="line">			roles: [&#123; role: "readWrite", db: "test" &#125;]</span><br><span class="line">		&#125;</span><br><span class="line">	)</span><br><span class="line">16.修改配置，开启验证</span><br><span class="line">	auth=true</span><br><span class="line">17.重启服务</span><br><span class="line">	停止服务，然后启动</span><br><span class="line">18.登录</span><br><span class="line">	./mongodb</span><br><span class="line">19.验证</span><br><span class="line">	auth('test', 'test')(返回1代表成功)</span><br><span class="line">20.操作	</span><br><span class="line">	db.user.find()</span><br><span class="line">	db.user.insert(&#123;"name":'jack',"age": 12&#125;)</span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-redis-advance" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -477,19 +559,19 @@
         
             <p><code>数据结构</code></p>
 <p>​    reids中常用的五种数据类型，string，list，hash，set，zset</p>
-<p><code>string</code></p>
+<p><code>string(sds)</code></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span>单个操作   </span><br><span class="line">	set name value(设置某个key-value)</span><br><span class="line">	get name(获取某个key)</span><br><span class="line">	exists name(判断某个key是否存在)</span><br><span class="line">	del name(删除某个key)</span><br><span class="line">	expire name seconds(给某个key设置expire)</span><br><span class="line">	setex name seconds value(设置key的时候同时设置expire)</span><br><span class="line">	setnx name value(不存在存储,存在不存储)</span><br><span class="line"><span class="meta">#</span>批量操作</span><br><span class="line">	mset name1 value1 name2 value2(批量插入)</span><br><span class="line">	mget name1 name2(批量获取)</span><br><span class="line"><span class="meta">#</span>特殊操作</span><br><span class="line">	incr key(针对值为整数的情况,value加1)</span><br><span class="line">	incrby key 5(针对值为整数的情况,value加5)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 使用场景</span><br><span class="line">	保存一些JSON序列化的用户对象信息，使用时通过JSON反序列化，一次性的获取一整个用户对象，消耗网络流量。优点是存储消耗低于hash。</span><br></pre></td></tr></table></figure>
 
 <p><code>list(ziplist+quicklist)</code></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span>基本操作(普通操作)</span><br><span class="line">	rpush key value1 value2 value3(存储元素)</span><br><span class="line">	llen key(获取列表元素个数)</span><br><span class="line">	lpop key(从左边弹出，非阻塞)</span><br><span class="line">	rpop key(从右边弹出，非阻塞)</span><br><span class="line">	blpop key timeout(从左边弹出，阻塞，timeout单位为秒)</span><br><span class="line">	brpop key timeout(从右边弹出，阻塞，timeout单位为秒)</span><br><span class="line"><span class="meta">#</span> 基本操作(慢操作)	</span><br><span class="line">	lindex key index(获取某个位置上的value)</span><br><span class="line">	ltrim key start_index end_index(保留start_index到end_index区间内的值,index可为负数,-1表示最后一个)</span><br><span class="line">	lrange key start_index end_index(返回start_index到end_index区间内的值)</span><br><span class="line">	</span><br><span class="line"><span class="meta">#</span> 使用场景</span><br><span class="line">	异步队列(rpush lpop) </span><br><span class="line">	栈(rpush rpop)</span><br></pre></td></tr></table></figure>
 
-<p><code>hash</code></p>
+<p><code>hash(字典)</code></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span>基本操作</span><br><span class="line">	hset key filed value(给某个key的字典中存储一个key-value)</span><br><span class="line">	hgetall key(查看key-value,key和value间隔出现)</span><br><span class="line">	hlen books(查看key中存储的key-value个数)</span><br><span class="line">	hget key filed(获取某个key下filed的value值)</span><br><span class="line">	hmset key filed1 value1 filed2 value2(批量设置key-value)</span><br><span class="line">	hincrby key filed 1(给某个key的field字段的value加1)</span><br><span class="line">	</span><br><span class="line"><span class="meta">#</span>使用场景</span><br><span class="line">	存储用户信息-&gt;针对用户信息中的每个字段单独存储，获取用户信息时可以对部分字段单独获取,节省网络流量。但是缺点是存储消耗要高于字符串。</span><br></pre></td></tr></table></figure>
 
 <p><code>set</code></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span>基本操作</span><br><span class="line">	sadd key value(集合中添加一个元素)</span><br><span class="line">	sadd key value1 value2(集合中添加多个元素)</span><br><span class="line">	smembers key(列出key下面的value列表)</span><br><span class="line">	sismember key value(查询key下面是否存在value)</span><br><span class="line">	scard key(获取key的长度)</span><br><span class="line">	spop key(弹出一个元素)</span><br><span class="line">	</span><br><span class="line"><span class="meta">#</span>使用场景</span><br><span class="line">	可以用来存储中将用户的id,因为有去重功能，所以可以保证同一个用户不会中将两次。</span><br></pre></td></tr></table></figure>
 
-<p><code>zset(跳跃表)</code></p>
+<p><code>zset(skiplist)</code></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span>基本操作</span><br><span class="line">	zadd key score value(添加一个value)</span><br><span class="line">	zrange key 0 -1(获取key元素列表，按照score排序列出)</span><br><span class="line">	zrevrange key 0 -1(获取key元素列表，按照score逆序列出)</span><br><span class="line">	zcard key(返回key中元素个数)</span><br><span class="line">	zscore key value(返回某个key的score)</span><br><span class="line">	zrangebyscore key score1 score2(根据分值区间遍历zset)</span><br><span class="line">	zrangebyscore key -inf score withscore (根据分值区间 (-∞, score] 遍历 zset，同时返回分值。inf 代表 infinite，无穷大的意思。)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>使用场景</span><br><span class="line">	可以用来存储粉丝列表，value值是粉丝的用户id，score是关注时间。可以对粉丝列表按照关注时间进行排序。</span><br><span class="line">	可以用来存储学生的成绩，value值是学生的id, score是考试成绩。可以对成绩按照分数进行排序，就可以获取到它的名次。</span><br></pre></td></tr></table></figure>
 
 <p><code>排序sort</code></p>
@@ -890,6 +972,11 @@
         
             <p><code>友情链接</code></p>
 <p><a href="https://yapengren.github.io/" target="_blank" rel="noopener">任亚鹏的博客</a></p>
+<p><code>给力博客</code></p>
+<p><a href="https://tech.meituan.com/" target="_blank" rel="noopener">美团技术团队</a></p>
+<p><a href="https://www.v2ex.com/" target="_blank" rel="noopener">v2ex</a></p>
+<p><a href="https://juejin.im/timeline" target="_blank" rel="noopener">掘金</a></p>
+<p><a href="http://cmsblogs.com/" target="_blank" rel="noopener">java技术驿站</a></p>
 
             </div>
         
@@ -1154,86 +1241,6 @@
 <p>​    串行化：针对所有的操作都会去加锁，普通的select操作会去加共享锁-&gt;select * from table in share mode。对于 update 等操作会加排他锁。若是一个事物查询操作时，正好有一个事物对改行的数据做修改操作。则该查询操作会阻塞，直到更新操作执行完成。</p>
 <p><code>9.如何理解快照读和当前读</code></p>
 <p>​    快照读：读取的数据是快照。当前读：读取的数据是数据库的最新的数据。</p>
-
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-tcp" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/分布式/">分布式</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/分布式/协议/">协议</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/tcp/">
-            <time datetime="2019-08-26T13:33:14.000Z" itemprop="datePublished">2019-08-26</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/tcp.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/tcp.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/tcp.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/tcp/">tcp</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-        
-        
-            <hr>
-<p><code>此时握手</code></p>
-<p><code>四次挥手</code></p>
-<p><code>为什么要三次握手</code></p>
-<p><code>为什么要四次挥手</code></p>
-<p><code>socket的几种状态</code></p>
-<p>​        <code>listen:侦听来自远方tcp端口的连接请求</code></p>
-<p>​        <code>syn-sent:在发送连接请求后，等待匹配的连接请求。</code></p>
-<p>​        <code>syn-receive:在收到和发送一个连接请求后，等待连接请求的确认</code></p>
-<p>​        <code>established:代表一个打开的连接，数据可以传送给用户</code></p>
 
             </div>
         
