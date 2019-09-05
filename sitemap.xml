@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zhilongao.github.io/wiki/array-ask/</loc>
+    
+    <lastmod>2019-09-05T01:59:47.303Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zhilongao.github.io/wiki/share-articles/</loc>
+    
+    <lastmod>2019-09-04T13:26:13.242Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zhilongao.github.io/wiki/project-ask/</loc>
     
     <lastmod>2019-09-03T08:43:48.528Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>https://zhilongao.github.io/wiki/redis-advance/</loc>
     
     <lastmod>2019-09-03T08:33:55.910Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zhilongao.github.io/wiki/share-articles/</loc>
-    
-    <lastmod>2019-09-03T08:06:27.162Z</lastmod>
     
   </url>
   

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhilongao.github.io/"/>
-  <updated>2019-09-03T07:29:04.672Z</updated>
+  <updated>2019-09-05T01:59:47.303Z</updated>
   <id>https://zhilongao.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>array-ask</title>
+    <link href="https://zhilongao.github.io/wiki/array-ask/"/>
+    <id>https://zhilongao.github.io/wiki/array-ask/</id>
+    <published>2019-09-05T01:52:30.000Z</published>
+    <updated>2019-09-05T01:59:47.303Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>给定一个未经过排序的数组，找到最长且连续的递增序列(在美团面试题中出现过-leetcode674题)</code></p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">findLengthOfLCIS</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nums.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> curr = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] &gt; nums[i - <span class="number">1</span>]) &#123;</span><br><span class="line">            curr ++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            max = Math.max(max, curr);</span><br><span class="line">        curr = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Math.max(max, curr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;code&gt;给定一个未经过排序的数组，找到最长且连续的递增序列(在美团面试题中出现过-leetcode674题)&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
+    
+      <category term="算法" scheme="https://zhilongao.github.io/categories/java/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="数组" scheme="https://zhilongao.github.io/categories/java/%E7%AE%97%E6%B3%95/%E6%95%B0%E7%BB%84/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>mongodb-base</title>
@@ -201,9 +229,9 @@
     <link href="https://zhilongao.github.io/wiki/share-articles/"/>
     <id>https://zhilongao.github.io/wiki/share-articles/</id>
     <published>2019-08-27T13:38:52.000Z</published>
-    <updated>2019-09-03T08:06:27.162Z</updated>
+    <updated>2019-09-04T13:26:13.242Z</updated>
     
-    <content type="html"><![CDATA[<p><code>友情链接</code></p><p><a href="https://yapengren.github.io/" target="_blank" rel="noopener">任亚鹏的博客</a></p><p><code>给力博客</code></p><p><a href="https://tech.meituan.com/" target="_blank" rel="noopener">美团技术团队</a></p><p><a href="https://www.v2ex.com/" target="_blank" rel="noopener">v2ex</a></p><p><a href="https://juejin.im/timeline" target="_blank" rel="noopener">掘金</a></p><p><a href="http://cmsblogs.com/" target="_blank" rel="noopener">java技术驿站</a></p>]]></content>
+    <content type="html"><![CDATA[<p><code>友情链接</code></p><p><a href="https://yapengren.github.io/" target="_blank" rel="noopener">任亚鹏的博客</a></p><p><code>给力博客</code></p><p><a href="https://tech.meituan.com/" target="_blank" rel="noopener">美团技术团队</a></p><p><a href="https://www.v2ex.com/" target="_blank" rel="noopener">v2ex</a></p><p><a href="https://juejin.im/timeline" target="_blank" rel="noopener">掘金</a></p><p><a href="http://cmsblogs.com/" target="_blank" rel="noopener">java技术驿站</a></p><p><a href="https://www.infoq.cn/" target="_blank" rel="noopener">infoq</a></p>]]></content>
     
     <summary type="html">
     
@@ -579,34 +607,6 @@
       <category term="框架" scheme="https://zhilongao.github.io/categories/java/%E6%A1%86%E6%9E%B6/"/>
     
       <category term="spring" scheme="https://zhilongao.github.io/categories/java/%E6%A1%86%E6%9E%B6/spring/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>基本操作</title>
-    <link href="https://zhilongao.github.io/wiki/redis-base/"/>
-    <id>https://zhilongao.github.io/wiki/redis-base/</id>
-    <published>2019-08-18T02:58:52.000Z</published>
-    <updated>2019-09-02T04:21:01.618Z</updated>
-    
-    <content type="html"><![CDATA[<p><code>redis安装步骤</code></p><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1.安装相关库gcc  </span><br><span class="line"># yum install gcc</span><br><span class="line">2.下载安装包 </span><br><span class="line"># wget http://download.redis.io/releases/redis-3.0.0.tar.gz</span><br><span class="line">3.解压安装包 </span><br><span class="line"># tar zxvf redis-3.0.0.tar.gz</span><br><span class="line">4.执行make命令</span><br><span class="line"># cd redis-3.0.0/src</span><br><span class="line"># make</span><br><span class="line">5.将src目录下的相关文件拷贝到/usr/redis文件夹下</span><br><span class="line"># mkdir /usr/redis</span><br><span class="line"># cp redis-server  /usr/redis</span><br><span class="line"># cp redis-benchmark /usr/redis</span><br><span class="line"># cp redis-cli  /usr/redis</span><br><span class="line"># cp redis.conf  /usr/redis</span><br><span class="line">6.为redis-server和redis-cli创建软链接</span><br><span class="line"># ln -s /usr/redis/redis-server /usr/bin/redis-server</span><br><span class="line"># ln -s /usr/redis/redis-cli /usr/bin/redis-cli</span><br></pre></td></tr></table></figure><p><code>启动redis服务</code></p><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1.启动redis</span><br><span class="line"># redis-server /usr/redis/redis.conf</span><br><span class="line">2.若是需要在后台启动，可以修改redis.conf文件中的daemonize为yes</span><br></pre></td></tr></table></figure><p><code>关闭redis服务</code></p><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1. 强制结束程序。使用kill -9 进程的pid，强行终止Redis进程可能会导致redis持久化丢失。</span><br><span class="line">2. 正确停止redis的方式是向redis发送shutdown命令(关闭默认端口)。 # redis-cli shutdown</span><br></pre></td></tr></table></figure><p><code>cluster集群</code></p><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">开启集群</span><br><span class="line">修改配置文件redis.conf中的cluster-enabled yes</span><br><span class="line">加入到集群</span><br><span class="line">127.0.0.1:6379&gt; cluster meet 192.168.25.150 6379</span><br><span class="line">分配hash槽</span><br><span class="line">[root@localhost redis]# redis-cli -h 192.168.25.147 -p 6379 cluster addslots &#123;0..5000&#125;</span><br></pre></td></tr></table></figure><p>redis和zk实现分布式锁的区别</p><table><thead><tr><th>实现方式</th><th>优点</th><th>缺点</th></tr></thead><tbody><tr><td>基于redis</td><td>性能高</td><td>锁的失效时间很难把控</td></tr><tr><td>基于zk</td><td>实现简单 有效解决单点问题 不可重入问题 锁无法释放问题 非阻塞问题</td><td>性能没redis高 对于临时节点的删除和创建需要leader节点来处理 然后同步给flow节点</td></tr></tbody></table><p>cap原则</p><ol><li><p>缓存数据的同步方式</p><ul><li><p>先写入数据库，在写入缓存</p></li><li><p>查询数据库，然后写入缓存</p></li><li><p>定时刷新数据写入缓存</p></li></ul></li></ol><ol start="4"><li><p>过期键删除策略</p><ul><li>惰性删除<ul><li>特点：当应用访问key时，发现key已经过期，就会删除。</li><li>不足：只有键被访问时才会删除，对内存不友好。</li></ul></li><li>定期删除：<ul><li>周期性的从设置了过期时间的key中选择一部分的key进行删除。</li></ul></li><li>随机测试20个带有timeout信息的key。<ul><li>如果超过25%的key被删除，则重复执行整个流程。<ul><li>难点：确定删除操作的时常和频率，若是删除操作执行的太频繁或者是删除操作占用的时间太长，会将cpu的时间过多的浪费在过期键的删除上面。若是删除操作执行的太少或者是删除操作执行的时间太短，又将会使太多过期键无法删除，造成内存浪费。</li></ul></li></ul></li></ul></li><li><p>pub/sub 发布订阅模式</p></li><li><p>redis持久化及原理</p><ul><li><p>RDB</p><ul><li><p>概念：当符合【条件】的时候，fork子进程，生成dump.rdb快照文件。</p></li><li><p>缺点：数据丢失</p></li><li><p>规则</p><ul><li><p>配置规则，配置文件配置（只要满足任意一个条件，就会执行bgsave命令）</p></li><li><p>save或者bgsave命令触发</p></li><li><p>flushall命令触发，且满足配置规则</p></li><li><p>执行复制操作</p></li></ul></li></ul></li><li><p>AOF</p><ul><li>概念：需要配置文件开启(默认关闭)，aof文件的写入，只针对事物操作。</li></ul></li><li><p>特点：文件过大时，会执行bgrewriteaof命令重写aof文件（实际上就是创建一个新的aof文件，将当前数据库中的命令保存到该文件中，然后替换原有的文件）</p></li></ul></li></ol><ol start="8"><li><p>redis单线程性能高的原因</p><ul><li><p>内存和网络的宽带</p></li><li><p>多路复用（同一时间处理多个请求）</p></li><li><p>避免线程切换</p></li><li><p>纯内存操作 </p></li></ul></li></ol><ol start="9"><li><p>lua脚本在redis中的应用</p><ul><li><p>pipeline管道模型</p></li><li><p>减少网络开销去执行多个指令</p></li><li><p>满足原子性</p></li><li><p>复用性</p></li><li><p>redis.call(“set”, “gupao”, “123”)</p></li><li><p>redis.call(“get”, “gupao”);</p></li><li><p>lua脚本可以存储在服务端-&gt;生成摘要 </p></li></ul></li></ol><hr><p>redis集群</p><ul><li><p>解决单点问题 </p></li><li><p>主从复制(master-slave)</p></li><li><p>数据同步: 全量复制(初始化)   增量复制  无磁盘复制</p></li><li><p>选主(哨兵) </p></li></ul><hr><p>哨兵机制</p><ul><li><p>监控master和slave是否正常运行</p></li><li><p>当master出现故障的时候，从slave中选取一个新的master</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;code&gt;redis安装步骤&lt;/code&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight tex&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1.安装相关库gcc  &lt;/span&gt;&lt;br&gt;&lt;span
-      
-    
-    </summary>
-    
-      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
-    
-      <category term="数据库" scheme="https://zhilongao.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-      <category term="redis" scheme="https://zhilongao.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/"/>
     
     
   </entry>
