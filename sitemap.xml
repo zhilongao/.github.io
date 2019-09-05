@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zhilongao.github.io/wiki/arithmetic-sort/</loc>
+    
+    <lastmod>2019-09-05T02:07:49.120Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zhilongao.github.io/wiki/array-ask/</loc>
     
     <lastmod>2019-09-05T01:59:47.303Z</lastmod>
@@ -82,13 +89,6 @@
     <loc>https://zhilongao.github.io/wiki/io/</loc>
     
     <lastmod>2019-08-31T03:59:42.888Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zhilongao.github.io/wiki/arithmetic-sort/</loc>
-    
-    <lastmod>2019-08-31T03:54:50.335Z</lastmod>
     
   </url>
   
