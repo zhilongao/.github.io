@@ -9,17 +9,17 @@
         <meta name="keywords" content="array-ask">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="给定一个未经过排序的数组，找到最长且连续的递增序列(在美团面试题中出现过-leetcode674题) public static int findLengthOfLCIS(int[] nums) &amp;#123;    if (nums.length == 0) &amp;#123;        return 0;    &amp;#125;    int max = 0;    int curr = 1;">
+    <meta name="description" content="寻找递增序列// 给定一个未经过排序的数组，找到最长且连续的递增序列(在美团面试题中出现过-leetcode674题)public static int findLengthOfLCIS(int[] nums) &amp;#123;    if (nums.length == 0) &amp;#123;        return 0;    &amp;#125;    int max = 0;    int curr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="array-ask">
 <meta property="og:url" content="https://zhilongao.github.io/wiki/array-ask/index.html">
 <meta property="og:site_name" content="gzl Blog">
-<meta property="og:description" content="给定一个未经过排序的数组，找到最长且连续的递增序列(在美团面试题中出现过-leetcode674题) public static int findLengthOfLCIS(int[] nums) &amp;#123;    if (nums.length == 0) &amp;#123;        return 0;    &amp;#125;    int max = 0;    int curr = 1;">
+<meta property="og:description" content="寻找递增序列// 给定一个未经过排序的数组，找到最长且连续的递增序列(在美团面试题中出现过-leetcode674题)public static int findLengthOfLCIS(int[] nums) &amp;#123;    if (nums.length == 0) &amp;#123;        return 0;    &amp;#125;    int max = 0;    int curr">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-05T01:59:47.303Z">
+<meta property="og:updated_time" content="2019-09-05T11:07:50.275Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="array-ask">
-<meta name="twitter:description" content="给定一个未经过排序的数组，找到最长且连续的递增序列(在美团面试题中出现过-leetcode674题) public static int findLengthOfLCIS(int[] nums) &amp;#123;    if (nums.length == 0) &amp;#123;        return 0;    &amp;#125;    int max = 0;    int curr = 1;">
+<meta name="twitter:description" content="寻找递增序列// 给定一个未经过排序的数组，找到最长且连续的递增序列(在美团面试题中出现过-leetcode674题)public static int findLengthOfLCIS(int[] nums) &amp;#123;    if (nums.length == 0) &amp;#123;        return 0;    &amp;#125;    int max = 0;    int curr">
     
 
     
@@ -491,10 +491,14 @@
         
         
             
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                    <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#寻找递增序列"><span class="toc-number">1.</span> <span class="toc-text">寻找递增序列</span></a></li></ol>
+                </div>
+            
         
         
-            <p><code>给定一个未经过排序的数组，找到最长且连续的递增序列(在美团面试题中出现过-leetcode674题)</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">findLengthOfLCIS</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nums.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> curr = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] &gt; nums[i - <span class="number">1</span>]) &#123;</span><br><span class="line">            curr ++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            max = Math.max(max, curr);</span><br><span class="line">        	curr = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Math.max(max, curr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h6 id="寻找递增序列"><a href="#寻找递增序列" class="headerlink" title="寻找递增序列"></a><code>寻找递增序列</code></h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 给定一个未经过排序的数组，找到最长且连续的递增序列(在美团面试题中出现过-leetcode674题)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">findLengthOfLCIS</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nums.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> curr = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] &gt; nums[i - <span class="number">1</span>]) &#123;</span><br><span class="line">            curr ++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            max = Math.max(max, curr);</span><br><span class="line">        	curr = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Math.max(max, curr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
             </div>
