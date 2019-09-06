@@ -330,6 +330,15 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
+                            字符串
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/string-ask/">字符串</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
                             排序
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/arithmetic-sort/">排序算法</a></li>  </ul> 
@@ -437,6 +446,80 @@
 </aside>
             
             <section id="main">
+        <article id="post-string-ask" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/算法/">算法</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/算法/字符串/">字符串</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/string-ask/">
+            <time datetime="2019-09-06T02:25:40.000Z" itemprop="datePublished">2019-09-06</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/string-ask.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/string-ask.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/string-ask.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/string-ask/">字符串</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h6 id="无重复字符的最长子串-leetcode第三题"><a href="#无重复字符的最长子串-leetcode第三题" class="headerlink" title="无重复字符的最长子串(leetcode第三题)"></a><code>无重复字符的最长子串(leetcode第三题)</code></h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 滑动窗口解法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> length = s.length();</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> right = <span class="number">0</span>;</span><br><span class="line">    Set&lt;Character&gt; set = <span class="keyword">new</span> HashSet&lt;Character&gt;();</span><br><span class="line">    <span class="keyword">while</span>(left &lt; length &amp;&amp; right &lt; length) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!set.contains(s.charAt(right))) &#123;</span><br><span class="line">            set.add(s.charAt(right ++));</span><br><span class="line">            ans = Math.max(ans, right - left);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            set.remove(s.charAt(left ++));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="最长回文子串-leetcode第五题"><a href="#最长回文子串-leetcode第五题" class="headerlink" title="最长回文子串(leetcode第五题)"></a><code>最长回文子串(leetcode第五题)</code></h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 题目要求:给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。</span></span><br><span class="line"><span class="comment">// 1.要判断一个字符串是否为回文字符串，可以通过下面几种方式来实现</span></span><br><span class="line"><span class="comment">// 第一种:通过栈的后进先出原理，将字符串翻转来对比前后两个字符串是否一致</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isHuiWen1</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">    Stack&lt;Character&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; str.length(); i++) &#123;</span><br><span class="line">        stack.push(str.charAt(i));</span><br><span class="line">    &#125;</span><br><span class="line">    StringBuffer buf = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">        buf.append(stack.pop());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (str.equals(buf.toString())) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 第二种: 取消栈的引入，直接通过逆序输出拼接字符串(减少了额外的空间Stack)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isHuiWen2</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">    StringBuffer buf = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = str.length() - <span class="number">1</span>; i &gt;= <span class="number">0</span> ; i--) &#123;</span><br><span class="line">        buf.append(str.charAt(i));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (buf.toString().equals(str)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 第三中: 基于回文串左右两边两个字符相等的规律，定义两个变量做对比(优势是减少了字符串str的遍历次数，时间复杂度降低)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isHuiWen3</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> length = str.length();</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> right = length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!(str.charAt(left) == str.charAt(right))) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        left ++;</span><br><span class="line">        right --;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当前这道题如何实现</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 给定一个字符串s,找到s中最长的回文子串。你可以假设s的最大长度为1000。</span></span><br><span class="line">    <span class="keyword">int</span> len = s.length();</span><br><span class="line">    <span class="keyword">if</span> (len == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> resultLen = <span class="number">1</span>;</span><br><span class="line">    String resultStr = s.substring(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i ++) &#123;</span><br><span class="line">        String oddStr = spread(s, len, i, i);</span><br><span class="line">        String evenStr = spread(s, len, i, i+<span class="number">1</span>);</span><br><span class="line">        String myStr = oddStr.length() &gt;= evenStr.length() ? oddStr : evenStr;</span><br><span class="line">        <span class="keyword">if</span> (myStr.length() &gt; resultLen) &#123;</span><br><span class="line">            resultStr = myStr;</span><br><span class="line">            resultLen = resultStr.length();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> resultStr;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">spread</span><span class="params">(String s, <span class="keyword">int</span> len, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l = left;</span><br><span class="line">    <span class="keyword">int</span> r = right;</span><br><span class="line">    <span class="keyword">while</span> (l &gt;= <span class="number">0</span> &amp;&amp; r &lt; len &amp;&amp; (s.charAt(l) == s.charAt(r))) &#123;</span><br><span class="line">        l --;</span><br><span class="line">        r ++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s.substring(l+<span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-array-ask" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1163,83 +1246,6 @@
 <hr>
 <p><code>Mycat</code></p>
 <figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1. 从github上面clone项目 https://github.com/MyCATApache/Mycat-Server.git</span><br><span class="line">2. 修改项目中schema.xml配置文件中的dataHost数据库配置节点信息，修改为可用的数据库</span><br><span class="line">3. MycatStartup类运行main函数启动</span><br><span class="line">	idea启动前需要在配置参数VM options: -DMYCAT_HOME=D:<span class="tag">\<span class="name">code</span></span><span class="tag">\<span class="name">Mycat</span></span>-Server<span class="tag">\<span class="name">src</span></span><span class="tag">\<span class="name">main</span></span></span><br><span class="line">4. 通过数据库连接工具可以连接到MyCat,数据库相关配置在server.xml配置文件里面</span><br><span class="line">	默认的用户名: root 密码: 123456 port: 8066</span><br><span class="line">5. mycat里面有三个比较重要的配置文件 </span><br><span class="line">	server.xml	配置数据库连接相关的一些信息</span><br><span class="line">	schema.xml  配置数据库的一些节点信息</span><br><span class="line">	rule.xml    配置一些路由规则</span><br><span class="line">6. 支持单库分表   支持跨库分表    支持配置读写分离(writeHost和readHost节点)</span><br></pre></td></tr></table></figure>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-mysql-base" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/数据库/">数据库</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/数据库/mysql/">mysql</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/mysql-base/">
-            <time datetime="2019-08-27T09:08:25.000Z" itemprop="datePublished">2019-08-27</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/mysql-base.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/mysql-base.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/mysql-base.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/mysql-base/">基本操作</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-        
-        
-            <hr>
-<p><code>centos7上mysql的安装步骤</code></p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1.下载mysql的repo源  &gt; wget http://repo.mysql.com/mysql57-community-release-el7-8.noarch.rpm</span><br><span class="line">2.安装源&gt; rpm -ivh mysql57-community-release-el7-8.noarch.rpm</span><br><span class="line">3.安装数据库-&gt;yum install mysql-server</span><br><span class="line">4.启动数据库&gt; systemctl start mysqld</span><br><span class="line">5.查看mysql为root账号生成的随机密码&gt;grep "password" /var/log/mysqld.log</span><br><span class="line">  说明root@localhost:此处为随机密码</span><br><span class="line">6.运行mysql -uroot -p回车</span><br><span class="line">7.粘贴随机密码-&gt;此时已经登录到mysql数据库，需要为root账号设置密码</span><br><span class="line">8.由于mysql5.7有对密码设置的验证，简单密码设置不了，需要运行下面两条命令关闭验证</span><br><span class="line">	&gt; set global validate_password_length=1;</span><br><span class="line">	&gt; set global validate_password_policy=0;</span><br><span class="line">9.修改root账号的密码</span><br><span class="line">	&gt; set password = password('123456');</span><br><span class="line">10.修改root账号的权限</span><br><span class="line">    &gt; GRANT ALL PRIVILEGES ON *.* TO 'root'@'<span class="comment">%' IDENTIFIED BY 'root' WITH GRANT OPTION;</span></span><br><span class="line">11.可以创建一个其它的用户</span><br><span class="line">	&gt; create user repl identified by 'repl';</span><br><span class="line">12.为该用户授权</span><br><span class="line">    &gt; grant replication slave on *.* to 'repl'@'<span class="comment">%' identified by 'repl';(数据同步的权限)</span></span><br><span class="line">    &gt; GRANT ALL ON *.* TO 'pig'@'<span class="comment">%';(为用户pig授予所有权限)</span></span><br></pre></td></tr></table></figure>
-
-<p><code>mysql配置主从同步的步骤</code></p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1.在master服务器上创建一个可以进行数据同步的账户。</span><br><span class="line">	&gt; create user repl identified by 'repl';</span><br><span class="line">2.在master服务器上为该用户授权。</span><br><span class="line">	&gt; grant replication slave on *.* to 'repl'@'<span class="comment">%' identified by 'repl';</span></span><br><span class="line">3.在master服务器上修改/etc/my.cnf文件。</span><br><span class="line">	[mysqld]</span><br><span class="line">	log-bin=mysql-bin</span><br><span class="line">	server-id=147</span><br><span class="line">4.在master上面重启mysql</span><br><span class="line">	&gt; systemctl restart mysqld</span><br><span class="line">5.在master上登录数据库，使用下面命令查看二进制文件。</span><br><span class="line">	&gt; show master status;</span><br><span class="line">6.在slave服务器上修改/etc/my.cnf文件</span><br><span class="line">	[mysqld]</span><br><span class="line">	server-id=149</span><br><span class="line">	relay-log=slave-relay-bin</span><br><span class="line">	relay-log-index=slave-relay-bin.index</span><br><span class="line">	read-only=1</span><br><span class="line">7.在slave服务器上重启mysql</span><br><span class="line">	&gt; systemctl restart mysqld</span><br><span class="line">8.在slave上登录数据库,	执行下列命令，设置master相关参数。</span><br><span class="line">	&gt; change master to master_host='192.168.25.147',master_port=3306,master_user='repl',master_password='repl',master_log_file='mysql-bin.000003', master_log_pos=154;</span><br><span class="line">9.在slave上运行命令，启动服务</span><br><span class="line">	&gt; start slave;</span><br><span class="line">10.查看状态，查看主从同步设置是否成功</span><br><span class="line">	&gt; show slave status<span class="tag">\<span class="name">G</span></span>;</span><br><span class="line">11.搭建完成，现在就可以玩啦，尝试在master上面创建数据库和表，在slave上会看到相应的数据库和表。</span><br></pre></td></tr></table></figure>
-
-
             </div>
         
         <footer class="article-footer">

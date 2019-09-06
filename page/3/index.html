@@ -330,6 +330,15 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
+                            字符串
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/string-ask/">字符串</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
                             排序
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/arithmetic-sort/">排序算法</a></li>  </ul> 
@@ -437,6 +446,219 @@
 </aside>
             
             <section id="main">
+        <article id="post-spring" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/">框架</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/spring/">spring</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/spring/">
+            <time datetime="2019-08-19T09:04:07.000Z" itemprop="datePublished">2019-08-19</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/spring.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/spring.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/spring.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/spring/">spring</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p>此处参考了<a href="http://www.codeceo.com/article/spring-transactions.html这篇博客，总结的挺nice的。" target="_blank" rel="noopener">http://www.codeceo.com/article/spring-transactions.html这篇博客，总结的挺nice的。</a></p>
+<p><strong>spring事物简介</strong></p>
+<ul>
+<li><p>spring基于注解的事物</p>
+<p>​    xml文件开启注解驱动，相关类和方法上通过@Transactional注解标识。</p>
+<p>​    spring在启动是会为这些class生成spring内部管理的bean，若是发现带有@Transactional注解的类和方</p>
+<p>​    法，会为其生成代理类，代理类中会做相关的事物处理（正常提交，异常回滚）。</p>
+</li>
+</ul>
+<ul>
+<li><p>基于实现TransactionCallback接口的事物</p>
+<p>​    </p>
+</li>
+</ul>
+<hr>
+<p><strong>spring事物的传播属性</strong></p>
+<table>
+<thead>
+<tr>
+<th>常量名称</th>
+<th align="center">常量解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PROPAGATION_REQUIRED(propagation_required)</td>
+<td align="center">支持当前事物，如果当前没有事物，就新建一个事物。这是最常见的选择，也是spring默认的事物传播。</td>
+</tr>
+<tr>
+<td>PROPAGATION_REQUIRES_NEW(propagation_requires_new)</td>
+<td align="center">新建事物，如果当前存在事物，就把当前事物挂起。新建的事物和挂起的事物没有任何的关系，是两个独立的事物。外层事物失败回滚之后，不能回滚内层事物执行的结果。内层事物失败抛出异常，外层事物捕获，也可以不处理回滚操作。</td>
+</tr>
+<tr>
+<td>PROPAGATION_SUPPORTS(propagation_supports)</td>
+<td align="center">支持当前事物，如果当前没有事物，就以非事物的方式执行。</td>
+</tr>
+<tr>
+<td>PROPAGATION_MANDATORY(propagation_mandatory)</td>
+<td align="center">支持当前事物，如果当前没有事物，就抛出异常。</td>
+</tr>
+<tr>
+<td>PROPAGATION_NOT_SUPPORTED(propagation_not_supported)</td>
+<td align="center">以非事物方式执行操作，如果当前存在事物，就把当前事物挂起。</td>
+</tr>
+<tr>
+<td>PROPAGATION_NEVER(propagation_never)</td>
+<td align="center">以非事物方式执行操作，如果当前存在事物，就抛出异常。</td>
+</tr>
+<tr>
+<td>PROPAGATION_NESTED(propagation_nested)</td>
+<td align="center">如果一个活动的事务存在，则运行在一个嵌套的事务中。如果没有活动事务，则按REQUIRED属性执行。它使用了一个单独的事务，这个事务拥有多个可以回滚的保存点。内部事务的回滚不会对外部事务造成影响。它只对DataSourceTransactionManager事务管理器起效。</td>
+</tr>
+</tbody></table>
+<hr>
+<p><strong>数据库隔离级别</strong></p>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>隔离级别的值</th>
+<th>导致的问题</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Read Uncommited</td>
+<td>0</td>
+<td>允许脏读，不可重复读，幻读</td>
+</tr>
+<tr>
+<td>Read Commited</td>
+<td>1</td>
+<td>避免脏读，允许不可重复读和幻读</td>
+</tr>
+<tr>
+<td>RepeatableRead</td>
+<td>2</td>
+<td>避免脏读和不可重复读，允许幻读</td>
+</tr>
+<tr>
+<td>Serializable</td>
+<td>3</td>
+<td>避免脏读 ，不可重复读，幻读，事物一个一个执行，执行效率低</td>
+</tr>
+</tbody></table>
+<hr>
+<p><strong>spring中的隔离级别</strong></p>
+<table>
+<thead>
+<tr>
+<th>常量名称</th>
+<th>常量解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ISOLATION_DEFAULT(isolation_default)</td>
+<td>PlatfromTransactionManager默认的事物隔离级别，使用数据库默认的事物隔离级别。</td>
+</tr>
+<tr>
+<td>ISOLATION_READ_UNCOMMITTED(isolation_read_uncommitted)</td>
+<td>读未提交</td>
+</tr>
+<tr>
+<td>ISOLATION_READ_COMMITTED(isolation_read_committed)</td>
+<td>读已提交</td>
+</tr>
+<tr>
+<td>ISOLATION_REPEATABLE_READ(isolation_repeatable)</td>
+<td>可重复读</td>
+</tr>
+<tr>
+<td>ISOLATION_SERIALIZABLE(isolation_serializable)</td>
+<td>串行化</td>
+</tr>
+</tbody></table>
+<hr>
+<p><code>@Resource注解和@Autowired注解的区别</code></p>
+<p>1.当单独使用@Autowired注解时，会默认按照类型装配，不适用与系统里一个接口有多个实现类的情况。<br>2.当系统内存在多个实现类时，无法按照类型装配，@Autowired可以配合@Qualifier注解按照名称进行装配<br>3.@Resource默认按照名称装配，可以通过指定name属性来进行按照名称来装配。<br>4.@Resource若是指定的name为空串或者是未指定name属性，会去按照类型来装配(此时系统内只能存在一个接口实现类，否则报错)<br>5.@Resource装配的类必须存在，否则会报错。@Autowired可以配置required=false来设置装配的bean是否是必须的。<br>6.@Resource注解属于JSR250标准的注释，属于J2EE的。而@Autowired属于spring提供的注解。使用@Resource注解可以与spring解耦。</p>
+<hr>
+<p>Restful风格</p>
+<p>参考博客：<a href="https://blog.igevin.info/posts/restful-architecture-in-general/#restful_features" target="_blank" rel="noopener">https://blog.igevin.info/posts/restful-architecture-in-general/#restful_features</a></p>
+<p>特点：资源，统一接口 ，URI和无状态</p>
+<ul>
+<li>资源：就是网络上面的一个实体，或者说是网络上面的一个具体信息。</li>
+<li>统一接口：数据的元操作，分别对应于http的四个不同的方法。</li>
+<li>URI：可以通过一个URI访问一个具体的资源。</li>
+<li>无状态：</li>
+</ul>
+<hr>
+<p>为啥说spring mvc是线程安全的</p>
+<p>​    SpringMVC是基于方法的映射，每一个controller在容器中只有一个实例对象。若是我们在controller中使用一些共享变量时，可以使用ThreadLocal关键字来实现。但是尽量不要使用共享变量。</p>
+<hr>
+<p>什么是一致性hash</p>
+<p>​    附上一篇比较白话的博客<a href="http://www.zsythink.net/archives/1182" target="_blank" rel="noopener">http://www.zsythink.net/archives/1182</a></p>
+<hr>
+<p>为什么synchronized不能锁住基本数据类型</p>
+<p>​    synchronized的实现原理是在synchronized修饰的代码块的开始和结束的地方添加monitorenter和monitorexit两个字节码指令，这两个字节码指令都需要一个reference类型的参数来指明要锁定和解锁的对象。就是说每一个对象会有一个monitor对象，上锁时需要获取到这个monitor对象。</p>
+<hr>
+<p>偏向锁-&gt;轻量级锁-&gt;重量级锁</p>
+<p>获取偏向锁的流程：</p>
+<p>​    1. 当前线程首先会去检查对象的对象头信息中有没有存储线程id，如果没有存储线程id，设置当前线程id。</p>
+<p>​    2.若是对象头中存储了线程id，当前线程会去通知该id的线程，进入到暂停状态，并将对象头线程id清空。</p>
+<p>​    3.两个线程会将对象头信息拷贝到各自的栈中，并尝试使用cas操作将对象头指向该栈，操作成功执行。</p>
+<pre><code>4. 若是操作并成功执行自旋操作。
+ 5. 若是在自旋指定的时间内，另一个线程执行完成了，会唤醒该自旋的线程来执行。
+ 6. 若是在自旋的时间内，另一个线程没有执行完，自旋的线程会进入到阻塞状态。</code></pre>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-redis-base" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
