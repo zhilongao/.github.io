@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zhilongao.github.io/wiki/redis-base/</loc>
+    
+    <lastmod>2019-09-07T07:08:12.129Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zhilongao.github.io/wiki/redis-advance/</loc>
+    
+    <lastmod>2019-09-07T06:59:09.080Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zhilongao.github.io/wiki/share-articles/</loc>
     
     <lastmod>2019-09-06T06:32:28.552Z</lastmod>
@@ -44,23 +58,9 @@
   </url>
   
   <url>
-    <loc>https://zhilongao.github.io/wiki/redis-advance/</loc>
-    
-    <lastmod>2019-09-03T08:33:55.910Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://zhilongao.github.io/wiki/linked-list-ask/</loc>
     
     <lastmod>2019-09-03T07:38:54.888Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zhilongao.github.io/wiki/redis-base/</loc>
-    
-    <lastmod>2019-09-02T04:21:01.618Z</lastmod>
     
   </url>
   
