@@ -3,26 +3,26 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     
-    <title>gzl Blog</title>
+    <title>zl&#39;s blog</title>
     
     
-        <meta name="keywords" content="gzl Blog">
+        <meta name="keywords" content="zl&#39;s blog">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="每天进步一点点">
 <meta property="og:type" content="website">
-<meta property="og:title" content="gzl Blog">
+<meta property="og:title" content="zl&#39;s blog">
 <meta property="og:url" content="https://zhilongao.github.io/index.html">
-<meta property="og:site_name" content="gzl Blog">
+<meta property="og:site_name" content="zl&#39;s blog">
 <meta property="og:description" content="每天进步一点点">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="gzl Blog">
+<meta name="twitter:title" content="zl&#39;s blog">
 <meta name="twitter:description" content="每天进步一点点">
     
 
     
-        <link rel="alternate" href="/atom.xml" title="gzl Blog" type="application/atom+xml">
+        <link rel="alternate" href="/atom.xml" title="zl&#39;s blog" type="application/atom+xml">
     
 
     
@@ -60,7 +60,7 @@
         <div class="outer">
             <a href="/" id="logo">
                 <i class="logo"></i>
-                <span class="site-title">gzl Blog</span>
+                <span class="site-title">zl&#39;s blog</span>
             </a>
             <nav id="main-nav">
                 
@@ -374,6 +374,24 @@
                     </li> 
                      </ul> 
                     </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            系统
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            linux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/linux-system-problem/">linux系统</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
                      <li class="file"><a href="/wiki/share-articles/">博客</a></li>  </ul> 
     </div>
     <script>
@@ -446,6 +464,80 @@
 </aside>
             
             <section id="main">
+        <article id="post-linux-system-problem" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/系统/">系统</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/系统/linux/">linux</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/linux-system-problem/">
+            <time datetime="2019-09-09T12:19:57.000Z" itemprop="datePublished">2019-09-09</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/linux-system-problem.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/linux-system-problem.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/linux-system-problem.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/linux-system-problem/">linux系统</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h6 id="centos7之动态ip与静态ip"><a href="#centos7之动态ip与静态ip" class="headerlink" title="centos7之动态ip与静态ip"></a><code>centos7之动态ip与静态ip</code></h6><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">centos7获取ip地址的方法主要有两种 1:动态获取  2:设置静态ip</span><br><span class="line"></span><br><span class="line">我们一般通过VMWare安装完centos7后，可以使用命令ip addr查看虚拟机的ip地址。但是刚安装完的centos7有些没有设置ip地址，我们可以通过下面两种方式来设置ip地址。</span><br><span class="line"></span><br><span class="line">1. 动态获取ip(前提是路由器已经开启了DHCP(动态主机设置协议))</span><br><span class="line">  a: 需要修改网卡的配置文件 /etc/sysconfig/network-scripts/ifcfg-ens33 其中ifcfg-ens33为网卡名。修改该文件的两处地方既可。</span><br><span class="line">   (1) bootproto=dhcp</span><br><span class="line">   (2) onboot=yes</span><br><span class="line">  b: 重启下网络服务</span><br><span class="line">   [root@mini ~]# systemctl restart network</span><br><span class="line">  c: 通过 ip addr 命令可以看到ens33的网卡已经有相应的ip地址啦</span><br><span class="line">  d: 通过 ping www.baidu.com 查看网络是否通畅</span><br><span class="line">  </span><br><span class="line">2. 配置静态ip地址</span><br><span class="line">  a: 也是需要修改网卡配置文件 /etc/sysconfig/network-srcipts/ifcfg-ens33 其中ifcfg-ens33为网卡名。修改该文件的两处地方既可。</span><br><span class="line">   (1) bootproto=static</span><br><span class="line">   (2) onboot=yes </span><br><span class="line">  b: 还需要在该网卡配置文件的后面加上几行，分别是ip地址，子网掩码，网关，dns服务器</span><br><span class="line">    IPADDR=192.168.25.156</span><br><span class="line">    NETMASK=255.255.255.0</span><br><span class="line">    GATEWAY=192.168.1.1</span><br><span class="line">    DNS1=192.168.25.2</span><br><span class="line">    DNS2=8.8.8.8</span><br><span class="line">  c: 重启下网络服务</span><br><span class="line">  	[root@mini ~]# systemctl restart network</span><br><span class="line">  d: 通过 ip addr 命令可以看到ens33的网卡已经有新的ip地址啦</span><br><span class="line">  e: 通过 ping www.baidu.com 查看网络是否通畅</span><br><span class="line">  </span><br><span class="line">3. 在 /etc/resolv.conf文件里面保存了dns地址，可以通过cat命令查看</span><br></pre></td></tr></table></figure>
+
+<h6 id="jdk安装"><a href="#jdk安装" class="headerlink" title="jdk安装"></a><code>jdk安装</code></h6><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-string-ask" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1147,97 +1239,6 @@
 <hr>
 <p><a href="https://www.infoq.cn/" target="_blank" rel="noopener">infoq</a></p>
 
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-mysql-split" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/数据库/">数据库</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/数据库/mysql/">mysql</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/mysql-split/">
-            <time datetime="2019-08-27T09:08:54.000Z" itemprop="datePublished">2019-08-27</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/mysql-split.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/mysql-split.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/mysql-split.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/mysql-split/">分库分表</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-        
-        
-            <hr>
-<p><code>数据库优化之分库分表</code></p>
-<hr>
-<p>针对数据库的优化有两点，第一是从整体层面优化，设计到读写分离和分库分表。第二是从sql层面优化，主要是涉及到索引相关的一些东西。</p>
-<hr>
-<p><code>读写分离</code></p>
-<p>​    <code>需求</code>: 读写分离的目的是做数据冗余备份，同时将读写分离，提升数据库的服务性能（IO性能瓶颈）。</p>
-<p>​    <code>搭建过程</code>: 在基本操作里面-&gt;mysql配置主从同步的步骤 。</p>
-<p>​    <code>实现原理</code>:  首先是master数据库会先将数据库的变化存储在binlog文件中。在slave数据库上，会有一个IO Thread负责将binlog文件读取到内部的relaylog文件中。同时，slave数据库上的另外一个线程SQL Thread读取relaylog，将数据写入到slave数据库里面。</p>
-<p>​    <code>细节</code>: mysql的binlog文件存储在 /var/lib/mysql文件夹下；使用命令-&gt; mysqlbinlog –base64-output=decode-rows -v  mysql-bin.000001 查看binlog的内容；binlog的格式：statement（默认，基于sql语句模式，针对数据更新的一些函数now()等，数据延迟造成的不一致），row：基于行模式，记录修改后每一条数据变化的值，mixed：混合模式，由mysql自动判断处理。</p>
-<p>​    <code>问题</code>：同步延迟，master tps较高时出现同步延迟； 网络延迟；磁盘IO</p>
-<hr>
-<p><code>分库分表</code></p>
-<p>​    <code>垂直拆分</code></p>
-<p>​        <code>概念</code>:垂直拆分主要是通过业务层面，将各个业务模块所使用到的表放到各自不同的数据库里面，做到各个业务模块库相互隔离的目的。</p>
-<p>​        <code>问题</code>:若是各个业务模块的表之间存在一些关联查询，需要将这些查询改为服务调用的方式。  针对一些全局表，可以改为服务调用的方式，对外提供服务。</p>
-<p>​    <code>水平拆分</code></p>
-<p>​        <code>概念</code>:将一张大的表拆分成n多张小表。实现方式，第一种是通过一致性hash（若是新增表的话，会涉及到数据迁移的问题）。第二种是可以按照id的范围来拆分。第三种是通过日期来拆分。</p>
-<p>​        <code>问题</code>:唯一主键问题，可以使用zk自增id  可以使用redis的自增id  可以使用代理的id</p>
-<hr>
-<p><code>Mycat</code></p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1. 从github上面clone项目 https://github.com/MyCATApache/Mycat-Server.git</span><br><span class="line">2. 修改项目中schema.xml配置文件中的dataHost数据库配置节点信息，修改为可用的数据库</span><br><span class="line">3. MycatStartup类运行main函数启动</span><br><span class="line">	idea启动前需要在配置参数VM options: -DMYCAT_HOME=D:<span class="tag">\<span class="name">code</span></span><span class="tag">\<span class="name">Mycat</span></span>-Server<span class="tag">\<span class="name">src</span></span><span class="tag">\<span class="name">main</span></span></span><br><span class="line">4. 通过数据库连接工具可以连接到MyCat,数据库相关配置在server.xml配置文件里面</span><br><span class="line">	默认的用户名: root 密码: 123456 port: 8066</span><br><span class="line">5. mycat里面有三个比较重要的配置文件 </span><br><span class="line">	server.xml	配置数据库连接相关的一些信息</span><br><span class="line">	schema.xml  配置数据库的一些节点信息</span><br><span class="line">	rule.xml    配置一些路由规则</span><br><span class="line">6. 支持单库分表   支持跨库分表    支持配置读写分离(writeHost和readHost节点)</span><br></pre></td></tr></table></figure>
             </div>
         
         <footer class="article-footer">
