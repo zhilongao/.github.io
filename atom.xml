@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhilongao.github.io/"/>
-  <updated>2019-09-09T13:23:24.535Z</updated>
+  <updated>2019-09-10T06:35:55.531Z</updated>
   <id>https://zhilongao.github.io/</id>
   
   <author>
@@ -21,15 +21,15 @@
     <link href="https://zhilongao.github.io/wiki/linux-system-problem/"/>
     <id>https://zhilongao.github.io/wiki/linux-system-problem/</id>
     <published>2019-09-09T12:19:57.000Z</published>
-    <updated>2019-09-09T13:23:24.535Z</updated>
+    <updated>2019-09-10T06:35:55.531Z</updated>
     
-    <content type="html"><![CDATA[<h6 id="centos7之动态ip与静态ip"><a href="#centos7之动态ip与静态ip" class="headerlink" title="centos7之动态ip与静态ip"></a><code>centos7之动态ip与静态ip</code></h6><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">centos7获取ip地址的方法主要有两种 1:动态获取  2:设置静态ip</span><br><span class="line"></span><br><span class="line">我们一般通过VMWare安装完centos7后，可以使用命令ip addr查看虚拟机的ip地址。但是刚安装完的centos7有些没有设置ip地址，我们可以通过下面两种方式来设置ip地址。</span><br><span class="line"></span><br><span class="line">1. 动态获取ip(前提是路由器已经开启了DHCP(动态主机设置协议))</span><br><span class="line">  a: 需要修改网卡的配置文件 /etc/sysconfig/network-scripts/ifcfg-ens33 其中ifcfg-ens33为网卡名。修改该文件的两处地方既可。</span><br><span class="line">   (1) bootproto=dhcp</span><br><span class="line">   (2) onboot=yes</span><br><span class="line">  b: 重启下网络服务</span><br><span class="line">   [root@mini ~]# systemctl restart network</span><br><span class="line">  c: 通过 ip addr 命令可以看到ens33的网卡已经有相应的ip地址啦</span><br><span class="line">  d: 通过 ping www.baidu.com 查看网络是否通畅</span><br><span class="line">  </span><br><span class="line">2. 配置静态ip地址</span><br><span class="line">  a: 也是需要修改网卡配置文件 /etc/sysconfig/network-srcipts/ifcfg-ens33 其中ifcfg-ens33为网卡名。修改该文件的两处地方既可。</span><br><span class="line">   (1) bootproto=static</span><br><span class="line">   (2) onboot=yes </span><br><span class="line">  b: 还需要在该网卡配置文件的后面加上几行，分别是ip地址，子网掩码，网关，dns服务器</span><br><span class="line">    IPADDR=192.168.25.156</span><br><span class="line">    NETMASK=255.255.255.0</span><br><span class="line">    GATEWAY=192.168.1.1</span><br><span class="line">    DNS1=192.168.25.2</span><br><span class="line">    DNS2=8.8.8.8</span><br><span class="line">  c: 重启下网络服务</span><br><span class="line">  [root@mini ~]# systemctl restart network</span><br><span class="line">  d: 通过 ip addr 命令可以看到ens33的网卡已经有新的ip地址啦</span><br><span class="line">  e: 通过 ping www.baidu.com 查看网络是否通畅</span><br><span class="line">  </span><br><span class="line">3. 在 /etc/resolv.conf文件里面保存了dns地址，可以通过cat命令查看</span><br></pre></td></tr></table></figure><h6 id="jdk安装"><a href="#jdk安装" class="headerlink" title="jdk安装"></a><code>jdk安装</code></h6><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h6 id="linux三种网络模式"><a href="#linux三种网络模式" class="headerlink" title="linux三种网络模式"></a><code>linux三种网络模式</code></h6><p>在我们安装vmware的时候，vmware会为三种网络模式各自创建一个虚拟机网络, 其中 VMnet0(表示桥接模式) VMnet8(NAT模式) VMnet1(仅主机模式) </p><hr><p>桥接模式<br>    和主机一样，也会占用一个局域网中的ip。信息的发送和接受，虚拟网络适配器和主机的物理网络适配器进行交换，虚拟网络适配器可以通过主机的物理网络适配器访问外部网络。在局域网中的其它主机能够识别到发送信息的ip为该虚拟机的ip。 </p><p>NAT模式<br>    虚拟机发送数据时，NAT虚拟机网络适配器会以主机的名义将数据包裹发送出去，接收时通过特殊的标识识别。在外部网络中并不知道当前虚拟机的存在。</p><p>主机模式<br>    仅可以和主机通信，无法访问外部网络。</p><hr><p>​    <a href="https://www.cnblogs.com/xuan52rock/p/5295069.html" target="_blank" rel="noopener">一篇介绍的很形象的文章</a></p><hr><h6 id="centos7之动态ip与静态ip"><a href="#centos7之动态ip与静态ip" class="headerlink" title="centos7之动态ip与静态ip"></a><code>centos7之动态ip与静态ip</code></h6><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">centos7获取ip地址的方法主要有两种 1:动态获取  2:设置静态ip</span><br><span class="line"></span><br><span class="line">我们一般通过VMWare安装完centos7后，可以使用命令ip addr查看虚拟机的ip地址。但是刚安装完的centos7有些没有设置ip地址，我们可以通过下面两种方式来设置ip地址。</span><br><span class="line"></span><br><span class="line">1. 动态获取ip(前提是路由器已经开启了DHCP(动态主机设置协议))</span><br><span class="line">  a: 需要修改网卡的配置文件 /etc/sysconfig/network-scripts/ifcfg-ens33 其中ifcfg-ens33为网卡名。修改该文件的两处地方既可。</span><br><span class="line">   (1) bootproto=dhcp</span><br><span class="line">   (2) onboot=yes</span><br><span class="line">  b: 重启下网络服务</span><br><span class="line">   [root@mini ~]# systemctl restart network</span><br><span class="line">  c: 通过 ip addr 命令可以看到ens33的网卡已经有相应的ip地址啦</span><br><span class="line">  d: 通过 ping www.baidu.com 查看网络是否通畅</span><br><span class="line">  </span><br><span class="line">在VMware里，点击'编辑'-'虚拟网络编辑器'  </span><br><span class="line">2. 配置静态ip地址(网络模式在nat模式下)</span><br><span class="line">  a: 也是需要修改网卡配置文件 /etc/sysconfig/network-srcipts/ifcfg-ens33 其中ifcfg-ens33为网卡名。修改该文件的两处地方既可。</span><br><span class="line">   (1) bootproto=static</span><br><span class="line">   (2) onboot=yes </span><br><span class="line">  b: 还需要在该网卡配置文件的后面加上几行，分别是ip地址，子网掩码，网关，dns服务器</span><br><span class="line">    IPADDR=192.168.25.156 #静态ip</span><br><span class="line">    NETMASK=255.255.255.0 #子网掩码</span><br><span class="line">    GATEWAY=192.168.1.1 #网关</span><br><span class="line">    DNS1=192.168.25.2</span><br><span class="line">    DNS2=8.8.8.8 #谷歌的dns服务器</span><br><span class="line">  c: 重启下网络服务</span><br><span class="line">  [root@mini ~]# systemctl restart network</span><br><span class="line">  d: 通过 ip addr 命令可以看到ens33的网卡已经有新的ip地址啦</span><br><span class="line">  e: 通过 ping www.baidu.com 查看网络是否通畅</span><br><span class="line"></span><br><span class="line">3. 在 /etc/resolv.conf文件里面保存了dns地址，可以通过cat命令查看</span><br></pre></td></tr></table></figure><p><code>在设置静态ip时,子网掩码和网关地址可以在vmware的-&gt;编辑-&gt;虚拟网络编辑器-&gt;NAT设置 中查看，如下图所示</code></p><p><img src="https://raw.githubusercontent.com/zhilongao/images-repository/master/46f916fdc305a268fe584b8ba809ed3.png" alt></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h6 id=&quot;centos7之动态ip与静态ip&quot;&gt;&lt;a href=&quot;#centos7之动态ip与静态ip&quot; class=&quot;headerlink&quot; title=&quot;centos7之动态ip与静态ip&quot;&gt;&lt;/a&gt;&lt;code&gt;centos7之动态ip与静态ip&lt;/code&gt;&lt;/h6&gt;
+        &lt;h6 id=&quot;linux三种网络模式&quot;&gt;&lt;a href=&quot;#linux三种网络模式&quot; class=&quot;headerlink&quot; title=&quot;linux三种网络模式&quot;&gt;&lt;/a&gt;&lt;code&gt;linux三种网络模式&lt;/code&gt;&lt;/h6&gt;&lt;p&gt;在我们安装vmware的时候，vmware
       
     
     </summary>
@@ -278,9 +278,9 @@
     <link href="https://zhilongao.github.io/wiki/share-articles/"/>
     <id>https://zhilongao.github.io/wiki/share-articles/</id>
     <published>2019-08-27T13:38:52.000Z</published>
-    <updated>2019-09-06T06:32:28.552Z</updated>
+    <updated>2019-09-10T06:31:34.768Z</updated>
     
-    <content type="html"><![CDATA[<p><code>友情链接</code></p><p><a href="https://yapengren.github.io/" target="_blank" rel="noopener">任亚鹏的博客</a></p><p><code>给力博客</code></p><p><a href="https://tech.meituan.com/" target="_blank" rel="noopener">美团技术团队</a></p><hr><p><a href="https://www.v2ex.com/" target="_blank" rel="noopener">v2ex</a></p><hr><p><a href="https://juejin.im/timeline" target="_blank" rel="noopener">掘金</a></p><hr><p><a href="http://cmsblogs.com/" target="_blank" rel="noopener">java技术驿站</a></p><hr><p><a href="https://www.infoq.cn/" target="_blank" rel="noopener">infoq</a></p>]]></content>
+    <content type="html"><![CDATA[<p><code>友情链接</code></p><p><a href="https://yapengren.github.io/" target="_blank" rel="noopener">任亚鹏的博客</a></p><p><code>技术大牛</code></p><p><a href="https://mercyblitz.github.io" target="_blank" rel="noopener">小马哥</a></p><p><code>精彩社区</code></p><p><a href="https://tech.meituan.com/" target="_blank" rel="noopener">美团技术团队</a></p><hr><p><a href="https://www.v2ex.com/" target="_blank" rel="noopener">v2ex</a></p><hr><p><a href="https://juejin.im/timeline" target="_blank" rel="noopener">掘金</a></p><hr><p><a href="http://cmsblogs.com/" target="_blank" rel="noopener">java技术驿站</a></p><hr><p><a href="https://www.infoq.cn/" target="_blank" rel="noopener">infoq</a></p>]]></content>
     
     <summary type="html">
     
@@ -288,7 +288,7 @@
       
         &lt;p&gt;&lt;code&gt;友情链接&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://yapengren.github.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;任亚鹏的博客&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;给力博客&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;技术大牛&lt;/code&gt;&lt;/p&gt;
 &lt;p
       
     
