@@ -3,25 +3,23 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     
-    <title>project-ask | zl&#39;s blog</title>
+    <title>questions | zl&#39;s blog</title>
     
     
-        <meta name="keywords" content="project-ask">
+        <meta name="keywords" content="questions">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="项目专题 系统1 ​    系统数据流转 ​     ​     // 大体流程1. 从原始借据表bp_collect_loan_src同步数据到bp_collect_loan，同步批次号为batch_no的数据。(同步数据时，每个线程处理数量默认为10000，若是当前批次数据量超过10000，会采用多线程来执行)2. 针对每一个原始借据，数据库里面只有可能有一条与之对应的借据，所以将bp_col">
+    <meta name="description" content="说说dubbo服务上下线时你们是如何处理的? dubbo的协议有哪些,哪些使用场景? dubbo使用的系列化框架是什么? dubbo服务容错机制? socket协议的几种状态,socket协议的三次握手,为什么是三次握手? 说说nio和io有什么不同,nio有哪些场景? http请求有哪些方法? jdk1.8有哪些新特性,使用过哪些? 谈谈对GC的理解，对G1有了解吗? Collection.s">
 <meta property="og:type" content="article">
-<meta property="og:title" content="project-ask">
-<meta property="og:url" content="https://zhilongao.github.io/wiki/project-ask/index.html">
+<meta property="og:title" content="questions">
+<meta property="og:url" content="https://zhilongao.github.io/wiki/questions/index.html">
 <meta property="og:site_name" content="zl&#39;s blog">
-<meta property="og:description" content="项目专题 系统1 ​    系统数据流转 ​     ​     // 大体流程1. 从原始借据表bp_collect_loan_src同步数据到bp_collect_loan，同步批次号为batch_no的数据。(同步数据时，每个线程处理数量默认为10000，若是当前批次数据量超过10000，会采用多线程来执行)2. 针对每一个原始借据，数据库里面只有可能有一条与之对应的借据，所以将bp_col">
+<meta property="og:description" content="说说dubbo服务上下线时你们是如何处理的? dubbo的协议有哪些,哪些使用场景? dubbo使用的系列化框架是什么? dubbo服务容错机制? socket协议的几种状态,socket协议的三次握手,为什么是三次握手? 说说nio和io有什么不同,nio有哪些场景? http请求有哪些方法? jdk1.8有哪些新特性,使用过哪些? 谈谈对GC的理解，对G1有了解吗? Collection.s">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/zhilongao/images-repository/master/3153f3dae0ac8b3014874267ad70cc1.png">
-<meta property="og:updated_time" content="2019-09-05T03:01:01.061Z">
+<meta property="og:updated_time" content="2019-09-12T02:46:20.517Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="project-ask">
-<meta name="twitter:description" content="项目专题 系统1 ​    系统数据流转 ​     ​     // 大体流程1. 从原始借据表bp_collect_loan_src同步数据到bp_collect_loan，同步批次号为batch_no的数据。(同步数据时，每个线程处理数量默认为10000，若是当前批次数据量超过10000，会采用多线程来执行)2. 针对每一个原始借据，数据库里面只有可能有一条与之对应的借据，所以将bp_col">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/zhilongao/images-repository/master/3153f3dae0ac8b3014874267ad70cc1.png">
+<meta name="twitter:title" content="questions">
+<meta name="twitter:description" content="说说dubbo服务上下线时你们是如何处理的? dubbo的协议有哪些,哪些使用场景? dubbo使用的系列化框架是什么? dubbo服务容错机制? socket协议的几种状态,socket协议的三次握手,为什么是三次握手? 说说nio和io有什么不同,nio有哪些场景? http请求有哪些方法? jdk1.8有哪些新特性,使用过哪些? 谈谈对GC的理解，对G1有了解吗? Collection.s">
     
 
     
@@ -367,22 +365,22 @@
                      </ul> 
                     </li> 
                     
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            面试题
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/questions/">questions</a></li>  </ul> 
-                    </li> 
-                    
                     <li class="directory open">
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder-open"></i>
                             &nbsp;
+                            面试题
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/wiki/questions/">questions</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
                             项目
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/wiki/project-ask/">project-ask</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/project-ask/">project-ask</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -475,7 +473,7 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main"><article id="post-project-ask" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-questions" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -485,15 +483,15 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/项目/">项目</a>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/面试题/">面试题</a>
     </div>
 
                         
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/wiki/project-ask/">
-            <time datetime="2019-08-26T13:26:32.000Z" itemprop="datePublished">2019-08-26</time>
+        <a href="/wiki/questions/">
+            <time datetime="2019-09-12T02:40:03.000Z" itemprop="datePublished">2019-09-12</time>
         </a>
     </div>
 
@@ -504,13 +502,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/project-ask.md'> Source </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/questions.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/project-ask.md'> Edit </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/questions.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/project-ask.md'> History </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/questions.md'> History </a>
                             </div>
                         
                     </div>
@@ -518,7 +516,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            project-ask
+            questions
         </h1>
     
 
@@ -529,15 +527,50 @@
         
         
             
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                    
+                </div>
+            
         
         
-            <p><code>项目专题</code></p>
-<p><code>系统1</code></p>
-<p>​    <code>系统数据流转</code></p>
-<p>​    <img src="https://raw.githubusercontent.com/zhilongao/images-repository/master/3153f3dae0ac8b3014874267ad70cc1.png" alt="任务执行流程"></p>
-<p>​    </p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 大体流程</span></span><br><span class="line"><span class="number">1</span>. 从原始借据表bp_collect_loan_src同步数据到bp_collect_loan，同步批次号为batch_no的数据。(同步数据时，每个线程处理数量默认为<span class="number">10000</span>，若是当前批次数据量超过<span class="number">10000</span>，会采用多线程来执行)</span><br><span class="line"><span class="number">2</span>. 针对每一个原始借据，数据库里面只有可能有一条与之对应的借据，所以将bp_collect_loan存入数据库的操作采用的是insertOrUpdate操作(任务执行失败后，不会对数据库中的数据造成影响)。</span><br><span class="line"><span class="number">3</span>. 借据同步完成之后，需要执行归案任务，就是将多个借据加工成为一个案件，以人为维度进行催收。</span><br><span class="line"><span class="number">4</span>. 归案完成之后，需要跑规则引擎来执行分案，通过规则引擎分案之后，会在数据库表bp_collect_divide表里面生成分案记录。</span><br><span class="line"><span class="number">5</span>. 将这些分案记录针对案件进行分案(分案记录里面存储了两类，针对个人的分案，针对组的分案)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用到的技术点(分布式锁 redis队列)</span></span><br><span class="line"><span class="number">1</span>. 由于任务是部署在多台机器上的，多个进程执行任务时，需要获取分布式锁。项目中采用redis来实现了分布式锁，上锁命令采用set命令，外加是否存在，过期时间参数来实现。而释放锁的命令采用lua脚本来实现，因为会有两步骤操作，首先式判断上锁客户端和释放锁的客户端是否一致（存储在value中），其次是删除该锁对应的key，lua脚本保证了该操作的原子性。</span><br><span class="line"><span class="number">2</span>. 在执行归案的过程中，针对每一个案件，需要将该案件分出去，会过规则引擎。而将分案请求交给规则引擎有两种方式，第一种是先将该案件构建成为请求，然后将该请求放到redis的同步队列里面，规则引擎那边从同步队列里面来进行消费。第二种是若同步队列已满，或者放入到同步队列出错，则会将请求直接交给规则引擎来处理。</span><br><span class="line"></span><br><span class="line"><span class="comment">// 技术难点-如何克服</span></span><br></pre></td></tr></table></figure>
-
+            <ol>
+<li>说说dubbo服务上下线时你们是如何处理的?</li>
+<li>dubbo的协议有哪些,哪些使用场景?</li>
+<li>dubbo使用的系列化框架是什么?</li>
+<li>dubbo服务容错机制?</li>
+<li>socket协议的几种状态,socket协议的三次握手,为什么是三次握手?</li>
+<li>说说nio和io有什么不同,nio有哪些场景?</li>
+<li>http请求有哪些方法?</li>
+<li>jdk1.8有哪些新特性,使用过哪些?</li>
+<li>谈谈对GC的理解，对G1有了解吗?</li>
+<li>Collection.sort底层默认使用哪种排序算法，说说你熟悉的排序算法有哪些?</li>
+<li>基本数据类型,占用字节,包装类,为什么会有包装类?</li>
+<li>多线程你们在项目中怎么用的?</li>
+<li>jdk1.8中Stream在并行处理时，适合哪些情景，不适合哪些情景?(第一次遇到这样问的,没回答上来)<br>适合计算密集型,不适合IO密集型。因为Stream被分配到的是核心线程池，IO密集型会造成线程阻塞。</li>
+<li>你们reids在使用中，过期时间是怎么设置的，分两步设置不能保证原子性，怎么解决的?</li>
+<li>写一下二分查找算法？</li>
+<li>写一个单例?(DCL)？</li>
+<li>说说dubbo和spring cloud有什么区别?</li>
+<li>你们数据库是怎么优化的,说说实例?</li>
+<li>了解redis吗，说说redis基本数据结构，有哪些常用的指令？</li>
+</ol>
+<hr>
+<p>1、说说 dubbo 的执行流程<br>2、redis 基本数据结构，你们是怎么用的（讲了下 5 分钟发帖 10 次）<br>3、数据库连接池了解吗？<br>4、生产环境项目打印日志出现了时间长的现象，你怎么排查<br>5、接口出现频繁 GC ，怎么排查</p>
+<hr>
+<p>1 线程池用过哪些，在项目中是怎么使用的</p>
+<p>2 sql优化怎么做的，哪些情况触发不了索引 , sql优化除了索引还要看哪些指标</p>
+<p>3 redis有没有遇到数据库满了的情况</p>
+<p>4  说说redis cluster</p>
+<p>5 springmvc  springboot springcloud的区别</p>
+<p>6 对restful有了解吗，弹弹restful</p>
+<p>7 说说对spring的理解</p>
+<p>8 @Autowired和@Resource的区别</p>
+<p>9 设计模式有哪些了解，说说设计模式遵循的原则</p>
+<p>10 交给你一个项目，怎么推进</p>
+<p>11 通过哪些途径学习，看些什么书</p>
+<p>12 总结下自己</p>
+<hr>
 
             </div>
         
@@ -550,19 +583,10 @@
     
 <nav id="article-nav">
     
-        <a href="/wiki/tcp/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    tcp
-                
-            </div>
-        </a>
     
-    
-        <a href="/wiki/threadpool/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/wiki/linux-system-problem/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">threadpool</div>
+            <div class="article-nav-title">linux系统</div>
         </a>
     
 </nav>
