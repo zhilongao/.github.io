@@ -379,7 +379,7 @@
                             &nbsp;
                             设计模式
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/design-pattern-observer/">观察者模式</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/design-pattern-observer/">观察者模式</a></li>  <li class="file"><a href="/wiki/design-pattern-listener/">监听器模式</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -491,6 +491,155 @@
 </aside>
             
             <section id="main">
+        <article id="post-lock" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/并发/">并发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/并发/锁/">锁</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/lock/">
+            <time datetime="2019-08-25T06:28:41.000Z" itemprop="datePublished">2019-08-25</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/lock.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/lock.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/lock.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/lock/">lock</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <hr>
+<p><code>前戏</code>java里面提供了两种锁机制，基于jvm层面实现的关键字synchronized和基于jdk层面实现的Lock锁。</p>
+<hr>
+<p><code>synchronized关键字</code></p>
+<p><code>基本使用</code>：synchronized关键字可以用来修饰静态方法，普通方法，代码块，获取到的锁对象分别为当前类Class对象，当前实例对象和synchronized括号里面的对象。</p>
+<p><code>加锁原理</code>：synchronized加锁是基于对象监视器Monitor的monitorenter和monitorexit。在java中，每个对象都会有一个对象监视器，当synchronized修饰代码块时，在开始位置会加上monitorenter指令，在方法结束和异常处会插入monitorexit指令。当执行monitorentrt指令时，会去获取锁的Monitor对象，若是获取到，执行，获取不到的话，线程阻塞。</p>
+<p><code>synchronized的锁升级</code></p>
+<p>​    <code>偏向锁</code>：当线程执行时，会去修改对象的对象头（Mark Word）中线程id，若是修改成功，执行。若是修改不成功，需要将偏向锁升级为轻量级锁。锁升级的过程是，该获取锁的线程通知Mark Word中标识的线程，使其进入暂停状态。</p>
+<p>​    <code>轻量级锁</code>：争抢锁的线程会去将对象的对象头（Mark Word）拷贝的线程栈中，并将对象头指向该栈（cas操作），若是执行成功，获取到锁，执行代码。若是执行失败，自旋等待其它线程释放锁。</p>
+<p>​    <code>重量级锁</code>：当自旋超过了一定的时间之后，若是还不能获取到锁，将会升级为重量级锁，线程阻塞。</p>
+<hr>
+<p><code>Lock接口</code></p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>尝试非阻塞的获取锁</td>
+<td>当前线程尝试获取锁，若这一时刻锁没有被其它线程获取到，则成功获取并持有锁。</td>
+</tr>
+<tr>
+<td>能被中断的获取锁</td>
+<td>获取到锁的线程能够响应中断，当获取到锁的线程被中断时，中断异常将会被抛出，同时锁会被释放。</td>
+</tr>
+<tr>
+<td>超时获取锁</td>
+<td>在指定的时间之前获取锁，如果过了指定的时间任然无法获取到锁，则返回。</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>方法名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>void lock()</td>
+<td>线程获取锁，当获取到锁后，线程从该方法返回。</td>
+</tr>
+<tr>
+<td>void lockInterruptibly() throws InteruptedExecption</td>
+<td>与lock方法不同之处在于可以在获取锁的过程中中断当前的线程。</td>
+</tr>
+<tr>
+<td>boolean tryLock()</td>
+<td>尝试获取锁，获取到返回true，未获取到返回false。</td>
+</tr>
+<tr>
+<td>boolean tryLock(long time, TimeUnit unit) throws InteruptedException;</td>
+<td>尝试获取锁，下列三种情况下会返回：1.在指定的时间内获取到锁。2.过了超时时间为获取到锁。3.当前线程被中断。</td>
+</tr>
+<tr>
+<td>void unlock()</td>
+<td>释放锁</td>
+</tr>
+<tr>
+<td>Condition newCondition()</td>
+<td>获取等待通知组件，只有成功获取到了锁，才能创建该组件</td>
+</tr>
+</tbody></table>
+<hr>
+<p><code>lock和synchronized的区别</code></p>
+<p>​        <code>关于加锁和释放锁方式和原理的不同</code></p>
+<ul>
+<li><p>synchronized是jvm层面提供的关键字，获取锁和释放锁不需要手工干预。synchronized获取锁时会获取锁定对象(静态方法-&gt;类对象，普通方法-&gt;当前对象，代码块-&gt;提供的对象)的对象监视器Monitor。一旦一个线程获取到这个对象的Monitor,其它线程就无法获取。但是同一个线程对这个Monitor可以多次获取（可重入）。对于锁的释放，当方法正常执行结束或者发生异常时，会释放该锁。</p>
+</li>
+<li><p>lock锁是jdk层面提供的锁，可以基于api执行上锁和解锁操作，操作更加的灵活。Lock接口实现的可重入锁ReentLock，其底层是依赖于AQS实现，AQS内部维护了一个同步队列，获取锁的线程会被加入到这个同步队列上面，等待前一个获取锁的节点释放锁时唤醒。ReentLock提供了多种获取锁的方式，可以在获取锁的时候立即响应中断。</p>
+<p><code>关于等待队列和同步队列的不同</code></p>
+</li>
+<li><p>synchronized基于对象监视器，调用底层的wait方法时，会将线程加入到等待队列中，内部只维护了一个等待队列，而调用notify或者notifyAll时，会将唤醒的线程加入到同步队列。</p>
+</li>
+<li><p>ReentLock内部可以创建多个等待队列，可以调用await方法将获取到锁的线程加入到等待队列，也可以调用singal,singalAll唤醒线程，将其加入到同步队列中。</p>
+</li>
+</ul>
+<hr>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-http" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -900,6 +1049,11 @@
 <h6 id="自动装配"><a href="#自动装配" class="headerlink" title="自动装配"></a><strong>自动装配</strong></h6><p>springboot核心注解 <code>@SpringBootApplication</code>。该注解是由下面三个注解组合而成的。</p>
 <p><code>@ComponentScan</code> 默认会去扫描当前类所在包下面的所有类或者所有包，将这些类创建为spring所管理的bean。可以通过添加basePackages或者是basePackageClasses属性来指定扫描的包路径。<br><code>@EnableAutoConfiguratio</code></p>
 <p><code>@SpringBootConfiguration</code></p>
+<p>核心事件</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">ApplicationEnvironmentPreparedEvent</span><br><span class="line">ApplicationPreparedEvent</span><br><span class="line">ApplicationStartingEvent</span><br><span class="line">ApplicationReadyEvent</span><br><span class="line">ApplicationFailedEvent</span><br></pre></td></tr></table></figure>
+
+<p>系统属性 <code>System:getProperties</code></p>
+<p>环境变量<code>System:getEnv</code></p>
 <hr>
 <h6 id="嵌入式容器"><a href="#嵌入式容器" class="headerlink" title="嵌入式容器"></a><strong>嵌入式容器</strong></h6><hr>
 <h6 id="为生产做准备"><a href="#为生产做准备" class="headerlink" title="为生产做准备"></a><strong>为生产做准备</strong></h6><hr>

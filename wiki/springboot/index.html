@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="zl&#39;s blog">
 <meta property="og:description" content="springboot三大特性  自动装配springboot核心注解 @SpringBootApplication。该注解是由下面三个注解组合而成的。 @ComponentScan 默认会去扫描当前类所在包下面的所有类或者所有包，将这些类创建为spring所管理的bean。可以通过添加basePackages或者是basePackageClasses属性来指定扫描的包路径。@EnableAutoC">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-12T02:26:58.157Z">
+<meta property="og:updated_time" content="2019-09-13T07:29:27.493Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springboot">
 <meta name="twitter:description" content="springboot三大特性  自动装配springboot核心注解 @SpringBootApplication。该注解是由下面三个注解组合而成的。 @ComponentScan 默认会去扫描当前类所在包下面的所有类或者所有包，将这些类创建为spring所管理的bean。可以通过添加basePackages或者是basePackageClasses属性来指定扫描的包路径。@EnableAutoC">
@@ -380,7 +380,7 @@
                             &nbsp;
                             设计模式
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/design-pattern-observer/">观察者模式</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/design-pattern-observer/">观察者模式</a></li>  <li class="file"><a href="/wiki/design-pattern-listener/">监听器模式</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -557,6 +557,11 @@
 <h6 id="自动装配"><a href="#自动装配" class="headerlink" title="自动装配"></a><strong>自动装配</strong></h6><p>springboot核心注解 <code>@SpringBootApplication</code>。该注解是由下面三个注解组合而成的。</p>
 <p><code>@ComponentScan</code> 默认会去扫描当前类所在包下面的所有类或者所有包，将这些类创建为spring所管理的bean。可以通过添加basePackages或者是basePackageClasses属性来指定扫描的包路径。<br><code>@EnableAutoConfiguratio</code></p>
 <p><code>@SpringBootConfiguration</code></p>
+<p>核心事件</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">ApplicationEnvironmentPreparedEvent</span><br><span class="line">ApplicationPreparedEvent</span><br><span class="line">ApplicationStartingEvent</span><br><span class="line">ApplicationReadyEvent</span><br><span class="line">ApplicationFailedEvent</span><br></pre></td></tr></table></figure>
+
+<p>系统属性 <code>System:getProperties</code></p>
+<p>环境变量<code>System:getEnv</code></p>
 <hr>
 <h6 id="嵌入式容器"><a href="#嵌入式容器" class="headerlink" title="嵌入式容器"></a><strong>嵌入式容器</strong></h6><hr>
 <h6 id="为生产做准备"><a href="#为生产做准备" class="headerlink" title="为生产做准备"></a><strong>为生产做准备</strong></h6><hr>
