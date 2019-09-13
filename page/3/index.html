@@ -303,6 +303,15 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
+                            spring-cloud
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/spring-cloud/">spring-cloud</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
                             springboot
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/springboot/">springboot</a></li>  </ul> 
@@ -362,6 +371,15 @@
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/linked-list-ask/">单链表</a></li>  </ul> 
                     </li> 
                      </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            设计模式
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/design-pattern-observer/">观察者模式</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -473,6 +491,228 @@
 </aside>
             
             <section id="main">
+        <article id="post-http" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/分布式/">分布式</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/分布式/协议/">协议</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/http/">
+            <time datetime="2019-08-24T01:51:41.000Z" itemprop="datePublished">2019-08-24</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/http.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/http.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/http.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/http/">http</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <hr>
+<ol>
+<li><p>对http协议的理解</p>
+<p>​    http协议是一种基于客户端-&gt;服务器模式的协议，客户端发送请求，服务器返回响应。http协议通过uri定位访问的资源。http协议是一种无状态的协议，服务 器无法识别同一浏览器的前后两次请求（为解决无状态,浏览器端引入了cookie机制）。</p>
+</li>
+</ol>
+<hr>
+<ol start="2">
+<li>http响应状态码</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>类别</th>
+<th>原因短语</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1XX</td>
+<td>Informational（信息性状态码）</td>
+<td>接收的请求正在处理</td>
+</tr>
+<tr>
+<td>2XX</td>
+<td>Success（成功状态码）</td>
+<td>请求正常处理完毕</td>
+</tr>
+<tr>
+<td>3XX</td>
+<td>Redirection（重定向状态码）</td>
+<td>需要进行附加操作以完成请求</td>
+</tr>
+<tr>
+<td>4XX</td>
+<td>Client Error（客户端错误）</td>
+<td>服务器无法处理请求</td>
+</tr>
+<tr>
+<td>5XX</td>
+<td>Server Error （服务端错误）</td>
+<td>服务器处理请求出错</td>
+</tr>
+</tbody></table>
+<hr>
+<ol start="3">
+<li><p>http请求首部常用字段</p>
+<p>Accept：用户代理可处理的媒体类型。</p>
+<p>Accept-Encoding：优先的内容编码。</p>
+<p>Accept-Language：优先的语言。</p>
+<p>Content-Type：实体类型。</p>
+</li>
+</ol>
+<hr>
+<ol start="4">
+<li>跨域问题</li>
+</ol>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-io" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/基础/">基础</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/基础/io/">io</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/io/">
+            <time datetime="2019-08-23T09:43:24.000Z" itemprop="datePublished">2019-08-23</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/io.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/io.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/io.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/io/">io</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <hr>
+<p>1.在jdk1.4，java引入了nio，nio是一种非阻塞io。</p>
+<hr>
+<ol start="2">
+<li>在nio中有三个概念</li>
+</ol>
+<ul>
+<li><p>缓冲区(buffer)：java nio中数据的读取和存放需要通过缓冲区。</p>
+</li>
+<li><p>通道(channel)：可以理解为io中流的概念 ，与流不同的是，一个通道中既可以进行数据的读取，也可以进行数据的写入，而在io模型中，数据的读取和写入会有专门的输入和输出流来进行操作。</p>
+</li>
+<li><p>选择器(select)：通道可以在选择器上注册相关的事件，而选择器会有一个专门的线程来负责轮询这些事件，当某个写入事件或是读取事件可写或可读时，会交给相应的线程来处理。</p>
+</li>
+</ul>
+<hr>
+<ol start="3">
+<li>通过java nio模拟一个服务端-客户端通信的实例</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * NIO Server服务</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NIOServer</span></span>&#123;</span><br><span class="line">    <span class="comment">// Selector-&gt;注册channel</span></span><br><span class="line">    Selector selector = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// ServerSocketChannel-&gt;服务端channel,类似ServerSocket</span></span><br><span class="line">    ServerSocketChannel serverSocketChannel;</span><br><span class="line">    <span class="comment">// 处理selector轮询事件</span></span><br><span class="line">    <span class="keyword">private</span> ChannelHandle handle;</span><br><span class="line">    <span class="comment">// NIO服务关闭标识</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> stop = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    NIOServer(<span class="keyword">int</span> port) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            selector = Selector.open();</span><br><span class="line">            serverSocketChannel = ServerSocketChannel.open();</span><br><span class="line">            <span class="comment">// 设置channel为非阻塞模式</span></span><br><span class="line">            serverSocketChannel.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">            <span class="comment">// 为channel绑定端口</span></span><br><span class="line">            serverSocketChannel.bind(<span class="keyword">new</span> InetSocketAddress(port));</span><br><span class="line">            <span class="comment">// 将channel注册到selector上，监听连接事件</span></span><br><span class="line">            serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);</span><br><span class="line">            handle = <span class="keyword">new</span> ChannelHandle();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 启动服务</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (!stop) &#123;</span><br><span class="line">            <span class="comment">// 获取到等待处理的IO事件数量</span></span><br><span class="line">            <span class="keyword">int</span> readyChannels = selector.select();</span><br><span class="line">            <span class="comment">// 若是等待处理的IO事件数量为0,不处理</span></span><br><span class="line">            <span class="keyword">if</span> (readyChannels == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            Iterator&lt;SelectionKey&gt; iterator = selector.selectedKeys().iterator();</span><br><span class="line">            <span class="comment">// 处理这些SelectionKey</span></span><br><span class="line">            <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">                <span class="comment">// 获取到该key</span></span><br><span class="line">                SelectionKey key = iterator.next();</span><br><span class="line">                <span class="comment">// 移除该key</span></span><br><span class="line">                iterator.remove();</span><br><span class="line">                <span class="comment">// 分别处理各自事件</span></span><br><span class="line">                <span class="keyword">if</span> (key.isAcceptable()) &#123;</span><br><span class="line">                    handle.handleAccept(key);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key.isReadable()) &#123;</span><br><span class="line">                    handle.handleRead(key);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key.isWritable()) &#123;</span><br><span class="line">                    handle.handleWrite(key);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 停止该服务</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.stop = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 针对selector上不同事件的处理类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ChannelHandle</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 处理连接事件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleAccept</span><span class="params">(SelectionKey key)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        ServerSocketChannel ssc = (ServerSocketChannel) key.channel();</span><br><span class="line">        SocketChannel sc = ssc.accept();</span><br><span class="line">        sc.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">        sc.register(key.selector(), SelectionKey.OP_READ);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 处理可读事件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleRead</span><span class="params">(SelectionKey key)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        SocketChannel sc = (SocketChannel) key.channel();</span><br><span class="line">        <span class="comment">// fixme 对读取到的数据进行处理-&gt;相关协议解析</span></span><br><span class="line">        sc.register(key.selector(), SelectionKey.OP_WRITE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 处理可写事件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleWrite</span><span class="params">(SelectionKey key)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"处理写数据"</span>);</span><br><span class="line">        <span class="comment">// fixme 对输出结果按照相关协议进行封装</span></span><br><span class="line">        String header = <span class="string">"HTTP/1.1 200 OK\r\n"</span>;</span><br><span class="line">        StringBuffer result = <span class="keyword">new</span> StringBuffer(header);</span><br><span class="line">        result.append(<span class="string">"Content-Type:application/json\n"</span>);</span><br><span class="line">        result.append(<span class="string">"\r\n"</span>);</span><br><span class="line">        result.append(<span class="string">"hello,world"</span>);</span><br><span class="line">        SocketChannel channel = (SocketChannel)key.channel();</span><br><span class="line">        ByteBuffer wrap = ByteBuffer.wrap(result.toString().getBytes());</span><br><span class="line">        channel.write(wrap);</span><br><span class="line">        channel.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NIOUtil</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 启动一个基于NIO的服务</span></span><br><span class="line">        NIOServer nioServer = <span class="keyword">new</span> NIOServer(<span class="number">8070</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            nioServer.start();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>下面是通过java io的方式来实现的</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IOUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        IOServer.createServer();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IOServer</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> stop = <span class="keyword">false</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 开启服务</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">createServer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ExecutorService executorService =</span><br><span class="line">                Executors.newFixedThreadPool(<span class="number">3</span>);</span><br><span class="line">        ServerSocket serverSocket = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            serverSocket = <span class="keyword">new</span> ServerSocket(<span class="number">8090</span>);</span><br><span class="line">            System.out.println(<span class="string">"服务器在端口8090上启动。。。"</span>);</span><br><span class="line">            <span class="keyword">while</span> (!stop) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Socket socket = serverSocket.accept();</span><br><span class="line">                    <span class="comment">// 将任务提交给线程池来处理</span></span><br><span class="line">                    executorService.execute(<span class="keyword">new</span> SocketHandle(socket));</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (serverSocket !=  <span class="keyword">null</span>) &#123;</span><br><span class="line">                    serverSocket.close();</span><br><span class="line">                &#125;</span><br><span class="line">                executorService.shutdown();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 关闭服务</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">stopServer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        stop = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * socket处理线程类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SocketHandle</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Socket socket;</span><br><span class="line"></span><br><span class="line">    SocketHandle(Socket socket) &#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="keyword">this</span>.socket = socket;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 处理输入</span></span><br><span class="line">        InputStream is = <span class="keyword">null</span>;</span><br><span class="line">        InputStreamReader isr = <span class="keyword">null</span>;</span><br><span class="line">        BufferedReader br = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            is = socket.getInputStream();</span><br><span class="line">            isr = <span class="keyword">new</span> InputStreamReader(is);</span><br><span class="line">            br = <span class="keyword">new</span> BufferedReader(isr);</span><br><span class="line">            String s = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">while</span> ((s = br.readLine()) != <span class="keyword">null</span> &amp;&amp; s.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                System.out.println(s);</span><br><span class="line">                s = <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 处理输出 \r\n 回车换行</span></span><br><span class="line">        OutputStream os = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            os = socket.getOutputStream();</span><br><span class="line">            os.write(<span class="string">"HTTP/1.1 200 OK\r\n"</span>.getBytes());</span><br><span class="line">            os.write(<span class="string">"Content-Type:application/json\n"</span>.getBytes());</span><br><span class="line">            os.write(<span class="string">"\r\n"</span>.getBytes());</span><br><span class="line">            os.write(<span class="string">"hello,world"</span>.getBytes());</span><br><span class="line">            os.flush();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (socket != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    socket.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-thread" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
