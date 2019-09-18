@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zhilongao.github.io/wiki/reentlock-source-analysis/</loc>
+    
+    <lastmod>2019-09-18T13:13:08.842Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zhilongao.github.io/wiki/spring-cloud-config/</loc>
     
     <lastmod>2019-09-15T07:48:44.405Z</lastmod>
