@@ -3,23 +3,23 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     
-    <title>questions | zl&#39;s blog</title>
+    <title>负载均衡 | zl&#39;s blog</title>
     
     
-        <meta name="keywords" content="questions">
+        <meta name="keywords" content="负载均衡">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="说说dubbo服务上下线时你们是如何处理的? dubbo的协议有哪些,哪些使用场景? dubbo使用的系列化框架是什么? dubbo服务容错机制? socket协议的几种状态,socket协议的三次握手,为什么是三次握手? 说说nio和io有什么不同,nio有哪些场景? http请求有哪些方法? jdk1.8有哪些新特性,使用过哪些? 谈谈对GC的理解，对G1有了解吗? Collection.s">
+    <meta name="description" content="完善中。。。。 负载均衡算法基础(理论)参考资料  负载均衡分类：  负载均衡算法：  Ribbon的实现(设计)设计分析 // 核心接口com.netflix.loadbalancer.IRulecom.netflix.loadbalancer.ILoadBalancer// 服务实例定义实体Netflix Eureka com.netflix.appinfo.InstanceInfoSprin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="questions">
-<meta property="og:url" content="https://zhilongao.github.io/wiki/questions/index.html">
+<meta property="og:title" content="负载均衡">
+<meta property="og:url" content="https://zhilongao.github.io/wiki/spring-cloud-loadbalance/index.html">
 <meta property="og:site_name" content="zl&#39;s blog">
-<meta property="og:description" content="说说dubbo服务上下线时你们是如何处理的? dubbo的协议有哪些,哪些使用场景? dubbo使用的系列化框架是什么? dubbo服务容错机制? socket协议的几种状态,socket协议的三次握手,为什么是三次握手? 说说nio和io有什么不同,nio有哪些场景? http请求有哪些方法? jdk1.8有哪些新特性,使用过哪些? 谈谈对GC的理解，对G1有了解吗? Collection.s">
+<meta property="og:description" content="完善中。。。。 负载均衡算法基础(理论)参考资料  负载均衡分类：  负载均衡算法：  Ribbon的实现(设计)设计分析 // 核心接口com.netflix.loadbalancer.IRulecom.netflix.loadbalancer.ILoadBalancer// 服务实例定义实体Netflix Eureka com.netflix.appinfo.InstanceInfoSprin">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-12T02:46:20.517Z">
+<meta property="og:updated_time" content="2019-09-21T03:25:32.978Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="questions">
-<meta name="twitter:description" content="说说dubbo服务上下线时你们是如何处理的? dubbo的协议有哪些,哪些使用场景? dubbo使用的系列化框架是什么? dubbo服务容错机制? socket协议的几种状态,socket协议的三次握手,为什么是三次握手? 说说nio和io有什么不同,nio有哪些场景? http请求有哪些方法? jdk1.8有哪些新特性,使用过哪些? 谈谈对GC的理解，对G1有了解吗? Collection.s">
+<meta name="twitter:title" content="负载均衡">
+<meta name="twitter:description" content="完善中。。。。 负载均衡算法基础(理论)参考资料  负载均衡分类：  负载均衡算法：  Ribbon的实现(设计)设计分析 // 核心接口com.netflix.loadbalancer.IRulecom.netflix.loadbalancer.ILoadBalancer// 服务实例定义实体Netflix Eureka com.netflix.appinfo.InstanceInfoSprin">
     
 
     
@@ -284,9 +284,9 @@
                      </ul> 
                     </li> 
                     
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             框架
                         </a>
@@ -300,13 +300,13 @@
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/spring/">spring</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             spring-cloud
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/spring-cloud-config/">分布式配置</a></li>  <li class="file"><a href="/wiki/spring-cloud-loadbalance/">负载均衡</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/spring-cloud-config/">分布式配置</a></li>  <li class="file active"><a href="/wiki/spring-cloud-loadbalance/">负载均衡</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -383,13 +383,13 @@
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/design-pattern-observer/">观察者模式</a></li>  <li class="file"><a href="/wiki/design-pattern-listener/">监听器模式</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory open">
+                    <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             面试题
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/wiki/questions/">questions</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/questions/">questions</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -491,7 +491,7 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main"><article id="post-questions" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-spring-cloud-loadbalance" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -501,15 +501,15 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/面试题/">面试题</a>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/">框架</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/spring-cloud/">spring-cloud</a>
     </div>
 
                         
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/wiki/questions/">
-            <time datetime="2019-09-12T02:40:03.000Z" itemprop="datePublished">2019-09-12</time>
+        <a href="/wiki/spring-cloud-loadbalance/">
+            <time datetime="2019-09-21T01:31:06.000Z" itemprop="datePublished">2019-09-21</time>
         </a>
     </div>
 
@@ -520,13 +520,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/questions.md'> Source </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/spring-cloud-loadbalance.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/questions.md'> Edit </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/spring-cloud-loadbalance.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/questions.md'> History </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/spring-cloud-loadbalance.md'> History </a>
                             </div>
                         
                     </div>
@@ -534,7 +534,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            questions
+            负载均衡
         </h1>
     
 
@@ -547,48 +547,21 @@
             
                 <div id="toc" class="toc-article">
                 <strong class="toc-title">文章目录</strong>
-                    
+                    <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#负载均衡算法基础-理论"><span class="toc-number">1.</span> <span class="toc-text">负载均衡算法基础(理论)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Ribbon的实现-设计"><span class="toc-number">2.</span> <span class="toc-text">Ribbon的实现(设计)</span></a></li></ol>
                 </div>
             
         
         
-            <ol>
-<li>说说dubbo服务上下线时你们是如何处理的?</li>
-<li>dubbo的协议有哪些,哪些使用场景?</li>
-<li>dubbo使用的系列化框架是什么?</li>
-<li>dubbo服务容错机制?</li>
-<li>socket协议的几种状态,socket协议的三次握手,为什么是三次握手?</li>
-<li>说说nio和io有什么不同,nio有哪些场景?</li>
-<li>http请求有哪些方法?</li>
-<li>jdk1.8有哪些新特性,使用过哪些?</li>
-<li>谈谈对GC的理解，对G1有了解吗?</li>
-<li>Collection.sort底层默认使用哪种排序算法，说说你熟悉的排序算法有哪些?</li>
-<li>基本数据类型,占用字节,包装类,为什么会有包装类?</li>
-<li>多线程你们在项目中怎么用的?</li>
-<li>jdk1.8中Stream在并行处理时，适合哪些情景，不适合哪些情景?(第一次遇到这样问的,没回答上来)<br>适合计算密集型,不适合IO密集型。因为Stream被分配到的是核心线程池，IO密集型会造成线程阻塞。</li>
-<li>你们reids在使用中，过期时间是怎么设置的，分两步设置不能保证原子性，怎么解决的?</li>
-<li>写一下二分查找算法？</li>
-<li>写一个单例?(DCL)？</li>
-<li>说说dubbo和spring cloud有什么区别?</li>
-<li>你们数据库是怎么优化的,说说实例?</li>
-<li>了解redis吗，说说redis基本数据结构，有哪些常用的指令？</li>
-</ol>
+            <p>完善中。。。。</p>
+<h6 id="负载均衡算法基础-理论"><a href="#负载均衡算法基础-理论" class="headerlink" title="负载均衡算法基础(理论)"></a><code>负载均衡算法基础(理论)</code></h6><p><a href="https://en.wikipedia.org/wiki/Load_balancing_(computing)" target="_blank" rel="noopener">参考资料</a></p>
 <hr>
-<p>1、说说 dubbo 的执行流程<br>2、redis 基本数据结构，你们是怎么用的（讲了下 5 分钟发帖 10 次）<br>3、数据库连接池了解吗？<br>4、生产环境项目打印日志出现了时间长的现象，你怎么排查<br>5、接口出现频繁 GC ，怎么排查</p>
+<p>负载均衡分类：</p>
 <hr>
-<p>1 线程池用过哪些，在项目中是怎么使用的</p>
-<p>2 sql优化怎么做的，哪些情况触发不了索引 , sql优化除了索引还要看哪些指标</p>
-<p>3 redis有没有遇到数据库满了的情况</p>
-<p>4  说说redis cluster</p>
-<p>5 springmvc  springboot springcloud的区别</p>
-<p>6 对restful有了解吗，弹弹restful</p>
-<p>7 说说对spring的理解</p>
-<p>8 @Autowired和@Resource的区别</p>
-<p>9 设计模式有哪些了解，说说设计模式遵循的原则</p>
-<p>10 交给你一个项目，怎么推进</p>
-<p>11 通过哪些途径学习，看些什么书</p>
-<p>12 总结下自己</p>
+<p>负载均衡算法：</p>
 <hr>
+<h6 id="Ribbon的实现-设计"><a href="#Ribbon的实现-设计" class="headerlink" title="Ribbon的实现(设计)"></a><code>Ribbon的实现(设计)</code></h6><p>设计分析</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 核心接口</span></span><br><span class="line">com.netflix.loadbalancer.IRule</span><br><span class="line">com.netflix.loadbalancer.ILoadBalancer</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务实例定义实体</span></span><br><span class="line">Netflix Eureka </span><br><span class="line">com.netflix.appinfo.InstanceInfo</span><br><span class="line"></span><br><span class="line">Spring Cloud Commons</span><br><span class="line">org.springframework.cloud.client.ServiceInstance</span><br><span class="line"></span><br><span class="line">Netflix Ribbon</span><br><span class="line">com.netflix.loadbalancer.Server</span><br></pre></td></tr></table></figure>
+
 
             </div>
         
@@ -601,19 +574,10 @@
     
 <nav id="article-nav">
     
-        <a href="/wiki/spring-cloud-config/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    分布式配置
-                
-            </div>
-        </a>
     
-    
-        <a href="/wiki/linux-system-problem/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/wiki/reentlock-source-analysis/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">linux系统</div>
+            <div class="article-nav-title">ReentrantLock</div>
         </a>
     
 </nav>

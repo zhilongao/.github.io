@@ -305,7 +305,7 @@
                             &nbsp;
                             spring-cloud
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/spring-cloud-config/">分布式配置</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/spring-cloud-config/">分布式配置</a></li>  <li class="file"><a href="/wiki/spring-cloud-loadbalance/">负载均衡</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -491,6 +491,83 @@
 </aside>
             
             <section id="main">
+        <article id="post-project-ask" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/项目/">项目</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/project-ask/">
+            <time datetime="2019-08-26T13:26:32.000Z" itemprop="datePublished">2019-08-26</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/project-ask.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/project-ask.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/project-ask.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/project-ask/">project-ask</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p><code>项目专题</code></p>
+<p><code>系统1</code></p>
+<p>​    <code>系统数据流转</code></p>
+<p>​    <img src="https://raw.githubusercontent.com/zhilongao/images-repository/master/3153f3dae0ac8b3014874267ad70cc1.png" alt="任务执行流程"></p>
+<p>​    </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 大体流程</span></span><br><span class="line"><span class="number">1</span>. 从原始借据表bp_collect_loan_src同步数据到bp_collect_loan，同步批次号为batch_no的数据。(同步数据时，每个线程处理数量默认为<span class="number">10000</span>，若是当前批次数据量超过<span class="number">10000</span>，会采用多线程来执行)</span><br><span class="line"><span class="number">2</span>. 针对每一个原始借据，数据库里面只有可能有一条与之对应的借据，所以将bp_collect_loan存入数据库的操作采用的是insertOrUpdate操作(任务执行失败后，不会对数据库中的数据造成影响)。</span><br><span class="line"><span class="number">3</span>. 借据同步完成之后，需要执行归案任务，就是将多个借据加工成为一个案件，以人为维度进行催收。</span><br><span class="line"><span class="number">4</span>. 归案完成之后，需要跑规则引擎来执行分案，通过规则引擎分案之后，会在数据库表bp_collect_divide表里面生成分案记录。</span><br><span class="line"><span class="number">5</span>. 将这些分案记录针对案件进行分案(分案记录里面存储了两类，针对个人的分案，针对组的分案)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用到的技术点(分布式锁 redis队列)</span></span><br><span class="line"><span class="number">1</span>. 由于任务是部署在多台机器上的，多个进程执行任务时，需要获取分布式锁。项目中采用redis来实现了分布式锁，上锁命令采用set命令，外加是否存在，过期时间参数来实现。而释放锁的命令采用lua脚本来实现，因为会有两步骤操作，首先式判断上锁客户端和释放锁的客户端是否一致（存储在value中），其次是删除该锁对应的key，lua脚本保证了该操作的原子性。</span><br><span class="line"><span class="number">2</span>. 在执行归案的过程中，针对每一个案件，需要将该案件分出去，会过规则引擎。而将分案请求交给规则引擎有两种方式，第一种是先将该案件构建成为请求，然后将该请求放到redis的同步队列里面，规则引擎那边从同步队列里面来进行消费。第二种是若同步队列已满，或者放入到同步队列出错，则会将请求直接交给规则引擎来处理。</span><br><span class="line"></span><br><span class="line"><span class="comment">// 技术难点-如何克服</span></span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-threadpool" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1526,110 +1603,6 @@
 3.HashMap的resize方法
     resize方法涉及到两个大的步骤,首先是确定新数组的大小已经下次的扩容时机，新数组大小为原有数组大小的两倍，扩容变量也扩大为原有的两倍。其次是将原有数组的元素迁移至新的数组中,其中数组元素只会在两个地方，一个在[原下标]的地方，另一个在[原下标+原容量]的位置。
 
-
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-jvm" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/基础/">基础</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/基础/jvm/">jvm</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/jvm/">
-            <time datetime="2019-08-16T04:51:03.000Z" itemprop="datePublished">2019-08-16</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/jvm.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/jvm.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/jvm.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/jvm/">jvm</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-        
-        
-            <p>jvm的运行时数据区</p>
-<hr>
-<p>堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空间。若是在堆中没有完成实例分配，并且堆也无法再扩展时，就会抛出OutOfMemoryError异常。</p>
-<hr>
-<p>方法区:用于存储已经被虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据。当方法区无法满足内存分配的需求时，将会抛出OutOfMemoryError异常。</p>
-<hr>
-<p>虚拟机栈:描述的是java方法执行的内存模型，每个方法执行时都会创建一个栈帧，栈帧中用于存储局部变量表，操作数栈，动态链接，方法出口等信息。当线程申请的栈深度大于虚拟机所允许的栈深度，将抛出StackOverflowError异常。若是虚拟机动态扩展时无法申请到足够的内存，将会抛出OutOfMemoryError异常。</p>
-<hr>
-<p>程序计数器:记录当前线程执行的字节码指令的行号，不会发生OutOfMemoryError。</p>
-<hr>
-<p>本地方法栈:用于执行非java方法的内存模型，也会发生StackOverflowError和OutOfMemoryError异常。</p>
-<hr>
-<p>jvm垃圾回收考虑的三个问题</p>
-<ul>
-<li>回收哪些对象</li>
-<li>什么时候回收这些对象</li>
-<li>怎么回收这些对象</li>
-</ul>
-<hr>
-<p>jvm垃圾回收算法</p>
-<ul>
-<li><p>标记清除：会有内存碎片</p>
-</li>
-<li><p>标记整理：没有内存碎片，适合新生代对象的回收</p>
-</li>
-<li><p>复制算法：需要留出一部分的内存空间，利用率不高</p>
-</li>
-<li><p>分代收集算法：新生代死亡对象多，采用复制算法。老年代死亡对象少，采用标记整理或标记清除。</p>
-</li>
-</ul>
-<hr>
-<p>jvm垃圾收集器</p>
-<p>​    新生代垃圾收集器</p>
-<p>​    老年代垃圾收集器    </p>
 
             </div>
         
