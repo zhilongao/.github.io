@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zhilongao.github.io/"/>
-  <updated>2019-09-21T08:05:15.345Z</updated>
+  <updated>2019-09-24T02:50:15.533Z</updated>
   <id>https://zhilongao.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>lambda和stream</title>
+    <link href="https://zhilongao.github.io/wiki/java-style-lambda/"/>
+    <id>https://zhilongao.github.io/wiki/java-style-lambda/</id>
+    <published>2019-09-23T11:11:56.000Z</published>
+    <updated>2019-09-24T02:50:15.533Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.infoq.cn/article/Java-se-8-lambda" target="_blank" rel="noopener">参考文章</a></p><h6 id="功能性接口的简化"><a href="#功能性接口的简化" class="headerlink" title="功能性接口的简化"></a><code>功能性接口的简化</code></h6><hr><ol><li>lambda表达式可以简化<code>Runnable</code>，<code>Comparator</code>这种接口的写法。</li></ol><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*****lambda表达式简化线程的创建*****/</span></span><br><span class="line"><span class="comment">// 普通写法</span></span><br><span class="line">Thread t1 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="comment">// do something</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// lambda写法</span></span><br><span class="line">Thread t2 = <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line"><span class="comment">// do something                </span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*****lambda表达式简化 Collections.sort 排序*****/</span></span><br><span class="line"><span class="comment">// 普通写法</span></span><br><span class="line">Collections.sort(list, <span class="keyword">new</span> Comparator&lt;Integer&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Integer o1, Integer o2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> o1 - o2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// lambda写法</span></span><br><span class="line">Collections.sort(list, (x, y) -&gt; x - y);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*****自定义功能接口*****/</span></span><br><span class="line">List&lt;String&gt; params = Arrays.asList(<span class="keyword">new</span> String[]&#123;<span class="string">"app"</span>, <span class="string">"red"</span>, <span class="string">"blue"</span>&#125;);</span><br><span class="line"><span class="comment">// 映射List中元素的length集合</span></span><br><span class="line">List&lt;Integer&gt; res1 = <span class="keyword">new</span> CollectionUtils&lt;String, Integer&gt;().map(params, (String param) -&gt; param.length());</span><br><span class="line"><span class="comment">// 映射list中以元素的大写集合</span></span><br><span class="line">List&lt;String&gt; res2 = <span class="keyword">new</span> CollectionUtils&lt;String, String&gt;().map(params, (String param) -&gt; param.toUpperCase());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义函数式接口</span></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">MyOP</span>&lt;<span class="title">P</span>, <span class="title">R</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">R <span class="title">apply</span><span class="params">(P obj)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 集合操作类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CollectionUtils</span>&lt;<span class="title">P</span>, <span class="title">R</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">// 对集合中的元素进行操作，操作完成之后返回一个新的集合</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;R&gt; <span class="title">map</span><span class="params">(List&lt;P&gt; input, MyOP&lt;P, R&gt; myOp)</span> </span>&#123;</span><br><span class="line">        List&lt;R&gt; result = <span class="keyword">new</span> ArrayList();</span><br><span class="line">        <span class="keyword">for</span> (P obj : input) &#123;</span><br><span class="line">            result.add(myOp.apply(obj));</span><br><span class="line">        &#125;    </span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h6 id="方法和构造方法的引用"><a href="#方法和构造方法的引用" class="headerlink" title="方法和构造方法的引用"></a><code>方法和构造方法的引用</code></h6><hr><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// lambda表达式的一般写法</span></span><br><span class="line">params.forEach((v) -&gt; System.out.print(v + <span class="string">"\t"</span>));</span><br><span class="line"><span class="comment">// lambda的简化写法</span></span><br><span class="line">params.forEach(System.out::print);</span><br><span class="line"></span><br><span class="line"><span class="comment">// lambda构造方法的简写 Date::new</span></span><br><span class="line">List&lt;Long&gt; dateValues = Arrays.asList(<span class="keyword">new</span> Long[] &#123;<span class="number">0L</span>, <span class="number">1000L</span>&#125;);</span><br><span class="line">List&lt;Date&gt; map = <span class="keyword">new</span> CollectionUtils&lt;Long, Date&gt;().map(dateValues, Date::<span class="keyword">new</span>);</span><br></pre></td></tr></table></figure><h6 id="接口的默认方法"><a href="#接口的默认方法" class="headerlink" title="接口的默认方法"></a><code>接口的默认方法</code></h6><hr><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>. 解决了接口的演化问题（接口中新增默认实现方法，不影响原先的实现类）</span><br><span class="line"><span class="number">2</span>. 实现了行为的多继承 （一个类可以实现多个接口的默认方法）</span><br></pre></td></tr></table></figure><h6 id="stream"><a href="#stream" class="headerlink" title="stream"></a><code>stream</code></h6><hr><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;https://www.infoq.cn/article/Java-se-8-lambda&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;参考文章&lt;/a&gt;&lt;/p&gt;
+&lt;h6 id=&quot;功能性接口的简化&quot;&gt;&lt;a href=&quot;#功能性接口的简化&quot;
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
+    
+      <category term="新特性" scheme="https://zhilongao.github.io/categories/java/%E6%96%B0%E7%89%B9%E6%80%A7/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>负载均衡</title>
@@ -546,38 +572,6 @@
       <category term="数据库" scheme="https://zhilongao.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
       <category term="mysql" scheme="https://zhilongao.github.io/categories/java/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>tcp</title>
-    <link href="https://zhilongao.github.io/wiki/tcp/"/>
-    <id>https://zhilongao.github.io/wiki/tcp/</id>
-    <published>2019-08-26T13:33:14.000Z</published>
-    <updated>2019-08-28T12:55:39.134Z</updated>
-    
-    <content type="html"><![CDATA[<hr><p><code>此时握手</code></p><p><code>四次挥手</code></p><p><code>为什么要三次握手</code></p><p><code>为什么要四次挥手</code></p><p><code>socket的几种状态</code></p><p>​        <code>listen:侦听来自远方tcp端口的连接请求</code></p><p>​        <code>syn-sent:在发送连接请求后，等待匹配的连接请求。</code></p><p>​        <code>syn-receive:在收到和发送一个连接请求后，等待连接请求的确认</code></p><p>​        <code>established:代表一个打开的连接，数据可以传送给用户</code></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;hr&gt;
-&lt;p&gt;&lt;code&gt;此时握手&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;四次挥手&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;为什么要三次握手&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;为什么要四次挥手&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;socket的几种状态&lt;/code&gt;
-      
-    
-    </summary>
-    
-      <category term="java" scheme="https://zhilongao.github.io/categories/java/"/>
-    
-      <category term="分布式" scheme="https://zhilongao.github.io/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-      <category term="协议" scheme="https://zhilongao.github.io/categories/java/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%8D%8F%E8%AE%AE/"/>
     
     
   </entry>

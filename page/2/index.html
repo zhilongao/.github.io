@@ -287,6 +287,15 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
+                            新特性
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/java-style-lambda/">lambda和stream</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
                             框架
                         </a>
                          <ul class="unstyled" id="tree" > 
@@ -491,6 +500,85 @@
 </aside>
             
             <section id="main">
+        <article id="post-mongodb-base" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/数据库/">数据库</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/数据库/mongodb/">mongodb</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/mongo/">mongo</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/mongodb-base/">
+            <time datetime="2019-09-03T03:45:03.000Z" itemprop="datePublished">2019-09-03</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/mongodb-base.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/mongodb-base.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/mongodb-base.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/mongodb-base/">mongodb-base</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h6 id="安装步骤-centos7"><a href="#安装步骤-centos7" class="headerlink" title="安装步骤(centos7)"></a><code>安装步骤(centos7)</code></h6><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">1.下载安装包</span><br><span class="line">	wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel62-3.2.10.tgz</span><br><span class="line">2.解压安装包</span><br><span class="line">	tar -zxvf mongodb-linux-x86_64-rhel62-3.2.10.tgz </span><br><span class="line">3.将解压目录移动到(/usr/local/mongodb)</span><br><span class="line">	mv mongodb-linux-x86_64-rhel62-3.2.10 /usr/local/mongodb</span><br><span class="line">4.在/usr/local/mongodb目录下创建/data/db目录和/logs目录</span><br><span class="line">	mkdir -p /usr/local/mongodb/data/db </span><br><span class="line">	mkdir -p /usr/local/mongodb/logs</span><br><span class="line">5.在/usr/local/mongodb/logs目录下创建mongodb.log文件</span><br><span class="line">	touch mongodb.log</span><br><span class="line">6.在/usr/local/mongodb/bin目录下创建mongodb的配置文件</span><br><span class="line">	touch mongodb.conf</span><br><span class="line">7.编辑mongodb.conf文件</span><br><span class="line">	vi mongodb.conf</span><br><span class="line">	编辑内容</span><br><span class="line">		dbpath = /usr/local/mongodb/data/db #数据文件存放目录</span><br><span class="line">		logpath = /usr/local/mongodb/logs/mongodb.log #日志文件存放目录</span><br><span class="line">		port = 27017  #端口</span><br><span class="line">		fork = true  #以守护程序的方式启用，即在后台运行</span><br><span class="line">		nohttpinterface = true</span><br><span class="line">		auth=true</span><br><span class="line">		bind_ip=0.0.0.0</span><br><span class="line">8.修改环境变量</span><br><span class="line">	vi /etc/profile</span><br><span class="line">	添加的内容</span><br><span class="line">		export MONGODB_HOME=/usr/local/mongodb</span><br><span class="line">		export PATH=$PATH:$MONGODB_HOME/bin</span><br><span class="line">9.编辑完成之后重启系统配置</span><br><span class="line">	source /etc/profile</span><br><span class="line">10.在/usr/local/mongodb/bin目录下启动mongodb</span><br><span class="line">	./mongod -f mongodb.conf</span><br><span class="line">11.关闭mongodb服务</span><br><span class="line">	./mongod -f ./mongodb.conf --shutdown</span><br><span class="line">12.开启27017端口</span><br><span class="line"></span><br><span class="line">13.使用shell登录到mongodb</span><br><span class="line">	./mongodb</span><br><span class="line"></span><br><span class="line">14.登录到相关数据库</span><br><span class="line">	use test</span><br><span class="line"></span><br><span class="line">15.创建用户</span><br><span class="line">	db.createUser(</span><br><span class="line">		&#123;</span><br><span class="line">			user: "test", </span><br><span class="line">			pwd: "test", </span><br><span class="line">			roles: [&#123; role: "readWrite", db: "test" &#125;]</span><br><span class="line">		&#125;</span><br><span class="line">	)</span><br><span class="line">16.修改配置，开启验证</span><br><span class="line">	auth=true</span><br><span class="line">17.重启服务</span><br><span class="line">	停止服务，然后启动</span><br><span class="line">18.登录</span><br><span class="line">	./mongodb</span><br><span class="line">19.验证</span><br><span class="line">	auth('test', 'test')(返回1代表成功)</span><br><span class="line">20.操作	</span><br><span class="line">	db.user.find()</span><br><span class="line">	db.user.insert(&#123;"name":'jack',"age": 12&#125;)</span><br></pre></td></tr></table></figure>
+
+<h6 id="基本操作-gt-java-api的crud"><a href="#基本操作-gt-java-api的crud" class="headerlink" title="基本操作-&gt;java api的crud"></a><code>基本操作-&gt;java api的crud</code></h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>. 引入依赖</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.mongodb&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mongo-java-driver&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.9.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>.java代码</span><br><span class="line"><span class="comment">// 工具类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MongoUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String baseUrl = <span class="string">"192.168.25.147:27017"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String userName = <span class="string">"test"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String passWord = <span class="string">"test"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String url = <span class="string">"mongodb://"</span>+ userName +<span class="string">":"</span>+ passWord + <span class="string">"@"</span>+ baseUrl + <span class="string">"/"</span>;</span><br><span class="line">    </span><br><span class="line">	<span class="comment">// 获取MongoDatabase</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MongoDatabase <span class="title">getConnection</span><span class="params">(String dataName)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取MongoClient</span></span><br><span class="line">        com.mongodb.client.MongoClient mongoClient = MongoClients.create(url + dataName);</span><br><span class="line">        <span class="comment">// 获取MongoDatabase</span></span><br><span class="line">        MongoDatabase db = mongoClient.getDatabase(dataName);</span><br><span class="line">        <span class="keyword">return</span> db;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 基本操作 -&gt; 获取所有</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">findAll</span><span class="params">(String databaseName, String collectionName)</span> </span>&#123;</span><br><span class="line">	MongoDatabase database = MongoUtil.getConnection(databaseName);</span><br><span class="line">    MongoCollection&lt;Document&gt; collection = database.getCollection(collectionName);</span><br><span class="line">    FindIterable&lt;Document&gt; documents = collection.find();</span><br><span class="line">    print(documents);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 基本操作 -&gt; 插入</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(String databaseName, String collectionName)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 获取database</span></span><br><span class="line">	MongoDatabase database = MongoUtil.getConnection(databaseName);</span><br><span class="line">	<span class="comment">// 获取Clooection</span></span><br><span class="line">	MongoCollection&lt;Document&gt; collection = database.getCollection(collectionName);</span><br><span class="line">	<span class="comment">// 创建Document</span></span><br><span class="line">	Document document = <span class="keyword">new</span> Document()</span><br><span class="line">                    .append(<span class="string">"name"</span>, <span class="string">"mick11"</span>)</span><br><span class="line">                    .append(<span class="string">"age"</span>, <span class="string">"33"</span>)</span><br><span class="line">                    .append(<span class="string">"address"</span>, <span class="string">"长沙"</span>)</span><br><span class="line">                    .append(<span class="string">"sex"</span>, <span class="string">"男"</span>);</span><br><span class="line">    <span class="comment">// 插入document                </span></span><br><span class="line">	collection.insertOne(document);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印所有</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(FindIterable&lt;Document&gt; documents)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (Document document : documents) &#123;</span><br><span class="line">		System.out.println(document.toJson());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-redis-advance" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1230,86 +1318,6 @@
 <p>​    串行化：针对所有的操作都会去加锁，普通的select操作会去加共享锁-&gt;select * from table in share mode。对于 update 等操作会加排他锁。若是一个事物查询操作时，正好有一个事物对改行的数据做修改操作。则该查询操作会阻塞，直到更新操作执行完成。</p>
 <p><code>9.如何理解快照读和当前读</code></p>
 <p>​    快照读：读取的数据是快照。当前读：读取的数据是数据库的最新的数据。</p>
-
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-tcp" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/分布式/">分布式</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/分布式/协议/">协议</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/tcp/">
-            <time datetime="2019-08-26T13:33:14.000Z" itemprop="datePublished">2019-08-26</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/tcp.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/tcp.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/tcp.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/tcp/">tcp</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-        
-        
-            <hr>
-<p><code>此时握手</code></p>
-<p><code>四次挥手</code></p>
-<p><code>为什么要三次握手</code></p>
-<p><code>为什么要四次挥手</code></p>
-<p><code>socket的几种状态</code></p>
-<p>​        <code>listen:侦听来自远方tcp端口的连接请求</code></p>
-<p>​        <code>syn-sent:在发送连接请求后，等待匹配的连接请求。</code></p>
-<p>​        <code>syn-receive:在收到和发送一个连接请求后，等待连接请求的确认</code></p>
-<p>​        <code>established:代表一个打开的连接，数据可以传送给用户</code></p>
 
             </div>
         

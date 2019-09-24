@@ -287,6 +287,15 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
+                            新特性
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/java-style-lambda/">lambda和stream</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
                             框架
                         </a>
                          <ul class="unstyled" id="tree" > 
@@ -491,6 +500,86 @@
 </aside>
             
             <section id="main">
+        <article id="post-tcp" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/分布式/">分布式</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/分布式/协议/">协议</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/tcp/">
+            <time datetime="2019-08-26T13:33:14.000Z" itemprop="datePublished">2019-08-26</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/tcp.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/tcp.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/tcp.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/tcp/">tcp</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <hr>
+<p><code>此时握手</code></p>
+<p><code>四次挥手</code></p>
+<p><code>为什么要三次握手</code></p>
+<p><code>为什么要四次挥手</code></p>
+<p><code>socket的几种状态</code></p>
+<p>​        <code>listen:侦听来自远方tcp端口的连接请求</code></p>
+<p>​        <code>syn-sent:在发送连接请求后，等待匹配的连接请求。</code></p>
+<p>​        <code>syn-receive:在收到和发送一个连接请求后，等待连接请求的确认</code></p>
+<p>​        <code>established:代表一个打开的连接，数据可以传送给用户</code></p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-project-ask" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1512,96 +1601,6 @@
 <h6 id="sort命令"><a href="#sort命令" class="headerlink" title="sort命令"></a><code>sort命令</code></h6><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> redis的sort命令可以对列表键 集合键或者有序集合键的值进行排序</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>############# 最简单的排序 sort #########</span><br><span class="line"><span class="meta">#</span> 插入元素</span><br><span class="line"><span class="meta">redis&gt;</span> rpush numbers 5 3 1 4 2</span><br><span class="line">(integer) 5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 按照插入顺序排列的列表元素</span><br><span class="line"><span class="meta">redis&gt;</span>lrange numbers 0 -1</span><br><span class="line"><span class="meta">#</span> 元素的输出顺序为 "5" "3" "1" "4" "2"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 按值从小到大有序排列的列表元素(默认升序排列asc)</span><br><span class="line"><span class="meta">redis&gt;</span> sort numbers</span><br><span class="line"><span class="meta">#</span> 元素的输出顺序为 "1" "2" "3" "4" "5"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 按值从大到小有序排列的列表元素</span><br><span class="line"><span class="meta">redis&gt;</span> sort numbers desc</span><br><span class="line"><span class="meta">#</span> 元素的输出顺序为 "5" "4" "3" "2" "1"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>########### 使用 sort和alpha选项对字符串进行排序########</span><br><span class="line"><span class="meta">#</span> 插入元素</span><br><span class="line"><span class="meta">reids&gt;</span> sadd alphabet a b c d e f g</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 乱序排列的集合元素</span><br><span class="line"><span class="meta">redis&gt;</span> smembers alphabet</span><br><span class="line"><span class="meta">#</span> 输出顺序为 "d" "a" "c" "b" "g" "e" "f"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 集合元素排序，使用alpha，asc升序排列</span><br><span class="line"><span class="meta">redis&gt;</span> sort alphabet alpha</span><br><span class="line"><span class="meta">#</span> 输出顺序为 "a" "b" "c" "d" "e" "f" "g"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 集合元素排序，使用alpha，desc降序排列</span><br><span class="line"><span class="meta">redis&gt;</span> sort alphabet alpha desc</span><br><span class="line"><span class="meta">#</span> 输出顺序为 "g" "f" "e" "d" "c" "b" "a"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>########### 使用sort和by选项对元素排序 ############</span><br><span class="line"><span class="meta">#</span> 插入元素</span><br><span class="line"><span class="meta">redis&gt;</span> zadd test-result 3.0 jack 3.5 peter 4.0 tom</span><br><span class="line">(integer) 3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 普通输出，按照元素的分值排序</span><br><span class="line"><span class="meta">redis&gt;</span> zrange test-result 0 -1</span><br><span class="line"><span class="meta">#</span> 输出顺序为 "jack" "peter" "tom"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 为各个元素设置序号</span><br><span class="line"><span class="meta">redis&gt;</span> mset peter_number 1 tom_number 2 jack_number 3</span><br><span class="line">ok</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 以序号为权重，对集合中的元素进行排序</span><br><span class="line"><span class="meta">redis&gt;</span> sort test-result by *_number</span><br><span class="line"><span class="meta">#</span> 输出顺序为 "peter" "tom" "jack"</span><br></pre></td></tr></table></figure>
 
 <h6 id="scan命令"><a href="#scan命令" class="headerlink" title="scan命令"></a><code>scan命令</code></h6><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">// scan命令的使用</span><br><span class="line">// scan命令提供了三个参数,第一个参数是cursor整数值，第二个是key的正则模式，第三个是遍历的limit hint。第一次遍历时，cursor值为0，然后将返回结果中第一个整数值作为下一次遍历的cursor。一直遍历到返回的cursor值为0时结束。</span><br><span class="line"></span><br><span class="line">// 可以同过java的jedis客户端插入一些key</span><br><span class="line">int count = 10000;</span><br><span class="line">Jedis jedis = new Jedis("192.168.25.150", 6379);</span><br><span class="line">for (int i = 0; i &lt; count; i++) &#123;</span><br><span class="line">    jedis.set("key" + i, i + "");</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 下面是redis-cli操作</span><br><span class="line">127.0.0.1:6379&gt; scan 0 match key99* count 1000</span><br><span class="line">1) "10904"</span><br><span class="line">2) 1) "key9987"</span><br><span class="line">   2) "key9924"</span><br><span class="line">   3) "key9992"</span><br><span class="line">   4) "key9941"</span><br><span class="line">   5) "key9901"</span><br><span class="line">   6) "key9945"</span><br><span class="line">   7) "key9984"</span><br><span class="line">   8) "key9903"    </span><br><span class="line">127.0.0.1:6379&gt; scan 10904 match key99* count 1000</span><br><span class="line">1) "14028"</span><br><span class="line">2) 1) "key9989"</span><br><span class="line">   2) "key992"</span><br><span class="line">   3) "key9997"</span><br><span class="line">   4) "key9968"</span><br><span class="line">   5) "key996"</span><br><span class="line">   6) "key9958"    </span><br><span class="line">        </span><br><span class="line">//下面是java客户端操作代码段</span><br><span class="line">String cursor = "0";</span><br><span class="line">ScanParams scanParams = new ScanParams();</span><br><span class="line">scanParams.match("key99*");</span><br><span class="line">scanParams.count(1000);</span><br><span class="line">while (true) &#123;</span><br><span class="line">    ScanResult&lt;String&gt; result = jedis.scan(cursor, scanParams);</span><br><span class="line">    List&lt;String&gt; resultList = result.getResult();</span><br><span class="line">    for (String resultStr : resultList) &#123;</span><br><span class="line">    	System.out.print(resultStr + "\t");</span><br><span class="line">	&#125;</span><br><span class="line">	System.out.println("\n--------------");</span><br><span class="line">	String stringCursor = result.getStringCursor();</span><br><span class="line">	// 当游标为再次为0时,表示已经遍历完毕,直接跳出循环</span><br><span class="line">	if (stringCursor.equals("0")) &#123;</span><br><span class="line">		break;</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		cursor = stringCursor;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-HashMap" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/源码/">源码</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/HashMap/">
-            <time datetime="2019-08-16T14:01:46.000Z" itemprop="datePublished">2019-08-16</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/HashMap.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/HashMap.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/HashMap.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/HashMap/">HashMap</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-        
-        
-            <hr>
-1.HashMap的数据结构
-    在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树
-
-<hr>
-2.HashMap的put方法的过程
-    a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resize方法初始化
-    b.通过key的hash值和数组长度计算出该元素在数组中的位置
-    c1.若是数组上没有元素,构建Node节点,存储该元素
-    c21.若是该数组上有元素,且第一个节点的key与要存储的key相等,用变量保存该节点。
-    c22.若是该数组上有元素,且第一个节点的key与要存储的key不相等,需要判断该节点类型。
-        若是该节点属于红黑树,将元素插入到红黑树。
-        若是该节点属于链表,循环遍历链表,若是没有遇到key相同的,将key-value创建称为节点,插入到链表的尾部。判断是否需要转成红黑树，若是需要，将链表转成红黑树。
-    d.前面的操作中，若是找到与key相同的节点,根据条件判断是否需要覆盖,若是需要覆盖,直接修改原有节点的value。
-    f.将元素的个数size加1并判断是否需要扩容,若是需要扩容,调用resize方法扩容。
-
-<hr>
-3.HashMap的resize方法
-    resize方法涉及到两个大的步骤,首先是确定新数组的大小已经下次的扩容时机，新数组大小为原有数组大小的两倍，扩容变量也扩大为原有的两倍。其次是将原有数组的元素迁移至新的数组中,其中数组元素只会在两个地方，一个在[原下标]的地方，另一个在[原下标+原容量]的位置。
 
 
             </div>
