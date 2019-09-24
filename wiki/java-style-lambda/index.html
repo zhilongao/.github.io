@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="zl&#39;s blog">
 <meta property="og:description" content="参考文章 功能性接口的简化  lambda表达式可以简化Runnable，Comparator这种接口的写法。  /*****lambda表达式简化线程的创建*****/// 普通写法Thread t1 = new Thread(new Runnable() &amp;#123;    @Override    public void run() &amp;#123;		// do something    &amp;#">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-24T02:50:15.533Z">
+<meta property="og:updated_time" content="2019-09-24T09:30:59.800Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lambda和stream">
 <meta name="twitter:description" content="参考文章 功能性接口的简化  lambda表达式可以简化Runnable，Comparator这种接口的写法。  /*****lambda表达式简化线程的创建*****/// 普通写法Thread t1 = new Thread(new Runnable() &amp;#123;    @Override    public void run() &amp;#123;		// do something    &amp;#">
@@ -575,9 +575,28 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>. 解决了接口的演化问题（接口中新增默认实现方法，不影响原先的实现类）</span><br><span class="line"><span class="number">2</span>. 实现了行为的多继承 （一个类可以实现多个接口的默认方法）</span><br></pre></td></tr></table></figure>
 
 <h6 id="stream"><a href="#stream" class="headerlink" title="stream"></a><code>stream</code></h6><hr>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//</span></span><br></pre></td></tr></table></figure>
+<p><code>Stream原理</code>：流式操作，由 jdk 内部分配多个线程来执行 stream 内部的操作。并发流使用的默认线程数等于你机器的处理器核心数。</p>
+<p><code>Stream场景</code>：由于 Stream 是由 jdk 内部来为任务分配线程，所以在 一些耗时操作慎用 Stream。</p>
+<p><code>Stream应用</code>：Stream.of()方法，可以接收单个参数，也可以接收一个数组参数，将其转换为一个Stream对象。下面是几个Stream的简单应用demo。</p>
+<hr>
+<p>（1）实例代码(forEach方法遍历)-&gt;接收一个参数, 通过forEach方法接收一个功能接口。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">list.add(<span class="number">1</span>);</span><br><span class="line">list.add(<span class="number">2</span>);</span><br><span class="line">list.add(<span class="number">3</span>);</span><br><span class="line">Stream.of(list).forEach(System.out::println);</span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="comment">// [1, 2, 3]</span></span><br></pre></td></tr></table></figure>
 
+<hr>
+<p>（2）实例代码(forEach方法遍历)-&gt;接收一个数组，通过forEach方法接收一个功能接口。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Stream.of(list.toArray()).forEach(System.out::println);</span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
 
+<hr>
+<p>（3）实例代码(filter方法过滤)-&gt; 找处以小写字母’a’开头的字符串</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Stream.of(<span class="string">"Abc"</span>, <span class="string">"abc"</span>, <span class="string">"ccc"</span>, <span class="string">"asD"</span>)</span><br><span class="line">    .filter((str) -&gt; &#123;<span class="keyword">return</span> str.startsWith(<span class="string">"a"</span>);&#125;)</span><br><span class="line">    .forEach(System.out::println);</span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="comment">// abc</span></span><br><span class="line"><span class="comment">// asD</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>（4）实例方法-&gt;(map方法建立映射)-&gt; 统计给出数组中每个字符串的长度</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Stream.of(<span class="string">"A"</span>, <span class="string">"abc"</span>, <span class="string">"cc"</span>, <span class="string">"a"</span>)</span><br><span class="line">    .map((str) -&gt; str.length())</span><br><span class="line">    .forEach(System.out::println);</span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p> （5）实例方法-&gt;(reduce方法的使用) -&gt; 初始值为 100，计算初始值加1到5的值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Integer&gt; integerList = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>);</span><br><span class="line"><span class="keyword">int</span> init = <span class="number">100</span>;</span><br><span class="line">Integer result = integerList.stream()</span><br><span class="line">    .reduce(init, (a, b) -&gt; a + b);</span><br><span class="line">System.out.println(<span class="string">"result-&gt;"</span> + result);</span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="comment">// 115</span></span><br></pre></td></tr></table></figure>
             </div>
         
         <footer class="article-footer">
