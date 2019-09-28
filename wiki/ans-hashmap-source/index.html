@@ -12,7 +12,7 @@
     <meta name="description" content="1.HashMap的数据结构     在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树   2.HashMap的put方法的过程     a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resize方法初始化     b.通过key的hash值和数组长度计算出该元素在数组中的位置     c1.若是数组上没有元素,构建Node节点,存储该元素     c21.若是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HashMap">
-<meta property="og:url" content="https://zhilongao.github.io/wiki/HashMap/index.html">
+<meta property="og:url" content="https://zhilongao.github.io/wiki/ans-hashmap-source/index.html">
 <meta property="og:site_name" content="zl&#39;s blog">
 <meta property="og:description" content="1.HashMap的数据结构     在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树   2.HashMap的put方法的过程     a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resize方法初始化     b.通过key的hash值和数组长度计算出该元素在数组中的位置     c1.若是数组上没有元素,构建Node节点,存储该元素     c21.若是">
 <meta property="og:locale" content="zh-CN">
@@ -299,7 +299,7 @@
                             &nbsp;
                             源码
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/wiki/HashMap/">HashMap</a></li>  <li class="file"><a href="/wiki/reentlock-source-analysis/">ReentrantLock</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/wiki/ans-hashmap-source/">HashMap</a></li>  <li class="file"><a href="/wiki/ans-reentlock-source/">ReentrantLock</a></li>  <li class="file"><a href="/wiki/ans-aqs-source/">AQS</a></li>  <li class="file"><a href="/wiki/ans-unsafe-source/">Unsafe</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -500,7 +500,7 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main"><article id="post-HashMap" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-ans-hashmap-source" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -517,7 +517,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/wiki/HashMap/">
+        <a href="/wiki/ans-hashmap-source/">
             <time datetime="2019-08-16T14:01:46.000Z" itemprop="datePublished">2019-08-16</time>
         </a>
     </div>
@@ -529,13 +529,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/HashMap.md'> Source </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/ans-hashmap-source.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/HashMap.md'> Edit </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/ans-hashmap-source.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/HashMap.md'> History </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/ans-hashmap-source.md'> History </a>
                             </div>
                         
                     </div>
