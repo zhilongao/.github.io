@@ -3,26 +3,23 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     
-    <title>排序算法 | zl&#39;s blog</title>
+    <title>单链表 | zl&#39;s blog</title>
     
     
-        <meta name="keywords" content="排序算法">
+        <meta name="keywords" content="单链表">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="常见的排序算法 1.插入排序 // 插入排序算法// 时间复杂度：平均情况:o(n^2)  最好情况:o(n) 最坏情况:o(n^2) // 空间复杂度: o(1)// 特点: 稳定public static void insertSort(int[] array) &amp;#123;    int i,j;    for (i = 1; i &amp;lt; array.length; i ++) &amp;#123">
+    <meta name="description" content="单链表常见操作 1.如何实现一个单链表的逆序输出-&amp;gt;反转单链表 public static ListNode reverse(ListNode head) &amp;#123;	ListNode prev = null;    ListNode next = null;    while (head != null &amp;amp;&amp;amp; (next = head.next) != null) &amp;#1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="排序算法">
-<meta property="og:url" content="https://zhilongao.github.io/wiki/arithmetic-sort/index.html">
+<meta property="og:title" content="单链表">
+<meta property="og:url" content="https://zhilongao.github.io/wiki/alg-linkedlist-simple1/index.html">
 <meta property="og:site_name" content="zl&#39;s blog">
-<meta property="og:description" content="常见的排序算法 1.插入排序 // 插入排序算法// 时间复杂度：平均情况:o(n^2)  最好情况:o(n) 最坏情况:o(n^2) // 空间复杂度: o(1)// 特点: 稳定public static void insertSort(int[] array) &amp;#123;    int i,j;    for (i = 1; i &amp;lt; array.length; i ++) &amp;#123">
+<meta property="og:description" content="单链表常见操作 1.如何实现一个单链表的逆序输出-&amp;gt;反转单链表 public static ListNode reverse(ListNode head) &amp;#123;	ListNode prev = null;    ListNode next = null;    while (head != null &amp;amp;&amp;amp; (next = head.next) != null) &amp;#1">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/zhilongao/images-repository/master/006y8mN6ly1g6mbx8snqyg30my075wqv.gif">
-<meta property="og:image" content="https://raw.githubusercontent.com/zhilongao/images-repository/master/7789414-007520d3d4a7610c.gif">
-<meta property="og:updated_time" content="2019-09-25T11:41:18.975Z">
+<meta property="og:updated_time" content="2019-09-25T11:42:36.482Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="排序算法">
-<meta name="twitter:description" content="常见的排序算法 1.插入排序 // 插入排序算法// 时间复杂度：平均情况:o(n^2)  最好情况:o(n) 最坏情况:o(n^2) // 空间复杂度: o(1)// 特点: 稳定public static void insertSort(int[] array) &amp;#123;    int i,j;    for (i = 1; i &amp;lt; array.length; i ++) &amp;#123">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/zhilongao/images-repository/master/006y8mN6ly1g6mbx8snqyg30my075wqv.gif">
+<meta name="twitter:title" content="单链表">
+<meta name="twitter:description" content="单链表常见操作 1.如何实现一个单链表的逆序输出-&amp;gt;反转单链表 public static ListNode reverse(ListNode head) &amp;#123;	ListNode prev = null;    ListNode next = null;    while (head != null &amp;amp;&amp;amp; (next = head.next) != null) &amp;#1">
     
 
     
@@ -374,16 +371,16 @@
                             &nbsp;
                             字符串
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/string-ask/">字符串</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-string-simple1/">字符串</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory open">
+                    <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             排序
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/wiki/arithmetic-sort/">排序算法</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-sort-simple/">排序算法</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -392,16 +389,16 @@
                             &nbsp;
                             数组
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/array-ask/">array-ask</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-array-simple1/">array-ask</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             链表
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/linked-list-ask/">单链表</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/wiki/alg-linkedlist-simple1/">单链表</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -503,7 +500,7 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main"><article id="post-arithmetic-sort" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-alg-linkedlist-simple1" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -513,15 +510,15 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/算法/">算法</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/算法/排序/">排序</a>
+        <a class="article-category-link" href="/categories/算法/">算法</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/算法/链表/">链表</a>
     </div>
 
                         
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/wiki/arithmetic-sort/">
-            <time datetime="2019-08-31T01:19:15.000Z" itemprop="datePublished">2019-08-31</time>
+        <a href="/wiki/alg-linkedlist-simple1/">
+            <time datetime="2019-08-31T03:56:40.000Z" itemprop="datePublished">2019-08-31</time>
         </a>
     </div>
 
@@ -532,13 +529,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/arithmetic-sort.md'> Source </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/alg-linkedlist-simple1.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/arithmetic-sort.md'> Edit </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/alg-linkedlist-simple1.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/arithmetic-sort.md'> History </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/alg-linkedlist-simple1.md'> History </a>
                             </div>
                         
                     </div>
@@ -546,7 +543,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            排序算法
+            单链表
         </h1>
     
 
@@ -559,26 +556,9 @@
             
         
         
-            <p><code>常见的排序算法</code></p>
-<p><code>1.插入排序</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 插入排序算法</span></span><br><span class="line"><span class="comment">// 时间复杂度：平均情况:o(n^2)  最好情况:o(n) 最坏情况:o(n^2) </span></span><br><span class="line"><span class="comment">// 空间复杂度: o(1)</span></span><br><span class="line"><span class="comment">// 特点: 稳定</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; array.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">int</span> temp = array[i];</span><br><span class="line">        <span class="keyword">for</span> (j = i - <span class="number">1</span>; j &gt;=<span class="number">0</span> &amp;&amp; array[j] &gt; temp; j --) &#123;</span><br><span class="line">            <span class="comment">// 将数组中的元素后移一位</span></span><br><span class="line">            array[j + <span class="number">1</span>] = array[j];</span><br><span class="line">        &#125;</span><br><span class="line">        array[j + <span class="number">1</span>] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>2.选择排序</code></p>
-<p><code>原理</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 选择排序算法</span></span><br><span class="line"><span class="comment">// 时间复杂度: 平均情况:o(n^2)  最好情况:o(n^2) 最坏情况:o(n^2)  </span></span><br><span class="line"><span class="comment">// 空间复杂度: o(1)</span></span><br><span class="line"><span class="comment">// 特点: 不稳定</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">selectSort</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; array.length; j ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (array[i] &gt; array[j]) &#123;</span><br><span class="line">                <span class="keyword">int</span> temp = array[i];</span><br><span class="line">                array[i] = array[j];</span><br><span class="line">                array[j] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>3.交换排序-&gt;冒泡排序</code></p>
-<p><code>原理</code></p>
-<p><img src="https://raw.githubusercontent.com/zhilongao/images-repository/master/006y8mN6ly1g6mbx8snqyg30my075wqv.gif" alt="冒泡排序"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 冒泡排序算法</span></span><br><span class="line"><span class="comment">// 时间复杂度: 平均情况:o(n^2)  最好情况:o(n) 最坏情况:o(n^2)</span></span><br><span class="line"><span class="comment">// 空间复杂度: o(1)</span></span><br><span class="line"><span class="comment">// 特点：稳定</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; array.length - i - <span class="number">1</span>; j ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (array[j] &gt; array[j + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">int</span> temp = array[j];</span><br><span class="line">                array[j] = array[j + <span class="number">1</span>];</span><br><span class="line">                array[j + <span class="number">1</span>] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>4.交换排序-&gt;快速排序</code></p>
-<p><code>原理</code></p>
-<p><img src="https://raw.githubusercontent.com/zhilongao/images-repository/master/7789414-007520d3d4a7610c.gif" alt="快速排序"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 快速排序算法</span></span><br><span class="line"><span class="comment">// 时间复杂度: 平均情况:o(nlog2^n) 最好情况:o(nlog2^n) 最坏情况:o(n^2)</span></span><br><span class="line"><span class="comment">// 空间复杂度: o(nlog2^n)</span></span><br><span class="line"><span class="comment">// 特点：不稳定</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">fastSort</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (low &gt; high) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> i = low;</span><br><span class="line">    <span class="keyword">int</span> j = fast;</span><br><span class="line">    <span class="keyword">int</span> temp = array[low];</span><br><span class="line">    <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">        <span class="comment">// 从右向左找到第一个小于temp的元素,保存其下标</span></span><br><span class="line">        <span class="keyword">while</span> (array[j] &gt; temp &amp;&amp; i &lt; j) &#123;</span><br><span class="line">            j --;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 从左向右找到第一个大于temp的元素，保存其下标</span></span><br><span class="line">        <span class="keyword">while</span> (array[i] &lt;= temp &amp;&amp; i &lt; j) &#123;</span><br><span class="line">            i ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 交换这两个元素</span></span><br><span class="line">        <span class="keyword">int</span> swap = array[i];</span><br><span class="line">        array[i] = array[j];</span><br><span class="line">        array[j] = swap;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 交换temp</span></span><br><span class="line">    array[low] = array[i];</span><br><span class="line">    array[i] = temp;</span><br><span class="line">    <span class="comment">// 快排temp左半边</span></span><br><span class="line">    fastSort(array, low, j - <span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 快排temp右半边</span></span><br><span class="line">    fastSort(array, j + <span class="number">1</span>, high);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>5.归并排序</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 归并排序算法</span></span><br><span class="line"><span class="comment">// 时间复杂度: 平均情况:o(nlog2^n) 最好情况:o(nlog2^n) 最坏情况:o(nlog2^n)</span></span><br><span class="line"><span class="comment">// 空间复杂度：o(1)</span></span><br><span class="line"><span class="comment">// 特点: 稳定</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title">sortMerge</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">    sort(array, <span class="number">0</span>, array.length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> array[], <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (L == R) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (R + L) / <span class="number">2</span>;</span><br><span class="line">    <span class="comment">// 排序左半部分</span></span><br><span class="line">    sort(array, L, mid);</span><br><span class="line">    <span class="comment">// 排序右半部分</span></span><br><span class="line">    sort(array, mid + <span class="number">1</span>, R);</span><br><span class="line">    <span class="comment">// 合并 </span></span><br><span class="line">    merge(array, L, mid, R);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> L, <span class="keyword">int</span> mid, <span class="keyword">int</span> R)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] temp = <span class="keyword">new</span> <span class="keyword">int</span>[R - L + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> p1 = L;</span><br><span class="line">    <span class="keyword">int</span> p2 = mid + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 将数组排序后放入到临时数组temp中</span></span><br><span class="line">    <span class="keyword">while</span> (p1 &lt;= mid &amp;&amp; p2 &lt;= R) &#123;</span><br><span class="line">        <span class="keyword">if</span> (array[p1] &lt; array[p2]) &#123;</span><br><span class="line">            temp[i++] = array[p1++];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            temp[i++] = array[p2++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(p1 &lt;= mid) &#123;</span><br><span class="line">        temp[i++] = array[p1++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(p2 &lt;= R) &#123;</span><br><span class="line">        temp[i++] = array[p2++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将临时数组中的元素移动到array中</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; temp.length; k ++) &#123;</span><br><span class="line">        array[L + k] = temp[k];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p><code>单链表常见操作</code></p>
+<p><code>1.如何实现一个单链表的逆序输出-&gt;反转单链表</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ListNode <span class="title">reverse</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">	ListNode prev = <span class="keyword">null</span>;</span><br><span class="line">    ListNode next = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">while</span> (head != <span class="keyword">null</span> &amp;&amp; (next = head.next) != <span class="keyword">null</span>) &#123;</span><br><span class="line">    	head.next = prev;</span><br><span class="line">        prev = head;</span><br><span class="line">        head = next;</span><br><span class="line">    &#125;</span><br><span class="line">    head.next = prev;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
             </div>
@@ -592,19 +572,19 @@
     
 <nav id="article-nav">
     
-        <a href="/wiki/linked-list-ask/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/wiki/redis-advance/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
-                    单链表
+                    实际应用
                 
             </div>
         </a>
     
     
-        <a href="/wiki/jvm-command/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/wiki/alg-sort-simple/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">jvm-command</div>
+            <div class="article-nav-title">排序算法</div>
         </a>
     
 </nav>

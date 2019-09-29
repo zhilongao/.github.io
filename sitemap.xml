@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zhilongao.github.io/wiki/alg-string-simple1/</loc>
+    
+    <lastmod>2019-09-29T08:26:16.315Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zhilongao.github.io/wiki/ans-unsafe-source/</loc>
     
     <lastmod>2019-09-28T06:11:58.370Z</lastmod>
@@ -9,9 +16,9 @@
   </url>
   
   <url>
-    <loc>https://zhilongao.github.io/wiki/string-ask/</loc>
+    <loc>https://zhilongao.github.io/wiki/ans-reentlock-source/</loc>
     
-    <lastmod>2019-09-28T04:52:27.236Z</lastmod>
+    <lastmod>2019-09-27T09:29:08.157Z</lastmod>
     
   </url>
   
@@ -23,28 +30,21 @@
   </url>
   
   <url>
-    <loc>https://zhilongao.github.io/wiki/ans-reentlock-source/</loc>
-    
-    <lastmod>2019-09-27T08:11:22.222Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zhilongao.github.io/wiki/linked-list-ask/</loc>
+    <loc>https://zhilongao.github.io/wiki/alg-linkedlist-simple1/</loc>
     
     <lastmod>2019-09-25T11:42:36.482Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://zhilongao.github.io/wiki/array-ask/</loc>
+    <loc>https://zhilongao.github.io/wiki/alg-array-simple1/</loc>
     
     <lastmod>2019-09-25T11:41:41.275Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://zhilongao.github.io/wiki/arithmetic-sort/</loc>
+    <loc>https://zhilongao.github.io/wiki/alg-sort-simple/</loc>
     
     <lastmod>2019-09-25T11:41:18.975Z</lastmod>
     

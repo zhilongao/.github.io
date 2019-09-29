@@ -370,7 +370,7 @@
                             &nbsp;
                             字符串
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/string-ask/">字符串</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-string-simple1/">字符串</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -379,7 +379,7 @@
                             &nbsp;
                             排序
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/arithmetic-sort/">排序算法</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-sort-simple/">排序算法</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -388,7 +388,7 @@
                             &nbsp;
                             数组
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/array-ask/">array-ask</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-array-simple1/">array-ask</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -397,7 +397,7 @@
                             &nbsp;
                             链表
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/linked-list-ask/">单链表</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-linkedlist-simple1/">单链表</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -500,7 +500,7 @@
 </aside>
             
             <section id="main">
-        <article id="post-string-ask" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-alg-string-simple1" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -517,7 +517,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/wiki/string-ask/">
+        <a href="/wiki/alg-string-simple1/">
             <time datetime="2019-09-06T02:25:40.000Z" itemprop="datePublished">2019-09-06</time>
         </a>
     </div>
@@ -529,13 +529,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/string-ask.md'> Source </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/alg-string-simple1.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/string-ask.md'> Edit </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/alg-string-simple1.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/string-ask.md'> History </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/alg-string-simple1.md'> History </a>
                             </div>
                         
                     </div>
@@ -543,7 +543,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/wiki/string-ask/">字符串</a>
+            <a class="article-title" href="/wiki/alg-string-simple1/">字符串</a>
         </h1>
     
 
@@ -581,6 +581,10 @@
 
 <h6 id="压缩字符串-443"><a href="#压缩字符串-443" class="headerlink" title="压缩字符串(443)"></a><code>压缩字符串(443)</code></h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 题目要求: 给定一组字符串，使用原地算法将其压缩。</span></span><br><span class="line"><span class="comment">// 题目解法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compress</span><span class="params">(<span class="keyword">char</span>[] chars)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> anchor = <span class="number">0</span>; <span class="comment">// 描点，定位可以元素</span></span><br><span class="line">    <span class="keyword">int</span> write = <span class="number">0</span>; <span class="comment">// 写下标，定位写的位置</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> read = <span class="number">0</span>; read &lt; chars.length; read ++) &#123;</span><br><span class="line">        <span class="comment">// 若是当前元素为最后一个元素或者是后一个元素与当前元素不相等，执行写入与统计写入操作</span></span><br><span class="line">        <span class="keyword">if</span> ((read == chars.length - <span class="number">1</span>) || (chars[read + <span class="number">1</span>] != chars[read])) &#123;</span><br><span class="line">            <span class="comment">// 将anchor位置处的元素写入到write位置处</span></span><br><span class="line">            chars[write ++] = chars[anchor];</span><br><span class="line">            <span class="comment">// 判断该元素是否需要压缩</span></span><br><span class="line">            <span class="keyword">if</span> (read &gt; anchor) &#123;</span><br><span class="line">                String numStr = read - anchor + <span class="number">1</span> + <span class="string">""</span>;</span><br><span class="line">                <span class="keyword">char</span>[] numArr = numStr.toCharArray();</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">char</span> num : numArr) &#123;</span><br><span class="line">                    chars[write ++] = num;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 将锚点移动到下一个元素</span></span><br><span class="line">            anchor = read + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 返回覆盖的个数</span></span><br><span class="line">    <span class="keyword">return</span> write;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h6 id="字符串中的第一个唯一字符-387"><a href="#字符串中的第一个唯一字符-387" class="headerlink" title="字符串中的第一个唯一字符(387)"></a><code>字符串中的第一个唯一字符(387)</code></h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">题目要求: 给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。</span></span><br><span class="line"><span class="comment">说明: 你可以假设字符串只含有小写字母。</span></span><br><span class="line"><span class="comment">示例: s = "leetcode" 返回 0.		s = "loveleetcode" 返回 2.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">// 第一中解法，遍历两次字符串，哈希表存储每个字符和其出现的个数</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">firstUniqCharA</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    Map&lt;Character, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;Character, Integer&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i ++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!map.containsKey(s.charAt(i))) &#123;</span><br><span class="line">            map.put(s.charAt(i), <span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            map.put(s.charAt(i), map.get(s.charAt(i)) + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s.length(); j ++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (map.get(s.charAt(j)) == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种解法: 仅遍历26个字母，唯一的特征：第一个字符和最后一个字符的index相同</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">firstUniqCharB</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span>[] originalChar = <span class="string">"abcdefghijklmnopqrstuvwxyz"</span>.toCharArray();</span><br><span class="line">    <span class="keyword">int</span> index = s.length();</span><br><span class="line">    <span class="comment">// 此处循环26次</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">char</span> c : originalChar) &#123;</span><br><span class="line">        <span class="keyword">int</span> left = s.indexOf(c);</span><br><span class="line">        <span class="keyword">if</span> (left != -<span class="number">1</span> &amp;&amp; left == s.lastIndexOf(c)) &#123;</span><br><span class="line">            index = Math.min(index, left);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(index != s.length()) &#123;</span><br><span class="line">        <span class="keyword">return</span> index;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="赎金信-383"><a href="#赎金信-383" class="headerlink" title="赎金信(383)"></a><code>赎金信(383)</code></h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">题目要求: 给出两个字符串，用第二个字符串中的字符拼接成为第一个字符串，每个字符只能使用一次。可以返回true，否则返回false。</span></span><br><span class="line"><span class="comment">说明: 你可以假设两个字符串均只含有小写字母。</span></span><br><span class="line"><span class="comment">实例：</span></span><br><span class="line"><span class="comment">	canConstruct("a", "b") -&gt; false  </span></span><br><span class="line"><span class="comment">	canConstruct("aa", "ab") -&gt; false</span></span><br><span class="line"><span class="comment">	canConstruct("aa", "aab") -&gt; true</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">canConstruct</span><span class="params">(String ransomNote, String magazine)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 第一个字符串里面的字符能不能由第二个字符串里面的字符构成，若可以，返回true。否则返回false。</span></span><br><span class="line">    <span class="comment">// 将26 个字母个数映射到一个26大小的数组上</span></span><br><span class="line">    <span class="keyword">int</span>[] bucket = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">26</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; magazine.length(); i ++) &#123;</span><br><span class="line">        bucket[magazine.charAt(i) - <span class="string">'a'</span>] ++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; ransomNote.length(); j ++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (-- bucket[ransomNote.charAt(j) - <span class="string">'a'</span>] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
             </div>
         
@@ -595,7 +599,7 @@
 
 
     
-        <article id="post-array-ask" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-alg-array-simple1" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -612,7 +616,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/wiki/array-ask/">
+        <a href="/wiki/alg-array-simple1/">
             <time datetime="2019-09-05T01:52:30.000Z" itemprop="datePublished">2019-09-05</time>
         </a>
     </div>
@@ -624,13 +628,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/array-ask.md'> Source </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/alg-array-simple1.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/array-ask.md'> Edit </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/alg-array-simple1.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/array-ask.md'> History </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/alg-array-simple1.md'> History </a>
                             </div>
                         
                     </div>
@@ -638,7 +642,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/wiki/array-ask/">array-ask</a>
+            <a class="article-title" href="/wiki/alg-array-simple1/">array-ask</a>
         </h1>
     
 
@@ -820,7 +824,7 @@
 
 
     
-        <article id="post-linked-list-ask" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-alg-linkedlist-simple1" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -837,7 +841,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/wiki/linked-list-ask/">
+        <a href="/wiki/alg-linkedlist-simple1/">
             <time datetime="2019-08-31T03:56:40.000Z" itemprop="datePublished">2019-08-31</time>
         </a>
     </div>
@@ -849,13 +853,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/linked-list-ask.md'> Source </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/alg-linkedlist-simple1.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/linked-list-ask.md'> Edit </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/alg-linkedlist-simple1.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/linked-list-ask.md'> History </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/alg-linkedlist-simple1.md'> History </a>
                             </div>
                         
                     </div>
@@ -863,7 +867,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/wiki/linked-list-ask/">单链表</a>
+            <a class="article-title" href="/wiki/alg-linkedlist-simple1/">单链表</a>
         </h1>
     
 
@@ -894,7 +898,7 @@
 
 
     
-        <article id="post-arithmetic-sort" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-alg-sort-simple" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -911,7 +915,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/wiki/arithmetic-sort/">
+        <a href="/wiki/alg-sort-simple/">
             <time datetime="2019-08-31T01:19:15.000Z" itemprop="datePublished">2019-08-31</time>
         </a>
     </div>
@@ -923,13 +927,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/arithmetic-sort.md'> Source </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/alg-sort-simple.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/arithmetic-sort.md'> Edit </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/alg-sort-simple.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/arithmetic-sort.md'> History </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/alg-sort-simple.md'> History </a>
                             </div>
                         
                     </div>
@@ -937,7 +941,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/wiki/arithmetic-sort/">排序算法</a>
+            <a class="article-title" href="/wiki/alg-sort-simple/">排序算法</a>
         </h1>
     
 
