@@ -269,7 +269,7 @@
                             &nbsp;
                             spring
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/spring/">spring</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-spring-xml/">xml驱动</a></li>  <li class="file"><a href="/wiki/fra-spring-annotation/">注解驱动</a></li>  <li class="file"><a href="/wiki/fra-spring-base/">基础知识</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -278,7 +278,7 @@
                             &nbsp;
                             spring-cloud
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/spring-cloud-config/">分布式配置</a></li>  <li class="file"><a href="/wiki/spring-cloud-loadbalance/">负载均衡</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-spring-cloud-config/">分布式配置</a></li>  <li class="file"><a href="/wiki/fra-spring-cloud-loadbalance/">负载均衡</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -287,7 +287,7 @@
                             &nbsp;
                             springboot
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/springboot/">springboot</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-springboot/">springboot</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -298,7 +298,7 @@
                             &nbsp;
                             源码
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/ans-hashmap-source/">HashMap</a></li>  <li class="file"><a href="/wiki/ans-reentlock-source/">ReentrantLock</a></li>  <li class="file"><a href="/wiki/ans-aqs-source/">AQS</a></li>  <li class="file"><a href="/wiki/ans-unsafe-source/">Unsafe</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/ans-hashmap-source/">HashMap</a></li>  <li class="file"><a href="/wiki/ans-reentlock-source/">ReentrantLock</a></li>  <li class="file"><a href="/wiki/ans-aqs-source/">AQS</a></li>  <li class="file"><a href="/wiki/ans-unsafe-source/">Unsafe</a></li>  <li class="file"><a href="/wiki/ans-countdownlatch-source/">CountDownLatch</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -500,7 +500,313 @@
 </aside>
             
             <section id="main">
-        <article id="post-spring" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-io" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/基础/">基础</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/基础/io/">io</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/io/">
+            <time datetime="2019-08-23T09:43:24.000Z" itemprop="datePublished">2019-08-23</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/io.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/io.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/io.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/io/">io</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <hr>
+<p>1.在jdk1.4，java引入了nio，nio是一种非阻塞io。</p>
+<hr>
+<ol start="2">
+<li>在nio中有三个概念</li>
+</ol>
+<ul>
+<li><p>缓冲区(buffer)：java nio中数据的读取和存放需要通过缓冲区。</p>
+</li>
+<li><p>通道(channel)：可以理解为io中流的概念 ，与流不同的是，一个通道中既可以进行数据的读取，也可以进行数据的写入，而在io模型中，数据的读取和写入会有专门的输入和输出流来进行操作。</p>
+</li>
+<li><p>选择器(select)：通道可以在选择器上注册相关的事件，而选择器会有一个专门的线程来负责轮询这些事件，当某个写入事件或是读取事件可写或可读时，会交给相应的线程来处理。</p>
+</li>
+</ul>
+<hr>
+<ol start="3">
+<li>通过java nio模拟一个服务端-客户端通信的实例</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * NIO Server服务</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NIOServer</span></span>&#123;</span><br><span class="line">    <span class="comment">// Selector-&gt;注册channel</span></span><br><span class="line">    Selector selector = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// ServerSocketChannel-&gt;服务端channel,类似ServerSocket</span></span><br><span class="line">    ServerSocketChannel serverSocketChannel;</span><br><span class="line">    <span class="comment">// 处理selector轮询事件</span></span><br><span class="line">    <span class="keyword">private</span> ChannelHandle handle;</span><br><span class="line">    <span class="comment">// NIO服务关闭标识</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> stop = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    NIOServer(<span class="keyword">int</span> port) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            selector = Selector.open();</span><br><span class="line">            serverSocketChannel = ServerSocketChannel.open();</span><br><span class="line">            <span class="comment">// 设置channel为非阻塞模式</span></span><br><span class="line">            serverSocketChannel.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">            <span class="comment">// 为channel绑定端口</span></span><br><span class="line">            serverSocketChannel.bind(<span class="keyword">new</span> InetSocketAddress(port));</span><br><span class="line">            <span class="comment">// 将channel注册到selector上，监听连接事件</span></span><br><span class="line">            serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);</span><br><span class="line">            handle = <span class="keyword">new</span> ChannelHandle();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 启动服务</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (!stop) &#123;</span><br><span class="line">            <span class="comment">// 获取到等待处理的IO事件数量</span></span><br><span class="line">            <span class="keyword">int</span> readyChannels = selector.select();</span><br><span class="line">            <span class="comment">// 若是等待处理的IO事件数量为0,不处理</span></span><br><span class="line">            <span class="keyword">if</span> (readyChannels == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            Iterator&lt;SelectionKey&gt; iterator = selector.selectedKeys().iterator();</span><br><span class="line">            <span class="comment">// 处理这些SelectionKey</span></span><br><span class="line">            <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">                <span class="comment">// 获取到该key</span></span><br><span class="line">                SelectionKey key = iterator.next();</span><br><span class="line">                <span class="comment">// 移除该key</span></span><br><span class="line">                iterator.remove();</span><br><span class="line">                <span class="comment">// 分别处理各自事件</span></span><br><span class="line">                <span class="keyword">if</span> (key.isAcceptable()) &#123;</span><br><span class="line">                    handle.handleAccept(key);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key.isReadable()) &#123;</span><br><span class="line">                    handle.handleRead(key);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key.isWritable()) &#123;</span><br><span class="line">                    handle.handleWrite(key);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 停止该服务</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.stop = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 针对selector上不同事件的处理类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ChannelHandle</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 处理连接事件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleAccept</span><span class="params">(SelectionKey key)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        ServerSocketChannel ssc = (ServerSocketChannel) key.channel();</span><br><span class="line">        SocketChannel sc = ssc.accept();</span><br><span class="line">        sc.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">        sc.register(key.selector(), SelectionKey.OP_READ);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 处理可读事件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleRead</span><span class="params">(SelectionKey key)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        SocketChannel sc = (SocketChannel) key.channel();</span><br><span class="line">        <span class="comment">// fixme 对读取到的数据进行处理-&gt;相关协议解析</span></span><br><span class="line">        sc.register(key.selector(), SelectionKey.OP_WRITE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 处理可写事件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleWrite</span><span class="params">(SelectionKey key)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"处理写数据"</span>);</span><br><span class="line">        <span class="comment">// fixme 对输出结果按照相关协议进行封装</span></span><br><span class="line">        String header = <span class="string">"HTTP/1.1 200 OK\r\n"</span>;</span><br><span class="line">        StringBuffer result = <span class="keyword">new</span> StringBuffer(header);</span><br><span class="line">        result.append(<span class="string">"Content-Type:application/json\n"</span>);</span><br><span class="line">        result.append(<span class="string">"\r\n"</span>);</span><br><span class="line">        result.append(<span class="string">"hello,world"</span>);</span><br><span class="line">        SocketChannel channel = (SocketChannel)key.channel();</span><br><span class="line">        ByteBuffer wrap = ByteBuffer.wrap(result.toString().getBytes());</span><br><span class="line">        channel.write(wrap);</span><br><span class="line">        channel.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NIOUtil</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 启动一个基于NIO的服务</span></span><br><span class="line">        NIOServer nioServer = <span class="keyword">new</span> NIOServer(<span class="number">8070</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            nioServer.start();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>下面是通过java io的方式来实现的</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IOUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        IOServer.createServer();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IOServer</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> stop = <span class="keyword">false</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 开启服务</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">createServer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ExecutorService executorService =</span><br><span class="line">                Executors.newFixedThreadPool(<span class="number">3</span>);</span><br><span class="line">        ServerSocket serverSocket = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            serverSocket = <span class="keyword">new</span> ServerSocket(<span class="number">8090</span>);</span><br><span class="line">            System.out.println(<span class="string">"服务器在端口8090上启动。。。"</span>);</span><br><span class="line">            <span class="keyword">while</span> (!stop) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Socket socket = serverSocket.accept();</span><br><span class="line">                    <span class="comment">// 将任务提交给线程池来处理</span></span><br><span class="line">                    executorService.execute(<span class="keyword">new</span> SocketHandle(socket));</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (serverSocket !=  <span class="keyword">null</span>) &#123;</span><br><span class="line">                    serverSocket.close();</span><br><span class="line">                &#125;</span><br><span class="line">                executorService.shutdown();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 关闭服务</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">stopServer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        stop = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * socket处理线程类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SocketHandle</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Socket socket;</span><br><span class="line"></span><br><span class="line">    SocketHandle(Socket socket) &#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="keyword">this</span>.socket = socket;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 处理输入</span></span><br><span class="line">        InputStream is = <span class="keyword">null</span>;</span><br><span class="line">        InputStreamReader isr = <span class="keyword">null</span>;</span><br><span class="line">        BufferedReader br = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            is = socket.getInputStream();</span><br><span class="line">            isr = <span class="keyword">new</span> InputStreamReader(is);</span><br><span class="line">            br = <span class="keyword">new</span> BufferedReader(isr);</span><br><span class="line">            String s = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">while</span> ((s = br.readLine()) != <span class="keyword">null</span> &amp;&amp; s.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                System.out.println(s);</span><br><span class="line">                s = <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 处理输出 \r\n 回车换行</span></span><br><span class="line">        OutputStream os = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            os = socket.getOutputStream();</span><br><span class="line">            os.write(<span class="string">"HTTP/1.1 200 OK\r\n"</span>.getBytes());</span><br><span class="line">            os.write(<span class="string">"Content-Type:application/json\n"</span>.getBytes());</span><br><span class="line">            os.write(<span class="string">"\r\n"</span>.getBytes());</span><br><span class="line">            os.write(<span class="string">"hello,world"</span>.getBytes());</span><br><span class="line">            os.flush();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (socket != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    socket.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-thread" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/并发/">并发</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/并发/基础/">基础</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/thread/">
+            <time datetime="2019-08-21T05:43:50.000Z" itemprop="datePublished">2019-08-21</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/thread.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/thread.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/thread.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/thread/">thread</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <hr>
+<p><code>为什么使用多线程</code></p>
+<p>​    更多的处理器核心    更快的响应时间    更好的编程模型</p>
+<hr>
+<p><code>线程的六种状态</code></p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>状态说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NEW</td>
+<td>初始状态，线程已经被构建，但是没有调用start()方法。</td>
+</tr>
+<tr>
+<td>RUNNABLE</td>
+<td>线程处于运行状态或者是可运行状态。</td>
+</tr>
+<tr>
+<td>BLOCKED</td>
+<td>阻塞状态，表示当前线程等待获取锁。</td>
+</tr>
+<tr>
+<td>WAITING</td>
+<td>等待状态，需要其他线程唤醒。</td>
+</tr>
+<tr>
+<td>TIME_WAITING</td>
+<td>超时等待状态，需要其他线程唤醒或者过了超时时间自动唤醒。</td>
+</tr>
+<tr>
+<td>TERMINATED</td>
+<td>终止状态，表示当前线程已经运行结束。</td>
+</tr>
+</tbody></table>
+<hr>
+<p><code>如何查看线程信息</code></p>
+<p>​    jps:该命令可以获取进程id。</p>
+<p>​    jstack:使用 jstack 进程id，可以查看线程的一些信息。</p>
+<hr>
+<p><code>线程的初始化</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(ThreadGroup g, Runnable target, String name,</span></span></span><br><span class="line"><span class="function"><span class="params">                      <span class="keyword">long</span> stackSize, AccessControlContext acc,</span></span></span><br><span class="line"><span class="function"><span class="params">                      <span class="keyword">boolean</span> inheritThreadLocals)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (name == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"name cannot be null"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="comment">// 创建的这个线程的父线程就是当前的这个线程</span></span><br><span class="line">    Thread parent = currentThread();</span><br><span class="line">    SecurityManager security = System.getSecurityManager();</span><br><span class="line">    <span class="keyword">if</span> (g == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (security != <span class="keyword">null</span>) &#123;</span><br><span class="line">            g = security.getThreadGroup();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (g == <span class="keyword">null</span>) &#123;</span><br><span class="line">            g = parent.getThreadGroup();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    g.checkAccess();</span><br><span class="line">    <span class="keyword">if</span> (security != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (isCCLOverridden(getClass())) &#123;</span><br><span class="line">            security.checkPermission(SUBCLASS_IMPLEMENTATION_PERMISSION);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    g.addUnstarted();</span><br><span class="line">	<span class="comment">// 设置当前线程的线程组信息</span></span><br><span class="line">    <span class="keyword">this</span>.group = g;</span><br><span class="line">    <span class="comment">// 将daemon priority设置为父线程的相关属性</span></span><br><span class="line">    <span class="keyword">this</span>.daemon = parent.isDaemon();</span><br><span class="line">    <span class="keyword">this</span>.priority = parent.getPriority();</span><br><span class="line">    <span class="keyword">if</span> (security == <span class="keyword">null</span> || isCCLOverridden(parent.getClass()))</span><br><span class="line">        <span class="keyword">this</span>.contextClassLoader = parent.getContextClassLoader();</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">this</span>.contextClassLoader = parent.contextClassLoader;</span><br><span class="line">    <span class="keyword">this</span>.inheritedAccessControlContext =</span><br><span class="line">        acc != <span class="keyword">null</span> ? acc : AccessController.getContext();</span><br><span class="line">    <span class="keyword">this</span>.target = target;</span><br><span class="line">    setPriority(priority);</span><br><span class="line">    <span class="keyword">if</span> (inheritThreadLocals &amp;&amp; parent.inheritableThreadLocals != <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">this</span>.inheritableThreadLocals =</span><br><span class="line">        ThreadLocal.createInheritedMap(parent.inheritableThreadLocals);</span><br><span class="line">    <span class="keyword">this</span>.stackSize = stackSize;</span><br><span class="line">    tid = nextThreadID();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><code>如何优雅的终止线程</code></p>
+<p>​    使用volidate修饰的变量    中断线程interrupt()方法</p>
+<hr>
+<p>在class所在目录下，使用javap -v HelloWorld.class指令可以查看该class的信息</p>
+<hr>
+<p>管道输入输出流–&gt;用于线程之间数据的传输，传输媒介为内存</p>
+<p>​    PipedInputStream </p>
+<p>​    PipedOutputStram</p>
+<p>​    PipedReader</p>
+<p>​    PipedWriter</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-fra-springboot" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/">框架</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/springboot/">springboot</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/fra-springboot/">
+            <time datetime="2019-08-21T01:58:17.000Z" itemprop="datePublished">2019-08-21</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/fra-springboot.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/fra-springboot.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/fra-springboot.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/fra-springboot/">springboot</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p><code>springboot三大特性</code></p>
+<hr>
+<h6 id="自动装配"><a href="#自动装配" class="headerlink" title="自动装配"></a><strong>自动装配</strong></h6><p>springboot核心注解 <code>@SpringBootApplication</code>。该注解是由下面三个注解组合而成的。</p>
+<p><code>@ComponentScan</code> 默认会去扫描当前类所在包下面的所有类或者所有包，将这些类创建为spring所管理的bean。可以通过添加basePackages或者是basePackageClasses属性来指定扫描的包路径。<br><code>@EnableAutoConfiguratio</code></p>
+<p><code>@SpringBootConfiguration</code></p>
+<p>核心事件</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">ApplicationEnvironmentPreparedEvent</span><br><span class="line">ApplicationPreparedEvent</span><br><span class="line">ApplicationStartingEvent</span><br><span class="line">ApplicationReadyEvent</span><br><span class="line">ApplicationFailedEvent</span><br></pre></td></tr></table></figure>
+
+<p>系统属性 <code>System:getProperties</code></p>
+<p>环境变量<code>System:getEnv</code></p>
+<hr>
+<h6 id="嵌入式容器"><a href="#嵌入式容器" class="headerlink" title="嵌入式容器"></a><strong>嵌入式容器</strong></h6><hr>
+<h6 id="为生产做准备"><a href="#为生产做准备" class="headerlink" title="为生产做准备"></a><strong>为生产做准备</strong></h6><hr>
+<h6 id="springboot踩坑记录"><a href="#springboot踩坑记录" class="headerlink" title="springboot踩坑记录"></a>springboot踩坑记录</h6><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1. 当我们在springboot的配置文件中将启动端口配置为随机端口时 server.port=0，我们使用下面的方式无法获取到启动的真正端口，该port的值任然为0。</span><br><span class="line"></span><br><span class="line">@Value("<span class="formula">$&#123;server.port&#125;")</span></span><br><span class="line"><span class="formula">private int port;</span></span><br><span class="line"><span class="formula"></span></span><br><span class="line"><span class="formula">可以通过使用下面这种方式来获取真正的启动端口</span></span><br><span class="line"><span class="formula"></span></span><br><span class="line"><span class="formula">private final Environment environment;</span></span><br><span class="line"><span class="formula">public OtherController(Environment environment) &#123;</span></span><br><span class="line"><span class="formula">	this.environment = environment;</span></span><br><span class="line"><span class="formula">&#125;</span></span><br><span class="line"><span class="formula">private String getPort() &#123;</span></span><br><span class="line"><span class="formula">	return environment.getProperty("local.server.port");</span></span><br><span class="line"><span class="formula">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-fra-spring-xml" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -517,7 +823,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/wiki/spring/">
+        <a href="/wiki/fra-spring-xml/">
             <time datetime="2019-08-19T09:04:07.000Z" itemprop="datePublished">2019-08-19</time>
         </a>
     </div>
@@ -529,13 +835,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/spring.md'> Source </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/fra-spring-xml.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/spring.md'> Edit </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/fra-spring-xml.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/spring.md'> History </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/fra-spring-xml.md'> History </a>
                             </div>
                         
                     </div>
@@ -543,7 +849,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/wiki/spring/">spring</a>
+            <a class="article-title" href="/wiki/fra-spring-xml/">xml驱动</a>
         </h1>
     
 
@@ -556,150 +862,7 @@
             
         
         
-            <p>此处参考了<a href="http://www.codeceo.com/article/spring-transactions.html这篇博客，总结的挺nice的。" target="_blank" rel="noopener">http://www.codeceo.com/article/spring-transactions.html这篇博客，总结的挺nice的。</a></p>
-<p><strong>spring事物简介</strong></p>
-<ul>
-<li><p>spring基于注解的事物</p>
-<p>​    xml文件开启注解驱动，相关类和方法上通过@Transactional注解标识。</p>
-<p>​    spring在启动是会为这些class生成spring内部管理的bean，若是发现带有@Transactional注解的类和方</p>
-<p>​    法，会为其生成代理类，代理类中会做相关的事物处理（正常提交，异常回滚）。</p>
-</li>
-</ul>
-<ul>
-<li><p>基于实现TransactionCallback接口的事物</p>
-<p>​    </p>
-</li>
-</ul>
-<hr>
-<p><strong>spring事物的传播属性</strong></p>
-<table>
-<thead>
-<tr>
-<th>常量名称</th>
-<th align="center">常量解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>PROPAGATION_REQUIRED(propagation_required)</td>
-<td align="center">支持当前事物，如果当前没有事物，就新建一个事物。这是最常见的选择，也是spring默认的事物传播。</td>
-</tr>
-<tr>
-<td>PROPAGATION_REQUIRES_NEW(propagation_requires_new)</td>
-<td align="center">新建事物，如果当前存在事物，就把当前事物挂起。新建的事物和挂起的事物没有任何的关系，是两个独立的事物。外层事物失败回滚之后，不能回滚内层事物执行的结果。内层事物失败抛出异常，外层事物捕获，也可以不处理回滚操作。</td>
-</tr>
-<tr>
-<td>PROPAGATION_SUPPORTS(propagation_supports)</td>
-<td align="center">支持当前事物，如果当前没有事物，就以非事物的方式执行。</td>
-</tr>
-<tr>
-<td>PROPAGATION_MANDATORY(propagation_mandatory)</td>
-<td align="center">支持当前事物，如果当前没有事物，就抛出异常。</td>
-</tr>
-<tr>
-<td>PROPAGATION_NOT_SUPPORTED(propagation_not_supported)</td>
-<td align="center">以非事物方式执行操作，如果当前存在事物，就把当前事物挂起。</td>
-</tr>
-<tr>
-<td>PROPAGATION_NEVER(propagation_never)</td>
-<td align="center">以非事物方式执行操作，如果当前存在事物，就抛出异常。</td>
-</tr>
-<tr>
-<td>PROPAGATION_NESTED(propagation_nested)</td>
-<td align="center">如果一个活动的事务存在，则运行在一个嵌套的事务中。如果没有活动事务，则按REQUIRED属性执行。它使用了一个单独的事务，这个事务拥有多个可以回滚的保存点。内部事务的回滚不会对外部事务造成影响。它只对DataSourceTransactionManager事务管理器起效。</td>
-</tr>
-</tbody></table>
-<hr>
-<p><strong>数据库隔离级别</strong></p>
-<table>
-<thead>
-<tr>
-<th>隔离级别</th>
-<th>隔离级别的值</th>
-<th>导致的问题</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Read Uncommited</td>
-<td>0</td>
-<td>允许脏读，不可重复读，幻读</td>
-</tr>
-<tr>
-<td>Read Commited</td>
-<td>1</td>
-<td>避免脏读，允许不可重复读和幻读</td>
-</tr>
-<tr>
-<td>RepeatableRead</td>
-<td>2</td>
-<td>避免脏读和不可重复读，允许幻读</td>
-</tr>
-<tr>
-<td>Serializable</td>
-<td>3</td>
-<td>避免脏读 ，不可重复读，幻读，事物一个一个执行，执行效率低</td>
-</tr>
-</tbody></table>
-<hr>
-<p><strong>spring中的隔离级别</strong></p>
-<table>
-<thead>
-<tr>
-<th>常量名称</th>
-<th>常量解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ISOLATION_DEFAULT(isolation_default)</td>
-<td>PlatfromTransactionManager默认的事物隔离级别，使用数据库默认的事物隔离级别。</td>
-</tr>
-<tr>
-<td>ISOLATION_READ_UNCOMMITTED(isolation_read_uncommitted)</td>
-<td>读未提交</td>
-</tr>
-<tr>
-<td>ISOLATION_READ_COMMITTED(isolation_read_committed)</td>
-<td>读已提交</td>
-</tr>
-<tr>
-<td>ISOLATION_REPEATABLE_READ(isolation_repeatable)</td>
-<td>可重复读</td>
-</tr>
-<tr>
-<td>ISOLATION_SERIALIZABLE(isolation_serializable)</td>
-<td>串行化</td>
-</tr>
-</tbody></table>
-<hr>
-<p><code>@Resource注解和@Autowired注解的区别</code></p>
-<p>1.当单独使用@Autowired注解时，会默认按照类型装配，不适用与系统里一个接口有多个实现类的情况。<br>2.当系统内存在多个实现类时，无法按照类型装配，@Autowired可以配合@Qualifier注解按照名称进行装配<br>3.@Resource默认按照名称装配，可以通过指定name属性来进行按照名称来装配。<br>4.@Resource若是指定的name为空串或者是未指定name属性，会去按照类型来装配(此时系统内只能存在一个接口实现类，否则报错)<br>5.@Resource装配的类必须存在，否则会报错。@Autowired可以配置required=false来设置装配的bean是否是必须的。<br>6.@Resource注解属于JSR250标准的注释，属于J2EE的。而@Autowired属于spring提供的注解。使用@Resource注解可以与spring解耦。</p>
-<hr>
-<p>Restful风格</p>
-<p>参考博客：<a href="https://blog.igevin.info/posts/restful-architecture-in-general/#restful_features" target="_blank" rel="noopener">https://blog.igevin.info/posts/restful-architecture-in-general/#restful_features</a></p>
-<p>特点：资源，统一接口 ，URI和无状态</p>
-<ul>
-<li>资源：就是网络上面的一个实体，或者说是网络上面的一个具体信息。</li>
-<li>统一接口：数据的元操作，分别对应于http的四个不同的方法。</li>
-<li>URI：可以通过一个URI访问一个具体的资源。</li>
-<li>无状态：</li>
-</ul>
-<hr>
-<p>为啥说spring mvc是线程安全的</p>
-<p>​    SpringMVC是基于方法的映射，每一个controller在容器中只有一个实例对象。若是我们在controller中使用一些共享变量时，可以使用ThreadLocal关键字来实现。但是尽量不要使用共享变量。</p>
-<hr>
-<p>什么是一致性hash</p>
-<p>​    附上一篇比较白话的博客<a href="http://www.zsythink.net/archives/1182" target="_blank" rel="noopener">http://www.zsythink.net/archives/1182</a></p>
-<hr>
-<p>为什么synchronized不能锁住基本数据类型</p>
-<p>​    synchronized的实现原理是在synchronized修饰的代码块的开始和结束的地方添加monitorenter和monitorexit两个字节码指令，这两个字节码指令都需要一个reference类型的参数来指明要锁定和解锁的对象。就是说每一个对象会有一个monitor对象，上锁时需要获取到这个monitor对象。</p>
-<hr>
-<p>偏向锁-&gt;轻量级锁-&gt;重量级锁</p>
-<p>获取偏向锁的流程：</p>
-<p>​    1. 当前线程首先会去检查对象的对象头信息中有没有存储线程id，如果没有存储线程id，设置当前线程id。</p>
-<p>​    2.若是对象头中存储了线程id，当前线程会去通知该id的线程，进入到暂停状态，并将对象头线程id清空。</p>
-<p>​    3.两个线程会将对象头信息拷贝到各自的栈中，并尝试使用cas操作将对象头指向该栈，操作成功执行。</p>
-<pre><code>4. 若是操作并成功执行自旋操作。
- 5. 若是在自旋指定的时间内，另一个线程执行完成了，会唤醒该自旋的线程来执行。
- 6. 若是在自旋的时间内，另一个线程没有执行完，自旋的线程会进入到阻塞状态。</code></pre>
+            
             </div>
         
         <footer class="article-footer">

@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>基础知识 | zl&#39;s blog</title>
+    
+    
+        <meta name="keywords" content="基础知识">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="spring事务spring关于事务提供了两种编程模型，注解和接口编程。 基于注解：① xml文件开启注解驱动，相关类和方法上通过@Transactional注解标识。② spring在启动是会为这些class生成spring内部管理的bean，若是发现带有@Transactional注解的类和方法，会为其生成代理类，代理类中会做相关的事物处理（正常提交，异常回滚）。   基于接口：需要实现Tra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础知识">
+<meta property="og:url" content="https://zhilongao.github.io/wiki/fra-spring-base/index.html">
+<meta property="og:site_name" content="zl&#39;s blog">
+<meta property="og:description" content="spring事务spring关于事务提供了两种编程模型，注解和接口编程。 基于注解：① xml文件开启注解驱动，相关类和方法上通过@Transactional注解标识。② spring在启动是会为这些class生成spring内部管理的bean，若是发现带有@Transactional注解的类和方法，会为其生成代理类，代理类中会做相关的事物处理（正常提交，异常回滚）。   基于接口：需要实现Tra">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-30T02:22:40.524Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基础知识">
+<meta name="twitter:description" content="spring事务spring关于事务提供了两种编程模型，注解和接口编程。 基于注解：① xml文件开启注解驱动，相关类和方法上通过@Transactional注解标识。② spring在启动是会为这些class生成spring内部管理的bean，若是发现带有@Transactional注解的类和方法，会为其生成代理类，代理类中会做相关的事物处理（正常提交，异常回滚）。   基于接口：需要实现Tra">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="zl&#39;s blog" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">zl&#39;s blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>分类</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            java
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分布式
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            协议
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/http/">http</a></li>  <li class="file"><a href="/wiki/tcp/">tcp</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/dubbo-ask/">dubbo</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            io
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/io/">io</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            jvm
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/jvm/">jvm</a></li>  <li class="file"><a href="/wiki/jvm-command/">jvm-command</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            并发
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/thread/">thread</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            线程池
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/threadpool/">threadpool</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            锁
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/lock/">lock</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            新特性
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/java-style-lambda/">lambda和stream</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            框架
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            spring
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-spring-xml/">xml驱动</a></li>  <li class="file"><a href="/wiki/fra-spring-annotation/">注解驱动</a></li>  <li class="file active"><a href="/wiki/fra-spring-base/">基础知识</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            spring-cloud
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-spring-cloud-config/">分布式配置</a></li>  <li class="file"><a href="/wiki/fra-spring-cloud-loadbalance/">负载均衡</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            springboot
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-springboot/">springboot</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            源码
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/ans-hashmap-source/">HashMap</a></li>  <li class="file"><a href="/wiki/ans-reentlock-source/">ReentrantLock</a></li>  <li class="file"><a href="/wiki/ans-aqs-source/">AQS</a></li>  <li class="file"><a href="/wiki/ans-unsafe-source/">Unsafe</a></li>  <li class="file"><a href="/wiki/ans-countdownlatch-source/">CountDownLatch</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            面试题
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/questions/">questions</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            项目
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/project-ask/">project-ask</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据库
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            mongodb
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/mongodb-base/">mongodb-base</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            mysql
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/mysql/">面试题</a></li>  <li class="file"><a href="/wiki/mysql-index/">索引</a></li>  <li class="file"><a href="/wiki/mysql-base/">基本操作</a></li>  <li class="file"><a href="/wiki/mysql-split/">分库分表</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            redis
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/redis-base/">基本操作</a></li>  <li class="file"><a href="/wiki/redis-advance/">实际应用</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            字符串
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-string-simple1/">字符串</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            排序
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-sort-simple/">排序算法</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数组
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-array-simple1/">array-ask</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            链表
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-linkedlist-simple1/">单链表</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            系统
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            linux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/linux-system-problem/">linux系统</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            设计模式
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/design-pattern-observer/">观察者模式</a></li>  <li class="file"><a href="/wiki/design-pattern-listener/">监听器模式</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/share-articles/">博客</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-fra-spring-base" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/">框架</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/spring/">spring</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/fra-spring-base/">
+            <time datetime="2019-09-30T02:08:09.000Z" itemprop="datePublished">2019-09-30</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/fra-spring-base.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/fra-spring-base.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/fra-spring-base.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            基础知识
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                    <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#spring事务"><span class="toc-number">1.</span> <span class="toc-text">spring事务</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#spring事务传播属性"><span class="toc-number">2.</span> <span class="toc-text">spring事务传播属性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#数据库事务隔离级别"><span class="toc-number">3.</span> <span class="toc-text">数据库事务隔离级别</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#spring事务隔离级别"><span class="toc-number">4.</span> <span class="toc-text">spring事务隔离级别</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
+                </div>
+            
+        
+        
+            <h6 id="spring事务"><a href="#spring事务" class="headerlink" title="spring事务"></a><code>spring事务</code></h6><p>spring关于事务提供了两种编程模型，注解和接口编程。</p>
+<p>基于注解：① xml文件开启注解驱动，相关类和方法上通过@Transactional注解标识。② spring在启动是会为这些class生成spring内部管理的bean，若是发现带有@Transactional注解的类和方法，会为其生成代理类，代理类中会做相关的事物处理（正常提交，异常回滚）。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>基于接口：需要实现TransactionCallback接口。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h6 id="spring事务传播属性"><a href="#spring事务传播属性" class="headerlink" title="spring事务传播属性"></a><code>spring事务传播属性</code></h6><table>
+<thead>
+<tr>
+<th>常量名称</th>
+<th align="center">常量解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PROPAGATION_REQUIRED(propagation_required)</td>
+<td align="center">支持当前事物，如果当前没有事物，就新建一个事物。这是最常见的选择，也是spring默认的事物传播。</td>
+</tr>
+<tr>
+<td>PROPAGATION_REQUIRES_NEW(propagation_requires_new)</td>
+<td align="center">新建事物，如果当前存在事物，就把当前事物挂起。新建的事物和挂起的事物没有任何的关系，是两个独立的事物。外层事物失败回滚之后，不能回滚内层事物执行的结果。内层事物失败抛出异常，外层事物捕获，也可以不处理回滚操作。</td>
+</tr>
+<tr>
+<td>PROPAGATION_SUPPORTS(propagation_supports)</td>
+<td align="center">支持当前事物，如果当前没有事物，就以非事物的方式执行。</td>
+</tr>
+<tr>
+<td>PROPAGATION_MANDATORY(propagation_mandatory)</td>
+<td align="center">支持当前事物，如果当前没有事物，就抛出异常。</td>
+</tr>
+<tr>
+<td>PROPAGATION_NOT_SUPPORTED(propagation_not_supported)</td>
+<td align="center">以非事物方式执行操作，如果当前存在事物，就把当前事物挂起。</td>
+</tr>
+<tr>
+<td>PROPAGATION_NEVER(propagation_never)</td>
+<td align="center">以非事物方式执行操作，如果当前存在事物，就抛出异常。</td>
+</tr>
+<tr>
+<td>PROPAGATION_NESTED(propagation_nested)</td>
+<td align="center">如果一个活动的事务存在，则运行在一个嵌套的事务中。如果没有活动事务，则按REQUIRED属性执行。它使用了一个单独的事务，这个事务拥有多个可以回滚的保存点。内部事务的回滚不会对外部事务造成影响。它只对DataSourceTransactionManager事务管理器起效。</td>
+</tr>
+</tbody></table>
+<h6 id="数据库事务隔离级别"><a href="#数据库事务隔离级别" class="headerlink" title="数据库事务隔离级别"></a><code>数据库事务隔离级别</code></h6><table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>隔离级别的值</th>
+<th>导致的问题</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Read Uncommited</td>
+<td>0</td>
+<td>允许脏读，不可重复读，幻读</td>
+</tr>
+<tr>
+<td>Read Commited</td>
+<td>1</td>
+<td>避免脏读，允许不可重复读和幻读</td>
+</tr>
+<tr>
+<td>RepeatableRead</td>
+<td>2</td>
+<td>避免脏读和不可重复读，允许幻读</td>
+</tr>
+<tr>
+<td>Serializable</td>
+<td>3</td>
+<td>避免脏读 ，不可重复读，幻读，事物一个一个执行，执行效率低</td>
+</tr>
+</tbody></table>
+<h6 id="spring事务隔离级别"><a href="#spring事务隔离级别" class="headerlink" title="spring事务隔离级别"></a><code>spring事务隔离级别</code></h6><table>
+<thead>
+<tr>
+<th>常量名称</th>
+<th>常量解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ISOLATION_DEFAULT(isolation_default)</td>
+<td>PlatfromTransactionManager默认的事物隔离级别，使用数据库默认的事物隔离级别。</td>
+</tr>
+<tr>
+<td>ISOLATION_READ_UNCOMMITTED(isolation_read_uncommitted)</td>
+<td>读未提交</td>
+</tr>
+<tr>
+<td>ISOLATION_READ_COMMITTED(isolation_read_committed)</td>
+<td>读已提交</td>
+</tr>
+<tr>
+<td>ISOLATION_REPEATABLE_READ(isolation_repeatable)</td>
+<td>可重复读</td>
+</tr>
+<tr>
+<td>ISOLATION_SERIALIZABLE(isolation_serializable)</td>
+<td>串行化</td>
+</tr>
+</tbody></table>
+<h6 id="参考"><a href="#参考" class="headerlink" title="参考"></a><code>参考</code></h6><p><a href="http://www.codeceo.com/article/spring-transactions.html" target="_blank" rel="noopener">深入了解spring事务原理</a></p>
+<p><a href="https://blog.igevin.info/posts/restful-architecture-in-general/#restful_features" target="_blank" rel="noopener">Restful风格</a></p>
+<p><a href="http://www.zsythink.net/archives/1182" target="_blank" rel="noopener">一致性hash</a></p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/wiki/ans-countdownlatch-source/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    CountDownLatch
+                
+            </div>
+        </a>
+    
+    
+        <a href="/wiki/fra-spring-annotation/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">注解驱动</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            gaozhilong &copy; 2019 
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

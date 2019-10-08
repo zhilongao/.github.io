@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>注解驱动 | zl&#39;s blog</title>
+    
+    
+        <meta name="keywords" content="注解驱动">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="元注解能够修饰其它注解的注解，如java的@Documented @Repeatable @Inherited等注解，spring的@Component等注解。 spring模式注解spring中提供了诸如@Repository @Service @Controller @Configuration等的注解，用以标记某一领域内的对象，故称为模式注解。这些注解均派生自@Component，sprin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="注解驱动">
+<meta property="og:url" content="https://zhilongao.github.io/wiki/fra-spring-annotation/index.html">
+<meta property="og:site_name" content="zl&#39;s blog">
+<meta property="og:description" content="元注解能够修饰其它注解的注解，如java的@Documented @Repeatable @Inherited等注解，spring的@Component等注解。 spring模式注解spring中提供了诸如@Repository @Service @Controller @Configuration等的注解，用以标记某一领域内的对象，故称为模式注解。这些注解均派生自@Component，sprin">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-30T12:19:49.091Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="注解驱动">
+<meta name="twitter:description" content="元注解能够修饰其它注解的注解，如java的@Documented @Repeatable @Inherited等注解，spring的@Component等注解。 spring模式注解spring中提供了诸如@Repository @Service @Controller @Configuration等的注解，用以标记某一领域内的对象，故称为模式注解。这些注解均派生自@Component，sprin">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="zl&#39;s blog" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">zl&#39;s blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>分类</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            java
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分布式
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            协议
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/http/">http</a></li>  <li class="file"><a href="/wiki/tcp/">tcp</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/dubbo-ask/">dubbo</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            io
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/io/">io</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            jvm
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/jvm/">jvm</a></li>  <li class="file"><a href="/wiki/jvm-command/">jvm-command</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            并发
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/thread/">thread</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            线程池
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/threadpool/">threadpool</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            锁
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/lock/">lock</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            新特性
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/java-style-lambda/">lambda和stream</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            框架
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            spring
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-spring-xml/">xml驱动</a></li>  <li class="file active"><a href="/wiki/fra-spring-annotation/">注解驱动</a></li>  <li class="file"><a href="/wiki/fra-spring-base/">基础知识</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            spring-cloud
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-spring-cloud-config/">分布式配置</a></li>  <li class="file"><a href="/wiki/fra-spring-cloud-loadbalance/">负载均衡</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            springboot
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-springboot/">springboot</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            源码
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/ans-hashmap-source/">HashMap</a></li>  <li class="file"><a href="/wiki/ans-reentlock-source/">ReentrantLock</a></li>  <li class="file"><a href="/wiki/ans-aqs-source/">AQS</a></li>  <li class="file"><a href="/wiki/ans-unsafe-source/">Unsafe</a></li>  <li class="file"><a href="/wiki/ans-countdownlatch-source/">CountDownLatch</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            面试题
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/questions/">questions</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            项目
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/project-ask/">project-ask</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据库
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            mongodb
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/mongodb-base/">mongodb-base</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            mysql
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/mysql/">面试题</a></li>  <li class="file"><a href="/wiki/mysql-index/">索引</a></li>  <li class="file"><a href="/wiki/mysql-base/">基本操作</a></li>  <li class="file"><a href="/wiki/mysql-split/">分库分表</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            redis
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/redis-base/">基本操作</a></li>  <li class="file"><a href="/wiki/redis-advance/">实际应用</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            字符串
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-string-simple1/">字符串</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            排序
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-sort-simple/">排序算法</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数组
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-array-simple1/">array-ask</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            链表
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-linkedlist-simple1/">单链表</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            系统
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            linux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/linux-system-problem/">linux系统</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            设计模式
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/design-pattern-observer/">观察者模式</a></li>  <li class="file"><a href="/wiki/design-pattern-listener/">监听器模式</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/share-articles/">博客</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-fra-spring-annotation" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/">框架</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/spring/">spring</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/fra-spring-annotation/">
+            <time datetime="2019-09-30T02:07:41.000Z" itemprop="datePublished">2019-09-30</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/fra-spring-annotation.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/fra-spring-annotation.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/fra-spring-annotation.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            注解驱动
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                    <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#元注解"><span class="toc-number">1.</span> <span class="toc-text">元注解</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#spring模式注解"><span class="toc-number">2.</span> <span class="toc-text">spring模式注解</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#spring组合注解"><span class="toc-number">3.</span> <span class="toc-text">spring组合注解</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#spring注解属性别名和覆盖"><span class="toc-number">4.</span> <span class="toc-text">spring注解属性别名和覆盖</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Enable"><span class="toc-number">5.</span> <span class="toc-text">Enable</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#条件装配"><span class="toc-number">6.</span> <span class="toc-text">条件装配</span></a></li></ol>
+                </div>
+            
+        
+        
+            <h6 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a><code>元注解</code></h6><p>能够修饰其它注解的注解，如java的<code>@Documented</code> <code>@Repeatable</code> <code>@Inherited</code>等注解，spring的<code>@Component</code>等注解。</p>
+<h6 id="spring模式注解"><a href="#spring模式注解" class="headerlink" title="spring模式注解"></a><code>spring模式注解</code></h6><p>spring中提供了诸如<code>@Repository</code> <code>@Service</code> <code>@Controller</code> <code>@Configuration</code>等的注解，用以标记某一领域内的对象，故称为模式注解。这些注解均派生自<code>@Component</code>，spring可以通过这些注解的元标注<code>@Component</code>来扫描并注册这些组件。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// @Controller注解定义</span></span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Controller &#123;</span><br><span class="line">	<span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自定义<code>@Component</code>的派生注解</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 自定义派生注解</span></span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> StringRepository &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 属性方法名称必须与<span class="doctag">@Component</span>#value()一致</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 被自定义注解修饰的bean</span></span><br><span class="line"><span class="meta">@StringRepository</span>(value = <span class="string">"stringService"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringService</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">findAll</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Arrays.asList(<span class="string">"jack"</span>, <span class="string">"tom"</span>, <span class="string">"seven"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 启动类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ClassPathXmlApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext();</span><br><span class="line">        context.setConfigLocation(<span class="string">"classpath:beans1.xml"</span>);</span><br><span class="line">        context.refresh();</span><br><span class="line">        StringService stringService = (StringService)context.getBean(<span class="string">"stringService"</span>);</span><br><span class="line">        System.out.printf(<span class="string">"stringService.findAll() = %s \n"</span>, stringService.findAll());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 输出结果</span></span><br><span class="line">    <span class="comment">// stringService.findAll() = [jack, tom, seven] </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- beans1.xml --&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context/spring-context-3.0.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.study.annotation.component"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>原理分析</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//1.spring会在初始化解析xml文件的时候读取/META-INF/spring.handlers的配置，定位到context命名空间的处理类 org.springframework.context.config.ContextNamespaceHandler，当spring的应用上下文启动时，获取调用 ContextNamespaceHandler#init()方法。</span></span><br><span class="line"><span class="comment">// ContextNamespaceHandler</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ContextNamespaceHandler</span> <span class="keyword">extends</span> <span class="title">NamespaceHandlerSupport</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		...</span><br><span class="line">        <span class="comment">// 注册annotation-config解析器</span></span><br><span class="line">		registerJava5DependentParser(<span class="string">"annotation-config"</span>,				<span class="string">"org.springframework.context.annotation.AnnotationConfigBeanDefinitionParser"</span>);</span><br><span class="line">        <span class="comment">// 注册component-scan解析器</span></span><br><span class="line">		registerJava5DependentParser(<span class="string">"component-scan"</span>,				<span class="string">"org.springframework.context.annotation.ComponentScanBeanDefinitionParser"</span>);</span><br><span class="line">        ...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ComponentScanBeanDefinitionParser处理</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ComponentScanBeanDefinitionParser</span> <span class="keyword">implements</span> <span class="title">BeanDefinitionParser</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> BeanDefinition <span class="title">parse</span><span class="params">(Element element, ParserContext parserContext)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 读取到base-package属性(扫描路径)</span></span><br><span class="line">		String basePackage = element.getAttribute(BASE_PACKAGE_ATTRIBUTE);</span><br><span class="line">		basePackage = parserContext.getReaderContext().getEnvironment().resolvePlaceholders(basePackage);</span><br><span class="line">		String[] basePackages = StringUtils.tokenizeToStringArray(basePackage,</span><br><span class="line">				ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 真正开始扫描BeanDefinition并注册它们</span></span><br><span class="line">		ClassPathBeanDefinitionScanner scanner = configureScanner(parserContext, element);</span><br><span class="line">        <span class="comment">// 扫描获取到集合</span></span><br><span class="line">		Set&lt;BeanDefinitionHolder&gt; beanDefinitions = scanner.doScan(basePackages);</span><br><span class="line">        <span class="comment">// 注册</span></span><br><span class="line">		registerComponents(parserContext.getReaderContext(), beanDefinitions, element);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;    </span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ClassPathBeanDefinitionScanner处理</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassPathBeanDefinitionScanner</span> <span class="keyword">extends</span> <span class="title">ClassPathScanningCandidateComponentProvider</span> </span>&#123;</span><br><span class="line">   	...</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Set&lt;BeanDefinitionHolder&gt; <span class="title">doScan</span><span class="params">(String... basePackages)</span> </span>&#123;</span><br><span class="line">		Assert.notEmpty(basePackages, <span class="string">"At least one base package must be specified"</span>);</span><br><span class="line">		Set&lt;BeanDefinitionHolder&gt; beanDefinitions = <span class="keyword">new</span> LinkedHashSet&lt;BeanDefinitionHolder&gt;();</span><br><span class="line">        <span class="comment">// 挨个扫描给定的路径数组</span></span><br><span class="line">		<span class="keyword">for</span> (String basePackage : basePackages) &#123;</span><br><span class="line">            <span class="comment">// 寻找候选组件</span></span><br><span class="line">			Set&lt;BeanDefinition&gt; candidates = findCandidateComponents(basePackage);</span><br><span class="line">			<span class="keyword">for</span> (BeanDefinition candidate : candidates) &#123;</span><br><span class="line">				ScopeMetadata scopeMetadata = <span class="keyword">this</span>.scopeMetadataResolver.resolveScopeMetadata(candidate);</span><br><span class="line">				candidate.setScope(scopeMetadata.getScopeName());</span><br><span class="line">				String beanName = <span class="keyword">this</span>.beanNameGenerator.generateBeanName(candidate, <span class="keyword">this</span>.registry);</span><br><span class="line">				<span class="keyword">if</span> (candidate <span class="keyword">instanceof</span> AbstractBeanDefinition) &#123;</span><br><span class="line">					postProcessBeanDefinition((AbstractBeanDefinition) candidate, beanName);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span> (candidate <span class="keyword">instanceof</span> AnnotatedBeanDefinition) &#123;</span><br><span class="line">					AnnotationConfigUtils.processCommonDefinitionAnnotations((AnnotatedBeanDefinition) candidate);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span> (checkCandidate(beanName, candidate)) &#123;</span><br><span class="line">					BeanDefinitionHolder definitionHolder = <span class="keyword">new</span> BeanDefinitionHolder(candidate, beanName);</span><br><span class="line">					definitionHolder =</span><br><span class="line">							AnnotationConfigUtils.applyScopedProxyMode(scopeMetadata, definitionHolder, <span class="keyword">this</span>.registry);</span><br><span class="line">					beanDefinitions.add(definitionHolder);</span><br><span class="line">					registerBeanDefinition(definitionHolder, <span class="keyword">this</span>.registry);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> beanDefinitions;</span><br><span class="line">	&#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassPathScanningCandidateComponentProvider</span> <span class="keyword">implements</span> <span class="title">EnvironmentCapable</span>, <span class="title">ResourceLoaderAware</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Set&lt;BeanDefinition&gt; <span class="title">findCandidateComponents</span><span class="params">(String basePackage)</span> </span>&#123;</span><br><span class="line">		Set&lt;BeanDefinition&gt; candidates = <span class="keyword">new</span> LinkedHashSet&lt;BeanDefinition&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			String packageSearchPath = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX +</span><br><span class="line">					resolveBasePackage(basePackage) + <span class="string">'/'</span> + <span class="keyword">this</span>.resourcePattern;</span><br><span class="line">			Resource[] resources = <span class="keyword">this</span>.resourcePatternResolver.getResources(packageSearchPath);</span><br><span class="line">			<span class="keyword">boolean</span> traceEnabled = logger.isTraceEnabled();</span><br><span class="line">			<span class="keyword">boolean</span> debugEnabled = logger.isDebugEnabled();</span><br><span class="line">			<span class="keyword">for</span> (Resource resource : resources) &#123;</span><br><span class="line">				<span class="keyword">if</span> (traceEnabled) &#123;</span><br><span class="line">					logger.trace(<span class="string">"Scanning "</span> + resource);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span> (resource.isReadable()) &#123;</span><br><span class="line">					<span class="keyword">try</span> &#123;</span><br><span class="line">						MetadataReader metadataReader = <span class="keyword">this</span>.metadataReaderFactory.getMetadataReader(resource);</span><br><span class="line">						<span class="keyword">if</span> (isCandidateComponent(metadataReader)) &#123;</span><br><span class="line">							ScannedGenericBeanDefinition sbd = <span class="keyword">new</span> ScannedGenericBeanDefinition(metadataReader);</span><br><span class="line">							sbd.setResource(resource);</span><br><span class="line">							sbd.setSource(resource);</span><br><span class="line">							<span class="keyword">if</span> (isCandidateComponent(sbd)) &#123;</span><br><span class="line">								<span class="keyword">if</span> (debugEnabled) &#123;</span><br><span class="line">									logger.debug(<span class="string">"Identified candidate component class: "</span> + resource);</span><br><span class="line">								&#125;</span><br><span class="line">								candidates.add(sbd);</span><br><span class="line">							&#125;</span><br><span class="line">							<span class="keyword">else</span> &#123;</span><br><span class="line">								<span class="keyword">if</span> (debugEnabled) &#123;</span><br><span class="line">									logger.debug(<span class="string">"Ignored because not a concrete top-level class: "</span> + resource);</span><br><span class="line">								&#125;</span><br><span class="line">							&#125;</span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">else</span> &#123;</span><br><span class="line">							<span class="keyword">if</span> (traceEnabled) &#123;</span><br><span class="line">								logger.trace(<span class="string">"Ignored because not matching any filter: "</span> + resource);</span><br><span class="line">							&#125;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">catch</span> (Throwable ex) &#123;</span><br><span class="line">						<span class="keyword">throw</span> <span class="keyword">new</span> BeanDefinitionStoreException(</span><br><span class="line">								<span class="string">"Failed to read candidate component class: "</span> + resource, ex);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="keyword">if</span> (traceEnabled) &#123;</span><br><span class="line">						logger.trace(<span class="string">"Ignored because not readable: "</span> + resource);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> BeanDefinitionStoreException(<span class="string">"I/O failure during classpath scanning"</span>, ex);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> candidates;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="spring组合注解"><a href="#spring组合注解" class="headerlink" title="spring组合注解"></a><code>spring组合注解</code></h6><h6 id="spring注解属性别名和覆盖"><a href="#spring注解属性别名和覆盖" class="headerlink" title="spring注解属性别名和覆盖"></a><code>spring注解属性别名和覆盖</code></h6><h6 id="Enable"><a href="#Enable" class="headerlink" title="Enable"></a><code>Enable</code></h6><h6 id="条件装配"><a href="#条件装配" class="headerlink" title="条件装配"></a><code>条件装配</code></h6>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/wiki/fra-spring-base/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    基础知识
+                
+            </div>
+        </a>
+    
+    
+        <a href="/wiki/ans-unsafe-source/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Unsafe</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            gaozhilong &copy; 2019 
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

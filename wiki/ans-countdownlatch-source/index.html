@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>CountDownLatch | zl&#39;s blog</title>
+    
+    
+        <meta name="keywords" content="CountDownLatch">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="应用场景① 下一步的任务需要等待上一步任务执行完成才能执行的场景。比如：有一批任务交给线程池来处理，我们需要知道任务从开始到结束一共执行了多长的时间。下面的代码展示了这种场景的使用。 public void unite(JobExecutionContext jobContext) throws Exception &amp;#123;    Set&amp;lt;String&amp;gt; batchNoSet =">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CountDownLatch">
+<meta property="og:url" content="https://zhilongao.github.io/wiki/ans-countdownlatch-source/index.html">
+<meta property="og:site_name" content="zl&#39;s blog">
+<meta property="og:description" content="应用场景① 下一步的任务需要等待上一步任务执行完成才能执行的场景。比如：有一批任务交给线程池来处理，我们需要知道任务从开始到结束一共执行了多长的时间。下面的代码展示了这种场景的使用。 public void unite(JobExecutionContext jobContext) throws Exception &amp;#123;    Set&amp;lt;String&amp;gt; batchNoSet =">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-08T12:24:10.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CountDownLatch">
+<meta name="twitter:description" content="应用场景① 下一步的任务需要等待上一步任务执行完成才能执行的场景。比如：有一批任务交给线程池来处理，我们需要知道任务从开始到结束一共执行了多长的时间。下面的代码展示了这种场景的使用。 public void unite(JobExecutionContext jobContext) throws Exception &amp;#123;    Set&amp;lt;String&amp;gt; batchNoSet =">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="zl&#39;s blog" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">zl&#39;s blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>分类</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            java
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分布式
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            协议
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/http/">http</a></li>  <li class="file"><a href="/wiki/tcp/">tcp</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/dubbo-ask/">dubbo</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            io
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/io/">io</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            jvm
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/jvm/">jvm</a></li>  <li class="file"><a href="/wiki/jvm-command/">jvm-command</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            并发
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/thread/">thread</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            线程池
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/threadpool/">threadpool</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            锁
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/lock/">lock</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            新特性
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/java-style-lambda/">lambda和stream</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            框架
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            spring
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-spring-xml/">xml驱动</a></li>  <li class="file"><a href="/wiki/fra-spring-annotation/">注解驱动</a></li>  <li class="file"><a href="/wiki/fra-spring-base/">基础知识</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            spring-cloud
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-spring-cloud-config/">分布式配置</a></li>  <li class="file"><a href="/wiki/fra-spring-cloud-loadbalance/">负载均衡</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            springboot
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-springboot/">springboot</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            源码
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/ans-hashmap-source/">HashMap</a></li>  <li class="file"><a href="/wiki/ans-reentlock-source/">ReentrantLock</a></li>  <li class="file"><a href="/wiki/ans-aqs-source/">AQS</a></li>  <li class="file"><a href="/wiki/ans-unsafe-source/">Unsafe</a></li>  <li class="file active"><a href="/wiki/ans-countdownlatch-source/">CountDownLatch</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            面试题
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/questions/">questions</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            项目
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/project-ask/">project-ask</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据库
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            mongodb
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/mongodb-base/">mongodb-base</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            mysql
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/mysql/">面试题</a></li>  <li class="file"><a href="/wiki/mysql-index/">索引</a></li>  <li class="file"><a href="/wiki/mysql-base/">基本操作</a></li>  <li class="file"><a href="/wiki/mysql-split/">分库分表</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            redis
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/redis-base/">基本操作</a></li>  <li class="file"><a href="/wiki/redis-advance/">实际应用</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            字符串
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-string-simple1/">字符串</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            排序
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-sort-simple/">排序算法</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数组
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-array-simple1/">array-ask</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            链表
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-linkedlist-simple1/">单链表</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            系统
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            linux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/linux-system-problem/">linux系统</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            设计模式
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/design-pattern-observer/">观察者模式</a></li>  <li class="file"><a href="/wiki/design-pattern-listener/">监听器模式</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/share-articles/">博客</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-ans-countdownlatch-source" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/源码/">源码</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/ans-countdownlatch-source/">
+            <time datetime="2019-09-30T13:29:36.000Z" itemprop="datePublished">2019-09-30</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/ans-countdownlatch-source.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/ans-countdownlatch-source.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/ans-countdownlatch-source.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            CountDownLatch
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                    <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#应用场景"><span class="toc-number">1.</span> <span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#源码分析"><span class="toc-number">2.</span> <span class="toc-text">源码分析</span></a></li></ol>
+                </div>
+            
+        
+        
+            <h6 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a><code>应用场景</code></h6><p>① 下一步的任务需要等待上一步任务执行完成才能执行的场景。比如：有一批任务交给线程池来处理，我们需要知道任务从开始到结束一共执行了多长的时间。下面的代码展示了这种场景的使用。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unite</span><span class="params">(JobExecutionContext jobContext)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Set&lt;String&gt; batchNoSet = getBatchSet(jobContext);  </span><br><span class="line">    Set&lt;String&gt; idCardSet = updateLoanInfoFromSrc(batchNoSet);</span><br><span class="line">    <span class="comment">// 任务开始之前获取到系统现在的时间</span></span><br><span class="line">    Long start = System.currentTimeMillis();</span><br><span class="line">    <span class="comment">// 创建 CountDownLatch 对象，以任务个数做为该对象的初始化参数</span></span><br><span class="line">    CountDownLatch latch = <span class="keyword">new</span> CountDownLatch(idCardSet.size());</span><br><span class="line">    <span class="keyword">for</span> (String idCard : idCardSet) &#123;</span><br><span class="line">        <span class="comment">// 创建任务线程</span></span><br><span class="line">        CaseUnitedThread thread = <span class="keyword">new</span> CaseUnitedThread(idCard.trim(), latch);</span><br><span class="line">        <span class="comment">// 任务交给线程池处理-&gt;每执行一次任务，CountDownLatch对象的 state值减去1</span></span><br><span class="line">        threadPool.execute(thread);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 等待归户完毕</span></span><br><span class="line">    latch.await();</span><br><span class="line">    logger.info(<span class="string">"case united finish: total time = &#123;&#125;"</span>, System.currentTimeMillis() - start);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a><code>源码分析</code></h6><hr>
+<p><code>类结构</code></p>
+<p><code>CountDownLatch</code>类内部定义比较简单，有一个类型为<code>Sync:sync</code>属性，而<code>CountDownLatch</code>最重要的两个方法<code>countDown</code>和<code>await</code>的内部实现是由<code>Sync:sync</code>来完成的。而<code>Sync</code>类又继承自<code>AQS</code>。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// jdk1.8</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CountDownLatch</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 内部属性，相关操作会交由该对象来完成</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Sync sync;</span><br><span class="line">    <span class="comment">// 构造函数，初始化 sync 属性</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CountDownLatch</span><span class="params">(<span class="keyword">int</span> count)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 参数值必须大于等于0</span></span><br><span class="line">        <span class="keyword">if</span> (count &lt; <span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"count &lt; 0"</span>);</span><br><span class="line">        <span class="keyword">this</span>.sync = <span class="keyword">new</span> Sync(count);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">await</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        sync.acquireSharedInterruptibly(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">await</span><span class="params">(<span class="keyword">long</span> timeout, TimeUnit unit)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sync.tryAcquireSharedNanos(<span class="number">1</span>, unit.toNanos(timeout));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">countDown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        sync.releaseShared(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// 静态内部类，继承了AQS</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Sync</span> <span class="keyword">extends</span> <span class="title">AbstractQueuedSynchronizer</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 对外提供的构造函数，初始化对象时，会将 AQS 中的 state 值设置为 count</span></span><br><span class="line">        Sync(<span class="keyword">int</span> count) &#123;</span><br><span class="line">            setState(count);</span><br><span class="line">        &#125;</span><br><span class="line">		...</span><br><span class="line">        <span class="comment">// 尝试获取共享锁，若是 state 值为0，返回 1，否则返回 -1</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">tryAcquireShared</span><span class="params">(<span class="keyword">int</span> acquires)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (getState() == <span class="number">0</span>) ? <span class="number">1</span> : -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 尝试释放共享锁</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">tryReleaseShared</span><span class="params">(<span class="keyword">int</span> releases)</span> </span>&#123;</span><br><span class="line">            <span class="comment">// 自旋，可能多个线程同时尝试释放共享锁，同时修改 state 值，造成线程安全问题</span></span><br><span class="line">            <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">                <span class="keyword">int</span> c = getState();</span><br><span class="line">                <span class="comment">// 若是 state 的值已经为 0，则尝试释放共享锁失败。</span></span><br><span class="line">                <span class="keyword">if</span> (c == <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">               	<span class="comment">// 通过 CAS 操作将原有 state 的值减去1，失败重试</span></span><br><span class="line">                <span class="keyword">int</span> nextc = c-<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span> (compareAndSetState(c, nextc)) &#123;</span><br><span class="line">                    <span class="comment">// state值为0时，返回 true</span></span><br><span class="line">                    <span class="keyword">return</span> nextc == <span class="number">0</span>;</span><br><span class="line">                &#125;    </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><code>countDown方法</code></p>
+<p>当某个线程调用<code>CountDownLatch</code> 的 <code>countDown</code>方法时，内部操作的原理其实是将<code>AQS</code>中的<code>state</code>属性值减<code>1</code>。</p>
+<hr>
+<p>① 当一个线程调用<code>countDown</code>方法时，该方法内部会调用<code>Sync:sync</code>的<code>releaseShared(int arg)</code>方法。而<code>releaseShared(int arg)</code>方法则是由<code>Sync</code>的父类<code>AQS</code>定义的方法。</p>
+<p>② <code>AQS</code>的<code>releaseShared(int arg)</code>方法首先调用<code>tryReleaseShared(int arg)</code>方法，该方法在<code>AQS</code>中是一个空方法，具体逻辑在其子类<code>Sync</code>中实现。</p>
+<p>③ <code>Sync</code>的<code>tryReleaseShared(int arg)</code>方法尝试释放共享锁。由于可能会有多个线程同时调用<code>countDown</code>方法修改<code>state</code>的值，故对<code>state</code>值的修改需要使用<code>自旋</code>加<code>CAS</code>操作。若修改前读到<code>state</code>的值为<code>0</code>，直接返回<code>false</code>。若修改前<code>state</code>的值不为<code>0</code>，通过<code>CAS</code>操作将其值修改为<code>state-1</code>，若修改后的值为<code>0</code>，返回<code>true</code>。</p>
+<p>④ 第 ③ 方法其实是执行了两个操作，第一是将<code>state</code>的值减去<code>1</code>，第二是判断修改后的<code>state</code>值是否为<code>0</code>。若是第 ③ 步返回值为<code>true</code>，证明<code>state</code>的值已经为<code>0</code>，可以做一些操作来唤醒调用<code>await</code>方法的线程。故第 ② 步判断返回值为<code>true</code>的话，执行<code>doReleaseShared()</code>方法。</p>
+<hr>
+<p>⑤ <code>doReleaseShared</code>释放共享锁，一段自旋操作。① 该方法首先获取到头节点，使用变量<code>h</code>保存。若是当前<code>h</code>节点不为空并且<code>h</code>节点不等于尾节点时，执行操作（这么判断的原因在于，若是头节点等于尾节点，就没必要唤醒线程。因为若是只有一个头节点时，没有需要唤醒的线程）。② 若节点<code>h</code>的<code>waitStatus</code>属性值为<code>Node.SIGNAL</code>，则<code>CAS</code>操作将其设置为<code>0</code>。若设置成功，调用<code>unparkSuccessor</code>方法唤醒线程。若设置失败，继续执行<code>for</code>循环。③ 若节点<code>h</code>的<code>waitStatus</code>属性值为<code>0</code>，则通过<code>CAS</code>操作将其设置为<code>Node.PROPAGATE</code>。若设置失败，继续执行<code>for</code>循环。若设置成功，继续执行后面的语句，即当<code>h==head</code>时，跳出<code>for</code>循环。</p>
+<p>⑥ 在上述步骤 ⑤ 中，将<code>waitStatus</code>状态值由<code>Node.SIGNAL</code>设置为<code>0</code>成功后，调用了<code>unparkSuccessor</code>方法，该方法会唤醒传入节点的下一个节点的线程。① 该方法首先会获取到传入节点<code>node</code>的<code>waitStatus</code>属性值，若是该值小于<code>0</code>，通过<code>CAS</code>操作将该值修改为<code>0</code>。② 获取到<code>node</code>节点的下一个节点<code>s</code>，该节点需要是<code>waitStatus</code>属性值小于等于<code>0</code>的。③ 调用<code>LockSupport</code>的<code>unpark</code>方法唤醒<code>s</code>节点所对应的线程。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// CountDownLatch</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">countDown</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   	<span class="comment">// 调用sync的releaseShared方法</span></span><br><span class="line">    sync.releaseShared(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// AQS</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">releaseShared</span><span class="params">(<span class="keyword">int</span> arg)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// tryReleaseShared</span></span><br><span class="line">    <span class="keyword">if</span> (tryReleaseShared(arg)) &#123;</span><br><span class="line">        doReleaseShared();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// AQS</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">tryReleaseShared</span><span class="params">(<span class="keyword">int</span> arg)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Sync</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">tryReleaseShared</span><span class="params">(<span class="keyword">int</span> releases)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 自旋，可能多个线程同时尝试释放共享锁，同时修改 state 值，造成线程安全问题</span></span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">        <span class="keyword">int</span> c = getState();</span><br><span class="line">        <span class="comment">// 若是 state 的值已经为 0，则尝试释放共享锁失败。</span></span><br><span class="line">        <span class="keyword">if</span> (c == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 通过 CAS 操作将原有 state 的值减去1，失败重试</span></span><br><span class="line">        <span class="keyword">int</span> nextc = c-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (compareAndSetState(c, nextc)) &#123;</span><br><span class="line">            <span class="comment">// state值为0时，返回 true</span></span><br><span class="line">            <span class="keyword">return</span> nextc == <span class="number">0</span>;</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// AQS-&gt; 释放共享模式的动作</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doReleaseShared</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">        <span class="comment">// 保存头节点</span></span><br><span class="line">        Node h = head;</span><br><span class="line">        <span class="comment">// 头节点不为空并且头节点不为尾节点</span></span><br><span class="line">        <span class="keyword">if</span> (h != <span class="keyword">null</span> &amp;&amp; h != tail) &#123;</span><br><span class="line">            <span class="comment">// 获取到头节点的等待状态</span></span><br><span class="line">            <span class="keyword">int</span> ws = h.waitStatus;</span><br><span class="line">            <span class="comment">// 若是头节点的等待状态为SIGNAL</span></span><br><span class="line">            <span class="keyword">if</span> (ws == Node.SIGNAL) &#123;</span><br><span class="line">                <span class="comment">// 节点的状态由 Node.SIGNAL更新为0失败，继续执行自旋</span></span><br><span class="line">                <span class="keyword">if</span> (!compareAndSetWaitStatus(h, Node.SIGNAL, <span class="number">0</span>)) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;  </span><br><span class="line">                <span class="comment">// 节点状态由 Node.SIGNAL更新为0成功，调用unparkSuccessor(Node node)唤醒后继节点</span></span><br><span class="line">                unparkSuccessor(h);</span><br><span class="line">            <span class="comment">// 若是该节点的状态为0，并且由0设置为PROPAGATE失败，继续执行自旋   </span></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ws == <span class="number">0</span> &amp;&amp; !compareAndSetWaitStatus(h, <span class="number">0</span>, Node.PROPAGATE)) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;    </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (h == head) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">unparkSuccessor</span><span class="params">(Node node)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ws = node.waitStatus;</span><br><span class="line">    <span class="comment">// ws小于0的状态有三个 SIGNAL(-1) CONDITION(-2) PROPAGATE(-3)</span></span><br><span class="line">    <span class="comment">// 若是 ws 小于0,CAS操作将其修改为0</span></span><br><span class="line">    <span class="keyword">if</span> (ws &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        compareAndSetWaitStatus(node, ws, <span class="number">0</span>);</span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">// ws大于0仅有一种情况，即 CANCELLED(1)</span></span><br><span class="line">    Node s = node.next;</span><br><span class="line">    <span class="keyword">if</span> (s == <span class="keyword">null</span> || s.waitStatus &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        s = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">// 从尾节点找到一个距离node节点最近的状态值&lt;=0的节点</span></span><br><span class="line">        <span class="keyword">for</span> (Node t = tail; t != <span class="keyword">null</span> &amp;&amp; t != node; t = t.prev) &#123;</span><br><span class="line">            <span class="keyword">if</span> (t.waitStatus &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                s = t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 若是该节点不为null，直接唤醒该节点线程</span></span><br><span class="line">    <span class="keyword">if</span> (s != <span class="keyword">null</span>) &#123;</span><br><span class="line">        LockSupport.unpark(s.thread);</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><code>await</code></p>
+<p>当一个线程调用一个<code>CountDownLatch</code>对象的<code>await</code>方法时，该线程会等到其<code>state</code>值为<code>0</code>时执行，否则不会执行。</p>
+<p>① 当调用 <code>CountDownLatch</code> 的 <code>await</code> 方法时，会调用<code>Sync:sync</code>的<code>acquireSharedInterruptibly(int arg)</code>方法，而<code>acquireSharedInterruptibly(int arg)</code>方法是由<code>Sync:sync</code>的父类<code>AQS</code>定义的方法。</p>
+<p>② <code>AQS</code>的<code>acquireSharedInterruptibly(int arg)</code>方法首先会去判断当前线程是否被中断，若是当前线程已经被中断，则直接抛出中断异常。若是当前线程没被中断，会去调用<code>tryAcquireShared(int arg)</code>方法。而该<code>tryAcquireShared(int arg)</code>方法在<code>AQS</code>中是一个空方法，具体的逻辑是由子类<code>Sync</code>来实现的。</p>
+<p>③ <code>Sync</code>重写父类的<code>tryAcquireShared(int arg)</code>方法，其方法的目的就是判断当前<code>state</code>的值是否为<code>0</code>，若是该值为<code>0</code>，返回<code>1</code>，否则返回<code>-1</code>。</p>
+<p>④ 步骤 ② 会根据步骤 ③ 方法返回的值进行判断。若是返回值不小于<code>0</code>，该方法什么也不做（不会挂起当前的线程）；若是返回值小于<code>0</code>，证明<code>state</code>的值不为<code>0</code>，当前线程不能执行，需要执行进一步的操作，即调用<code>doAcquireSharedInterruptibly(int arg)</code>方法。</p>
+<hr>
+<p>⑤ <code>doAcquireSharedInterruptibly</code>方法，添加到等待队列，AQS里面的方法。① 该方法首先会在队列中添加一个共享模式的节点。② 一段自旋操作，获取到该节点<code>node</code>的前一个节点<code>p</code>，若是<code>p</code>节点正好为<code>head</code>节点，调用<code>tryAcquireShared</code>方法尝试获取共享锁（<code>state</code>为<code>0</code>返回<code>1</code>，否则返回<code>-1</code>）,若是获取共享锁成功，调用<code>setHeadAndPropagate</code>方法，该方法可能会唤醒当前线程。 ③ 若是上一步操做获取共享锁失败，首先调用<code>shouldParkAfterFailedAcquire</code>方法判断当前线程是否可以被挂起。若是该方法返回值为<code>true</code>，调用<code>parkAndCheckInterrupt</code>方法挂起当前线程，并返回当前线程的中断标识。若是中断标识为<code>true</code>，立即抛出中断异常。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// CountDownLatch</span></span><br><span class="line"><span class="comment">// 1.委托给sync的acquireSharedInterruptibly方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">await</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    sync.acquireSharedInterruptibly(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// AQS</span></span><br><span class="line"><span class="comment">// 2.尝试获取，若获取不到在调用doAcquireSharedInterruptibly方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">acquireSharedInterruptibly</span><span class="params">(<span class="keyword">int</span> arg)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="comment">// 若是当前线程已经被中断，直接抛出中断异常</span></span><br><span class="line">    <span class="keyword">if</span> (Thread.interrupted()) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> InterruptedException();</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">// 若是当前 state的值不为0</span></span><br><span class="line">    <span class="keyword">if</span> (tryAcquireShared(arg) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        doAcquireSharedInterruptibly(arg);</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// AQS</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">tryAcquireShared</span><span class="params">(<span class="keyword">int</span> arg)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// CountDownLatch-Sync</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">tryAcquireShared</span><span class="params">(<span class="keyword">int</span> acquires)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 若是当前 state 的值为0，返回1，否则返回-1</span></span><br><span class="line">    <span class="keyword">return</span> (getState() == <span class="number">0</span>) ? <span class="number">1</span> : -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// AQS-&gt;获取共享锁的方法</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doAcquireSharedInterruptibly</span><span class="params">(<span class="keyword">int</span> arg)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="comment">// 将当前线程封装成为 Node 节点，添加到等待队列(此时waitStatus值为0)</span></span><br><span class="line">    <span class="keyword">final</span> Node node = addWaiter(Node.SHARED);</span><br><span class="line">    <span class="comment">// 判断是否执行失败的标识，失败时会将该节点清除</span></span><br><span class="line">    <span class="keyword">boolean</span> failed = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">            <span class="comment">// 获取 node 节点的前一个节点p</span></span><br><span class="line">            <span class="keyword">final</span> Node p = node.predecessor();</span><br><span class="line">            <span class="comment">// 若是节点p为等待队列的头节点</span></span><br><span class="line">            <span class="keyword">if</span> (p == head) &#123;</span><br><span class="line">                <span class="comment">// 若是p为头节点，尝试一下获取共享锁(具体逻辑由Sync实现)</span></span><br><span class="line">                <span class="keyword">int</span> r = tryAcquireShared(arg);</span><br><span class="line">				<span class="comment">// r &gt;= 0 证明 state 的值已经为 0，即获取到了共享锁。CountDownLatch:Sync返回1</span></span><br><span class="line">                <span class="keyword">if</span> (r &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                    setHeadAndPropagate(node, r);</span><br><span class="line">                    p.next = <span class="keyword">null</span>;</span><br><span class="line">                    failed = <span class="keyword">false</span>;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 1. 当获取锁失败后判断是否需要挂起线程</span></span><br><span class="line">            <span class="comment">// 2. 若是需要挂起线程，则挂起线程并检查中断</span></span><br><span class="line">            <span class="keyword">if</span> (shouldParkAfterFailedAcquire(p, node) &amp;&amp; parkAndCheckInterrupt()) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> InterruptedException();</span><br><span class="line">            &#125;   </span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="comment">// 若是执行失败，调用 cancelAcquire(Node node)方法将这个节点从等待队列中删除</span></span><br><span class="line">        <span class="keyword">if</span> (failed) &#123;</span><br><span class="line">            cancelAcquire(node);</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 在自旋操作期间成功获取到共享锁执行的操作(此处传入的propagate值为1,节点为当前节点新加入队列的节点)</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setHeadAndPropagate</span><span class="params">(Node node, <span class="keyword">int</span> propagate)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 首先保留原始头节点，然后将当前的节点设置为头节点</span></span><br><span class="line">    Node h = head;</span><br><span class="line">    setHead(node);</span><br><span class="line">    <span class="comment">// 已经将node节点设置为了头结点，需要唤醒下一个节点啦</span></span><br><span class="line">    <span class="comment">// 1.若是传入的值大于0</span></span><br><span class="line">    <span class="comment">// 2.若是传入的值小于等于0，原始头结点为null</span></span><br><span class="line">    <span class="comment">// 3.若是传入的值小于等于0，原始头节点不为null，原始头结点的waitStatus状态值小于0</span></span><br><span class="line">    <span class="comment">// 4.给h重新赋了一次值后h为null</span></span><br><span class="line">    <span class="comment">// 5.给h重新赋了一次值后h不为null,其waitStatus状态值小于0</span></span><br><span class="line">    <span class="keyword">if</span> (propagate &gt; <span class="number">0</span> || h == <span class="keyword">null</span> || h.waitStatus &lt; <span class="number">0</span> ||</span><br><span class="line">        (h = head) == <span class="keyword">null</span> || h.waitStatus &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 获取传入节点的下一个节点s</span></span><br><span class="line">        Node s = node.next;</span><br><span class="line">        <span class="comment">// 若是s为null或者是s节点是共享模式，执行doReleaseShared方法</span></span><br><span class="line">        <span class="keyword">if</span> (s == <span class="keyword">null</span> || s.isShared()) &#123;</span><br><span class="line">            doReleaseShared();</span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doReleaseShared</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">        <span class="comment">// 首先保存头结点</span></span><br><span class="line">        Node h = head;</span><br><span class="line">        <span class="comment">// 若是头结点不为空并且头结点不等于尾节点(证明不只有一个节点)</span></span><br><span class="line">        <span class="keyword">if</span> (h != <span class="keyword">null</span> &amp;&amp; h != tail) &#123;</span><br><span class="line">            <span class="comment">// 获取头结点的waitStatus状态值</span></span><br><span class="line">            <span class="keyword">int</span> ws = h.waitStatus;</span><br><span class="line">            <span class="comment">// 若是该状态值为SIGNAL</span></span><br><span class="line">            <span class="keyword">if</span> (ws == Node.SIGNAL) &#123;</span><br><span class="line">                <span class="comment">// 尝试将节点h的waitStatus状态值由SIGNAL修改为0</span></span><br><span class="line">                <span class="keyword">if</span> (!compareAndSetWaitStatus(h, Node.SIGNAL, <span class="number">0</span>)) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>; </span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 若是修改成功，执行unparkSuccessor方法，唤醒当前节点的下一个节点</span></span><br><span class="line">                unparkSuccessor(h);</span><br><span class="line">            <span class="comment">// 若是该状态值为0,将其设置为PROPAGATE   </span></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ws == <span class="number">0</span> &amp;&amp; !compareAndSetWaitStatus(h, <span class="number">0</span>, Node.PROPAGATE)) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (h == head) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 唤醒node节点的下一个节点</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">unparkSuccessor</span><span class="params">(Node node)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ws小于0，存在三种状态</span></span><br><span class="line">    <span class="comment">// SIGNAL(-1) CONDITION(-2) PROPAGATE(-3)</span></span><br><span class="line">    <span class="keyword">int</span> = node.waitStatus;</span><br><span class="line">    <span class="keyword">if</span> (ws &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        compareAndSetWaitStatus(node, ws, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 获取node节点的下一个节点</span></span><br><span class="line">    Node s = node.next;</span><br><span class="line">    <span class="comment">// 去除一些无用的节点</span></span><br><span class="line">    <span class="keyword">if</span> (s == <span class="keyword">null</span> || s.waitStatus &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        s = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">for</span> (Node t = tail; t != <span class="keyword">null</span> &amp;&amp; t != node; t = t.prev) &#123;</span><br><span class="line">            <span class="keyword">if</span> (t.waitStatus &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                s = t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 唤醒操作</span></span><br><span class="line">    <span class="keyword">if</span> (s != <span class="keyword">null</span>) &#123;</span><br><span class="line">        LockSupport.unpark(s.thread);</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+    
+        <a href="/wiki/fra-spring-base/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">基础知识</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            gaozhilong &copy; 2019 
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

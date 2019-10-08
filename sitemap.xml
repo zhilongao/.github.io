@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zhilongao.github.io/wiki/ans-countdownlatch-source/</loc>
+    
+    <lastmod>2019-10-08T12:24:10.408Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zhilongao.github.io/wiki/fra-spring-annotation/</loc>
+    
+    <lastmod>2019-09-30T12:19:49.091Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zhilongao.github.io/wiki/fra-spring-xml/</loc>
+    
+    <lastmod>2019-09-30T02:22:49.576Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zhilongao.github.io/wiki/fra-spring-base/</loc>
+    
+    <lastmod>2019-09-30T02:22:40.524Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zhilongao.github.io/wiki/alg-string-simple1/</loc>
     
     <lastmod>2019-09-29T08:26:16.315Z</lastmod>
@@ -128,21 +156,21 @@
   </url>
   
   <url>
-    <loc>https://zhilongao.github.io/wiki/spring-cloud-loadbalance/</loc>
+    <loc>https://zhilongao.github.io/wiki/fra-spring-cloud-loadbalance/</loc>
     
     <lastmod>2019-09-21T08:05:15.345Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://zhilongao.github.io/wiki/spring-cloud-config/</loc>
+    <loc>https://zhilongao.github.io/wiki/fra-spring-cloud-config/</loc>
     
     <lastmod>2019-09-15T07:48:44.405Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://zhilongao.github.io/wiki/springboot/</loc>
+    <loc>https://zhilongao.github.io/wiki/fra-springboot/</loc>
     
     <lastmod>2019-09-13T07:29:27.493Z</lastmod>
     
@@ -173,13 +201,6 @@
     <loc>https://zhilongao.github.io/wiki/project-ask/</loc>
     
     <lastmod>2019-09-05T03:01:01.061Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zhilongao.github.io/wiki/spring/</loc>
-    
-    <lastmod>2019-08-31T04:01:29.755Z</lastmod>
     
   </url>
   
