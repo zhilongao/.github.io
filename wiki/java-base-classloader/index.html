@@ -3,25 +3,23 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     
-    <title>project-ask | zl&#39;s blog</title>
+    <title>ClassLoader | zl&#39;s blog</title>
     
     
-        <meta name="keywords" content="project-ask">
+        <meta name="keywords" content="ClassLoader">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="项目专题 系统1 ​    系统数据流转 ​     ​     // 大体流程1. 从原始借据表bp_collect_loan_src同步数据到bp_collect_loan，同步批次号为batch_no的数据。(同步数据时，每个线程处理数量默认为10000，若是当前批次数据量超过10000，会采用多线程来执行)2. 针对每一个原始借据，数据库里面只有可能有一条与之对应的借据，所以将bp_col">
+    <meta name="description" content="类加载器的区别java中提供了三种类加载器，分别是启动类加载器，扩展类加载器，系统类加载器。三种类加载器通过双亲委派机制来实现类的加载。    类加载器 名称 加载路径 实现    启动类加载器 BootStrap ClassLoader 核心库：java.lang.*，系统属性：sun.boot.class.path所指路径 c++   扩展类加载器 Extension ClassLoader">
 <meta property="og:type" content="article">
-<meta property="og:title" content="project-ask">
-<meta property="og:url" content="https://zhilongao.github.io/wiki/project-ask/index.html">
+<meta property="og:title" content="ClassLoader">
+<meta property="og:url" content="https://zhilongao.github.io/wiki/java-base-classloader/index.html">
 <meta property="og:site_name" content="zl&#39;s blog">
-<meta property="og:description" content="项目专题 系统1 ​    系统数据流转 ​     ​     // 大体流程1. 从原始借据表bp_collect_loan_src同步数据到bp_collect_loan，同步批次号为batch_no的数据。(同步数据时，每个线程处理数量默认为10000，若是当前批次数据量超过10000，会采用多线程来执行)2. 针对每一个原始借据，数据库里面只有可能有一条与之对应的借据，所以将bp_col">
+<meta property="og:description" content="类加载器的区别java中提供了三种类加载器，分别是启动类加载器，扩展类加载器，系统类加载器。三种类加载器通过双亲委派机制来实现类的加载。    类加载器 名称 加载路径 实现    启动类加载器 BootStrap ClassLoader 核心库：java.lang.*，系统属性：sun.boot.class.path所指路径 c++   扩展类加载器 Extension ClassLoader">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/zhilongao/images-repository/master/3153f3dae0ac8b3014874267ad70cc1.png">
-<meta property="og:updated_time" content="2019-09-05T03:01:01.061Z">
+<meta property="og:updated_time" content="2019-10-13T09:53:03.756Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="project-ask">
-<meta name="twitter:description" content="项目专题 系统1 ​    系统数据流转 ​     ​     // 大体流程1. 从原始借据表bp_collect_loan_src同步数据到bp_collect_loan，同步批次号为batch_no的数据。(同步数据时，每个线程处理数量默认为10000，若是当前批次数据量超过10000，会采用多线程来执行)2. 针对每一个原始借据，数据库里面只有可能有一条与之对应的借据，所以将bp_col">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/zhilongao/images-repository/master/3153f3dae0ac8b3014874267ad70cc1.png">
+<meta name="twitter:title" content="ClassLoader">
+<meta name="twitter:description" content="类加载器的区别java中提供了三种类加载器，分别是启动类加载器，扩展类加载器，系统类加载器。三种类加载器通过双亲委派机制来实现类的加载。    类加载器 名称 加载路径 实现    启动类加载器 BootStrap ClassLoader 核心库：java.lang.*，系统属性：sun.boot.class.path所指路径 c++   扩展类加载器 Extension ClassLoader">
     
 
     
@@ -187,20 +185,20 @@
                      <li class="file"><a href="/wiki/dubbo-ask/">dubbo</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             基础
                         </a>
                          <ul class="unstyled" id="tree" > 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             ClassLoader
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/java-base-classloader/">ClassLoader</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/wiki/java-base-classloader/">ClassLoader</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -322,13 +320,13 @@
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/questions/">questions</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory open">
+                    <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             项目
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/wiki/project-ask/">project-ask</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/project-ask/">project-ask</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -511,7 +509,7 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main"><article id="post-project-ask" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-java-base-classloader" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -521,15 +519,15 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/项目/">项目</a>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/基础/">基础</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/基础/ClassLoader/">ClassLoader</a>
     </div>
 
                         
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/wiki/project-ask/">
-            <time datetime="2019-08-26T13:26:32.000Z" itemprop="datePublished">2019-08-26</time>
+        <a href="/wiki/java-base-classloader/">
+            <time datetime="2019-10-13T03:19:08.000Z" itemprop="datePublished">2019-10-13</time>
         </a>
     </div>
 
@@ -540,13 +538,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/project-ask.md'> Source </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/java-base-classloader.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/project-ask.md'> Edit </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/java-base-classloader.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/project-ask.md'> History </a>
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/java-base-classloader.md'> History </a>
                             </div>
                         
                     </div>
@@ -554,7 +552,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            project-ask
+            ClassLoader
         </h1>
     
 
@@ -565,14 +563,57 @@
         
         
             
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                    <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#类加载器的区别"><span class="toc-number">1.</span> <span class="toc-text">类加载器的区别</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#双亲委派机制"><span class="toc-number">2.</span> <span class="toc-text">双亲委派机制</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#自定义类加载器"><span class="toc-number">3.</span> <span class="toc-text">自定义类加载器</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#资源文件的读取"><span class="toc-number">4.</span> <span class="toc-text">资源文件的读取</span></a></li></ol>
+                </div>
+            
         
         
-            <p><code>项目专题</code></p>
-<p><code>系统1</code></p>
-<p>​    <code>系统数据流转</code></p>
-<p>​    <img src="https://raw.githubusercontent.com/zhilongao/images-repository/master/3153f3dae0ac8b3014874267ad70cc1.png" alt="任务执行流程"></p>
-<p>​    </p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 大体流程</span></span><br><span class="line"><span class="number">1</span>. 从原始借据表bp_collect_loan_src同步数据到bp_collect_loan，同步批次号为batch_no的数据。(同步数据时，每个线程处理数量默认为<span class="number">10000</span>，若是当前批次数据量超过<span class="number">10000</span>，会采用多线程来执行)</span><br><span class="line"><span class="number">2</span>. 针对每一个原始借据，数据库里面只有可能有一条与之对应的借据，所以将bp_collect_loan存入数据库的操作采用的是insertOrUpdate操作(任务执行失败后，不会对数据库中的数据造成影响)。</span><br><span class="line"><span class="number">3</span>. 借据同步完成之后，需要执行归案任务，就是将多个借据加工成为一个案件，以人为维度进行催收。</span><br><span class="line"><span class="number">4</span>. 归案完成之后，需要跑规则引擎来执行分案，通过规则引擎分案之后，会在数据库表bp_collect_divide表里面生成分案记录。</span><br><span class="line"><span class="number">5</span>. 将这些分案记录针对案件进行分案(分案记录里面存储了两类，针对个人的分案，针对组的分案)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用到的技术点(分布式锁 redis队列)</span></span><br><span class="line"><span class="number">1</span>. 由于任务是部署在多台机器上的，多个进程执行任务时，需要获取分布式锁。项目中采用redis来实现了分布式锁，上锁命令采用set命令，外加是否存在，过期时间参数来实现。而释放锁的命令采用lua脚本来实现，因为会有两步骤操作，首先式判断上锁客户端和释放锁的客户端是否一致（存储在value中），其次是删除该锁对应的key，lua脚本保证了该操作的原子性。</span><br><span class="line"><span class="number">2</span>. 在执行归案的过程中，针对每一个案件，需要将该案件分出去，会过规则引擎。而将分案请求交给规则引擎有两种方式，第一种是先将该案件构建成为请求，然后将该请求放到redis的同步队列里面，规则引擎那边从同步队列里面来进行消费。第二种是若同步队列已满，或者放入到同步队列出错，则会将请求直接交给规则引擎来处理。</span><br><span class="line"></span><br><span class="line"><span class="comment">// 技术难点-如何克服</span></span><br></pre></td></tr></table></figure>
+            <h6 id="类加载器的区别"><a href="#类加载器的区别" class="headerlink" title="类加载器的区别"></a><code>类加载器的区别</code></h6><p>java中提供了三种类加载器，分别是启动类加载器，扩展类加载器，系统类加载器。三种类加载器通过双亲委派机制来实现类的加载。</p>
+<table>
+<thead>
+<tr>
+<th>类加载器</th>
+<th>名称</th>
+<th>加载路径</th>
+<th>实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>启动类加载器</td>
+<td>BootStrap ClassLoader</td>
+<td>核心库：java.lang.*，系统属性：sun.boot.class.path所指路径</td>
+<td>c++</td>
+</tr>
+<tr>
+<td>扩展类加载器</td>
+<td>Extension ClassLoader</td>
+<td>扩展库：jre\lib\ext 目录下的包，系统属性：java.ext.dirs所指路径</td>
+<td>纯java</td>
+</tr>
+<tr>
+<td>系统类加载器</td>
+<td>System ClassLoader</td>
+<td>环境变量 classpath 或系统属性 java.class.path 指定目录中加载类</td>
+<td>纯java</td>
+</tr>
+</tbody></table>
+<hr>
+<h6 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a><code>双亲委派机制</code></h6><p>类的双亲委派机制是指子类加载器加载类时，首先会检查该类是否已经被加载。若是该类未被加载，会将加载任务委托给父类加载器，父类加载器又会委托给更上一层类加载器，直到启动类加载器。启动类加载器会检查其加载路径，有则加载，无则加载任务给扩展类加载器，扩展类有会检查路径并执行加载。</p>
+<hr>
+<h6 id="自定义类加载器"><a href="#自定义类加载器" class="headerlink" title="自定义类加载器"></a><code>自定义类加载器</code></h6><p>在测试之前，需要将<code>Test.java</code>编译成<code>Test.class</code>文件，将该文件放如到路径<code>D:\jar\com\study\zl\classloader</code>下，并将项目中的<code>Test.java</code>和<code>Test.class</code>文件删除，以免该类被系统类加载器加载到。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.study.zl.classloader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/10/13 10:24</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException </span>&#123;</span><br><span class="line">        SelfClassLoader selfClassLoader = <span class="keyword">new</span> SelfClassLoader(<span class="string">"D:\\jar"</span>);</span><br><span class="line">        Class&lt;?&gt; cls = selfClassLoader.loadClass(<span class="string">"com.study.zl.classloader.Test"</span>);</span><br><span class="line">        <span class="keyword">if</span> (cls != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 创建一个cls类型的对象</span></span><br><span class="line">            Object o = cls.newInstance();</span><br><span class="line">            <span class="comment">// 获取该对象的say方法</span></span><br><span class="line">            Method say = cls.getMethod(<span class="string">"say"</span>, <span class="keyword">null</span>);</span><br><span class="line">            <span class="comment">// 调用该类型的say方法</span></span><br><span class="line">            say.invoke(o, <span class="keyword">null</span>);</span><br><span class="line">            <span class="comment">// 查看 cls 的类加载器</span></span><br><span class="line">            System.out.println(cls.getClassLoader().toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 输出结果</span></span><br><span class="line">    <span class="comment">// hello,world</span></span><br><span class="line">    <span class="comment">// com.study.zl.classloader.SelfClassLoader@7f31245a</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.study.zl.classloader;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello,world"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自定义一个类加载器，该类加载器继承自<code>ClassLoader</code>，重写 <code>findClass</code> 方法来获取 <code>Class</code>。该方法首先会调用<code>getData</code>方法来获取类的字节码，然后调用父类的<code>defineClass</code>方法将字节码转化未 <code>Class</code>并返回。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.study.zl.classloader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/10/13 10:40</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SelfClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String classpath;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SelfClassLoader</span><span class="params">(String classpath)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.classpath = classpath;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">byte</span>[] data = getData(name);</span><br><span class="line">            <span class="keyword">if</span> (data != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// 调用 defineClass 方法将字节码转化为Class</span></span><br><span class="line">                <span class="keyword">return</span> defineClass(name, data, <span class="number">0</span> , data.length);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.findClass(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回类的字节码</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> className</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span>[] getData(String className) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        InputStream in = <span class="keyword">null</span>;</span><br><span class="line">        ByteArrayOutputStream out = <span class="keyword">null</span>;</span><br><span class="line">        String path = classpath + File.separatorChar + className.replace(<span class="string">'.'</span>, File.separatorChar) + <span class="string">".class"</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            in = <span class="keyword">new</span> FileInputStream(path);</span><br><span class="line">            out = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">            <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2048</span>];</span><br><span class="line">            <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((len = in.read(buffer)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                out.write(buffer, <span class="number">0</span>, len);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> out.toByteArray();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            in.close();</span><br><span class="line">            out.close();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h6 id="资源文件的读取"><a href="#资源文件的读取" class="headerlink" title="资源文件的读取"></a><code>资源文件的读取</code></h6><p>在 java 中可以使用 Class 或者是 ClassLoader 读取资源文件。比如现在项目的<code>resources</code>目录下面有一个 <code>application.properties</code>文件，可以使用项目中某个类的<code>class.getResource</code>方法或者某个类的类加载器<code>class.getClassLoader().getResource</code>方法。方法所传资源文件路径是向对于<code>resources</code>的目录。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.study.zl.classloader.p2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/10/13 14:26</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Class&lt;App&gt; appClass = App.class;</span><br><span class="line">        <span class="comment">// 通过 class 获取资源时，必须有 / ,否则会从该类所在包下面读取</span></span><br><span class="line">        URL resource1 = appClass.getResource(<span class="string">"/application.properties"</span>);</span><br><span class="line">        <span class="comment">// 通过 ClassLoader 读取资源，所不同的是 ClassLoader 还有一个 getResources 方法</span></span><br><span class="line">        URL resource2 = appClass.getClassLoader().getResource(<span class="string">"application.properties"</span>);</span><br><span class="line">        System.out.println(resource1.toString());</span><br><span class="line">        System.out.println(resource2.toString());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">  	<span class="comment">// 输出结果</span></span><br><span class="line">    <span class="comment">// file:/D:/code/struct-parent/interview-ready/target/classes/application.properties</span></span><br><span class="line">    <span class="comment">// file:/D:/code/struct-parent/interview-ready/target/classes/application.properties</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在spring核心包中提供了一个工具类<code>PropertiesLoaderUtils</code>，该工具类可以将<code>ClassLoader</code>读取到的资源转换未<code>Properties</code>文件。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//  pom.xml文件引入 spring framework 核心包依赖</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-core&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;2.5.6&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// application.properties文件加入内容</span></span><br><span class="line">#Tue Jun 18 23:47:55 GMT 2019</span><br><span class="line">server.port=<span class="number">8080</span></span><br><span class="line">server.name=spring-boot-application</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.study.zl.classloader.p2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.core.io.UrlResource;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.io.support.PropertiesLoaderUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.util.Enumeration;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/10/13 14:26</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Class&lt;App&gt; appClass = App.class;</span><br><span class="line">        <span class="comment">// 定义Properties对象</span></span><br><span class="line">        Properties properties = <span class="keyword">new</span> Properties();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 读取资源集合</span></span><br><span class="line">            Enumeration&lt;URL&gt; urls = appClass.getClassLoader().getResources(<span class="string">"application.properties"</span>);</span><br><span class="line">            <span class="keyword">while</span> (urls.hasMoreElements()) &#123;</span><br><span class="line">                <span class="comment">// 使用工具类加载</span></span><br><span class="line">                properties.putAll(PropertiesLoaderUtils.loadProperties(<span class="keyword">new</span> UrlResource(urls.nextElement())));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 输出</span></span><br><span class="line">        System.out.println(properties);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 输出结果</span></span><br><span class="line">    <span class="comment">// &#123;server.port=8080, server.name=spring-boot-application&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
             </div>
@@ -586,19 +627,10 @@
     
 <nav id="article-nav">
     
-        <a href="/wiki/tcp/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    tcp
-                
-            </div>
-        </a>
     
-    
-        <a href="/wiki/threadpool/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/wiki/ans-countdownlatch-source/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">threadpool</div>
+            <div class="article-nav-title">CountDownLatch</div>
         </a>
     
 </nav>

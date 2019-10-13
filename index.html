@@ -195,6 +195,15 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
+                            ClassLoader
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/java-base-classloader/">ClassLoader</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
                             io
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/io/">io</a></li>  </ul> 
@@ -500,6 +509,121 @@
 </aside>
             
             <section id="main">
+        <article id="post-java-base-classloader" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/基础/">基础</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/基础/ClassLoader/">ClassLoader</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/java-base-classloader/">
+            <time datetime="2019-10-13T03:19:08.000Z" itemprop="datePublished">2019-10-13</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/java-base-classloader.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/java-base-classloader.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/java-base-classloader.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/java-base-classloader/">ClassLoader</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h6 id="类加载器的区别"><a href="#类加载器的区别" class="headerlink" title="类加载器的区别"></a><code>类加载器的区别</code></h6><p>java中提供了三种类加载器，分别是启动类加载器，扩展类加载器，系统类加载器。三种类加载器通过双亲委派机制来实现类的加载。</p>
+<table>
+<thead>
+<tr>
+<th>类加载器</th>
+<th>名称</th>
+<th>加载路径</th>
+<th>实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>启动类加载器</td>
+<td>BootStrap ClassLoader</td>
+<td>核心库：java.lang.*，系统属性：sun.boot.class.path所指路径</td>
+<td>c++</td>
+</tr>
+<tr>
+<td>扩展类加载器</td>
+<td>Extension ClassLoader</td>
+<td>扩展库：jre\lib\ext 目录下的包，系统属性：java.ext.dirs所指路径</td>
+<td>纯java</td>
+</tr>
+<tr>
+<td>系统类加载器</td>
+<td>System ClassLoader</td>
+<td>环境变量 classpath 或系统属性 java.class.path 指定目录中加载类</td>
+<td>纯java</td>
+</tr>
+</tbody></table>
+<hr>
+<h6 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a><code>双亲委派机制</code></h6><p>类的双亲委派机制是指子类加载器加载类时，首先会检查该类是否已经被加载。若是该类未被加载，会将加载任务委托给父类加载器，父类加载器又会委托给更上一层类加载器，直到启动类加载器。启动类加载器会检查其加载路径，有则加载，无则加载任务给扩展类加载器，扩展类有会检查路径并执行加载。</p>
+<hr>
+<h6 id="自定义类加载器"><a href="#自定义类加载器" class="headerlink" title="自定义类加载器"></a><code>自定义类加载器</code></h6><p>在测试之前，需要将<code>Test.java</code>编译成<code>Test.class</code>文件，将该文件放如到路径<code>D:\jar\com\study\zl\classloader</code>下，并将项目中的<code>Test.java</code>和<code>Test.class</code>文件删除，以免该类被系统类加载器加载到。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.study.zl.classloader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/10/13 10:24</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException </span>&#123;</span><br><span class="line">        SelfClassLoader selfClassLoader = <span class="keyword">new</span> SelfClassLoader(<span class="string">"D:\\jar"</span>);</span><br><span class="line">        Class&lt;?&gt; cls = selfClassLoader.loadClass(<span class="string">"com.study.zl.classloader.Test"</span>);</span><br><span class="line">        <span class="keyword">if</span> (cls != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 创建一个cls类型的对象</span></span><br><span class="line">            Object o = cls.newInstance();</span><br><span class="line">            <span class="comment">// 获取该对象的say方法</span></span><br><span class="line">            Method say = cls.getMethod(<span class="string">"say"</span>, <span class="keyword">null</span>);</span><br><span class="line">            <span class="comment">// 调用该类型的say方法</span></span><br><span class="line">            say.invoke(o, <span class="keyword">null</span>);</span><br><span class="line">            <span class="comment">// 查看 cls 的类加载器</span></span><br><span class="line">            System.out.println(cls.getClassLoader().toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 输出结果</span></span><br><span class="line">    <span class="comment">// hello,world</span></span><br><span class="line">    <span class="comment">// com.study.zl.classloader.SelfClassLoader@7f31245a</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.study.zl.classloader;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello,world"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自定义一个类加载器，该类加载器继承自<code>ClassLoader</code>，重写 <code>findClass</code> 方法来获取 <code>Class</code>。该方法首先会调用<code>getData</code>方法来获取类的字节码，然后调用父类的<code>defineClass</code>方法将字节码转化未 <code>Class</code>并返回。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.study.zl.classloader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/10/13 10:40</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SelfClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String classpath;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SelfClassLoader</span><span class="params">(String classpath)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.classpath = classpath;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">byte</span>[] data = getData(name);</span><br><span class="line">            <span class="keyword">if</span> (data != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// 调用 defineClass 方法将字节码转化为Class</span></span><br><span class="line">                <span class="keyword">return</span> defineClass(name, data, <span class="number">0</span> , data.length);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.findClass(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回类的字节码</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> className</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span>[] getData(String className) <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        InputStream in = <span class="keyword">null</span>;</span><br><span class="line">        ByteArrayOutputStream out = <span class="keyword">null</span>;</span><br><span class="line">        String path = classpath + File.separatorChar + className.replace(<span class="string">'.'</span>, File.separatorChar) + <span class="string">".class"</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            in = <span class="keyword">new</span> FileInputStream(path);</span><br><span class="line">            out = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">            <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2048</span>];</span><br><span class="line">            <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> ((len = in.read(buffer)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                out.write(buffer, <span class="number">0</span>, len);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> out.toByteArray();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            in.close();</span><br><span class="line">            out.close();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h6 id="资源文件的读取"><a href="#资源文件的读取" class="headerlink" title="资源文件的读取"></a><code>资源文件的读取</code></h6><p>在 java 中可以使用 Class 或者是 ClassLoader 读取资源文件。比如现在项目的<code>resources</code>目录下面有一个 <code>application.properties</code>文件，可以使用项目中某个类的<code>class.getResource</code>方法或者某个类的类加载器<code>class.getClassLoader().getResource</code>方法。方法所传资源文件路径是向对于<code>resources</code>的目录。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.study.zl.classloader.p2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/10/13 14:26</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Class&lt;App&gt; appClass = App.class;</span><br><span class="line">        <span class="comment">// 通过 class 获取资源时，必须有 / ,否则会从该类所在包下面读取</span></span><br><span class="line">        URL resource1 = appClass.getResource(<span class="string">"/application.properties"</span>);</span><br><span class="line">        <span class="comment">// 通过 ClassLoader 读取资源，所不同的是 ClassLoader 还有一个 getResources 方法</span></span><br><span class="line">        URL resource2 = appClass.getClassLoader().getResource(<span class="string">"application.properties"</span>);</span><br><span class="line">        System.out.println(resource1.toString());</span><br><span class="line">        System.out.println(resource2.toString());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">  	<span class="comment">// 输出结果</span></span><br><span class="line">    <span class="comment">// file:/D:/code/struct-parent/interview-ready/target/classes/application.properties</span></span><br><span class="line">    <span class="comment">// file:/D:/code/struct-parent/interview-ready/target/classes/application.properties</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在spring核心包中提供了一个工具类<code>PropertiesLoaderUtils</code>，该工具类可以将<code>ClassLoader</code>读取到的资源转换未<code>Properties</code>文件。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//  pom.xml文件引入 spring framework 核心包依赖</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-core&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;2.5.6&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// application.properties文件加入内容</span></span><br><span class="line">#Tue Jun 18 23:47:55 GMT 2019</span><br><span class="line">server.port=<span class="number">8080</span></span><br><span class="line">server.name=spring-boot-application</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.study.zl.classloader.p2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.core.io.UrlResource;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.io.support.PropertiesLoaderUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.util.Enumeration;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/10/13 14:26</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Class&lt;App&gt; appClass = App.class;</span><br><span class="line">        <span class="comment">// 定义Properties对象</span></span><br><span class="line">        Properties properties = <span class="keyword">new</span> Properties();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 读取资源集合</span></span><br><span class="line">            Enumeration&lt;URL&gt; urls = appClass.getClassLoader().getResources(<span class="string">"application.properties"</span>);</span><br><span class="line">            <span class="keyword">while</span> (urls.hasMoreElements()) &#123;</span><br><span class="line">                <span class="comment">// 使用工具类加载</span></span><br><span class="line">                properties.putAll(PropertiesLoaderUtils.loadProperties(<span class="keyword">new</span> UrlResource(urls.nextElement())));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 输出</span></span><br><span class="line">        System.out.println(properties);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 输出结果</span></span><br><span class="line">    <span class="comment">// &#123;server.port=8080, server.name=spring-boot-application&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-ans-countdownlatch-source" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1413,85 +1537,6 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 扩展的事件监听器接口-&gt;采用泛型</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ApplicationListener</span>&lt;<span class="title">E</span> <span class="keyword">extends</span> <span class="title">ApplicationEvent</span>&gt; <span class="keyword">extends</span> <span class="title">EventListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(E event)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 扩展的EventObject</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationEvent</span> <span class="keyword">extends</span> <span class="title">EventObject</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">7099057708183571937L</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">long</span> timestamp;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ApplicationEvent</span><span class="params">(Object source)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(source);</span><br><span class="line">		<span class="keyword">this</span>.timestamp = System.currentTimeMillis();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">long</span> <span class="title">getTimestamp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.timestamp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h6 id="spring中监听器模式的使用"><a href="#spring中监听器模式的使用" class="headerlink" title="spring中监听器模式的使用"></a><code>spring中监听器模式的使用</code></h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/13 11:46</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        AnnotationConfigApplicationContext context = <span class="keyword">new</span> AnnotationConfigApplicationContext();</span><br><span class="line">        <span class="comment">// 注册监听器</span></span><br><span class="line">        context.addApplicationListener(<span class="keyword">new</span> ApplicationListener&lt;MyApplicationEvent&gt;() &#123;</span><br><span class="line">            <span class="comment">// 接收到事件</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(MyApplicationEvent event)</span> </span>&#123;</span><br><span class="line">                System.out.println(event.getSource());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        context.refresh();</span><br><span class="line">        <span class="comment">// 发布事件</span></span><br><span class="line">        context.publishEvent(<span class="keyword">new</span> MyApplicationEvent(<span class="string">"study spring！"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApplicationEvent</span> <span class="keyword">extends</span> <span class="title">ApplicationEvent</span></span>&#123;</span><br><span class="line">    MyApplicationEvent(Object source) &#123;</span><br><span class="line">        <span class="keyword">super</span>(source);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-design-pattern-observer" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/design-pattern-observer/">
-            <time datetime="2019-09-13T01:54:53.000Z" itemprop="datePublished">2019-09-13</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/design-pattern-observer.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/design-pattern-observer.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/design-pattern-observer.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/design-pattern-observer/">观察者模式</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-        
-        
-            <h6 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a><code>观察者模式</code></h6><p>可以通过jdk中提供的<code>Observable</code>类和<code>Observer</code>接口来实现观察者模式。下面通过简单的会员订阅频道，然后频道定期的去给订阅的会员推送消息，展示jdk中观察者模式的使用。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/13 9:16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 科技频道</span></span><br><span class="line">        TechnologyChannel technologyChannel = <span class="keyword">new</span> TechnologyChannel();</span><br><span class="line">        technologyChannel.setTitle(<span class="string">"科技频道"</span>);</span><br><span class="line">        <span class="comment">// 用户</span></span><br><span class="line">        Members member1 = <span class="keyword">new</span> Members();</span><br><span class="line">        Members member2 = <span class="keyword">new</span> Members();</span><br><span class="line">        <span class="comment">// 用户订阅该科技频道</span></span><br><span class="line">        technologyChannel.addObserver(member1);</span><br><span class="line">        technologyChannel.addObserver(member2);</span><br><span class="line">        <span class="comment">// 给会员定时推送消息</span></span><br><span class="line">        String[] messages = &#123;<span class="string">"华为"</span>, <span class="string">"小米"</span>, <span class="string">"苹果"</span>&#125;;</span><br><span class="line">        Random random = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span> ; i++) &#123;</span><br><span class="line">            <span class="comment">// 创建消息</span></span><br><span class="line">            NotifyMessage message = <span class="keyword">new</span> NotifyMessage();</span><br><span class="line">            String id = UUID.randomUUID().toString();</span><br><span class="line">            message.setId(id);</span><br><span class="line">            message.setCreateTime(System.currentTimeMillis());</span><br><span class="line">            message.setTitle(<span class="string">"手机"</span>);</span><br><span class="line">            message.setContent(messages[random.nextInt(<span class="number">3</span>)] + <span class="string">"又出新机，赶快来订购吧!"</span>);</span><br><span class="line">            <span class="comment">// 评到发送消息给订阅的会员</span></span><br><span class="line">            technologyChannel.setChanged();</span><br><span class="line">            technologyChannel.notifyObservers(message);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                TimeUnit.MILLISECONDS.sleep(<span class="number">2000</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/13 9:14</span></span><br><span class="line"><span class="comment"> * 频道</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TechnologyChannel</span> <span class="keyword">extends</span> <span class="title">Observable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.setChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/13 9:13</span></span><br><span class="line"><span class="comment"> * 会员</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Members</span> <span class="keyword">implements</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(Observable o, Object arg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (o <span class="keyword">instanceof</span> TechnologyChannel) &#123;</span><br><span class="line">            TechnologyChannel channel = (TechnologyChannel)o;</span><br><span class="line">            String title = channel.getTitle();</span><br><span class="line">            NotifyMessage message = (NotifyMessage)arg;</span><br><span class="line">            System.out.println(<span class="string">"channel:"</span> + title);</span><br><span class="line">            System.out.println(<span class="string">"message:"</span> + message);</span><br><span class="line">            System.out.println(<span class="string">"======================="</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/13 9:28</span></span><br><span class="line"><span class="comment"> * 消息通知</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NotifyMessage</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> Long createTime;</span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line">    <span class="keyword">private</span> String content;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="jdk中观察者模式的实现"><a href="#jdk中观察者模式的实现" class="headerlink" title="jdk中观察者模式的实现"></a><code>jdk中观察者模式的实现</code></h6><ol>
-<li>观察者（类似订阅模式中的订阅者）。jdk中定义了一个公共的接口<code>Observer</code>，里面定义了一个<code>update</code>方法，该方法可以接收被观察者对象和一个参数对象。我们可以通过实现该接口，重写<code>update</code>方法来实现观察者的逻辑。</li>
-<li>被观察者（类似订阅模式中的被订阅者）。jdk中定义了一个类<code>Observable</code>，可以实现添加，移除，通知观察者。该类里面有两个属性<code>boolean:changed</code>和<code>Vector:obs</code>。当我们执行<code>addObserver</code>方法来添加观察者时，若是该观察者还未被加入到<code>Vector:obs</code>中，会将观察者加入到该集合。当我们执行<code>notifyObservers</code>方法来通知观察者时，只有<code>changed</code>属性为<code>true</code>时，才会依次调用观察者的<code>update</code>方法。若是该值为<code>true</code>，在调用观察者的<code>update</code>方法之前，又会将该值设置为<code>false</code>。</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(Observable o, Object arg)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Observable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> changed = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> Vector&lt;Observer&gt; obs;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Observable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        obs = <span class="keyword">new</span> Vector&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 添加观察者</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">addObserver</span><span class="params">(Observer o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!obs.contains(o)) &#123;</span><br><span class="line">            obs.addElement(o);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通知所有的观察者，可以传递一个参数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">(Object arg)</span> </span>&#123;</span><br><span class="line">        Object[] arrLocal;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            <span class="comment">// 若是状态未变化，不做任何事情</span></span><br><span class="line">            <span class="keyword">if</span> (!changed) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 将Vector转化为一个数组</span></span><br><span class="line">            arrLocal = obs.toArray();</span><br><span class="line">            <span class="comment">// 将changed设置为false</span></span><br><span class="line">            clearChanged();</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="comment">// 循环遍历Observer数组，调用其update方法</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = arrLocal.length-<span class="number">1</span>; i&gt;=<span class="number">0</span>; i--)</span><br><span class="line">            ((Observer)arrLocal[i]).update(<span class="keyword">this</span>, arg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
             </div>

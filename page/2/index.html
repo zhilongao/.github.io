@@ -195,6 +195,15 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
+                            ClassLoader
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/java-base-classloader/">ClassLoader</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
                             io
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/io/">io</a></li>  </ul> 
@@ -500,6 +509,85 @@
 </aside>
             
             <section id="main">
+        <article id="post-design-pattern-observer" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/design-pattern-observer/">
+            <time datetime="2019-09-13T01:54:53.000Z" itemprop="datePublished">2019-09-13</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/design-pattern-observer.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/design-pattern-observer.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/design-pattern-observer.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/design-pattern-observer/">观察者模式</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h6 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a><code>观察者模式</code></h6><p>可以通过jdk中提供的<code>Observable</code>类和<code>Observer</code>接口来实现观察者模式。下面通过简单的会员订阅频道，然后频道定期的去给订阅的会员推送消息，展示jdk中观察者模式的使用。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/13 9:16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 科技频道</span></span><br><span class="line">        TechnologyChannel technologyChannel = <span class="keyword">new</span> TechnologyChannel();</span><br><span class="line">        technologyChannel.setTitle(<span class="string">"科技频道"</span>);</span><br><span class="line">        <span class="comment">// 用户</span></span><br><span class="line">        Members member1 = <span class="keyword">new</span> Members();</span><br><span class="line">        Members member2 = <span class="keyword">new</span> Members();</span><br><span class="line">        <span class="comment">// 用户订阅该科技频道</span></span><br><span class="line">        technologyChannel.addObserver(member1);</span><br><span class="line">        technologyChannel.addObserver(member2);</span><br><span class="line">        <span class="comment">// 给会员定时推送消息</span></span><br><span class="line">        String[] messages = &#123;<span class="string">"华为"</span>, <span class="string">"小米"</span>, <span class="string">"苹果"</span>&#125;;</span><br><span class="line">        Random random = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span> ; i++) &#123;</span><br><span class="line">            <span class="comment">// 创建消息</span></span><br><span class="line">            NotifyMessage message = <span class="keyword">new</span> NotifyMessage();</span><br><span class="line">            String id = UUID.randomUUID().toString();</span><br><span class="line">            message.setId(id);</span><br><span class="line">            message.setCreateTime(System.currentTimeMillis());</span><br><span class="line">            message.setTitle(<span class="string">"手机"</span>);</span><br><span class="line">            message.setContent(messages[random.nextInt(<span class="number">3</span>)] + <span class="string">"又出新机，赶快来订购吧!"</span>);</span><br><span class="line">            <span class="comment">// 评到发送消息给订阅的会员</span></span><br><span class="line">            technologyChannel.setChanged();</span><br><span class="line">            technologyChannel.notifyObservers(message);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                TimeUnit.MILLISECONDS.sleep(<span class="number">2000</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/13 9:14</span></span><br><span class="line"><span class="comment"> * 频道</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TechnologyChannel</span> <span class="keyword">extends</span> <span class="title">Observable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.setChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/13 9:13</span></span><br><span class="line"><span class="comment"> * 会员</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Members</span> <span class="keyword">implements</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(Observable o, Object arg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (o <span class="keyword">instanceof</span> TechnologyChannel) &#123;</span><br><span class="line">            TechnologyChannel channel = (TechnologyChannel)o;</span><br><span class="line">            String title = channel.getTitle();</span><br><span class="line">            NotifyMessage message = (NotifyMessage)arg;</span><br><span class="line">            System.out.println(<span class="string">"channel:"</span> + title);</span><br><span class="line">            System.out.println(<span class="string">"message:"</span> + message);</span><br><span class="line">            System.out.println(<span class="string">"======================="</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/13 9:28</span></span><br><span class="line"><span class="comment"> * 消息通知</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NotifyMessage</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> Long createTime;</span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line">    <span class="keyword">private</span> String content;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="jdk中观察者模式的实现"><a href="#jdk中观察者模式的实现" class="headerlink" title="jdk中观察者模式的实现"></a><code>jdk中观察者模式的实现</code></h6><ol>
+<li>观察者（类似订阅模式中的订阅者）。jdk中定义了一个公共的接口<code>Observer</code>，里面定义了一个<code>update</code>方法，该方法可以接收被观察者对象和一个参数对象。我们可以通过实现该接口，重写<code>update</code>方法来实现观察者的逻辑。</li>
+<li>被观察者（类似订阅模式中的被订阅者）。jdk中定义了一个类<code>Observable</code>，可以实现添加，移除，通知观察者。该类里面有两个属性<code>boolean:changed</code>和<code>Vector:obs</code>。当我们执行<code>addObserver</code>方法来添加观察者时，若是该观察者还未被加入到<code>Vector:obs</code>中，会将观察者加入到该集合。当我们执行<code>notifyObservers</code>方法来通知观察者时，只有<code>changed</code>属性为<code>true</code>时，才会依次调用观察者的<code>update</code>方法。若是该值为<code>true</code>，在调用观察者的<code>update</code>方法之前，又会将该值设置为<code>false</code>。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(Observable o, Object arg)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Observable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> changed = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> Vector&lt;Observer&gt; obs;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Observable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        obs = <span class="keyword">new</span> Vector&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 添加观察者</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">addObserver</span><span class="params">(Observer o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!obs.contains(o)) &#123;</span><br><span class="line">            obs.addElement(o);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通知所有的观察者，可以传递一个参数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">(Object arg)</span> </span>&#123;</span><br><span class="line">        Object[] arrLocal;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            <span class="comment">// 若是状态未变化，不做任何事情</span></span><br><span class="line">            <span class="keyword">if</span> (!changed) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 将Vector转化为一个数组</span></span><br><span class="line">            arrLocal = obs.toArray();</span><br><span class="line">            <span class="comment">// 将changed设置为false</span></span><br><span class="line">            clearChanged();</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="comment">// 循环遍历Observer数组，调用其update方法</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = arrLocal.length-<span class="number">1</span>; i&gt;=<span class="number">0</span>; i--)</span><br><span class="line">            ((Observer)arrLocal[i]).update(<span class="keyword">this</span>, arg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-fra-spring-cloud-config" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1246,106 +1334,6 @@
 <p><code>5.归并排序</code></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 归并排序算法</span></span><br><span class="line"><span class="comment">// 时间复杂度: 平均情况:o(nlog2^n) 最好情况:o(nlog2^n) 最坏情况:o(nlog2^n)</span></span><br><span class="line"><span class="comment">// 空间复杂度：o(1)</span></span><br><span class="line"><span class="comment">// 特点: 稳定</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title">sortMerge</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">    sort(array, <span class="number">0</span>, array.length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> array[], <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (L == R) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (R + L) / <span class="number">2</span>;</span><br><span class="line">    <span class="comment">// 排序左半部分</span></span><br><span class="line">    sort(array, L, mid);</span><br><span class="line">    <span class="comment">// 排序右半部分</span></span><br><span class="line">    sort(array, mid + <span class="number">1</span>, R);</span><br><span class="line">    <span class="comment">// 合并 </span></span><br><span class="line">    merge(array, L, mid, R);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> L, <span class="keyword">int</span> mid, <span class="keyword">int</span> R)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] temp = <span class="keyword">new</span> <span class="keyword">int</span>[R - L + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> p1 = L;</span><br><span class="line">    <span class="keyword">int</span> p2 = mid + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 将数组排序后放入到临时数组temp中</span></span><br><span class="line">    <span class="keyword">while</span> (p1 &lt;= mid &amp;&amp; p2 &lt;= R) &#123;</span><br><span class="line">        <span class="keyword">if</span> (array[p1] &lt; array[p2]) &#123;</span><br><span class="line">            temp[i++] = array[p1++];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            temp[i++] = array[p2++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(p1 &lt;= mid) &#123;</span><br><span class="line">        temp[i++] = array[p1++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(p2 &lt;= R) &#123;</span><br><span class="line">        temp[i++] = array[p2++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将临时数组中的元素移动到array中</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; temp.length; k ++) &#123;</span><br><span class="line">        array[L + k] = temp[k];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-jvm-command" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/基础/">基础</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/基础/jvm/">jvm</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/jvm-command/">
-            <time datetime="2019-08-29T09:01:23.000Z" itemprop="datePublished">2019-08-29</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/jvm-command.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/jvm-command.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/jvm-command.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/jvm-command/">jvm-command</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-        
-        
-            <hr>
-<p><code>jvm基本指令</code></p>
-<table>
-<thead>
-<tr>
-<th>基本指令</th>
-<th>指令说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>iconst_1</td>
-<td>int型常量值1进栈</td>
-</tr>
-<tr>
-<td>bipush</td>
-<td>将一个byte型常量值推送至栈顶</td>
-</tr>
-<tr>
-<td>iload_1</td>
-<td>第二个int型局部变量进栈，从0开始计数</td>
-</tr>
-<tr>
-<td>istore_1</td>
-<td><em>将栈顶int型数值存入第二个局部变量，从<strong>0</strong>开始计数</em></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
 
             </div>
         

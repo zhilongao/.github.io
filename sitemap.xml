@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zhilongao.github.io/wiki/java-base-classloader/</loc>
+    
+    <lastmod>2019-10-13T09:53:03.756Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zhilongao.github.io/wiki/fra-springboot/</loc>
+    
+    <lastmod>2019-10-13T09:49:22.973Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zhilongao.github.io/wiki/ans-countdownlatch-source/</loc>
     
     <lastmod>2019-10-08T12:24:10.408Z</lastmod>
@@ -166,13 +180,6 @@
     <loc>https://zhilongao.github.io/wiki/fra-spring-cloud-config/</loc>
     
     <lastmod>2019-09-15T07:48:44.405Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zhilongao.github.io/wiki/fra-springboot/</loc>
-    
-    <lastmod>2019-09-13T07:29:27.493Z</lastmod>
     
   </url>
   
