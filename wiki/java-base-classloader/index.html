@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="zl&#39;s blog">
 <meta property="og:description" content="类加载器的区别java中提供了三种类加载器，分别是启动类加载器，扩展类加载器，系统类加载器。三种类加载器通过双亲委派机制来实现类的加载。    类加载器 名称 加载路径 实现    启动类加载器 BootStrap ClassLoader 核心库：java.lang.*，系统属性：sun.boot.class.path所指路径 c++   扩展类加载器 Extension ClassLoader">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-13T09:53:03.756Z">
+<meta property="og:updated_time" content="2019-11-03T08:00:06.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ClassLoader">
 <meta name="twitter:description" content="类加载器的区别java中提供了三种类加载器，分别是启动类加载器，扩展类加载器，系统类加载器。三种类加载器通过双亲委派机制来实现类的加载。    类加载器 名称 加载路径 实现    启动类加载器 BootStrap ClassLoader 核心库：java.lang.*，系统属性：sun.boot.class.path所指路径 c++   扩展类加载器 Extension ClassLoader">
@@ -299,7 +299,7 @@
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-springboot/">springboot</a></li>  </ul> 
                     </li> 
-                     </ul> 
+                     <li class="file"><a href="/wiki/spring-base-environment/">spring-base-environment</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -565,7 +565,7 @@
             
                 <div id="toc" class="toc-article">
                 <strong class="toc-title">文章目录</strong>
-                    <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#类加载器的区别"><span class="toc-number">1.</span> <span class="toc-text">类加载器的区别</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#双亲委派机制"><span class="toc-number">2.</span> <span class="toc-text">双亲委派机制</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#自定义类加载器"><span class="toc-number">3.</span> <span class="toc-text">自定义类加载器</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#资源文件的读取"><span class="toc-number">4.</span> <span class="toc-text">资源文件的读取</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#类加载器的区别"><span class="toc-number">1.</span> <span class="toc-text">类加载器的区别</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#双亲委派机制"><span class="toc-number">2.</span> <span class="toc-text">双亲委派机制</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#自定义类加载器"><span class="toc-number">3.</span> <span class="toc-text">自定义类加载器</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#资源文件的读取"><span class="toc-number">4.</span> <span class="toc-text">资源文件的读取</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#读取Properties文件"><span class="toc-number">5.</span> <span class="toc-text">读取Properties文件</span></a></li></ol>
                 </div>
             
         
@@ -612,7 +612,8 @@
 <h6 id="资源文件的读取"><a href="#资源文件的读取" class="headerlink" title="资源文件的读取"></a><code>资源文件的读取</code></h6><p>在 java 中可以使用 Class 或者是 ClassLoader 读取资源文件。比如现在项目的<code>resources</code>目录下面有一个 <code>application.properties</code>文件，可以使用项目中某个类的<code>class.getResource</code>方法或者某个类的类加载器<code>class.getClassLoader().getResource</code>方法。方法所传资源文件路径是向对于<code>resources</code>的目录。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.study.zl.classloader.p2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/10/13 14:26</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Class&lt;App&gt; appClass = App.class;</span><br><span class="line">        <span class="comment">// 通过 class 获取资源时，必须有 / ,否则会从该类所在包下面读取</span></span><br><span class="line">        URL resource1 = appClass.getResource(<span class="string">"/application.properties"</span>);</span><br><span class="line">        <span class="comment">// 通过 ClassLoader 读取资源，所不同的是 ClassLoader 还有一个 getResources 方法</span></span><br><span class="line">        URL resource2 = appClass.getClassLoader().getResource(<span class="string">"application.properties"</span>);</span><br><span class="line">        System.out.println(resource1.toString());</span><br><span class="line">        System.out.println(resource2.toString());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">  	<span class="comment">// 输出结果</span></span><br><span class="line">    <span class="comment">// file:/D:/code/struct-parent/interview-ready/target/classes/application.properties</span></span><br><span class="line">    <span class="comment">// file:/D:/code/struct-parent/interview-ready/target/classes/application.properties</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在spring核心包中提供了一个工具类<code>PropertiesLoaderUtils</code>，该工具类可以将<code>ClassLoader</code>读取到的资源转换未<code>Properties</code>文件。</p>
+<hr>
+<h6 id="读取Properties文件"><a href="#读取Properties文件" class="headerlink" title="读取Properties文件"></a><code>读取Properties文件</code></h6><p>在spring核心包中提供了一个工具类<code>PropertiesLoaderUtils</code>，该工具类可以将<code>ClassLoader</code>读取到的资源转换未<code>Properties</code>文件。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//  pom.xml文件引入 spring framework 核心包依赖</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-core&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;2.5.6&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// application.properties文件加入内容</span></span><br><span class="line">#Tue Jun 18 23:47:55 GMT 2019</span><br><span class="line">server.port=<span class="number">8080</span></span><br><span class="line">server.name=spring-boot-application</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.study.zl.classloader.p2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.core.io.UrlResource;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.io.support.PropertiesLoaderUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.util.Enumeration;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/10/13 14:26</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Class&lt;App&gt; appClass = App.class;</span><br><span class="line">        <span class="comment">// 定义Properties对象</span></span><br><span class="line">        Properties properties = <span class="keyword">new</span> Properties();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 读取资源集合</span></span><br><span class="line">            Enumeration&lt;URL&gt; urls = appClass.getClassLoader().getResources(<span class="string">"application.properties"</span>);</span><br><span class="line">            <span class="keyword">while</span> (urls.hasMoreElements()) &#123;</span><br><span class="line">                <span class="comment">// 使用工具类加载</span></span><br><span class="line">                properties.putAll(PropertiesLoaderUtils.loadProperties(<span class="keyword">new</span> UrlResource(urls.nextElement())));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 输出</span></span><br><span class="line">        System.out.println(properties);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 输出结果</span></span><br><span class="line">    <span class="comment">// &#123;server.port=8080, server.name=spring-boot-application&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -626,6 +627,15 @@
 
     
 <nav id="article-nav">
+    
+        <a href="/wiki/spring-base-environment/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    spring-base-environment
+                
+            </div>
+        </a>
     
     
         <a href="/wiki/ans-countdownlatch-source/" id="article-nav-older" class="article-nav-link-wrap">

@@ -298,7 +298,7 @@
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-springboot/">springboot</a></li>  </ul> 
                     </li> 
-                     </ul> 
+                     <li class="file"><a href="/wiki/spring-base-environment/">spring-base-environment</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -509,6 +509,87 @@
 </aside>
             
             <section id="main">
+        <article id="post-design-pattern-listener" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/design-pattern-listener/">
+            <time datetime="2019-09-13T02:58:12.000Z" itemprop="datePublished">2019-09-13</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/design-pattern-listener.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/design-pattern-listener.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/design-pattern-listener.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/design-pattern-listener/">监听器模式</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h6 id="监听器模式"><a href="#监听器模式" class="headerlink" title="监听器模式"></a><code>监听器模式</code></h6><p>针对监听器模式，jdk提供了<code>EventListener</code>接口和<code>EventObject</code>类，分别定义事件监听器和事件对象。下面是通过扩展这两个接口实现一个简单的事件监听器模式。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/13 11:03</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 事件源</span></span><br><span class="line">        MyEventSource eventSource = <span class="keyword">new</span> MyEventSource();</span><br><span class="line">        <span class="comment">// 创建事件监听器-&gt;处理EventObject</span></span><br><span class="line">        StartEventListener startEventListener = <span class="keyword">new</span> StartEventListener();</span><br><span class="line">        ClosedEventListener closedEventListener = <span class="keyword">new</span> ClosedEventListener();</span><br><span class="line">        <span class="comment">// 添加事件监听器</span></span><br><span class="line">        eventSource.addEventListener(startEventListener);</span><br><span class="line">        eventSource.addEventListener(closedEventListener);</span><br><span class="line">        <span class="comment">// 创建事件对象</span></span><br><span class="line">        EventObject startEventObject = <span class="keyword">new</span> EventObject(<span class="string">"start"</span>);</span><br><span class="line">        EventObject closedEventObject = <span class="keyword">new</span> EventObject(<span class="string">"closed"</span>);</span><br><span class="line">        <span class="comment">// 事件源-&gt;通知事件监听者来处理</span></span><br><span class="line">        eventSource.notifyListenerEvents(startEventObject);</span><br><span class="line">        eventSource.notifyListenerEvents(closedEventObject);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/13 11:00</span></span><br><span class="line"><span class="comment"> * 扩展的监听器接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MyEventListener</span> <span class="keyword">extends</span> <span class="title">EventListener</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 处理EventObject</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> event</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">handleEvent</span><span class="params">(EventObject event)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/13 11:21</span></span><br><span class="line"><span class="comment"> * 启动事件监听器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StartEventListener</span> <span class="keyword">implements</span> <span class="title">MyEventListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleEvent</span><span class="params">(EventObject event)</span> </span>&#123;</span><br><span class="line">        Object source = event.getSource();</span><br><span class="line">        <span class="keyword">if</span> (source.equals(<span class="string">"start"</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">"context has start!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/13 11:24</span></span><br><span class="line"><span class="comment"> * 关闭事件监听器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClosedEventListener</span> <span class="keyword">implements</span> <span class="title">MyEventListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleEvent</span><span class="params">(EventObject event)</span> </span>&#123;</span><br><span class="line">        Object source = event.getSource();</span><br><span class="line">        <span class="keyword">if</span> (source.equals(<span class="string">"closed"</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">"context has closed!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/13 11:03</span></span><br><span class="line"><span class="comment"> * 事件源-&gt;添加 删除 通知</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyEventSource</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 监听器列表</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Vector&lt;EventListener&gt; listeners = <span class="keyword">new</span> Vector&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 注册监听器</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> eventListener</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addEventListener</span><span class="params">(EventListener eventListener)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!listeners.contains(eventListener)) &#123;</span><br><span class="line">            listeners.add(eventListener);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 移除监听器</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> eventListener</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeEventListener</span><span class="params">(EventListener eventListener)</span> </span>&#123;</span><br><span class="line">        listeners.remove(eventListener);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 接收外部的事件-&gt;将事件交给事件监听者来处理</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> event</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyListenerEvents</span><span class="params">(EventObject event)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (EventListener eventListener : listeners) &#123;</span><br><span class="line">            ((MyEventListener)eventListener).handleEvent(event);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="jdk中监听器模式的实现"><a href="#jdk中监听器模式的实现" class="headerlink" title="jdk中监听器模式的实现"></a><code>jdk中监听器模式的实现</code></h6><p>jdk针对监听器模式并未定义太多的实现，只是定义了一个<code>EventListener</code>接口和一个<code>EventObject</code>类，我们可以扩展<code>EventListener</code>接口来定义处理<code>EventObject</code>的方法。在<code>EventObject</code>中有一个属性<code>Object:source</code>，该属性可以在定义<code>EventObject</code>的时候，传入一些参数值。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">EventListener</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EventObject</span> <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">transient</span> Object  source;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">EventObject</span><span class="params">(Object source)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (source == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"null source"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.source = source;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> source;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> getClass().getName() + <span class="string">"[source="</span> + source + <span class="string">"]"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="spring中监听器模式的实现"><a href="#spring中监听器模式的实现" class="headerlink" title="spring中监听器模式的实现"></a><code>spring中监听器模式的实现</code></h6><p>在spring中定义了<code>ApplicationListener</code>接口和<code>ApplicationEvent</code>类，其中<code>ApplicationListener</code>接口实现了jdk中定义的<code>EventListener</code>接口，并定义了<code>onApplicationEvent</code>方法来处理事件，并且每个<code>ApplicationListener</code>只会处理特定的事件。<code>ApplicationEvent</code>类继承了jdk中定义的<code>EventObject</code>类，用以定义事件对象。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 扩展的事件监听器接口-&gt;采用泛型</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ApplicationListener</span>&lt;<span class="title">E</span> <span class="keyword">extends</span> <span class="title">ApplicationEvent</span>&gt; <span class="keyword">extends</span> <span class="title">EventListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(E event)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 扩展的EventObject</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationEvent</span> <span class="keyword">extends</span> <span class="title">EventObject</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">7099057708183571937L</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">long</span> timestamp;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ApplicationEvent</span><span class="params">(Object source)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(source);</span><br><span class="line">		<span class="keyword">this</span>.timestamp = System.currentTimeMillis();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">long</span> <span class="title">getTimestamp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.timestamp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="spring中监听器模式的使用"><a href="#spring中监听器模式的使用" class="headerlink" title="spring中监听器模式的使用"></a><code>spring中监听器模式的使用</code></h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/13 11:46</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        AnnotationConfigApplicationContext context = <span class="keyword">new</span> AnnotationConfigApplicationContext();</span><br><span class="line">        <span class="comment">// 注册监听器</span></span><br><span class="line">        context.addApplicationListener(<span class="keyword">new</span> ApplicationListener&lt;MyApplicationEvent&gt;() &#123;</span><br><span class="line">            <span class="comment">// 接收到事件</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(MyApplicationEvent event)</span> </span>&#123;</span><br><span class="line">                System.out.println(event.getSource());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        context.refresh();</span><br><span class="line">        <span class="comment">// 发布事件</span></span><br><span class="line">        context.publishEvent(<span class="keyword">new</span> MyApplicationEvent(<span class="string">"study spring！"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApplicationEvent</span> <span class="keyword">extends</span> <span class="title">ApplicationEvent</span></span>&#123;</span><br><span class="line">    MyApplicationEvent(Object source) &#123;</span><br><span class="line">        <span class="keyword">super</span>(source);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-design-pattern-observer" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1242,97 +1323,6 @@
             <p><code>单链表常见操作</code></p>
 <p><code>1.如何实现一个单链表的逆序输出-&gt;反转单链表</code></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ListNode <span class="title">reverse</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">	ListNode prev = <span class="keyword">null</span>;</span><br><span class="line">    ListNode next = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">while</span> (head != <span class="keyword">null</span> &amp;&amp; (next = head.next) != <span class="keyword">null</span>) &#123;</span><br><span class="line">    	head.next = prev;</span><br><span class="line">        prev = head;</span><br><span class="line">        head = next;</span><br><span class="line">    &#125;</span><br><span class="line">    head.next = prev;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-alg-sort-simple" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/算法/">算法</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/算法/排序/">排序</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/alg-sort-simple/">
-            <time datetime="2019-08-31T01:19:15.000Z" itemprop="datePublished">2019-08-31</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/alg-sort-simple.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/alg-sort-simple.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/alg-sort-simple.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/alg-sort-simple/">排序算法</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-        
-        
-            <p><code>常见的排序算法</code></p>
-<p><code>1.插入排序</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 插入排序算法</span></span><br><span class="line"><span class="comment">// 时间复杂度：平均情况:o(n^2)  最好情况:o(n) 最坏情况:o(n^2) </span></span><br><span class="line"><span class="comment">// 空间复杂度: o(1)</span></span><br><span class="line"><span class="comment">// 特点: 稳定</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; array.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">int</span> temp = array[i];</span><br><span class="line">        <span class="keyword">for</span> (j = i - <span class="number">1</span>; j &gt;=<span class="number">0</span> &amp;&amp; array[j] &gt; temp; j --) &#123;</span><br><span class="line">            <span class="comment">// 将数组中的元素后移一位</span></span><br><span class="line">            array[j + <span class="number">1</span>] = array[j];</span><br><span class="line">        &#125;</span><br><span class="line">        array[j + <span class="number">1</span>] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>2.选择排序</code></p>
-<p><code>原理</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 选择排序算法</span></span><br><span class="line"><span class="comment">// 时间复杂度: 平均情况:o(n^2)  最好情况:o(n^2) 最坏情况:o(n^2)  </span></span><br><span class="line"><span class="comment">// 空间复杂度: o(1)</span></span><br><span class="line"><span class="comment">// 特点: 不稳定</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">selectSort</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; array.length; j ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (array[i] &gt; array[j]) &#123;</span><br><span class="line">                <span class="keyword">int</span> temp = array[i];</span><br><span class="line">                array[i] = array[j];</span><br><span class="line">                array[j] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>3.交换排序-&gt;冒泡排序</code></p>
-<p><code>原理</code></p>
-<p><img src="https://raw.githubusercontent.com/zhilongao/images-repository/master/006y8mN6ly1g6mbx8snqyg30my075wqv.gif" alt="冒泡排序"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 冒泡排序算法</span></span><br><span class="line"><span class="comment">// 时间复杂度: 平均情况:o(n^2)  最好情况:o(n) 最坏情况:o(n^2)</span></span><br><span class="line"><span class="comment">// 空间复杂度: o(1)</span></span><br><span class="line"><span class="comment">// 特点：稳定</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; array.length - i - <span class="number">1</span>; j ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (array[j] &gt; array[j + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">int</span> temp = array[j];</span><br><span class="line">                array[j] = array[j + <span class="number">1</span>];</span><br><span class="line">                array[j + <span class="number">1</span>] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>4.交换排序-&gt;快速排序</code></p>
-<p><code>原理</code></p>
-<p><img src="https://raw.githubusercontent.com/zhilongao/images-repository/master/7789414-007520d3d4a7610c.gif" alt="快速排序"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 快速排序算法</span></span><br><span class="line"><span class="comment">// 时间复杂度: 平均情况:o(nlog2^n) 最好情况:o(nlog2^n) 最坏情况:o(n^2)</span></span><br><span class="line"><span class="comment">// 空间复杂度: o(nlog2^n)</span></span><br><span class="line"><span class="comment">// 特点：不稳定</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">fastSort</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (low &gt; high) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> i = low;</span><br><span class="line">    <span class="keyword">int</span> j = fast;</span><br><span class="line">    <span class="keyword">int</span> temp = array[low];</span><br><span class="line">    <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">        <span class="comment">// 从右向左找到第一个小于temp的元素,保存其下标</span></span><br><span class="line">        <span class="keyword">while</span> (array[j] &gt; temp &amp;&amp; i &lt; j) &#123;</span><br><span class="line">            j --;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 从左向右找到第一个大于temp的元素，保存其下标</span></span><br><span class="line">        <span class="keyword">while</span> (array[i] &lt;= temp &amp;&amp; i &lt; j) &#123;</span><br><span class="line">            i ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 交换这两个元素</span></span><br><span class="line">        <span class="keyword">int</span> swap = array[i];</span><br><span class="line">        array[i] = array[j];</span><br><span class="line">        array[j] = swap;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 交换temp</span></span><br><span class="line">    array[low] = array[i];</span><br><span class="line">    array[i] = temp;</span><br><span class="line">    <span class="comment">// 快排temp左半边</span></span><br><span class="line">    fastSort(array, low, j - <span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 快排temp右半边</span></span><br><span class="line">    fastSort(array, j + <span class="number">1</span>, high);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>5.归并排序</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 归并排序算法</span></span><br><span class="line"><span class="comment">// 时间复杂度: 平均情况:o(nlog2^n) 最好情况:o(nlog2^n) 最坏情况:o(nlog2^n)</span></span><br><span class="line"><span class="comment">// 空间复杂度：o(1)</span></span><br><span class="line"><span class="comment">// 特点: 稳定</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title">sortMerge</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">    sort(array, <span class="number">0</span>, array.length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> array[], <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (L == R) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (R + L) / <span class="number">2</span>;</span><br><span class="line">    <span class="comment">// 排序左半部分</span></span><br><span class="line">    sort(array, L, mid);</span><br><span class="line">    <span class="comment">// 排序右半部分</span></span><br><span class="line">    sort(array, mid + <span class="number">1</span>, R);</span><br><span class="line">    <span class="comment">// 合并 </span></span><br><span class="line">    merge(array, L, mid, R);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> L, <span class="keyword">int</span> mid, <span class="keyword">int</span> R)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] temp = <span class="keyword">new</span> <span class="keyword">int</span>[R - L + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> p1 = L;</span><br><span class="line">    <span class="keyword">int</span> p2 = mid + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 将数组排序后放入到临时数组temp中</span></span><br><span class="line">    <span class="keyword">while</span> (p1 &lt;= mid &amp;&amp; p2 &lt;= R) &#123;</span><br><span class="line">        <span class="keyword">if</span> (array[p1] &lt; array[p2]) &#123;</span><br><span class="line">            temp[i++] = array[p1++];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            temp[i++] = array[p2++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(p1 &lt;= mid) &#123;</span><br><span class="line">        temp[i++] = array[p1++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(p2 &lt;= R) &#123;</span><br><span class="line">        temp[i++] = array[p2++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将临时数组中的元素移动到array中</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; temp.length; k ++) &#123;</span><br><span class="line">        array[L + k] = temp[k];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
             </div>

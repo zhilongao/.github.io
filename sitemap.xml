@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zhilongao.github.io/wiki/spring-base-environment/</loc>
+    
+    <lastmod>2019-11-03T08:04:04.265Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zhilongao.github.io/wiki/java-base-classloader/</loc>
+    
+    <lastmod>2019-11-03T08:00:06.887Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zhilongao.github.io/wiki/fra-spring-annotation/</loc>
     
     <lastmod>2019-10-20T07:17:06.568Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>https://zhilongao.github.io/wiki/fra-springboot/</loc>
     
     <lastmod>2019-10-19T06:20:15.712Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zhilongao.github.io/wiki/java-base-classloader/</loc>
-    
-    <lastmod>2019-10-13T09:53:03.756Z</lastmod>
     
   </url>
   
