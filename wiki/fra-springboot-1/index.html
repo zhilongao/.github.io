@@ -3,22 +3,23 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     
-    <title>分类: spring-cloud | zl&#39;s blog</title>
+    <title>事件监听 | zl&#39;s blog</title>
     
     
-        <meta name="keywords" content="zl&#39;s blog">
+        <meta name="keywords" content="事件监听">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="每天进步一点点">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zl&#39;s blog">
-<meta property="og:url" content="https://zhilongao.github.io/categories/java/框架/spring-cloud/index.html">
+    <meta name="description" content="spring事件和事件监听器 在spring框架中有许多事件监听的应用。定义事件监听一般有三种角色：事件(event)，事件监听器(listener)，事件的发布者(multicaster)。 事件：在java.util包下面有一个类 EventObject，该类只定义了一个Object:source 属性(事件源)。spring事件定义是在该类上面扩展的，ApplicationEvent -&amp;g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="事件监听">
+<meta property="og:url" content="https://zhilongao.github.io/wiki/fra-springboot-1/index.html">
 <meta property="og:site_name" content="zl&#39;s blog">
-<meta property="og:description" content="每天进步一点点">
+<meta property="og:description" content="spring事件和事件监听器 在spring框架中有许多事件监听的应用。定义事件监听一般有三种角色：事件(event)，事件监听器(listener)，事件的发布者(multicaster)。 事件：在java.util包下面有一个类 EventObject，该类只定义了一个Object:source 属性(事件源)。spring事件定义是在该类上面扩展的，ApplicationEvent -&amp;g">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-20T14:38:00.136Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zl&#39;s blog">
-<meta name="twitter:description" content="每天进步一点点">
+<meta name="twitter:title" content="事件监听">
+<meta name="twitter:description" content="spring事件和事件监听器 在spring框架中有许多事件监听的应用。定义事件监听一般有三种角色：事件(event)，事件监听器(listener)，事件的发布者(multicaster)。 事件：在java.util包下面有一个类 EventObject，该类只定义了一个Object:source 属性(事件源)。spring事件定义是在该类上面扩展的，ApplicationEvent -&amp;g">
     
 
     
@@ -159,9 +160,9 @@
         
         
          <ul class="unstyled" id="tree" > 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             java
                         </a>
@@ -274,9 +275,9 @@
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/java-style-lambda/">lambda和stream</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             框架
                         </a>
@@ -307,7 +308,7 @@
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-springboot/">springboot</a></li>  </ul> 
                     </li> 
-                     <li class="file"><a href="/wiki/spring-base-environment/">环境</a></li>  <li class="file"><a href="/wiki/fra-springboot-1/">事件监听</a></li>  </ul> 
+                     <li class="file"><a href="/wiki/spring-base-environment/">环境</a></li>  <li class="file active"><a href="/wiki/fra-springboot-1/">事件监听</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -517,76 +518,110 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main">
-<div class="timeline timeline-wrap">
-    <div class="timeline-row timeline-row-major">
-        <span class="node"><i class="fa fa-folder"></i></span>
-        <h1 class="title">spring-cloud</h1>
-    </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+            <section id="main"><article id="post-fra-springboot-1" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
                 
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/wiki/fra-spring-cloud-loadbalance/">负载均衡</a>
-        </h1>
-    
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/">框架</a>
+    </div>
 
-                <div class="article-meta">
-                    
+                        
+                        
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/wiki/fra-spring-cloud-loadbalance/">
-            <time datetime="2019-09-21T01:31:06.000Z" itemprop="datePublished">2019-09-21</time>
+        <a href="/wiki/fra-springboot-1/">
+            <time datetime="2019-11-19T13:54:24.000Z" itemprop="datePublished">2019-11-19</time>
         </a>
     </div>
 
 
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/">框架</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/spring-cloud/">spring-cloud</a>
-    </div>
-
-                    
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/fra-springboot-1.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/fra-springboot-1.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/fra-springboot-1.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
                 
     
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/wiki/fra-spring-cloud-config/">分布式配置</a>
+        <h1 class="article-title" itemprop="name">
+            事件监听
         </h1>
     
 
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/fra-spring-cloud-config/">
-            <time datetime="2019-09-12T03:55:17.000Z" itemprop="datePublished">2019-09-12</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/">框架</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/spring-cloud/">spring-cloud</a>
-    </div>
-
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
                     
                 </div>
+            
+        
+        
+            <p><code>spring事件和事件监听器</code></p>
+<p>在spring框架中有许多事件监听的应用。定义事件监听一般有三种角色：事件(event)，事件监听器(listener)，<br>事件的发布者(multicaster)。</p>
+<p>事件：在java.util包下面有一个类 EventObject，该类只定义了一个Object:source 属性(事件源)。spring事件定义是在该类上面扩展的，ApplicationEvent -&gt; EventObject</p>
+<p>监听器：在java.util包下面定义了监听器的顶层接口 EventListener，该接口没有定义任何方法。spring事件监听器接口继承了该接口，ApplicationListener -&gt; EventListener</p>
+<p>事件发布器：在spring中有一个类 SimpleApplicationEventMulticaster，该类可以实现spring事件的发布。</p>
+<p>spring事件发布的简单示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 定义一个事件发布器</span></span><br><span class="line">        SimpleApplicationEventMulticaster multicaster = <span class="keyword">new</span> SimpleApplicationEventMulticaster();</span><br><span class="line">        <span class="comment">// 2.添加WorkEventListener和FreeEventListener事件监听器</span></span><br><span class="line">        multicaster.addApplicationListener(<span class="keyword">new</span> WorkEventListener());</span><br><span class="line">        multicaster.addApplicationListener(<span class="keyword">new</span> FreeEventListener());</span><br><span class="line">        <span class="comment">// 3.发布WorkEvent和FreeEvent事件</span></span><br><span class="line">        multicaster.multicastEvent(<span class="keyword">new</span> WorkEvent(<span class="keyword">new</span> Object()));</span><br><span class="line">        multicaster.multicastEvent(<span class="keyword">new</span> FreeEvent(<span class="keyword">new</span> Object()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// WorkEvent 事件-&gt;继承自spring的ApplicationEvent。</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">WorkEvent</span> <span class="keyword">extends</span> <span class="title">ApplicationEvent</span></span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">WorkEvent</span><span class="params">(Object source)</span></span>&#123;</span><br><span class="line">            <span class="keyword">super</span>(source);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// FreeEvent 事件-&gt;继承自spring的ApplicationEvent。</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">FreeEvent</span> <span class="keyword">extends</span> <span class="title">ApplicationEvent</span></span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">FreeEvent</span><span class="params">(Object source)</span></span>&#123;</span><br><span class="line">            <span class="keyword">super</span>(source);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// WorkEvent事件监听器-&gt;继承自spring的ApplicationListener,通过泛型可以限制该listener只可接受WorkEvent类型的事件。</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">WorkEventListener</span> <span class="keyword">implements</span> <span class="title">ApplicationListener</span>&lt;<span class="title">WorkEvent</span>&gt;</span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(WorkEvent workEvent)</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"WorkEventListener received event-&gt;"</span> + workEvent.getClass().getSimpleName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// FreeEvent事件监听器-&gt;继承自spring的ApplicationListener,通过泛型可以限制该listener只可接受FreeEvent类型的事件。</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">FreeEventListener</span> <span class="keyword">implements</span> <span class="title">ApplicationListener</span>&lt;<span class="title">FreeEvent</span>&gt;</span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(FreeEvent freeEvent)</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"FreeEventListener received event-&gt;"</span> + freeEvent.getClass().getSimpleName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出结果：</span></span><br><span class="line"><span class="comment">// WorkEventListener received event-&gt;WorkEvent</span></span><br><span class="line"><span class="comment">// FreeEventListener received event-&gt;FreeEvent</span></span><br></pre></td></tr></table></figure>
+
+<p>由于<code>ApplicationListener</code>接口定义每个实现类只能接收一种事件，但对于一个监听器处理多个事件无能为力。故 spring 又在 <code>ApplicationListener</code>接口上扩展了一个接口<code>SmartApplicationListener</code>，该接口可以通过判断事件和事件源来决定是否处理该事件，更加的灵活。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SimpleApplicationEventMulticaster multicaster = <span class="keyword">new</span> SimpleApplicationEventMulticaster();</span><br><span class="line">        multicaster.addApplicationListener(<span class="keyword">new</span> MySmartListener());</span><br><span class="line">        multicaster.multicastEvent(<span class="keyword">new</span> WorkEvent(<span class="keyword">new</span> Object()));</span><br><span class="line">        multicaster.multicastEvent(<span class="keyword">new</span> FreeEvent(<span class="keyword">new</span> Object()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义WorkEvent</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">WorkEvent</span> <span class="keyword">extends</span> <span class="title">ApplicationEvent</span></span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">WorkEvent</span><span class="params">(Object source)</span></span>&#123;</span><br><span class="line">            <span class="keyword">super</span>(source);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 定义FreeEvent</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">FreeEvent</span> <span class="keyword">extends</span> <span class="title">ApplicationEvent</span></span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">FreeEvent</span><span class="params">(Object source)</span></span>&#123;</span><br><span class="line">            <span class="keyword">super</span>(source);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MySmartListener</span> <span class="keyword">implements</span> <span class="title">SmartApplicationListener</span> </span>&#123;</span><br><span class="line">        <span class="comment">// WorkEvent和FreeEvent均可以处理</span></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">supportsEventType</span><span class="params">(Class&lt;? extends ApplicationEvent&gt; aClass)</span> </span>&#123;</span><br><span class="line">            String workEventName = WorkEvent.class.getSimpleName();</span><br><span class="line">            String freeEventName = FreeEvent.class.getSimpleName();</span><br><span class="line">            <span class="keyword">return</span> aClass.getSimpleName().equals(workEventName) || aClass.getSimpleName().equals(freeEventName);</span><br><span class="line">        &#125;</span><br><span class="line">		</span><br><span class="line">        <span class="comment">// 对于属性源不加限制</span></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">supportsSourceType</span><span class="params">(Class&lt;?&gt; sourceType)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(ApplicationEvent applicationEvent)</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"MySmartListener received event "</span> + applicationEvent.getClass().getSimpleName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
             </div>
-        </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
     
-</div>
+<nav id="article-nav">
+    
+    
+        <a href="/wiki/java-dev-problem/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">java开发常见问题</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
 </section>
         </div>
         <footer id="footer">

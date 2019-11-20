@@ -307,7 +307,7 @@
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-springboot/">springboot</a></li>  </ul> 
                     </li> 
-                     <li class="file"><a href="/wiki/spring-base-environment/">spring-base-environment</a></li>  </ul> 
+                     <li class="file"><a href="/wiki/spring-base-environment/">环境</a></li>  <li class="file"><a href="/wiki/fra-springboot-1/">事件监听</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -336,7 +336,7 @@
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/project-ask/">project-ask</a></li>  </ul> 
                     </li> 
-                     </ul> 
+                     <li class="file"><a href="/wiki/java-dev-problem/">java开发常见问题</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -518,6 +518,194 @@
 </aside>
             
             <section id="main">
+        <article id="post-java-style-lambda" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/新特性/">新特性</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/java-style-lambda/">
+            <time datetime="2019-09-23T11:11:56.000Z" itemprop="datePublished">2019-09-23</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/java-style-lambda.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/java-style-lambda.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/java-style-lambda.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/java-style-lambda/">lambda和stream</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p><a href="https://www.infoq.cn/article/Java-se-8-lambda" target="_blank" rel="noopener">参考文章1</a></p>
+<p><a href="https://my.oschina.net/chenxiaobian/blog/704421" target="_blank" rel="noopener">参考文章2</a></p>
+<h6 id="功能性接口的简化"><a href="#功能性接口的简化" class="headerlink" title="功能性接口的简化"></a><code>功能性接口的简化</code></h6><hr>
+<ol>
+<li>lambda表达式可以简化<code>Runnable</code>，<code>Comparator</code>这种接口的写法。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*****lambda表达式简化线程的创建*****/</span></span><br><span class="line"><span class="comment">// 普通写法</span></span><br><span class="line">Thread t1 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// do something</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// lambda写法</span></span><br><span class="line">Thread t2 = <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">	<span class="comment">// do something                </span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*****lambda表达式简化 Collections.sort 排序*****/</span></span><br><span class="line"><span class="comment">// 普通写法</span></span><br><span class="line">Collections.sort(list, <span class="keyword">new</span> Comparator&lt;Integer&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Integer o1, Integer o2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> o1 - o2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// lambda写法</span></span><br><span class="line">Collections.sort(list, (x, y) -&gt; x - y);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*****自定义功能接口*****/</span></span><br><span class="line">List&lt;String&gt; params = Arrays.asList(<span class="keyword">new</span> String[]&#123;<span class="string">"app"</span>, <span class="string">"red"</span>, <span class="string">"blue"</span>&#125;);</span><br><span class="line"><span class="comment">// 映射List中元素的length集合</span></span><br><span class="line">List&lt;Integer&gt; res1 = <span class="keyword">new</span> CollectionUtils&lt;String, Integer&gt;().map(params, (String param) -&gt; param.length());</span><br><span class="line"><span class="comment">// 映射list中以元素的大写集合</span></span><br><span class="line">List&lt;String&gt; res2 = <span class="keyword">new</span> CollectionUtils&lt;String, String&gt;().map(params, (String param) -&gt; param.toUpperCase());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义函数式接口</span></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">MyOP</span>&lt;<span class="title">P</span>, <span class="title">R</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">R <span class="title">apply</span><span class="params">(P obj)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 集合操作类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CollectionUtils</span>&lt;<span class="title">P</span>, <span class="title">R</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">// 对集合中的元素进行操作，操作完成之后返回一个新的集合</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;R&gt; <span class="title">map</span><span class="params">(List&lt;P&gt; input, MyOP&lt;P, R&gt; myOp)</span> </span>&#123;</span><br><span class="line">        List&lt;R&gt; result = <span class="keyword">new</span> ArrayList();</span><br><span class="line">        <span class="keyword">for</span> (P obj : input) &#123;</span><br><span class="line">            result.add(myOp.apply(obj));</span><br><span class="line">        &#125;    </span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="方法和构造方法的引用"><a href="#方法和构造方法的引用" class="headerlink" title="方法和构造方法的引用"></a><code>方法和构造方法的引用</code></h6><hr>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// lambda表达式的一般写法</span></span><br><span class="line">params.forEach((v) -&gt; System.out.print(v + <span class="string">"\t"</span>));</span><br><span class="line"><span class="comment">// lambda的简化写法</span></span><br><span class="line">params.forEach(System.out::print);</span><br><span class="line"></span><br><span class="line"><span class="comment">// lambda构造方法的简写 Date::new</span></span><br><span class="line">List&lt;Long&gt; dateValues = Arrays.asList(<span class="keyword">new</span> Long[] &#123;<span class="number">0L</span>, <span class="number">1000L</span>&#125;);</span><br><span class="line">List&lt;Date&gt; map = <span class="keyword">new</span> CollectionUtils&lt;Long, Date&gt;().map(dateValues, Date::<span class="keyword">new</span>);</span><br></pre></td></tr></table></figure>
+
+<h6 id="接口的默认方法"><a href="#接口的默认方法" class="headerlink" title="接口的默认方法"></a><code>接口的默认方法</code></h6><hr>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>. 解决了接口的演化问题（接口中新增默认实现方法，不影响原先的实现类）</span><br><span class="line"><span class="number">2</span>. 实现了行为的多继承 （一个类可以实现多个接口的默认方法）</span><br></pre></td></tr></table></figure>
+
+<h6 id="stream"><a href="#stream" class="headerlink" title="stream"></a><code>stream</code></h6><hr>
+<p><code>Stream原理</code>：流式操作，由 jdk 内部分配多个线程来执行 stream 内部的操作。并发流使用的默认线程数等于你机器的处理器核心数。</p>
+<p><code>Stream场景</code>：由于 Stream 是由 jdk 内部来为任务分配线程，所以在 一些耗时操作慎用 Stream。</p>
+<p><code>Stream应用</code>：Stream.of()方法，可以接收单个参数，也可以接收一个数组参数，将其转换为一个Stream对象。下面是几个Stream的简单应用demo。</p>
+<hr>
+<p>（1）实例代码(forEach方法遍历)-&gt;接收一个参数, 通过forEach方法接收一个功能接口。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">list.add(<span class="number">1</span>);</span><br><span class="line">list.add(<span class="number">2</span>);</span><br><span class="line">list.add(<span class="number">3</span>);</span><br><span class="line">Stream.of(list).forEach(System.out::println);</span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="comment">// [1, 2, 3]</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>（2）实例代码(forEach方法遍历)-&gt;接收一个数组，通过forEach方法接收一个功能接口。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Stream.of(list.toArray()).forEach(System.out::println);</span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>（3）实例代码(filter方法过滤)-&gt; 找处以小写字母’a’开头的字符串</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Stream.of(<span class="string">"Abc"</span>, <span class="string">"abc"</span>, <span class="string">"ccc"</span>, <span class="string">"asD"</span>)</span><br><span class="line">    .filter((str) -&gt; &#123;<span class="keyword">return</span> str.startsWith(<span class="string">"a"</span>);&#125;)</span><br><span class="line">    .forEach(System.out::println);</span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="comment">// abc</span></span><br><span class="line"><span class="comment">// asD</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>（4）实例方法-&gt;(map方法建立映射)-&gt; 统计给出数组中每个字符串的长度</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Stream.of(<span class="string">"A"</span>, <span class="string">"abc"</span>, <span class="string">"cc"</span>, <span class="string">"a"</span>)</span><br><span class="line">    .map((str) -&gt; str.length())</span><br><span class="line">    .forEach(System.out::println);</span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 3</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p> （5）实例方法-&gt;(reduce方法的使用) -&gt; 初始值为 100，计算初始值加1到5的值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Integer&gt; integerList = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>);</span><br><span class="line"><span class="keyword">int</span> init = <span class="number">100</span>;</span><br><span class="line">Integer result = integerList.stream()</span><br><span class="line">    .reduce(init, (a, b) -&gt; a + b);</span><br><span class="line">System.out.println(<span class="string">"result-&gt;"</span> + result);</span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="comment">// 115</span></span><br></pre></td></tr></table></figure>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-fra-spring-cloud-loadbalance" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/">框架</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/spring-cloud/">spring-cloud</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/fra-spring-cloud-loadbalance/">
+            <time datetime="2019-09-21T01:31:06.000Z" itemprop="datePublished">2019-09-21</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/fra-spring-cloud-loadbalance.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/fra-spring-cloud-loadbalance.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/fra-spring-cloud-loadbalance.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/fra-spring-cloud-loadbalance/">负载均衡</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p>完善中。。。。</p>
+<h6 id="负载均衡算法基础-理论"><a href="#负载均衡算法基础-理论" class="headerlink" title="负载均衡算法基础(理论)"></a><code>负载均衡算法基础(理论)</code></h6><p><a href="https://en.wikipedia.org/wiki/Load_balancing_(computing)" target="_blank" rel="noopener">参考资料</a></p>
+<hr>
+<p>负载均衡分类：客户端负载均衡  服务端负载均衡</p>
+<hr>
+<p>负载均衡算法</p>
+<p>​    随机   轮询</p>
+<p>​    权重</p>
+<hr>
+<h6 id="Ribbon的实现-设计"><a href="#Ribbon的实现-设计" class="headerlink" title="Ribbon的实现(设计)"></a><code>Ribbon的实现(设计)</code></h6><p>设计分析</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 核心接口</span></span><br><span class="line">com.netflix.loadbalancer.IRule</span><br><span class="line">com.netflix.loadbalancer.ILoadBalancer</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务实例定义实体</span></span><br><span class="line">Netflix Eureka </span><br><span class="line">com.netflix.appinfo.InstanceInfo</span><br><span class="line"></span><br><span class="line">Spring Cloud Commons</span><br><span class="line">org.springframework.cloud.client.ServiceInstance</span><br><span class="line"></span><br><span class="line">Netflix Ribbon</span><br><span class="line">com.netflix.loadbalancer.Server</span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-ans-reentlock-source" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1207,159 +1395,6 @@
         
         
             <h6 id="寻找递增序列"><a href="#寻找递增序列" class="headerlink" title="寻找递增序列"></a><code>寻找递增序列</code></h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 给定一个未经过排序的数组，找到最长且连续的递增序列(在美团面试题中出现过-leetcode674题)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">findLengthOfLCIS</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nums.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> curr = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length; i ++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] &gt; nums[i - <span class="number">1</span>]) &#123;</span><br><span class="line">            curr ++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            max = Math.max(max, curr);</span><br><span class="line">        	curr = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Math.max(max, curr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-mongodb-base" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/数据库/">数据库</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/数据库/mongodb/">mongodb</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/mongo/">mongo</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/mongodb-base/">
-            <time datetime="2019-09-03T03:45:03.000Z" itemprop="datePublished">2019-09-03</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/mongodb-base.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/mongodb-base.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/mongodb-base.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/mongodb-base/">mongodb-base</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-        
-        
-            <h6 id="安装步骤-centos7"><a href="#安装步骤-centos7" class="headerlink" title="安装步骤(centos7)"></a><code>安装步骤(centos7)</code></h6><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">1.下载安装包</span><br><span class="line">	wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel62-3.2.10.tgz</span><br><span class="line">2.解压安装包</span><br><span class="line">	tar -zxvf mongodb-linux-x86_64-rhel62-3.2.10.tgz </span><br><span class="line">3.将解压目录移动到(/usr/local/mongodb)</span><br><span class="line">	mv mongodb-linux-x86_64-rhel62-3.2.10 /usr/local/mongodb</span><br><span class="line">4.在/usr/local/mongodb目录下创建/data/db目录和/logs目录</span><br><span class="line">	mkdir -p /usr/local/mongodb/data/db </span><br><span class="line">	mkdir -p /usr/local/mongodb/logs</span><br><span class="line">5.在/usr/local/mongodb/logs目录下创建mongodb.log文件</span><br><span class="line">	touch mongodb.log</span><br><span class="line">6.在/usr/local/mongodb/bin目录下创建mongodb的配置文件</span><br><span class="line">	touch mongodb.conf</span><br><span class="line">7.编辑mongodb.conf文件</span><br><span class="line">	vi mongodb.conf</span><br><span class="line">	编辑内容</span><br><span class="line">		dbpath = /usr/local/mongodb/data/db #数据文件存放目录</span><br><span class="line">		logpath = /usr/local/mongodb/logs/mongodb.log #日志文件存放目录</span><br><span class="line">		port = 27017  #端口</span><br><span class="line">		fork = true  #以守护程序的方式启用，即在后台运行</span><br><span class="line">		nohttpinterface = true</span><br><span class="line">		auth=true</span><br><span class="line">		bind_ip=0.0.0.0</span><br><span class="line">8.修改环境变量</span><br><span class="line">	vi /etc/profile</span><br><span class="line">	添加的内容</span><br><span class="line">		export MONGODB_HOME=/usr/local/mongodb</span><br><span class="line">		export PATH=$PATH:$MONGODB_HOME/bin</span><br><span class="line">9.编辑完成之后重启系统配置</span><br><span class="line">	source /etc/profile</span><br><span class="line">10.在/usr/local/mongodb/bin目录下启动mongodb</span><br><span class="line">	./mongod -f mongodb.conf</span><br><span class="line">11.关闭mongodb服务</span><br><span class="line">	./mongod -f ./mongodb.conf --shutdown</span><br><span class="line">12.开启27017端口</span><br><span class="line"></span><br><span class="line">13.使用shell登录到mongodb</span><br><span class="line">	./mongodb</span><br><span class="line"></span><br><span class="line">14.登录到相关数据库</span><br><span class="line">	use test</span><br><span class="line"></span><br><span class="line">15.创建用户</span><br><span class="line">	db.createUser(</span><br><span class="line">		&#123;</span><br><span class="line">			user: "test", </span><br><span class="line">			pwd: "test", </span><br><span class="line">			roles: [&#123; role: "readWrite", db: "test" &#125;]</span><br><span class="line">		&#125;</span><br><span class="line">	)</span><br><span class="line">16.修改配置，开启验证</span><br><span class="line">	auth=true</span><br><span class="line">17.重启服务</span><br><span class="line">	停止服务，然后启动</span><br><span class="line">18.登录</span><br><span class="line">	./mongodb</span><br><span class="line">19.验证</span><br><span class="line">	auth('test', 'test')(返回1代表成功)</span><br><span class="line">20.操作	</span><br><span class="line">	db.user.find()</span><br><span class="line">	db.user.insert(&#123;"name":'jack',"age": 12&#125;)</span><br></pre></td></tr></table></figure>
-
-<h6 id="基本操作-gt-java-api的crud"><a href="#基本操作-gt-java-api的crud" class="headerlink" title="基本操作-&gt;java api的crud"></a><code>基本操作-&gt;java api的crud</code></h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>. 引入依赖</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.mongodb&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mongo-java-driver&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.9.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>.java代码</span><br><span class="line"><span class="comment">// 工具类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MongoUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String baseUrl = <span class="string">"192.168.25.147:27017"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String userName = <span class="string">"test"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String passWord = <span class="string">"test"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String url = <span class="string">"mongodb://"</span>+ userName +<span class="string">":"</span>+ passWord + <span class="string">"@"</span>+ baseUrl + <span class="string">"/"</span>;</span><br><span class="line">    </span><br><span class="line">	<span class="comment">// 获取MongoDatabase</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MongoDatabase <span class="title">getConnection</span><span class="params">(String dataName)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取MongoClient</span></span><br><span class="line">        com.mongodb.client.MongoClient mongoClient = MongoClients.create(url + dataName);</span><br><span class="line">        <span class="comment">// 获取MongoDatabase</span></span><br><span class="line">        MongoDatabase db = mongoClient.getDatabase(dataName);</span><br><span class="line">        <span class="keyword">return</span> db;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 基本操作 -&gt; 获取所有</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">findAll</span><span class="params">(String databaseName, String collectionName)</span> </span>&#123;</span><br><span class="line">	MongoDatabase database = MongoUtil.getConnection(databaseName);</span><br><span class="line">    MongoCollection&lt;Document&gt; collection = database.getCollection(collectionName);</span><br><span class="line">    FindIterable&lt;Document&gt; documents = collection.find();</span><br><span class="line">    print(documents);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 基本操作 -&gt; 插入</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(String databaseName, String collectionName)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 获取database</span></span><br><span class="line">	MongoDatabase database = MongoUtil.getConnection(databaseName);</span><br><span class="line">	<span class="comment">// 获取Clooection</span></span><br><span class="line">	MongoCollection&lt;Document&gt; collection = database.getCollection(collectionName);</span><br><span class="line">	<span class="comment">// 创建Document</span></span><br><span class="line">	Document document = <span class="keyword">new</span> Document()</span><br><span class="line">                    .append(<span class="string">"name"</span>, <span class="string">"mick11"</span>)</span><br><span class="line">                    .append(<span class="string">"age"</span>, <span class="string">"33"</span>)</span><br><span class="line">                    .append(<span class="string">"address"</span>, <span class="string">"长沙"</span>)</span><br><span class="line">                    .append(<span class="string">"sex"</span>, <span class="string">"男"</span>);</span><br><span class="line">    <span class="comment">// 插入document                </span></span><br><span class="line">	collection.insertOne(document);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印所有</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(FindIterable&lt;Document&gt; documents)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (Document document : documents) &#123;</span><br><span class="line">		System.out.println(document.toJson());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-redis-advance" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/数据库/">数据库</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/数据库/redis/">redis</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/redis-advance/">
-            <time datetime="2019-09-02T00:47:25.000Z" itemprop="datePublished">2019-09-02</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/redis-advance.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/redis-advance.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/redis-advance.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/redis-advance/">实际应用</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-        
-        
-            <h6 id="list实现分布式队列"><a href="#list实现分布式队列" class="headerlink" title="list实现分布式队列"></a><code>list实现分布式队列</code></h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 需要的依赖jedis fastjson</span></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;2.9.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line"> 	&lt;artifactId&gt;fastjson&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.2.4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"><span class="comment">// 测试类</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/8 15:00</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String url = <span class="string">"192.168.25.150"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> port = <span class="number">6379</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 构建queue</span></span><br><span class="line">        String queueKey = <span class="string">"message_queue"</span>;</span><br><span class="line">        Jedis jedis = <span class="keyword">new</span> Jedis(url, port);</span><br><span class="line">        <span class="comment">// 消息转换器</span></span><br><span class="line">        MessageConvert&lt;TaskItem&gt; convert = <span class="keyword">new</span> MessageConvert&lt;&gt;();</span><br><span class="line">        <span class="comment">// 消息队列</span></span><br><span class="line">        RedisQueue queue = <span class="keyword">new</span> RedisQueue(jedis, queueKey, convert);</span><br><span class="line">        <span class="comment">// 生产者</span></span><br><span class="line">        MessageProducer producer = <span class="keyword">new</span> MessageProducer(queue);</span><br><span class="line">        <span class="comment">// 消费者</span></span><br><span class="line">        MessageConsumer consumer = <span class="keyword">new</span> MessageConsumer(queue);</span><br><span class="line">        producer.start();</span><br><span class="line">        consumer.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 消息队列</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/8 14:34</span></span><br><span class="line"><span class="comment"> * 分布式消息队列-list实现</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisQueue</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Jedis jedis;</span><br><span class="line">    <span class="keyword">private</span> String queueKey;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RedisQueue</span><span class="params">(Jedis jedis, String queueKey, MessageConvert messageConvert)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.jedis = jedis;</span><br><span class="line">        <span class="keyword">this</span>.queueKey = queueKey;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 发送消息</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.jedis.lpush(queueKey, message);</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 消费消息-&gt;可重试</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">poll</span><span class="params">(<span class="keyword">boolean</span> isRetry)</span> </span>&#123;</span><br><span class="line">        String message = jedis.rpop(queueKey);</span><br><span class="line">        <span class="keyword">if</span> (message == <span class="keyword">null</span> &amp;&amp; isRetry) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                TimeUnit.MILLISECONDS.sleep(<span class="number">500</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            message = jedis.rpop(queueKey);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/8 15:47</span></span><br><span class="line"><span class="comment"> * 消息生产者</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageProducer</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 队列</span></span><br><span class="line">    <span class="keyword">private</span> RedisQueue queue;</span><br><span class="line">    <span class="comment">// 消息转换器</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> MessageConvert&lt;TaskItem&gt; convert = <span class="keyword">new</span> MessageConvert&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MessageProducer</span><span class="params">(RedisQueue queue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.queue = queue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            send(<span class="string">"message:"</span> + i);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                TimeUnit.MILLISECONDS.sleep(<span class="number">30</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建并发送消息</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">send</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建一条消息</span></span><br><span class="line">        TaskItem item = <span class="keyword">new</span> TaskItem();</span><br><span class="line">        item.id = UUID.randomUUID().toString();</span><br><span class="line">        item.msg = message;</span><br><span class="line">        <span class="comment">// 转换为字符串发送</span></span><br><span class="line">        String sendMess = convert.messageToString(item);</span><br><span class="line">        queue.push(sendMess);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/8 15:48</span></span><br><span class="line"><span class="comment"> * 消息消费者</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageConsumer</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> RedisQueue queue;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MessageConsumer</span><span class="params">(RedisQueue queue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.queue = queue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Random random = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                TimeUnit.MILLISECONDS.sleep(random.nextInt(<span class="number">10</span>));</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            receive();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">receive</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Object object = queue.poll(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">if</span> (object != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(object);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/8 15:45</span></span><br><span class="line"><span class="comment"> * 消息转换器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageConvert</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Type taskType = <span class="keyword">new</span> TypeReference&lt;T&gt;() &#123;&#125;.getType();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 将给定的消息转换为string类型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> t</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">messageToString</span><span class="params">(T t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> JSON.toJSONString(t);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 将string类型的消息转换为T类型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> message</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">stringToObject</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> JSON.parseObject(message, taskType);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="zset实现延时队列"><a href="#zset实现延时队列" class="headerlink" title="zset实现延时队列"></a><code>zset实现延时队列</code></h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 测试方法</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">delayQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Jedis jedis = <span class="keyword">new</span> Jedis(url, port);</span><br><span class="line">    <span class="comment">// 延时队列</span></span><br><span class="line">    RedisDelayingQueue queue = <span class="keyword">new</span> RedisDelayingQueue(jedis, <span class="string">"q-demo"</span>);</span><br><span class="line">    DelayMessageConsumer consumer = <span class="keyword">new</span> DelayMessageConsumer(queue);</span><br><span class="line">    DelayMessageProducer producer = <span class="keyword">new</span> DelayMessageProducer(queue);</span><br><span class="line">    producer.start();</span><br><span class="line">    consumer.start();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 首先让producer线程执行完成</span></span><br><span class="line">        producer.join();</span><br><span class="line">        <span class="comment">// 主线程睡眠6秒，等待consumer将消息消费完成</span></span><br><span class="line">        Thread.sleep(<span class="number">6000</span>);</span><br><span class="line">        consumer.interrupt();</span><br><span class="line">        consumer.join();</span><br><span class="line">    &#125;  <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/7 16:56</span></span><br><span class="line"><span class="comment"> * 延时队列-&gt; 通过zset实现</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisDelayingQueue</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Jedis jedis;</span><br><span class="line">    <span class="keyword">private</span> String queueKey;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RedisDelayingQueue</span><span class="params">(Jedis jedis, String queueKey)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.jedis = jedis;</span><br><span class="line">        <span class="keyword">this</span>.queueKey = queueKey;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 执行消息的发送</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delay</span><span class="params">(String msg, <span class="keyword">long</span> score)</span> </span>&#123;</span><br><span class="line">        jedis.zadd(queueKey, score, msg);</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 执行消息的处理</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loop</span><span class="params">(MessageHandle handle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (!Thread.interrupted()) &#123;</span><br><span class="line">            <span class="comment">// fixme 此处需要优化，保证操作的原子性</span></span><br><span class="line">            <span class="comment">// 获取一条数据(score最小的那条数据)</span></span><br><span class="line">            Set values = jedis.zrangeByScore(queueKey, <span class="number">0</span>, System.currentTimeMillis(), <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">            <span class="comment">// 若是队列中没有任务，线程睡眠500毫秒</span></span><br><span class="line">            <span class="keyword">if</span> (values.isEmpty()) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">500</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            String value = (String) values.iterator().next();</span><br><span class="line">            <span class="comment">// 从queueKey中移除该元素</span></span><br><span class="line">            <span class="keyword">if</span> (jedis.zrem(queueKey, value) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 将消息交给回调接口来处理</span></span><br><span class="line">                handle.handle(value);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/8 17:13</span></span><br><span class="line"><span class="comment"> * 延时队列-生产者线程</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DelayMessageProducer</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    RedisDelayingQueue queue;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DelayMessageProducer</span><span class="params">(RedisDelayingQueue queue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.queue = queue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Random random = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span> ; i++) &#123;</span><br><span class="line">            String message = <span class="string">"message:"</span>+ i;</span><br><span class="line">            <span class="keyword">long</span> score = random.nextInt(<span class="number">10</span>);</span><br><span class="line">            send(message, score);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">send</span><span class="params">(String msg, <span class="keyword">long</span> delay)</span> </span>&#123;</span><br><span class="line">        TaskItem task = <span class="keyword">new</span> TaskItem();</span><br><span class="line">        task.id = UUID.randomUUID().toString();</span><br><span class="line">        task.msg = msg;</span><br><span class="line">        String message = JSON.toJSONString(task);</span><br><span class="line">        queue.delay(message, delay);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/8 17:11</span></span><br><span class="line"><span class="comment"> * 延时队列消费者线程</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DelayMessageConsumer</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    RedisDelayingQueue queue;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> MessageHandle handle = <span class="keyword">new</span> MessageHandle() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(String item)</span> </span>&#123;</span><br><span class="line">            System.out.println(item);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DelayMessageConsumer</span><span class="params">(RedisDelayingQueue queue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.queue = queue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.queue.loop(handle);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> long</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/9/8 17:21</span></span><br><span class="line"><span class="comment"> * 消息处理回调接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MessageHandle</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">handle</span><span class="params">(String item)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
             </div>

@@ -307,7 +307,7 @@
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-springboot/">springboot</a></li>  </ul> 
                     </li> 
-                     <li class="file"><a href="/wiki/spring-base-environment/">spring-base-environment</a></li>  </ul> 
+                     <li class="file"><a href="/wiki/spring-base-environment/">环境</a></li>  <li class="file"><a href="/wiki/fra-springboot-1/">事件监听</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -336,7 +336,7 @@
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/project-ask/">project-ask</a></li>  </ul> 
                     </li> 
-                     </ul> 
+                     <li class="file"><a href="/wiki/java-dev-problem/">java开发常见问题</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -518,6 +518,200 @@
 </aside>
             
             <section id="main">
+        <article id="post-ans-hashmap-source" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/源码/">源码</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/ans-hashmap-source/">
+            <time datetime="2019-08-16T14:01:46.000Z" itemprop="datePublished">2019-08-16</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/ans-hashmap-source.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/ans-hashmap-source.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/ans-hashmap-source.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/ans-hashmap-source/">HashMap</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <hr>
+1.HashMap的数据结构
+    在jdk1.7中基于数组+链表,在jdk1.8中基于数组+链表+红黑树
+
+<hr>
+2.HashMap的put方法的过程
+    a.首先判断当前的数组是否被初始化,若是没有被初始化,调用resize方法初始化
+    b.通过key的hash值和数组长度计算出该元素在数组中的位置
+    c1.若是数组上没有元素,构建Node节点,存储该元素
+    c21.若是该数组上有元素,且第一个节点的key与要存储的key相等,用变量保存该节点。
+    c22.若是该数组上有元素,且第一个节点的key与要存储的key不相等,需要判断该节点类型。
+        若是该节点属于红黑树,将元素插入到红黑树。
+        若是该节点属于链表,循环遍历链表,若是没有遇到key相同的,将key-value创建称为节点,插入到链表的尾部。判断是否需要转成红黑树，若是需要，将链表转成红黑树。
+    d.前面的操作中，若是找到与key相同的节点,根据条件判断是否需要覆盖,若是需要覆盖,直接修改原有节点的value。
+    f.将元素的个数size加1并判断是否需要扩容,若是需要扩容,调用resize方法扩容。
+
+<hr>
+3.HashMap的resize方法
+    resize方法涉及到两个大的步骤,首先是确定新数组的大小已经下次的扩容时机，新数组大小为原有数组大小的两倍，扩容变量也扩大为原有的两倍。其次是将原有数组的元素迁移至新的数组中,其中数组元素只会在两个地方，一个在[原下标]的地方，另一个在[原下标+原容量]的位置。
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-jvm" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/基础/">基础</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/基础/jvm/">jvm</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/jvm/">
+            <time datetime="2019-08-16T04:51:03.000Z" itemprop="datePublished">2019-08-16</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/jvm.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/jvm.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/jvm.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/jvm/">jvm</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p>jvm的运行时数据区</p>
+<hr>
+<p>堆:java垃圾回收的主要区域，唯一存在的价值就是存放对象实例，几乎所有的对象实例都会在这里分配内存。从垃圾回收的角度分为新生代和老年代。在细分一点可以划分为Eden空间,From Survivor空间,To Survivor空间。若是在堆中没有完成实例分配，并且堆也无法再扩展时，就会抛出OutOfMemoryError异常。</p>
+<hr>
+<p>方法区:用于存储已经被虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据。当方法区无法满足内存分配的需求时，将会抛出OutOfMemoryError异常。</p>
+<hr>
+<p>虚拟机栈:描述的是java方法执行的内存模型，每个方法执行时都会创建一个栈帧，栈帧中用于存储局部变量表，操作数栈，动态链接，方法出口等信息。当线程申请的栈深度大于虚拟机所允许的栈深度，将抛出StackOverflowError异常。若是虚拟机动态扩展时无法申请到足够的内存，将会抛出OutOfMemoryError异常。</p>
+<hr>
+<p>程序计数器:记录当前线程执行的字节码指令的行号，不会发生OutOfMemoryError。</p>
+<hr>
+<p>本地方法栈:用于执行非java方法的内存模型，也会发生StackOverflowError和OutOfMemoryError异常。</p>
+<hr>
+<p>jvm垃圾回收考虑的三个问题</p>
+<ul>
+<li>回收哪些对象</li>
+<li>什么时候回收这些对象</li>
+<li>怎么回收这些对象</li>
+</ul>
+<hr>
+<p>jvm垃圾回收算法</p>
+<ul>
+<li><p>标记清除：会有内存碎片</p>
+</li>
+<li><p>标记整理：没有内存碎片，适合新生代对象的回收</p>
+</li>
+<li><p>复制算法：需要留出一部分的内存空间，利用率不高</p>
+</li>
+<li><p>分代收集算法：新生代死亡对象多，采用复制算法。老年代死亡对象少，采用标记整理或标记清除。</p>
+</li>
+</ul>
+<hr>
+<p>jvm垃圾收集器</p>
+<p>​    新生代垃圾收集器</p>
+<p>​    老年代垃圾收集器    </p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-mysql" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
