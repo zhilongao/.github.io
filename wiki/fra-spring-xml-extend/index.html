@@ -3,22 +3,23 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     
-    <title>归档: 2019/9 | zl&#39;s blog</title>
+    <title>spring扩展 | zl&#39;s blog</title>
     
     
-        <meta name="keywords" content="zl&#39;s blog">
+        <meta name="keywords" content="spring扩展">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="每天进步一点点">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zl&#39;s blog">
-<meta property="og:url" content="https://zhilongao.github.io/archives/2019/09/index.html">
+    <meta name="description" content="spring除了可以解析自定的标签外，也可以解析用户自定义的标签。解析自定义标签需要添加一些扩展。下面以一个实例展示这个过程。 1.在resources/META-INF目录下新建文件spring-test.xsd &amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&amp;gt;&amp;lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring扩展">
+<meta property="og:url" content="https://zhilongao.github.io/wiki/fra-spring-xml-extend/index.html">
 <meta property="og:site_name" content="zl&#39;s blog">
-<meta property="og:description" content="每天进步一点点">
+<meta property="og:description" content="spring除了可以解析自定的标签外，也可以解析用户自定义的标签。解析自定义标签需要添加一些扩展。下面以一个实例展示这个过程。 1.在resources/META-INF目录下新建文件spring-test.xsd &amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&amp;gt;&amp;lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-30T08:05:58.581Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zl&#39;s blog">
-<meta name="twitter:description" content="每天进步一点点">
+<meta name="twitter:title" content="spring扩展">
+<meta name="twitter:description" content="spring除了可以解析自定的标签外，也可以解析用户自定义的标签。解析自定义标签需要添加一些扩展。下面以一个实例展示这个过程。 1.在resources/META-INF目录下新建文件spring-test.xsd &amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&amp;gt;&amp;lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/">
     
 
     
@@ -159,9 +160,9 @@
         
         
          <ul class="unstyled" id="tree" > 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             java
                         </a>
@@ -274,20 +275,20 @@
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/java-style-lambda/">lambda和stream</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             框架
                         </a>
                          <ul class="unstyled" id="tree" > 
-                    <li class="directory">
+                    <li class="directory open">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
+                            <i class="fa fa-folder-open"></i>
                             &nbsp;
                             spring
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-spring-xml/">bean的创建</a></li>  <li class="file"><a href="/wiki/fra-spring-annotation/">注解驱动</a></li>  <li class="file"><a href="/wiki/fra-spring-base/">基础知识</a></li>  <li class="file"><a href="/wiki/spring-base-environment/">环境</a></li>  <li class="file"><a href="/wiki/fra-springboot-1/">事件监听</a></li>  <li class="file"><a href="/wiki/fra-spring-xml-extend/">spring扩展</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-spring-xml/">bean的创建</a></li>  <li class="file"><a href="/wiki/fra-spring-annotation/">注解驱动</a></li>  <li class="file"><a href="/wiki/fra-spring-base/">基础知识</a></li>  <li class="file"><a href="/wiki/spring-base-environment/">环境</a></li>  <li class="file"><a href="/wiki/fra-springboot-1/">事件监听</a></li>  <li class="file active"><a href="/wiki/fra-spring-xml-extend/">spring扩展</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -517,353 +518,128 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main"><div class="timeline timeline-wrap">
-    
-            <div class="timeline-row timeline-row-major">
-                <span class="node"><i class="fa fa-calendar-o"></i></span>
-                <h1 class="title"><a href="/archives/2019/">2019</a></h1>
-            </div>
-    
-            <div class="timeline-row timeline-row-major">
-                <span class="node"><i class="fa fa-calendar"></i></span>
-                <h1 class="title"><a href="/archives/2019/09/">2019-09</a><span class="archive-list-count">10</span></h1>
-            </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+            <section id="main"><article id="post-fra-spring-xml-extend" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
                 
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/wiki/ans-countdownlatch-source/">CountDownLatch</a>
-        </h1>
-    
-
-                
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/ans-countdownlatch-source/">
-            <time datetime="2019-09-30T13:29:36.000Z" itemprop="datePublished">2019-09-30</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/源码/">源码</a>
-    </div>
-
-                    
-                </div>
-                
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/wiki/fra-spring-base/">基础知识</a>
-        </h1>
-    
-
-                
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/fra-spring-base/">
-            <time datetime="2019-09-30T02:08:09.000Z" itemprop="datePublished">2019-09-30</time>
-        </a>
-    </div>
-
-
-                    
+                    <div class="article-meta">
+                        
     <div class="article-category">
     	<i class="fa fa-folder"></i>
         <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/">框架</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/spring/">spring</a>
     </div>
 
-                    
-                </div>
-                
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/wiki/fra-spring-annotation/">注解驱动</a>
-        </h1>
-    
-
-                
-                <div class="article-meta">
-                    
+                        
+                        
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/wiki/fra-spring-annotation/">
-            <time datetime="2019-09-30T02:07:41.000Z" itemprop="datePublished">2019-09-30</time>
+        <a href="/wiki/fra-spring-xml-extend/">
+            <time datetime="2019-11-30T07:53:47.000Z" itemprop="datePublished">2019-11-30</time>
         </a>
     </div>
 
 
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/">框架</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/spring/">spring</a>
-    </div>
-
-                    
-                </div>
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/fra-spring-xml-extend.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/fra-spring-xml-extend.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/fra-spring-xml-extend.md'> History </a>
+                            </div>
+                        
+                    </div>
                 
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
                 
     
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/wiki/ans-unsafe-source/">Unsafe</a>
+        <h1 class="article-title" itemprop="name">
+            spring扩展
         </h1>
     
 
-                
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/ans-unsafe-source/">
-            <time datetime="2019-09-27T09:19:05.000Z" itemprop="datePublished">2019-09-27</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/源码/">源码</a>
-    </div>
-
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
                     
                 </div>
-                
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/wiki/ans-aqs-source/">AQS</a>
-        </h1>
-    
+            
+        
+        
+            <p>spring除了可以解析自定的标签外，也可以解析用户自定义的标签。解析自定义标签需要添加一些扩展。下面以一个实例展示这个过程。</p>
+<p>1.在resources/META-INF目录下新建文件spring-test.xsd</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">xs:schema</span> <span class="attr">xmlns:xs</span>=<span class="string">"http://www.w3.org/2001/XMLSchema"</span></span></span><br><span class="line"><span class="tag"><span class="attr">targetNamespace</span>=<span class="string">"http://www.test.com/schema/user"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">xs:element</span> <span class="attr">name</span>=<span class="string">"user"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">xs:complexType</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">xs:attribute</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">type</span>=<span class="string">"xs:string"</span>&gt;</span><span class="tag">&lt;/<span class="name">xs:attribute</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">xs:attribute</span> <span class="attr">name</span>=<span class="string">"userName"</span> <span class="attr">type</span>=<span class="string">"xs:string"</span>&gt;</span><span class="tag">&lt;/<span class="name">xs:attribute</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">xs:attribute</span> <span class="attr">name</span>=<span class="string">"email"</span> <span class="attr">type</span>=<span class="string">"xs:string"</span>&gt;</span><span class="tag">&lt;/<span class="name">xs:attribute</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">xs:complexType</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">xs:element</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">xs:schema</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-                
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/ans-aqs-source/">
-            <time datetime="2019-09-27T06:19:27.000Z" itemprop="datePublished">2019-09-27</time>
+<p>2.在resource/META-INF目录下创建spring.schema文件，并添加以下内容。</p>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">http<span class="tag">\<span class="name">:</span></span>//www.test.com/schema/user.xsd=META-INF/spring-test.xsd</span><br></pre></td></tr></table></figure>
+
+<p>3.创建自定义bean解析器类UserBeanDefinitionParser,该类需要继承AbstractSingleBeanDefinitionParser</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserBeanDefinitionParser</span> <span class="keyword">extends</span> <span class="title">AbstractSingleBeanDefinitionParser</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; getBeanClass(Element element) &#123;</span><br><span class="line">        <span class="keyword">return</span> User.class;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 从element中解析并提取相应的元素</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doParse</span><span class="params">(Element element, BeanDefinitionBuilder builder)</span> </span>&#123;</span><br><span class="line">        String userName = element.getAttribute(<span class="string">"userName"</span>);</span><br><span class="line">        String email = element.getAttribute(<span class="string">"email"</span>);</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.hasText(userName)) &#123;</span><br><span class="line">            builder.addPropertyValue(<span class="string">"userName"</span>, userName);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.hasText(email)) &#123;</span><br><span class="line">            builder.addPropertyValue(<span class="string">"email"</span>, email);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.创建自定义namespace处理器类MyNamespaceHandler,该类需要继承NamespaceHandlerSupport</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyNamespaceHandler</span> <span class="keyword">extends</span> <span class="title">NamespaceHandlerSupport</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        registerBeanDefinitionParser(<span class="string">"user"</span>, <span class="keyword">new</span> UserBeanDefinitionParser());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.定义一个实体类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> String userName;</span><br><span class="line">    <span class="keyword">private</span> String email;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.getUserName() + <span class="string">"--"</span> + <span class="keyword">this</span>.getEmail();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>6.创建一个xml文件,beans3.xml,使用自定义标签定义bean</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:myname</span>=<span class="string">"http://www.test.com/schema/user"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">            http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">            http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">            http://www.springframework.org/schema/context/spring-context-4.0.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">            http://www.test.com/schema/user</span></span></span><br><span class="line"><span class="tag"><span class="string">            http://www.test.com/schema/user.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">myname:user</span> <span class="attr">id</span>=<span class="string">"testbean"</span> <span class="attr">userName</span>=<span class="string">"aaa"</span> <span class="attr">email</span>=<span class="string">"bbb"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>7.定义一个测试类，测试能否成功加载该bean</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestApp</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        XmlBeanFactory factory = <span class="keyword">new</span> XmlBeanFactory(<span class="keyword">new</span> ClassPathResource(<span class="string">"beans3.xml"</span>));</span><br><span class="line">        User u1 = (User)factory.getBean(<span class="string">"testbean"</span>);</span><br><span class="line">        System.out.println(u1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>输出结果</li>
+</ol>
+<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">aaa--bbbf</span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+    
+        <a href="/wiki/fra-springboot-1/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">事件监听</div>
         </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/源码/">源码</a>
-    </div>
-
-                    
-                </div>
-                
-            </div>
-        </div>
     
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
+</nav>
+
+
+
+
+
     
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/wiki/java-style-lambda/">lambda和stream</a>
-        </h1>
     
 
-                
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/java-style-lambda/">
-            <time datetime="2019-09-23T11:11:56.000Z" itemprop="datePublished">2019-09-23</time>
-        </a>
-    </div>
 
 
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/新特性/">新特性</a>
-    </div>
 
-                    
-                </div>
-                
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/wiki/fra-spring-cloud-loadbalance/">负载均衡</a>
-        </h1>
-    
-
-                
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/fra-spring-cloud-loadbalance/">
-            <time datetime="2019-09-21T01:31:06.000Z" itemprop="datePublished">2019-09-21</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/">框架</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/框架/spring-cloud/">spring-cloud</a>
-    </div>
-
-                    
-                </div>
-                
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/wiki/ans-reentlock-source/">ReentrantLock</a>
-        </h1>
-    
-
-                
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/ans-reentlock-source/">
-            <time datetime="2019-09-18T12:31:57.000Z" itemprop="datePublished">2019-09-18</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/源码/">源码</a>
-    </div>
-
-                    
-                </div>
-                
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/wiki/design-pattern-listener/">监听器模式</a>
-        </h1>
-    
-
-                
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/design-pattern-listener/">
-            <time datetime="2019-09-13T02:58:12.000Z" itemprop="datePublished">2019-09-13</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
-    </div>
-
-                    
-                </div>
-                
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/wiki/design-pattern-observer/">观察者模式</a>
-        </h1>
-    
-
-                
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/design-pattern-observer/">
-            <time datetime="2019-09-13T01:54:53.000Z" itemprop="datePublished">2019-09-13</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/设计模式/">设计模式</a>
-    </div>
-
-                    
-                </div>
-                
-            </div>
-        </div>
-    
-</div>
-
-    <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/archives/2019/09/page/2/">2</a><a class="extend next" rel="next" href="/archives/2019/09/page/2/">下一页 &raquo;</a>
-    </nav>
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
 </section>
         </div>
         <footer id="footer">
