@@ -343,6 +343,33 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
+                            工具箱
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            docker
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/docker-base-unit1/">docker安装</a></li>  <li class="file"><a href="/wiki/docker-base-unit2/">docker镜像</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            linux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/linux-system-problem/">linux系统</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
                             数据库
                         </a>
                          <ul class="unstyled" id="tree" > 
@@ -416,24 +443,6 @@
                             链表
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-linkedlist-simple1/">单链表</a></li>  </ul> 
-                    </li> 
-                     </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            系统
-                        </a>
-                         <ul class="unstyled" id="tree" > 
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            linux
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/linux-system-problem/">linux系统</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -518,6 +527,195 @@
 </aside>
             
             <section id="main">
+        <article id="post-questions" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/java/">java</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/java/面试题/">面试题</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/questions/">
+            <time datetime="2019-09-12T02:40:03.000Z" itemprop="datePublished">2019-09-12</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/questions.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/questions.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/questions.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/questions/">questions</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <ol>
+<li>说说dubbo服务上下线时你们是如何处理的?</li>
+<li>dubbo的协议有哪些,哪些使用场景?</li>
+<li>dubbo使用的系列化框架是什么?</li>
+<li>dubbo服务容错机制?</li>
+<li>socket协议的几种状态,socket协议的三次握手,为什么是三次握手?</li>
+<li>说说nio和io有什么不同,nio有哪些场景?</li>
+<li>http请求有哪些方法?</li>
+<li>jdk1.8有哪些新特性,使用过哪些?</li>
+<li>谈谈对GC的理解，对G1有了解吗?</li>
+<li>Collection.sort底层默认使用哪种排序算法，说说你熟悉的排序算法有哪些?</li>
+<li>基本数据类型,占用字节,包装类,为什么会有包装类?</li>
+<li>多线程你们在项目中怎么用的?</li>
+<li>jdk1.8中Stream在并行处理时，适合哪些情景，不适合哪些情景?(第一次遇到这样问的,没回答上来)<br>适合计算密集型,不适合IO密集型。因为Stream被分配到的是核心线程池，IO密集型会造成线程阻塞。</li>
+<li>你们reids在使用中，过期时间是怎么设置的，分两步设置不能保证原子性，怎么解决的?</li>
+<li>写一下二分查找算法？</li>
+<li>写一个单例?(DCL)？</li>
+<li>说说dubbo和spring cloud有什么区别?</li>
+<li>你们数据库是怎么优化的,说说实例?</li>
+<li>了解redis吗，说说redis基本数据结构，有哪些常用的指令？</li>
+</ol>
+<hr>
+<p>1、说说 dubbo 的执行流程<br>2、redis 基本数据结构，你们是怎么用的（讲了下 5 分钟发帖 10 次）<br>3、数据库连接池了解吗？<br>4、生产环境项目打印日志出现了时间长的现象，你怎么排查<br>5、接口出现频繁 GC ，怎么排查</p>
+<hr>
+<p>1 线程池用过哪些，在项目中是怎么使用的</p>
+<p>2 sql优化怎么做的，哪些情况触发不了索引 , sql优化除了索引还要看哪些指标</p>
+<p>3 redis有没有遇到数据库满了的情况</p>
+<p>4  说说redis cluster</p>
+<p>5 springmvc  springboot springcloud的区别</p>
+<p>6 对restful有了解吗，弹弹restful</p>
+<p>7 说说对spring的理解</p>
+<p>8 @Autowired和@Resource的区别</p>
+<p>9 设计模式有哪些了解，说说设计模式遵循的原则</p>
+<p>10 交给你一个项目，怎么推进</p>
+<p>11 通过哪些途径学习，看些什么书</p>
+<p>12 总结下自己</p>
+<hr>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-linux-system-problem" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/工具箱/">工具箱</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/工具箱/linux/">linux</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/linux-system-problem/">
+            <time datetime="2019-09-09T12:19:57.000Z" itemprop="datePublished">2019-09-09</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/linux-system-problem.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/linux-system-problem.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/linux-system-problem.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/wiki/linux-system-problem/">linux系统</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h6 id="linux三种网络模式"><a href="#linux三种网络模式" class="headerlink" title="linux三种网络模式"></a><code>linux三种网络模式</code></h6><p>在我们安装vmware的时候，vmware会为三种网络模式各自创建一个虚拟机网络, 其中 VMnet0(表示桥接模式) VMnet8(NAT模式) VMnet1(仅主机模式) </p>
+<hr>
+<p>桥接模式<br>    和主机一样，也会占用一个局域网中的ip。信息的发送和接受，虚拟网络适配器和主机的物理网络适配器进行交换，虚拟网络适配器可以通过主机的物理网络适配器访问外部网络。在局域网中的其它主机能够识别到发送信息的ip为该虚拟机的ip。 </p>
+<p>NAT模式<br>    虚拟机发送数据时，NAT虚拟机网络适配器会以主机的名义将数据包裹发送出去，接收时通过特殊的标识识别。在外部网络中并不知道当前虚拟机的存在。</p>
+<p>主机模式<br>    仅可以和主机通信，无法访问外部网络。</p>
+<hr>
+<p>​    <a href="https://www.cnblogs.com/xuan52rock/p/5295069.html" target="_blank" rel="noopener">一篇介绍的很形象的文章</a></p>
+<hr>
+<h6 id="centos7之动态ip与静态ip"><a href="#centos7之动态ip与静态ip" class="headerlink" title="centos7之动态ip与静态ip"></a><code>centos7之动态ip与静态ip</code></h6><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">centos7获取ip地址的方法主要有两种 1:动态获取  2:设置静态ip</span><br><span class="line"></span><br><span class="line">我们一般通过VMWare安装完centos7后，可以使用命令ip addr查看虚拟机的ip地址。但是刚安装完的centos7有些没有设置ip地址，我们可以通过下面两种方式来设置ip地址。</span><br><span class="line"></span><br><span class="line">1. 动态获取ip(前提是路由器已经开启了DHCP(动态主机设置协议))</span><br><span class="line">  a: 需要修改网卡的配置文件 /etc/sysconfig/network-scripts/ifcfg-ens33 其中ifcfg-ens33为网卡名。修改该文件的两处地方既可。</span><br><span class="line">   (1) bootproto=dhcp</span><br><span class="line">   (2) onboot=yes</span><br><span class="line">  b: 重启下网络服务</span><br><span class="line">   [root@mini ~]# systemctl restart network</span><br><span class="line">  c: 通过 ip addr 命令可以看到ens33的网卡已经有相应的ip地址啦</span><br><span class="line">  d: 通过 ping www.baidu.com 查看网络是否通畅</span><br><span class="line">  </span><br><span class="line">在VMware里，点击'编辑'-'虚拟网络编辑器'  </span><br><span class="line">2. 配置静态ip地址(网络模式在nat模式下)</span><br><span class="line">  a: 也是需要修改网卡配置文件 /etc/sysconfig/network-srcipts/ifcfg-ens33 其中ifcfg-ens33为网卡名。修改该文件的两处地方既可。</span><br><span class="line">   (1) bootproto=static</span><br><span class="line">   (2) onboot=yes </span><br><span class="line">  b: 还需要在该网卡配置文件的后面加上几行，分别是ip地址，子网掩码，网关，dns服务器</span><br><span class="line">    IPADDR=192.168.25.156 #静态ip</span><br><span class="line">    NETMASK=255.255.255.0 #子网掩码</span><br><span class="line">    GATEWAY=192.168.1.1 #网关</span><br><span class="line">    DNS1=192.168.25.2</span><br><span class="line">    DNS2=8.8.8.8 #谷歌的dns服务器</span><br><span class="line">  c: 重启下网络服务</span><br><span class="line">  	[root@mini ~]# systemctl restart network</span><br><span class="line">  d: 通过 ip addr 命令可以看到ens33的网卡已经有新的ip地址啦</span><br><span class="line">  e: 通过 ping www.baidu.com 查看网络是否通畅</span><br><span class="line"></span><br><span class="line">3. 在 /etc/resolv.conf文件里面保存了dns地址，可以通过cat命令查看</span><br></pre></td></tr></table></figure>
+
+<p><code>在设置静态ip时,子网掩码和网关地址可以在vmware的-&gt;编辑-&gt;虚拟网络编辑器-&gt;NAT设置 中查看，如下图所示</code></p>
+<p><img src="https://raw.githubusercontent.com/zhilongao/images-repository/master/46f916fdc305a268fe584b8ba809ed3.png" alt></p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-alg-string-simple1" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1165,176 +1363,6 @@
         
             <p><code>协议</code></p>
 
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-share-articles" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/share-articles/">
-            <time datetime="2019-08-27T13:38:52.000Z" itemprop="datePublished">2019-08-27</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/share-articles.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/share-articles.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/share-articles.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/share-articles/">博客</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-        
-        
-            <p><code>友情链接</code></p>
-<p><a href="https://yapengren.github.io/" target="_blank" rel="noopener">任亚鹏的博客</a></p>
-<p><code>技术大牛</code></p>
-<p><a href="https://mercyblitz.github.io" target="_blank" rel="noopener">小马哥</a></p>
-<p><code>精彩社区</code></p>
-<p><a href="https://tech.meituan.com/" target="_blank" rel="noopener">美团技术团队</a></p>
-<hr>
-<p><a href="https://www.v2ex.com/" target="_blank" rel="noopener">v2ex</a></p>
-<hr>
-<p><a href="https://juejin.im/timeline" target="_blank" rel="noopener">掘金</a></p>
-<hr>
-<p><a href="http://cmsblogs.com/" target="_blank" rel="noopener">java技术驿站</a></p>
-<hr>
-<p><a href="https://www.infoq.cn/" target="_blank" rel="noopener">infoq</a></p>
-
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-mysql-split" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/数据库/">数据库</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/数据库/mysql/">mysql</a>
-    </div>
-
-                        
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/wiki/mysql-split/">
-            <time datetime="2019-08-27T09:08:54.000Z" itemprop="datePublished">2019-08-27</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/mysql-split.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/mysql-split.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/mysql-split.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/wiki/mysql-split/">分库分表</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-        
-        
-            <hr>
-<p><code>数据库优化之分库分表</code></p>
-<hr>
-<p>针对数据库的优化有两点，第一是从整体层面优化，设计到读写分离和分库分表。第二是从sql层面优化，主要是涉及到索引相关的一些东西。</p>
-<hr>
-<p><code>读写分离</code></p>
-<p>​    <code>需求</code>: 读写分离的目的是做数据冗余备份，同时将读写分离，提升数据库的服务性能（IO性能瓶颈）。</p>
-<p>​    <code>搭建过程</code>: 在基本操作里面-&gt;mysql配置主从同步的步骤 。</p>
-<p>​    <code>实现原理</code>:  首先是master数据库会先将数据库的变化存储在binlog文件中。在slave数据库上，会有一个IO Thread负责将binlog文件读取到内部的relaylog文件中。同时，slave数据库上的另外一个线程SQL Thread读取relaylog，将数据写入到slave数据库里面。</p>
-<p>​    <code>细节</code>: mysql的binlog文件存储在 /var/lib/mysql文件夹下；使用命令-&gt; mysqlbinlog –base64-output=decode-rows -v  mysql-bin.000001 查看binlog的内容；binlog的格式：statement（默认，基于sql语句模式，针对数据更新的一些函数now()等，数据延迟造成的不一致），row：基于行模式，记录修改后每一条数据变化的值，mixed：混合模式，由mysql自动判断处理。</p>
-<p>​    <code>问题</code>：同步延迟，master tps较高时出现同步延迟； 网络延迟；磁盘IO</p>
-<hr>
-<p><code>分库分表</code></p>
-<p>​    <code>垂直拆分</code></p>
-<p>​        <code>概念</code>:垂直拆分主要是通过业务层面，将各个业务模块所使用到的表放到各自不同的数据库里面，做到各个业务模块库相互隔离的目的。</p>
-<p>​        <code>问题</code>:若是各个业务模块的表之间存在一些关联查询，需要将这些查询改为服务调用的方式。  针对一些全局表，可以改为服务调用的方式，对外提供服务。</p>
-<p>​    <code>水平拆分</code></p>
-<p>​        <code>概念</code>:将一张大的表拆分成n多张小表。实现方式，第一种是通过一致性hash（若是新增表的话，会涉及到数据迁移的问题）。第二种是可以按照id的范围来拆分。第三种是通过日期来拆分。</p>
-<p>​        <code>问题</code>:唯一主键问题，可以使用zk自增id  可以使用redis的自增id  可以使用代理的id</p>
-<hr>
-<p><code>Mycat</code></p>
-<figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1. 从github上面clone项目 https://github.com/MyCATApache/Mycat-Server.git</span><br><span class="line">2. 修改项目中schema.xml配置文件中的dataHost数据库配置节点信息，修改为可用的数据库</span><br><span class="line">3. MycatStartup类运行main函数启动</span><br><span class="line">	idea启动前需要在配置参数VM options: -DMYCAT_HOME=D:<span class="tag">\<span class="name">code</span></span><span class="tag">\<span class="name">Mycat</span></span>-Server<span class="tag">\<span class="name">src</span></span><span class="tag">\<span class="name">main</span></span></span><br><span class="line">4. 通过数据库连接工具可以连接到MyCat,数据库相关配置在server.xml配置文件里面</span><br><span class="line">	默认的用户名: root 密码: 123456 port: 8066</span><br><span class="line">5. mycat里面有三个比较重要的配置文件 </span><br><span class="line">	server.xml	配置数据库连接相关的一些信息</span><br><span class="line">	schema.xml  配置数据库的一些节点信息</span><br><span class="line">	rule.xml    配置一些路由规则</span><br><span class="line">6. 支持单库分表   支持跨库分表    支持配置读写分离(writeHost和readHost节点)</span><br></pre></td></tr></table></figure>
             </div>
         
         <footer class="article-footer">

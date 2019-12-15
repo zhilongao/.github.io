@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>docker镜像 | zl&#39;s blog</title>
+    
+    
+        <meta name="keywords" content="docker镜像">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="spring-boot项目image 创建一个Spring Boot项目  写一个controller @RestController    public class DockerController &amp;#123;            @GetMapping(&quot;/dockerfile&quot;)            @ResponseBody            String dockerfile(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker镜像">
+<meta property="og:url" content="https://zhilongao.github.io/wiki/docker-base-unit2/index.html">
+<meta property="og:site_name" content="zl&#39;s blog">
+<meta property="og:description" content="spring-boot项目image 创建一个Spring Boot项目  写一个controller @RestController    public class DockerController &amp;#123;            @GetMapping(&quot;/dockerfile&quot;)            @ResponseBody            String dockerfile(">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-15T08:07:27.333Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker镜像">
+<meta name="twitter:description" content="spring-boot项目image 创建一个Spring Boot项目  写一个controller @RestController    public class DockerController &amp;#123;            @GetMapping(&quot;/dockerfile&quot;)            @ResponseBody            String dockerfile(">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="zl&#39;s blog" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">zl&#39;s blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>分类</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            java
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            分布式
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            协议
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/http/">http</a></li>  <li class="file"><a href="/wiki/tcp/">tcp</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/dubbo-ask/">dubbo</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            ClassLoader
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/java-base-classloader/">ClassLoader</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            io
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/io/">io</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            jvm
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/jvm/">jvm</a></li>  <li class="file"><a href="/wiki/jvm-command/">jvm-command</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            安全
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/java-base-security/">加密算法</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            并发
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            基础
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/thread/">thread</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            线程池
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/threadpool/">threadpool</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            锁
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/lock/">lock</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            新特性
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/java-style-lambda/">lambda和stream</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            框架
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            spring
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-spring-xml/">bean的创建</a></li>  <li class="file"><a href="/wiki/fra-spring-annotation/">注解驱动</a></li>  <li class="file"><a href="/wiki/fra-spring-base/">基础知识</a></li>  <li class="file"><a href="/wiki/spring-base-environment/">环境</a></li>  <li class="file"><a href="/wiki/fra-springboot-1/">事件监听</a></li>  <li class="file"><a href="/wiki/fra-spring-xml-extend/">spring扩展</a></li>  <li class="file"><a href="/wiki/fra-spring-xml-circle/">循环依赖</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            spring-cloud
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-spring-cloud-config/">分布式配置</a></li>  <li class="file"><a href="/wiki/fra-spring-cloud-loadbalance/">负载均衡</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            springboot
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/fra-springboot/">springboot</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            源码
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/ans-hashmap-source/">HashMap</a></li>  <li class="file"><a href="/wiki/ans-reentlock-source/">ReentrantLock</a></li>  <li class="file"><a href="/wiki/ans-aqs-source/">AQS</a></li>  <li class="file"><a href="/wiki/ans-unsafe-source/">Unsafe</a></li>  <li class="file"><a href="/wiki/ans-countdownlatch-source/">CountDownLatch</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            面试题
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/questions/">questions</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            项目
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/project-ask/">project-ask</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/java-dev-problem/">java开发常见问题</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            工具箱
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            docker
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/docker-base-unit1/">docker安装</a></li>  <li class="file active"><a href="/wiki/docker-base-unit2/">docker镜像</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            linux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/linux-system-problem/">linux系统</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数据库
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            mongodb
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/mongodb-base/">mongodb-base</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            mysql
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/mysql/">面试题</a></li>  <li class="file"><a href="/wiki/mysql-index/">索引</a></li>  <li class="file"><a href="/wiki/mysql-base/">基本操作</a></li>  <li class="file"><a href="/wiki/mysql-split/">分库分表</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            redis
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/redis-base/">基本操作</a></li>  <li class="file"><a href="/wiki/redis-advance/">实际应用</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            算法
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            字符串
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-string-simple1/">字符串</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            排序
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-sort-simple/">排序算法</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            数组
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-array-simple1/">array-ask</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            链表
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/alg-linkedlist-simple1/">单链表</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            设计模式
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/design-pattern-observer/">观察者模式</a></li>  <li class="file"><a href="/wiki/design-pattern-listener/">监听器模式</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/share-articles/">博客</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-docker-base-unit2" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/工具箱/">工具箱</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/工具箱/docker/">docker</a>
+    </div>
+
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/docker-base-unit2/">
+            <time datetime="2019-12-15T06:03:52.000Z" itemprop="datePublished">2019-12-15</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/raw/master/source/_posts/docker-base-unit2.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/edit/master/source/_posts/docker-base-unit2.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/yapengren/https://github.com/gzl2017/gzl2017.github.io.git/commits/master/source/_posts/docker-base-unit2.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            docker镜像
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                    <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#spring-boot项目image"><span class="toc-number">1.</span> <span class="toc-text">spring-boot项目image</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#镜像仓库"><span class="toc-number">2.</span> <span class="toc-text">镜像仓库</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#docker-hub"><span class="toc-number"></span> <span class="toc-text">docker hub</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#阿里云docker-hub"><span class="toc-number"></span> <span class="toc-text">阿里云docker hub</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#搭建自己的Docker-Harbor"><span class="toc-number"></span> <span class="toc-text">搭建自己的Docker Harbor</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Image常见操作"><span class="toc-number"></span> <span class="toc-text">Image常见操作</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#container到image"><span class="toc-number"></span> <span class="toc-text">container到image</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#container常见操作"><span class="toc-number"></span> <span class="toc-text">container常见操作</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#container资源限制"><span class="toc-number"></span> <span class="toc-text">container资源限制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#底层技术支持"><span class="toc-number"></span> <span class="toc-text">底层技术支持</span></a>
+                </div>
+            
+        
+        
+            <h6 id="spring-boot项目image"><a href="#spring-boot项目image" class="headerlink" title="spring-boot项目image"></a>spring-boot项目image</h6><ol>
+<li><p>创建一个Spring Boot项目</p>
+</li>
+<li><p>写一个controller</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span>    </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DockerController</span> </span>&#123;        </span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/dockerfile"</span>)        </span><br><span class="line">    <span class="meta">@ResponseBody</span>        </span><br><span class="line">    <span class="function">String <span class="title">dockerfile</span><span class="params">()</span> </span>&#123;            </span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello docker"</span> ;       </span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mvn clean package打成一个jar包    在target下找到”dockerfile-demo-0.0.1-SNAPSHOT.jar”    </p>
+</li>
+<li><p>在docker环境中新建一个目录”first-dockerfile”     </p>
+</li>
+<li><p>上传”dockerfile-demo-0.0.1-SNAPSHOT.jar”到该目录下，并且在此目录创建Dockerfile</p>
+</li>
+<li><p>创建Dockerfile文件，编写内容 </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">FROM openjdk:8    </span><br><span class="line"></span><br><span class="line">MAINTAINER itcrazy2016    </span><br><span class="line"></span><br><span class="line">LABEL name="dockerfile-demo" version="1.0" author="itcrazy2016"    </span><br><span class="line"></span><br><span class="line">COPY dockerfile-demo-0.0.1-SNAPSHOT.jar dockerfile-image.jar    </span><br><span class="line"></span><br><span class="line">CMD ["java","-jar","dockerfile-image.jar"]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>基于Dockerfile构建镜像    </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker build -t test-docker-image .</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>基于image创建container</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -d --name user01 -p 6666:8080 test-docker-image</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看启动日志</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker logs user01</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>宿主机上访问</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl localhost:6666/dockerfile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>还可以再次启动一个 </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -d --name user02 -p 8081:8080 test-docker-image</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h6 id="镜像仓库"><a href="#镜像仓库" class="headerlink" title="镜像仓库"></a>镜像仓库</h6><h5 id="docker-hub"><a href="#docker-hub" class="headerlink" title="docker hub"></a>docker hub</h5><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1. 访问 hub.docker.com 申请用户名和密码。</span><br><span class="line"></span><br><span class="line">2. 在docker机器上登录</span><br><span class="line">	docker login</span><br><span class="line">	</span><br><span class="line">3. 输入用户名和密码</span><br><span class="line"></span><br><span class="line">4. docker push itcrazy2018/test-docker-image </span><br><span class="line">	[注意镜像名称要和docker id一致，不然push不成功]</span><br><span class="line"></span><br><span class="line">5. 给image重命名，并删除掉原来的    </span><br><span class="line">		docker tag test-docker-image itcrazy2018/test-docker-image    </span><br><span class="line">		docker rmi -f test-docker-image </span><br><span class="line">		</span><br><span class="line">6. 再次推送，刷新hub.docker.com后台，发现成功	</span><br><span class="line"></span><br><span class="line">7. 别人下载，并且运行    </span><br><span class="line">		docker pull itcrazy2018/test-docker-image    </span><br><span class="line">		docker run -d --name user01 -p 6661:8080 itcrazy2018/test-docker-image</span><br></pre></td></tr></table></figure>
+
+<h5 id="阿里云docker-hub"><a href="#阿里云docker-hub" class="headerlink" title="阿里云docker hub"></a>阿里云docker hub</h5><figure class="highlight tex"><table><tr><td class="code"><pre><span class="line">1. 阿里云docker仓库</span><br><span class="line">	https://cr.console.aliyun.com/cn-hangzhou/instances/repositories</span><br></pre></td></tr></table></figure>
+
+<h5 id="搭建自己的Docker-Harbor"><a href="#搭建自己的Docker-Harbor" class="headerlink" title="搭建自己的Docker Harbor"></a>搭建自己的Docker Harbor</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">1. 访问github上的harbor项目</span><br><span class="line"></span><br><span class="line">2. 下载版本，比如1.7.1    </span><br><span class="line">	https://github.com/goharbor/harbor/releases    </span><br><span class="line"></span><br><span class="line">3. 找一台安装了docker-compose，上传并解压    </span><br><span class="line">	tar -zxvf xxx.tar.gz</span><br><span class="line"></span><br><span class="line">4. 进入到harbor目录    </span><br><span class="line">	修改harbor.cfg文件，主要是ip地址的修改成当前机器的ip地址    </span><br><span class="line">	同时也可以看到Harbor的密码，默认是Harbor12345 </span><br><span class="line">	</span><br><span class="line">5.安装harbor，需要一些时间    </span><br><span class="line">	sh install.sh    </span><br><span class="line">	</span><br><span class="line">6. 浏览器访问，比如39.100.39.63，输入用户名和密码即可</span><br></pre></td></tr></table></figure>
+
+<h5 id="Image常见操作"><a href="#Image常见操作" class="headerlink" title="Image常见操作"></a>Image常见操作</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">1. 查看本地image列表    </span><br><span class="line">	docker images    </span><br><span class="line">	docker image ls</span><br><span class="line">	</span><br><span class="line">2. 获取远端镜像    </span><br><span class="line">	docker pull     </span><br><span class="line"></span><br><span class="line">3. 删除镜像[注意此镜像如果正在使用，或者有关联的镜像，则需要先处理完]    </span><br><span class="line">	docker image rm imageid    </span><br><span class="line">	docker rmi -f imageid    </span><br><span class="line">	docker rmi -f $(docker image ls)     删除所有镜像</span><br><span class="line">	</span><br><span class="line">4. 运行镜像    </span><br><span class="line">	docker run image    </span><br><span class="line"></span><br><span class="line">5. 发布镜像    </span><br><span class="line">	docker push</span><br></pre></td></tr></table></figure>
+
+<h5 id="container到image"><a href="#container到image" class="headerlink" title="container到image"></a>container到image</h5><p>既然container是基于image之上的，想想是否能够由一个container反推出image呢？肯定是可以的，比如通过docker run运行起一个container出来，这时候对container对一些修 改，然后再生成一个新的image，这时候image的由来就不仅仅只能通过Dockerﬁle咯。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">1. 拉取一个centos image    </span><br><span class="line">	docker pull centos</span><br><span class="line">	</span><br><span class="line">2. 根据centos镜像创建出一个container    </span><br><span class="line">	docker run -d -it --name my-centos centos    </span><br><span class="line">	</span><br><span class="line">3. 进入my-centos容器中    </span><br><span class="line">	docker exec -it my-centos bash    </span><br><span class="line">	</span><br><span class="line">4. 输入vim命令    </span><br><span class="line">	bash: vim: command not found    </span><br><span class="line">	</span><br><span class="line">5. 我们要做的是对该container进行修改，也就是安装一下vim命令，然后将其生成一个新的centos</span><br><span class="line"></span><br><span class="line">6. 在centos的container中安装vim    </span><br><span class="line">	yum install -y vim    </span><br><span class="line">	</span><br><span class="line">7. 退出容器，将其生成一个新的centos，名称为"vim-centos-image"    </span><br><span class="line">	docker commit my-centos vim-centos-image   </span><br><span class="line">    </span><br><span class="line">8. 查看镜像列表，并且基于"vim-centos-image"创建新的容器    </span><br><span class="line">	docker run -d -it --name my-vim-centos vim-centos-image    </span><br><span class="line">	</span><br><span class="line">9. 进入到my-vim-centos容器中，检查vim命令是否存在    </span><br><span class="line">	docker exec -it my-vim-centos bash    vim</span><br></pre></td></tr></table></figure>
+
+<p>结论 ：可以通过docker commit命令基于一个container重新生成一个image，但是一般得到image的 方式不建议这么做，不然image怎么来的就全然不知咯。 </p>
+<h5 id="container常见操作"><a href="#container常见操作" class="headerlink" title="container常见操作"></a>container常见操作</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">1. 根据镜像创建容器    </span><br><span class="line">	docker run -d --name -p 9090:8080 my-tomcat tomcat    </span><br><span class="line"></span><br><span class="line">2. 查看运行中的</span><br><span class="line">	container    docker ps</span><br><span class="line"></span><br><span class="line">3. 查看所有的container[包含退出的]    </span><br><span class="line">	docker ps -a    </span><br><span class="line">	</span><br><span class="line">4. 删除container    </span><br><span class="line">	docker rm containerid   </span><br><span class="line">    docker rm -f $(docker ps -a)    删除所有container </span><br><span class="line">    </span><br><span class="line">5. 进入到一个container中    </span><br><span class="line">	docker exec -it container bash    </span><br><span class="line">	</span><br><span class="line">6. 根据container生成image    </span><br><span class="line">	docker commit</span><br><span class="line"></span><br><span class="line">7. 查看某个container的日志    </span><br><span class="line">	docker logs container    </span><br><span class="line">	</span><br><span class="line">8. 查看容器资源使用情况    </span><br><span class="line">	docker stats </span><br><span class="line">	</span><br><span class="line">9. 查看容器详情信息    </span><br><span class="line">	docker inspect container    </span><br><span class="line">	</span><br><span class="line">10.停止/启动容器    </span><br><span class="line">	docker stop/start container</span><br></pre></td></tr></table></figure>
+
+<h5 id="container资源限制"><a href="#container资源限制" class="headerlink" title="container资源限制"></a>container资源限制</h5><p>如果不对container的资源做限制，它就会无限制地使用物理机的资源，这样显然是不合适的。 查看资源情况 ：docker stats </p>
+<ol>
+<li><p>内存限制</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">--memory    Memory limit </span><br><span class="line"></span><br><span class="line">如果不设置 --memory-swap，其大小和memory一样 </span><br><span class="line"></span><br><span class="line">docker run -d --memory 100M --name tomcat1 tomcat</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>cpu限制</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">--cpu-shares    权重 </span><br><span class="line"></span><br><span class="line">docker run -d --cpu-shares 10 --name tomcat2 tomcat</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>图像化资源监控</p>
+<p><a href="https://github.com/weaveworks/scope" target="_blank" rel="noopener">https://github.com/weaveworks/scope</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo curl -L git.io/scope -o /usr/local/bin/scope </span><br><span class="line"></span><br><span class="line">sudo chmod a+x /usr/local/bin/scope </span><br><span class="line"></span><br><span class="line">scope launch 39.100.39.63</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> 停止</span><br><span class="line">scope scope stop</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 同时监控两台机器，在两台机器中分别执行如下命令 </span><br><span class="line">scope launch ip1 ip2</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ol>
+<h5 id="底层技术支持"><a href="#底层技术支持" class="headerlink" title="底层技术支持"></a>底层技术支持</h5><p>Container是一种轻量级的虚拟化技术，不用模拟硬件创建虚拟机。 Docker是基于Linux Kernel的Namespace、CGroups、UnionFileSystem等技术封装成的一种自 定义容器格式，从而提供一套虚拟运行环境。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Namespace：用来做隔离的，比如pid[进程]、net[网络]、mnt[挂载点]等</span><br><span class="line"></span><br><span class="line">CGroups: Controller Groups用来做资源限制，比如内存和CPU等</span><br><span class="line"></span><br><span class="line">Union file systems：用来做image和container分层</span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+    
+        <a href="/wiki/docker-base-unit1/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">docker安装</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            gaozhilong &copy; 2019 
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
